@@ -1,0 +1,203 @@
+:root {
+    --preto: #000;
+    --laranja: #F24405;
+    --marrom: #261515;
+    --laranja-escuro: #590902;
+    --laranja-claro: #F25C05;
+    --branco: #fff;
+    --cinza: #F2F2F2;
+    --cor-de-fundo-insercoes: #F49054;
+}
+
+h1 {
+    color: var(--cinza);
+}
+
+h2 {
+    margin: 1px;
+    color: var(--cinza)
+}
+
+h3 {
+    font-size: 15px;
+    color: var(--cinza);
+}
+
+body {
+    background-color: var(--preto);
+}
+
+main {
+    margin-bottom: 20px;
+}
+
+.insercoes {
+    width: 100%;
+    display: none;
+}
+
+.time {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--laranja-claro);
+    margin-top: 1px;
+    border-radius: 10px;
+}
+
+.botao_time {
+    background-color: var(--laranja);
+    color: var(--branco);
+    border: 1px solid var(--marrom);
+}
+
+.botao_time:hover {
+    background-color: var(--laranja-escuro);
+    color: var(--laranja);
+    border: 2px solid var(--laranja-claro);
+}
+
+#timeSelecionado {
+    display: none;
+}
+
+.jogador_dados {
+    width: auto;
+}
+
+.defesa,
+.passes,
+.ataques,
+.saques,
+.bloqueios,
+.levantamentos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--cor-de-fundo-insercoes);
+    padding: 1px;
+    text-wrap: nowrap;
+    margin: 1px;
+}
+
+.defesa,
+.passes>div,
+.ataques>div,
+.saques>div,
+.bloqueios>div,
+.levantamentos>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.atributos_span {
+    width: 30px;
+    cursor: pointer;
+    padding: 1px 1px;
+    background-color: var(--laranja);
+    color: var(--cinza);
+    border-radius: 10px;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    font-size: 15px;
+}
+
+.jogadores>form {
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+}
+
+.jogadores>form button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#jogadores_no_time {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#adicionar_jogador {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#jogadores_no_time>div {
+    width: auto;
+    margin-bottom: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid var(--cinza);
+    padding: 1px;
+    border-radius: 10px;
+    margin: 1px;
+}
+
+.insercao_individual {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#jogadores_no_time>div>div {
+    margin-top: 1px;
+}
+
+#novo_jogador {
+    width: auto;
+    background-color: var(--laranja);
+    color: var(--cinza);
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid var(--laranja-escuro);
+    border-radius: 10px;
+}
+
+.form-label {
+    padding-right: 10px;
+}
+
+input[type=number] {
+    max-width: 30px;
+    height: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+span {
+    font-size: 15px;
+    padding-right: 1px;
+    padding-left: 1px;
+}
+
+.linha_unica {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
