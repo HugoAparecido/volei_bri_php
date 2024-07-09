@@ -36,50 +36,51 @@
     </nav>
 
     <button type="button" class="botao_deslogar" id="logout">Sair</button>
-
-    <main class="container text-center">
-        <section id="time">
-            <section>
-                <form action="">
-                    <fieldset>
-                        <legend>Cadastrar Time</legend>
-                        <div class="linha_unica">
-                            <label class="form-label" for="nome_time">Nome do Time:</label>
-                            <input class="form-control" type="text" id="nome_time" name="nome_time" value="">
-                        </div>
-                        <div class="linha_unica">
-                            <label class="form-label" for="sexo_time">Sexo do Time:</label>
-                            <select class="form-select" name="sexo_time" id="sexo_time" required>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                                <option value="Mis">Misto</option>
-                            </select>
-                        </div>
-                        <button id="cadastrar_time" class="btn" type="button"
-                            style="background-color: #F24405;">Cadastar Time</button>
-                        <button class="btn" type="button"><a href="./cadastrar_jogador.html"
-                                style="color:  white;">Cadastrar
-                                Jogador</a></button>
-                    </fieldset>
-                </form>
-            </section>
-            <button class="btn id=" id="mostrar_times" type="button" style="background-color: #F24405;">Mostrar
-                Time</button>
-            <div class="tabela">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Sexo</th>
-                            <th>Jogadores</th>
-                        </tr>
-                    </thead>
-                    <tbody id="times_cadastrados">
-                    </tbody>
-                </table>
+    <div class="container">
+        <div class="login-form">
+            <fieldset>
+                <legend>Cadastrar Time</legend>
+                <div class="linha_unica">
+                    <label class="form-label" for="nome_time">Nome do Time:</label>
+                    <input class="form-control" type="text" id="nome_time" name="nome_time" value="">
+                </div>
+                <div class="linha_unica">
+                    <label class="form-label" for="sexo_time">Sexo do Time:</label>
+                    <select class="form-select" name="sexo_time" id="sexo_time" required>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="Mis">Misto</option>
+                    </select>
+                </div>
+                <button id="cadastrar_time" class="btn" type="button"
+                    style="background-color: #F24405;">Cadastar Time</button>
+                <button class="btn" type="button"><a href="./cadastrar_jogador.html"
+                        style="color:  white;">Cadastrar
+                        Jogador</a></button>
+            </fieldset>
             </div>
-        </section>
+        </div>
+            <div class="container">
+                <div class="login-form">
+                        <button class="btn id=" id="mostrar_times" type="button" style="background-color: #F24405;">Mostrar
+                        Time</button>
+                    <div class="tabela">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Sexo</th>
+                                    <th>Jogadores</th>
+                                </tr>
+                            </thead>
+                                <tbody id="times_cadastrados">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
     </main>
     <script src="../js/cadastrar_time.js" type="module"></script>
 </body>
