@@ -30,7 +30,7 @@
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1); /* Sombra suave */
   }
   .login-form h2 {
-    color: var(--preto); /* Texto branco */
+    color: var(--cinza); /* Texto preto */
     text-align: center;
     margin-bottom: 30px; 
   }
