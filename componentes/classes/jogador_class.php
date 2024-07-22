@@ -43,26 +43,27 @@ abstract class Jogador
      */
     public $sexo;
     /**
-     * Método responsável porCcadastrar um novo jogador no banco
-     * @return boolean
-     */
-    /**
      * Defesas do joagador
      * @var int
      */
     protected $defesa;
+    /**
+     * Método responsável porCcadastrar um novo jogador no banco
+     * @return boolean
+     */
     public function Cadastrar()
     {
         //INSERIR O JOGADOR NO BANCO
         $obDatabase = new Database('jogador');
         $this->id = $obDatabase->insert([
             'nome' => $this->nome,
-            'posicao' => $this->posicao,
-            'num_camisa' => $this->num_camisa,
-            'apelido' => $this->apelido,
-            'altura' => $this->altura,
-            'peso' => $this->peso,
-            'sexo' => $this->sexo
+            'nome_jogador' => $this->posicao,
+            'numero_camisa' => $this->num_camisa,
+            'apelido_jogador' => $this->apelido,
+            'altura_jogador' => $this->altura,
+            'peso_jogador' => $this->peso,
+            'sexo_jogador' => $this->sexo,
+            'defesa_jogador' => $this->defesa
         ]);
         //RETORNAR SUCESSO
         return true;
@@ -75,12 +76,12 @@ abstract class Jogador
     {
         return (new Database('jogador'))->update('id = ' . $this->id, [
             'nome' => $this->nome,
-            'posicao' => $this->posicao,
-            'num_camisa' => $this->num_camisa,
-            'apelido' => $this->apelido,
-            'altura' => $this->altura,
-            'peso' => $this->peso,
-            'sexo' => $this->sexo
+            'nome_jogador' => $this->posicao,
+            'numero_camisa' => $this->num_camisa,
+            'apelido_jogador' => $this->apelido,
+            'altura_jogador' => $this->altura,
+            'peso_jogador' => $this->peso,
+            'sexo_jogador' => $this->sexo
         ]);
     }
     /**

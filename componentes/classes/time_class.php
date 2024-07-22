@@ -13,7 +13,7 @@ abstract class Time
      */
     public $nome;
     /**
-     * Posição
+     * Jogadores que estão no time
      * @var string
      */
     protected $posicao;
@@ -29,7 +29,7 @@ abstract class Time
     public function Cadastrar()
     {
         //INSERIR O JOGADOR NO BANCO
-        $obDatabase = new Database('jogador');
+        $obDatabase = new Database('time');
         $this->id = $obDatabase->insert([
             'nome' => $this->nome,
             'posicao' => $this->posicao,
