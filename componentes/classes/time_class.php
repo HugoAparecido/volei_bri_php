@@ -1,9 +1,9 @@
 <?php
 require_once "./database_class.php";
-abstract class Jogador
+abstract class Time
 {
     /**
-     * Identificador único do jogador
+     * Identificador único do time
      * @var integer
      */
     public $id;
