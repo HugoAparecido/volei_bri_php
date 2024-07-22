@@ -1,6 +1,6 @@
 <?php
 require_once "./database_class.php";
-abstract class Time
+class Time
 {
     /**
      * Identificador único do time
@@ -14,12 +14,17 @@ abstract class Time
     public $nome;
     /**
      * Jogadores que estão no time
+     * @var array
+     */
+    public $jogadoresNoTime;
+    /**
+     * Nome do Jogador
      * @var string
      */
-    protected $posicao;
+    public $dataCriacao;
     /**
-     * Sexo do jogador
-     * @var string(M/F)
+     * Sexo do Time
+     * @var string(M/F/MIS)
      */
     public $sexo;
     /**
@@ -28,6 +33,8 @@ abstract class Time
      */
     public function Cadastrar()
     {
+        //DEFINIR A DATA
+        $this->dataCriacao = date('Y-m-d H:i:s');
         //INSERIR O JOGADOR NO BANCO
         $obDatabase = new Database('time');
         $this->id = $obDatabase->insert([
