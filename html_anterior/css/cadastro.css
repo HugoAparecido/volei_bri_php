@@ -5,11 +5,9 @@
 }
 
 :root {
+    --amarelo:#FDDE5C;
     --preto: #000;
-    --laranja: #F24405;
     --marrom: #261515;
-    --laranja-escuro: #590902;
-    --laranja-claro: #F25C05;
     --branco: #fff;
     --cinza: #F2F2F2;
 }
@@ -34,7 +32,7 @@ main>section {
 
 button {
     margin-top: 30px;
-    background-color: var(--laranja);
+    background-color: var(--amarelo);
 }
 
 .linha_unica {
