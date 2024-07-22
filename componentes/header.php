@@ -13,7 +13,6 @@
     ?>
     <link rel="stylesheet" href="<?= $link_css ?>">
     <?php } ?>
-    <link rel="stylesheet" href="<?= FOLHAS_DE_ESTILO ?>">
 </head>
 
 <body>

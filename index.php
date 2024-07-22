@@ -4,7 +4,6 @@ session_set_cookie_params(['httponly' => true]);
 session_start();
 //sessions servem para pegar a variável em qualquer parte do sistema, isto é feito por meio de cookies
 // Segurança: criar a sessao com http Only e com o protolo ssl
-var_dump(session_id());
 //Para toda vez que logar o usuário utilizar a função abaixo
 //Gera outro cookie com um novo id
 //com  true deleta a sessao antiga
