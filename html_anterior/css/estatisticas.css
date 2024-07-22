@@ -1,17 +1,16 @@
 :root {
+    --amarelo:#FDDE5C;
     --preto: #000;
-    --laranja: #F24405;
+    --cinza:#E6E4E1;
     --marrom: #261515;
-    --laranja-escuro: #590902;
-    --laranja-claro: #F25C05;
     --branco: #fff;
-    --cinza: #F2F2F2;
+    
 }
 
 main {
     float: left;
     width: 100%;
-    background-color: var(--preto);
+    background-color: var(--cinza);
 }
 
 select {
@@ -30,7 +29,7 @@ label {
 }
 
 .titulo_graficos {
-    color: var(--cinza);
+    color: var(--preto);
 }
 
 .escolher_time,
@@ -67,11 +66,11 @@ canvas {
 
 #exibir_graficos_time,
 #exibir_graficos_jogador {
-    background-color: var(--laranja);
+    background-color: var(--amarelo);
 }
 
 #time {
     width: 20%;
-    background-color: var(--laranja);
-    border: var(--laranja);
+    background-color: var(--amarelo );
+    border: var(--amarelo);
 }
