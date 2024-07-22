@@ -18,39 +18,14 @@ abstract class Time
      */
     protected $posicao;
     /**
-     * Número da camisa
-     * @var int
-     */
-    public $num_camisa;
-    /**
-     * Apelido do jogador
-     * @var string
-     */
-    public $apelido;
-    /**
-     * Altura do jogador
-     * @var float
-     */
-    public $altura;
-    /**
-     * Peso do jogador
-     * @var float
-     */
-    public $peso;
-    /**
      * Sexo do jogador
      * @var string(M/F)
      */
     public $sexo;
     /**
-     * Método responsável porCcadastrar um novo jogador no banco
+     * Método responsável por Cadastrar um novo time no banco
      * @return boolean
      */
-    /**
-     * Defesas do joagador
-     * @var int
-     */
-    protected $defesa;
     public function Cadastrar()
     {
         //INSERIR O JOGADOR NO BANCO
