@@ -1,13 +1,14 @@
 <?php
-// define o caminho do icone em uma constante
-define('FAVICON', "../img/logo-volei.ico");
-// define o caminho do css da página
-define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
-// define o caminho da logo no header
-define('LOGO_HEADER', "../img/raposa2.png");
-// define os nomes dasa páginas e seus respectivos caminhos
-define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './login.php']));
-include '../componentes/header.php';
+if (isset($_SESSION['nome_usuario'])) {
+  // define o caminho do icone em uma constante
+  define('FAVICON', "../img/logo-volei.ico");
+  // define o caminho do css da página
+  define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
+  // define o caminho da logo no header
+  define('LOGO_HEADER', "../img/raposa2.png");
+  // define os nomes dasa páginas e seus respectivos caminhos
+  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './login.php']));
+  include '../componentes/header.php';
 ?>
   <main>
     <div class="insercoes" id="insercoes">
@@ -22,9 +23,12 @@ include '../componentes/header.php';
           <div id="descricao_botoes">
             <p><strong>Def:</strong> defesa bem sucedida</p>
             <p><strong>Def Err:</strong> defesa em que a bola não pode ser pega pelo companheiro</p>
-            <p><strong>Pas:</strong> ato de passar a bola entre os jogadores, considerando a altura máxima entre a
-              jogado de um e o recebimneto do outro. <strong>A:</strong> acima das antenas da rede; <strong>B:</strong>
-              acima da rede e na altura das antenas; <strong>C:</strong> abaixo das antenas e na altura da rede;
+            <p><strong>Pas:</strong> ato de passar a bola entre os jogadores, considerando a altura máxima entre
+              a
+              jogado de um e o recebimneto do outro. <strong>A:</strong> acima das antenas da rede;
+              <strong>B:</strong>
+              acima da rede e na altura das antenas; <strong>C:</strong> abaixo das antenas e na altura da
+              rede;
               <strong>D:</strong> abaixo da rede;
             </p>
           </div>
@@ -72,7 +76,8 @@ include '../componentes/header.php';
           <div id="adicionar_jogador">
             <label class="form-label" for="novo_jogador">Novo Jogador</label>
             <select class="form-select" name="novo_jogador" id="novo_jogador"></select>
-            <button id="adicionar_jogador_button" type="button" class="btn botao_time">Adicionar Jogador</button>
+            <button id="adicionar_jogador_button" type="button" class="btn botao_time">Adicionar
+              Jogador</button>
           </div>
           <button id="salvar_informacoes" type="button" class="botao_time btn">Enviar Dados</button>
         </form>
@@ -84,25 +89,28 @@ include '../componentes/header.php';
       <section>
         <h2>Masculino</h2>
         <div id="times_masculinos"></div>
-        <button class="btn" style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=M"
-            class="nav-link">Cadastrar
+        <button class="btn" style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=M" class="nav-link">Cadastrar
             Time</a></button>
       </section>
       <section>
         <h2>Feminino</h2>
         <div id="times_femininos"></div>
-        <button class="btn" style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=F"
-            class="nav-link">Cadastrar
+        <button class="btn" style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=F" class="nav-link">Cadastrar
             Time</a></button>
       </section>
       <section>
         <h2>Misto</h2>
         <div id="times_misto"></div>
-        <button class="btn " style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=Mis"
-            class="nav-link">Cadastrar
+        <button class="btn " style="background-color: #F24405;"><a href="cadastrar_time.html?sexo=Mis" class="nav-link">Cadastrar
             Time</a></button>
       </section>
     </div>
   </main>
 <?php
-include '../componentes/footer.php';
+  include '../componentes/footer.php';
+} else {
+?>
+  <script>
+    window.location.href = "./login.php"
+  </script><?php
+          }

@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="shortcut icon" href="<?= FAVICON ?>" type="image/x-icon">
-                        <?php
-                        foreach(FOLHAS_DE_ESTILO as $link_css){
-                            ?>
-                            <link rel="stylesheet" href="<?= $link_css?>">
-                        <?php } ?>
+    <?php
+    foreach (FOLHAS_DE_ESTILO as $link_css) {
+    ?>
+    <link rel="stylesheet" href="<?= $link_css ?>">
+    <?php } ?>
     <link rel="stylesheet" href="<?= FOLHAS_DE_ESTILO ?>">
 </head>
 
@@ -32,11 +32,12 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <?php
-                        foreach(OUTRAS_PAGINAS as $pagina){
-                            ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
-                            </li>
+                        foreach (OUTRAS_PAGINAS as $pagina) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </div>
