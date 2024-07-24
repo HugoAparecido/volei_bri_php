@@ -1,6 +1,5 @@
 // importações necessárias
 import { Validation } from "./classes/validation_class.js";
-import { Auth } from "./classes/auth_class.js";
 // Elementos htmls
 const form = {
     email: () => document.getElementById('email'),
@@ -12,9 +11,6 @@ const form = {
     recoverPassword: () => document.getElementById("recover-password-button"),
     register: () => document.getElementById("register-button")
 }
-// Gerencia de atenticação
-const auth = new Auth;
-auth.UsuarioLogado();
 // validacoes
 let validacoes = new Validation(form.email(), form.password());
 form.email().addEventListener('change', () => {
@@ -25,8 +21,6 @@ form.password().addEventListener('change', () => {
 });
 // eventos
 form.loginButton().addEventListener('click', () => {
-    auth.Login(form.email().value, form.password().value)
 });
 form.recoverPassword().addEventListener('click', () => {
-    auth.RecuperarSenha(form.email().value);
 });
