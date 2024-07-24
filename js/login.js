@@ -13,10 +13,10 @@ const form = {
 }
 // validacoes
 let validacoes = new Validation(form.email(), form.password());
-form.email().addEventListener('change', () => {
+form.email().addEventListener('input', () => {
     validacoes.OnChangeEmail(form.emailRequiredError, form.emailInvalidError, form.recoverPassword, form.loginButton);
 });
-form.password().addEventListener('change', () => {
+form.password().addEventListener('input', () => {
     validacoes.OnChangePassword(form.recoverPassword, form.loginButton, form.passwordRequiredError)
 });
 // eventos
