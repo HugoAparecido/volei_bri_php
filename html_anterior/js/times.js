@@ -18,7 +18,6 @@ const mostrarTimes = {
 }
 // Gerencia de atenticação
 let auth = new Auth;
-auth.UsuarioNaoLogado();
 buttons.logoutButton().addEventListener('click', () => {
     auth.Logout();
 })
