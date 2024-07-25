@@ -14,7 +14,7 @@ if (!isset($_SESSION['id_usuario'])) {
         <div class="container">
             <div class="login-form">
                 <h2>Login</h2>
-                <form action="loginExe.php">
+                <form action="loginExe.php" , method="post">
                     <div class="mb-3 container">
                         <label class="form-label" for="email">Email</label>
                         <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
