@@ -1,27 +1,27 @@
 <?php
-require_once "./database_class.php";
+require_once "database_class.php";
 class Usuario
 {
     /**
      * Identificador único do Usuário
      * @var integer
      */
-    private $id;
+    public $id_usuario;
     /**
      * Nome do Usuário
      * @var string
      */
-    private $nome;
+    public $nome_usuario;
     /**
      * Email do Usuário
      * @var string
      */
-    private $email;
+    private $email_usuario;
     /**
      * Senha do Usuário
      * @var string
      */
-    private $senha;
+    private $senha_usuario;
     /**
      * É jogador
      * @var bool
@@ -43,9 +43,8 @@ class Usuario
      * @param string $senha
      * @return array
      */
-    public function Logar($email, $senha)
+    public static function Logar($email, $senha)
     {
-        $usuario = (new Database('usuario'))->select('email_usuario = ' . $email . ' AND senha_usuario = ' . $senha)->fetchAll(PDO::FETCH_CLASS, self::class);
-        $_SESSION['id_usuario'] = $usuario['id_usuario'];
+        return (new Database('usuario'))->select("email_usuario = '$email' AND senha_usuario = '$senha'")->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 }

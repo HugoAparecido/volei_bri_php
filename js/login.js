@@ -6,21 +6,17 @@ const form = {
     emailInvalidError: () => document.getElementById("email-invalid-error"),
     emailRequiredError: () => document.getElementById("email-required-error"),
     loginButton: () => document.getElementById("login-button"),
-    password: () => document.getElementById('password'),
-    passwordRequiredError: () => document.getElementById("password-required-error"),
-    recoverPassword: () => document.getElementById("recover-password-button"),
+    senha: () => document.getElementById('senha'),
+    senhaRequiredError: () => document.getElementById("senha-required-error"),
+    recoverSenha: () => document.getElementById("recover-senha-button"),
     register: () => document.getElementById("register-button")
 }
 // validacoes
-let validacoes = new Validation(form.email(), form.password());
+let validacoes = new Validation(form.email(), form.senha());
 form.email().addEventListener('input', () => {
-    validacoes.OnChangeEmail(form.emailRequiredError, form.emailInvalidError, form.recoverPassword, form.loginButton);
+    validacoes.OnChangeEmail(form.emailRequiredError, form.emailInvalidError, form.recoverSenha, form.loginButton);
 });
-form.password().addEventListener('input', () => {
-    validacoes.OnChangePassword(form.recoverPassword, form.loginButton, form.passwordRequiredError)
+form.senha().addEventListener('input', () => {
+    validacoes.OnChangeSenha(form.recoverSenha, form.loginButton, form.senhaRequiredError)
 });
 // eventos
-form.loginButton().addEventListener('click', () => {
-});
-form.recoverPassword().addEventListener('click', () => {
-});

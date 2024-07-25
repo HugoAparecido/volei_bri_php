@@ -1,4 +1,25 @@
 <?php
+require_once '../componentes/classes/login_class.php';
+if (isset($_POST['email']) || isset($_POST['senha'])) {
+    if (strlen($_POST['email']) == 0) {
+        echo "Preencha seu e-mail";
+    } else if (strlen($_POST['senha']) == 0) {
+        echo "Preencha sua senha";
+    } else {
+        $usuario = Usuario::Logar($_POST['email'], $_POST['senha']);
+        $quantidade = count($usuario);
+        if ($quantidade == 1) {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['id_usuario'] = $usuario[0]->id_usuario;
+            $_SESSION['nome_usuario'] = $usuario[0]->nome_usuario;
+            header("Location: ./times.php");
+        } else {
+            echo "Falha ao logar! E-mail ou senha incorretos";
+        }
+    }
+}
 if (!isset($_SESSION['id_usuario'])) {
     // define o caminho do icone em uma constante
     define('FAVICON', "../img/bolas.ico");
@@ -14,7 +35,7 @@ if (!isset($_SESSION['id_usuario'])) {
         <div class="container">
             <div class="login-form">
                 <h2>Login</h2>
-                <form action="loginExe.php" , method="post">
+                <form action="" method="post">
                     <div class="mb-3 container">
                         <label class="form-label" for="email">Email</label>
                         <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
@@ -22,16 +43,16 @@ if (!isset($_SESSION['id_usuario'])) {
                         <div class="error" id="email-invalid-error">Email é inválido</div>
                     </div>
                     <div class="mb-3 container">
-                        <div><label class="form-label" for="password">Senha</label></div>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
-                        <div class="error" id="password-required-error">Senha é obrigatória</div>
+                        <div><label class="form-label" for="senha">Senha</label></div>
+                        <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                        <div class="error" id="senha-required-error">Senha é obrigatória</div>
                     </div>
                     <div>
-                        <button type="button" class="btn" id="recover-password-button" disabled="true" style="background-color: #FDDE5C;">Recuperar
+                        <button type="button" class="btn" id="recover-senha-button" disabled="true" style="background-color: #FDDE5C;">Recuperar
                             senha</button>
                     </div>
                     <div>
-                        <button type="button" class=" btn" id="login-button" disabled="true" style="background-color: #FDDE5C; margin-top: 15px;">Entrar</button>
+                        <button type="submit" class=" btn" id="login-button" disabled="true" style="background-color: #FDDE5C; margin-top: 15px;">Entrar</button>
                     </div>
                 </form>
             </div>
