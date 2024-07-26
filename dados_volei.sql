@@ -222,8 +222,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `senha_usuario`, `jogador`, `treinador`) VALUES
-(1, 'Hugo Aparecido', '321senha', 0, 0);
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `senha_usuario`, `email_usuario` `jogador`, `treinador`) VALUES
+(1, 'Hugo Aparecido', 'hugoapga626@gmail.com', '321senha', 0, 0);
 
 --
 -- Restrições para despejos de tabelas
