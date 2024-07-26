@@ -172,13 +172,20 @@ export class Graficos {
     GraficoDefesa(defesa, localGrafico, idChart) {
         let total = 0;
         let background = [
-            'rgba(255, 99, 132)',
-            'rgba(255, 159, 64)',
-            'rgba(255, 205, 86)',
-            'rgba(75, 192, 192)',
-            'rgba(54, 162, 235)',
-            'rgba(153, 102, 255)',
-            'rgba(201, 203, 207)'
+            'rgba(147,112,219)',
+            'rgba(	72,61,139)',
+            'rgba(75,0,130)',
+            'rgba(128,0,128)',
+            'rgba(139,0,139)',
+            'rgba(186,85,211)',
+            'rgba(218,112,214)'
+            
+            
+            
+            
+            
+            
+            
         ]
         let jogadorArray = [];
         let valores = [];
@@ -285,10 +292,10 @@ export class Graficos {
                     data: [passeA, passeB, passeC, passeD],
                     // cores a mostrar respectivamente
                     backgroundColor: [
-                        'rgb(0, 37, 228)',
-                        'rgb(2, 183, 86)',
-                        'rgb(230, 197, 1)',
-                        'rgb(242, 92, 5)',
+                        'rgb(25,25,112)',
+                        'rgb(0,0,255)',
+                        'rgb(30,144,255)',
+                        'rgb(70,130,180)',
                     ],
                     hoverOffset: 4
                 }]
@@ -342,10 +349,10 @@ export class Graficos {
                     data: [saque.flutuante, saque.por_cima, saque.viagem, saque.ace],
                     // cores a mostrar respectivamente
                     backgroundColor: [
-                        'rgb(230, 197, 1)',
-                        'rgb(242, 92, 5)',
-                        'rgb(0, 37, 228)',
-                        'rgb(2, 183, 86)'
+                        'rgb(139,0,0)',
+                        'rgb(178,34,34)',
+                        'rgb(205,92,92)',
+                        'rgb(250,128,114)'
                     ],
                     hoverOffset: 4
                 }]
@@ -396,8 +403,8 @@ export class Graficos {
                     data: [acerto, erro],
                     // cores a mostrar respectivamente
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)'
+                        'rgb(255,222,173)',
+                        'rgb(218,165,32)'
                     ],
                     hoverOffset: 4
                 }]
@@ -444,8 +451,8 @@ export class Graficos {
                     // quantidade dos acertos e erros 
                     data: [ataqueAcertado, ataqueErrado],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)'
+                        'rgb(173,216,230)',
+                        'rgb(135,206,235)'
                     ],
                     hoverOffset: 4
                 }]
@@ -492,8 +499,8 @@ export class Graficos {
                     // quantidade dos acertos e erros 
                     data: [pontoDesteTime, pontoAdversario],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)'
+                        'rgb(219,112,147)',
+                        'rgb(255,182,193)'
                     ],
                     hoverOffset: 4
                 }]
@@ -543,11 +550,11 @@ export class Graficos {
                     // quantidade dos respectivos levanatmentos
                     data: [levantamentos.ponta, levantamentos.centro, levantamentos.oposto, levantamentos.pipe, levantamentos.errou],
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(75, 192, 192)',
-                        'rgb(255, 205, 86)',
-                        'rgb(201, 203, 207)',
-                        'rgb(54, 162, 235)'
+                        'rgb(	0,128,0)',
+                        'rgb(0,100,0)',
+                        'rgb(85,107,47)',
+                        'rgb(107,142,35)',
+                        'rgb(154,205,50)'
                     ]
                 }]
             }
