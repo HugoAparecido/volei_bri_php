@@ -1,4 +1,5 @@
 <?php
+include ('../componentes/protect.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/logo-volei.ico");
