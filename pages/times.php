@@ -1,5 +1,5 @@
 <?php
-include ('../componentes/protect.php');
+include('../componentes/protect.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/logo-volei.ico");
@@ -8,7 +8,7 @@ if (isset($_SESSION['id_usuario'])) {
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/raposa2.png");
   // define os nomes dasa páginas e seus respectivos caminhos
-  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './login.php']));
+  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
   include '../componentes/header.php';
 ?>
   <main>

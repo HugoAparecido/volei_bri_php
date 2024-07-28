@@ -1,20 +1,21 @@
 <?php
+include '../componentes/protect.php';
 require_once '../componentes/classes/login_class.php';
 if (isset($_POST['email']) || isset($_POST['senha'])) {
     if (strlen($_POST['email']) == 0) {
         echo "Preencha seu e-mail";
     } else if (strlen($_POST['senha']) == 0) {
         echo "Preencha sua senha";
-    }else {
+    } else {
         $usuario = Usuario::Logar($_POST['email'], $_POST['senha']);
         $quantidade = count($usuario);
         if ($quantidade == 1) {
             if (!isset($_SESSION)) {
                 session_start();
             }
-            $_SESSION['id_usuario'] = $usuario[0]->id_usuario;
-            $_SESSION['nome_usuario'] = $usuario[0]->nome_usuario;
-            if($usuario[0]->treinador){
+            $_SESSION['id_usuario'] = $usuario[0]->GetID();
+            $_SESSION['nome_usuario'] = $usuario[0]->GetNomeUsuario();
+            if ($usuario[0]->GetTreinador()) {
                 $_SESSION['treinador'] = true;
             }
             header("Location: ./times.php");
