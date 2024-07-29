@@ -6,11 +6,12 @@ if (isset($_SESSION['id_usuario'])) {
   // define o caminho do css da página
   define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
   // define o caminho da logo no header
-  define('LOGO_HEADER', "../img/raposa2.png");
+  define('LOGO_HEADER', "../img/bolas.png");
   // define os nomes dasa páginas e seus respectivos caminhos
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
   include '../componentes/header.php';
 ?>
+  <button type="button" class="botao_deslogar" id="logout"><a href="../componentes/logout.php">Sair</a></button>
   <main>
     <div class="insercoes" id="insercoes">
       <section class="time">
@@ -82,7 +83,7 @@ if (isset($_SESSION['id_usuario'])) {
           </div>
           <button id="salvar_informacoes" type="button" class="botao_time btn">Enviar Dados</button>
         </form>
-        <button type="button" class="btn botao_time"><a href="./cadastrar_jogador.html" class="nav-link">Cadastrar
+        <button type="button" class="btn botao_time"><a href="./cadastrar_jogador.php" class="nav-link">Cadastrar
             Jogador</a></button>
       </section>
     </div>
