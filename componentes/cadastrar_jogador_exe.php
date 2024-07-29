@@ -1,7 +1,12 @@
 <?php
-$nome_jogador = $_POST['nome_jogador'];
-$num_camisa_jogador = $_POST['num_camisa_jogador'];
-$posicao_jogador = $_POST['posicao_jogador'];
-$sexo_jogador = $_POST['sexo_jogador'];
-$altura_jogador = $_POST['altura_jogador'];
-$peso_jogador = $_POST['peso_jogador'];
+$nomeJogador = $_POST['nome_jogador'];
+$apelidoJogador = $_POST['apelido_jogador'];
+$numCamisaJogador = $_POST['num_camisa_jogador'];
+$posicaoJogador = $_POST['posicao_jogador'];
+$sexoJogador = $_POST['sexo_jogador'];
+$alturaJogador = $_POST['altura_jogador'];
+$pesoJogador = $_POST['peso_jogador'];
+if ($posicaoJogador === "Líbero") {
+    $obLibero = new Libero(null, $nomeJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador, $sexoJogador);
+    $obLibero->CadastrarLibero();
+}

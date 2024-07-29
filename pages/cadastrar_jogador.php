@@ -22,6 +22,10 @@ if (isset($_SESSION['id_usuario'])) {
                         <input class="form-control" type="text" id="nome_jogador" name="nome_jogador" required>
                     </div>
                     <div class="linha_unica">
+                        <label class="form-label" for="apelido_jogador">Apelido: </label>
+                        <input class="form-control" type="text" id="apelido_jogador" name="apelido_jogador">
+                    </div>
+                    <div class="linha_unica">
                         <label class="form-label" for="num_camisa_jogador">Número da camisa do jogador: </label>
                         <input class="form-control" type="number" id="num_camisa_jogador" name="num_camisa_jogador">
                     </div>
@@ -52,28 +56,12 @@ if (isset($_SESSION['id_usuario'])) {
                         <label class="form-label" for="peso_jogador">Peso do jogador: </label>
                         <input class="form-control" type="text" id="peso_jogador" name="peso_jogador"><br>
                     </div>
-                    <button id="cadastrar_jogador" class="btn " type="button" style="background-color: #FDDE5C;">Cadastar Jogador</button>
+                    <button id="cadastrar_jogador" class="btn " type="submit" style="background-color: #FDDE5C;">Cadastar Jogador</button>
                 </fieldset>
             </form>
-            <button id="update_jogadores_cadastrados" class="btn"><a href="./update.html" style="color:  rgb(0, 0, 0);">Atualizar Jogador
+            <button id="update_jogadores_cadastrados" class="btn"><a href="./atualizar_jogador.php" style="color:  rgb(0, 0, 0);">Atualizar Jogador
                     Existente</a></button>
-            <button id="mostrar_jogadores_cadastrados" class="btn " style="background-color: #FDDE5C;">Mostar Jogadores
-                Cadastrados</button>
-            <div class="tabela">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Número</th>
-                            <th>Posição</th>
-                            <th>Sexo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="jogadores_cadastrados">
-                    </tbody>
-                </table>
-            </div>
+            <button id="mostrar_jogadores_cadastrados" class="btn " style="background-color: #FDDE5C;"><a href="./exibir_jogador.php"> Mostar Jogadores Cadastrados</a></button>
         </section>
     </main>
 <?php
