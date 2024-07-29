@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22-Jul-2024 às 21:08
+-- Tempo de geração: 29-Jul-2024 às 22:16
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS `instituicao` (
   `nome_instituicao` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tipo_instituicao` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_instituicao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `instituicao`
+--
+
+INSERT INTO `instituicao` (`id_instituicao`, `nome_instituicao`, `tipo_instituicao`) VALUES
+(1, 'teste', 'Integral');
 
 -- --------------------------------------------------------
 
@@ -52,7 +59,14 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `peso_jogador` decimal(3,2) DEFAULT NULL,
   `sexo_jogador` enum('M','S') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_jogador`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `jogador`
+--
+
+INSERT INTO `jogador` (`id_jogador`, `nome_jogador`, `apelido_jogador`, `numero_camisa`, `defesa_jogador`, `altura_jogador`, `peso_jogador`, `sexo_jogador`) VALUES
+(1, 'Eduardo', 'Dudu', 12, 0, NULL, NULL, 'M');
 
 -- --------------------------------------------------------
 
@@ -64,7 +78,7 @@ DROP TABLE IF EXISTS `jogador_no_time`;
 CREATE TABLE IF NOT EXISTS `jogador_no_time` (
   `id_jogador` int NOT NULL,
   `id_time` int NOT NULL,
-  `defesa_no_time` int UNSIGNED NOT NULL,
+  `defesa_no_time` int UNSIGNED NOT NULL DEFAULT '0',
   `ataque_dentro_no_time` int UNSIGNED DEFAULT '0',
   `ataque_fora_no_time` int UNSIGNED DEFAULT '0',
   `bloqueio_convertido_no_time` int UNSIGNED DEFAULT '0',
@@ -78,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `jogador_no_time` (
   `levantamento_para_ponta_no_time` int UNSIGNED DEFAULT '0',
   `levantamento_para_centro_no_time` int UNSIGNED DEFAULT '0',
   `errou_levantamento_no_time` int UNSIGNED DEFAULT '0',
-  `posicao_jogador` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `posicao_jogador` enum('Líbero','Levantador','Oposto','Central','Ponta 1','Ponta 2','Não definida') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `saque_fora_no_time` int UNSIGNED DEFAULT '0',
   `saque_ace_cima_no_time` int UNSIGNED DEFAULT '0',
   `saque_ace_viagem_no_time` int UNSIGNED DEFAULT '0',
@@ -89,6 +103,13 @@ CREATE TABLE IF NOT EXISTS `jogador_no_time` (
   PRIMARY KEY (`id_jogador`,`id_time`),
   KEY `time_time` (`id_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `jogador_no_time`
+--
+
+INSERT INTO `jogador_no_time` (`id_jogador`, `id_time`, `defesa_no_time`, `ataque_dentro_no_time`, `ataque_fora_no_time`, `bloqueio_convertido_no_time`, `bloqueio_errado_no_time`, `passe_a_no_time`, `passe_b_no_time`, `passe_c_no_time`, `passe_d_no_time`, `levantamento_para_oposto_no_time`, `levantamento_para_pipe_no_time`, `levantamento_para_ponta_no_time`, `levantamento_para_centro_no_time`, `errou_levantamento_no_time`, `posicao_jogador`, `saque_fora_no_time`, `saque_ace_cima_no_time`, `saque_ace_viagem_no_time`, `saque_ace_flutuante_no_time`, `saque_cima_no_time`, `saque_viagem_no_time`, `saque_flutuante_no_time`) VALUES
+(1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Líbero', 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -135,6 +156,13 @@ CREATE TABLE IF NOT EXISTS `libero` (
   `posicao` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Líbero',
   PRIMARY KEY (`id_jogador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `libero`
+--
+
+INSERT INTO `libero` (`id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `posicao`) VALUES
+(1, 0, 0, 0, 0, 'Líbero');
 
 -- --------------------------------------------------------
 
@@ -183,7 +211,14 @@ CREATE TABLE IF NOT EXISTS `time` (
   KEY `time_time` (`id_time_adversario`),
   KEY `time_usuario` (`id_usuario`),
   KEY `time_instituicao` (`id_instituicao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `time`
+--
+
+INSERT INTO `time` (`id_time`, `nome_time`, `data_hora_criacao`, `sexo_time`, `id_time_adversario`, `id_usuario`, `id_instituicao`) VALUES
+(2, 'teste banco', '2024-07-29 21:54:53', 'M', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -212,6 +247,7 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id_usuario` int NOT NULL AUTO_INCREMENT,
   `nome_usuario` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email_usuario` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   `senha_usuario` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `jogador` tinyint(1) NOT NULL,
   `treinador` tinyint(1) NOT NULL,
@@ -222,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `senha_usuario`, `email_usuario` `jogador`, `treinador`) VALUES
+INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `jogador`, `treinador`) VALUES
 (1, 'Hugo Aparecido', 'hugoapga626@gmail.com', '321senha', 0, 0);
 
 --
