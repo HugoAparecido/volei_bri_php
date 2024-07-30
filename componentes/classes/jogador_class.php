@@ -3,66 +3,65 @@ require_once "./database_class.php";
 abstract class Jogador
 {
     /**
-     * Identificador único do joagador
+     * Identificador único do jogador
      * @var integer
      */
-    public $id;
+    protected $id_jogador;
     /**
      * Nome do Jogador
      * @var string
      */
-    public $nome;
-    /**
-     * Posição
-     * @var string
-     */
-    protected $posicao;
-    /**
-     * Número da camisa
-     * @var int
-     */
-    public $num_camisa;
+    protected $nome_jogador;
     /**
      * Apelido do jogador
      * @var string
      */
-    public $apelido;
+    protected $apelido_jogador;
+    /**
+     * Posição
+     * @var string
+     */
+    protected $posicao_jogador;
+    /**
+     * Número da camisa
+     * @var int
+     */
+    protected $numero_camisa;
     /**
      * Altura do jogador
      * @var float
      */
-    public $altura;
+    protected $altura_jogador;
     /**
      * Peso do jogador
      * @var float
      */
-    public $peso;
+    protected $peso_jogador;
     /**
      * Sexo do jogador
      * @var string(M/F)
      */
-    public $sexo;
-    /**
-     * Método responsável porCcadastrar um novo jogador no banco
-     * @return boolean
-     */
+    protected $sexo_jogador;
     /**
      * Defesas do joagador
      * @var int
      */
-    protected $defesa;
+    protected $defesa_jogador;
+    /**
+     * Método responsável por Cadastrar um novo jogador no banco
+     * @return boolean
+     */
     public function Cadastrar()
     {
         //INSERIR O JOGADOR NO BANCO
         $obDatabase = new Database('jogador');
-        $this->id = $obDatabase->insert([
-            'nome' => $this->nome,
-            'posicao' => $this->posicao,
-            'num_camisa' => $this->num_camisa,
-            'apelido' => $this->apelido,
-            'altura' => $this->altura,
-            'peso' => $this->peso,
-            'sexo' => $this->sexo
+        $this->id_jogador = $obDatabase->insert([
+            'nome_jogador' => $this->nome_jogador,
+            'apelido_jogador' => $this->apelido_jogador,
+            'numero_camisa' => $this->numero_camisa,
+            'altura_jogador' => $this->altura_jogador,
+            'peso_jogador' => $this->peso_jogador,
+            'sexo_jogador' => $this->sexo_jogador
         ]);
         //RETORNAR SUCESSO
         return true;
@@ -73,14 +72,13 @@ abstract class Jogador
      */
     public function Atualizar()
     {
-        return (new Database('jogador'))->update('id = ' . $this->id, [
-            'nome' => $this->nome,
-            'posicao' => $this->posicao,
-            'num_camisa' => $this->num_camisa,
-            'apelido' => $this->apelido,
-            'altura' => $this->altura,
-            'peso' => $this->peso,
-            'sexo' => $this->sexo
+        return (new Database('jogador'))->update('id = ' . $this->id_jogador, [
+            'nome_jogador' => $this->nome_jogador,
+            'numero_camisa' => $this->numero_camisa,
+            'apelido_jogador' => $this->apelido_jogador,
+            'altura_jogador' => $this->altura_jogador,
+            'peso_jogador' => $this->peso_jogador,
+            'sexo_jogador' => $this->sexo_jogador
         ]);
     }
     /**
@@ -89,7 +87,7 @@ abstract class Jogador
      */
     public function Excluir()
     {
-        return (new Database('jogador'))->delete('id = ' . $this->id);
+        return (new Database('jogador'))->delete('id = ' . $this->id_jogador);
     }
     /**
      * Método responsável por obter os jogadores do banco de dados
@@ -112,3 +110,5 @@ abstract class Jogador
         return (new Database('jogador'))->select('id = ' . $id)->fetchObject(self::class);
     }
 }
+//Select para puxar os dados no time e também os dados da posição
+//SELECT * FROM jogador INNER JOIN libero on libero.id_jogador = jogador.id_jogador INNER JOIN jogador_no_time on jogador_no_time.id_jogador = jogador.id_jogador;

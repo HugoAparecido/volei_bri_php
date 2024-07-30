@@ -1,72 +1,76 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/login.css">
-  <link rel="shortcut icon" href="../img/Logo.png" type="image/x-icon">
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg" id="nav">
-    <div class="container-fluid" id="nav_container">
-      <a class="navbar-brand" href="#">
-        <img src="../img/Logo.png" alt="Logo" id="logo">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.html">Página Principal</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../pages/times.html">Times</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../pages/estatisticas.html">Visualizar estatísticas</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <main class="d-flex justify-content-center align-items-center flex-grow-1">
-    <div class="text-center w-25">
-      <div class="p-4 border rounded-5" style="background-color: #7AB5CB; margin: auto;">
-          <a href="#">
-            <img src="../img/Logo.png" alt="Logo" class="img-fluid mb-1" style="max-width: 80px;">
-          </a>
-        <form action="cadastroClienteExe.php" method="post">
-          <fieldset>
-            <legend class="text-center mb-4">Login</legend>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email:</label>
-              <input type="text" name="email" id="email" class="form-control " aria-describedby="EmailCliente" required>
+<?php
+include '../componentes/protect.php';
+require_once '../componentes/classes/login_class.php';
+if (isset($_POST['email']) || isset($_POST['senha'])) {
+    if (strlen($_POST['email']) == 0) {
+        echo "Preencha seu e-mail";
+    } else if (strlen($_POST['senha']) == 0) {
+        echo "Preencha sua senha";
+    } else {
+        $usuario = Usuario::Logar($_POST['email'], $_POST['senha']);
+        $quantidade = count($usuario);
+        if ($quantidade == 1) {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $_SESSION['id_usuario'] = $usuario[0]->GetID();
+            $_SESSION['nome_usuario'] = $usuario[0]->GetNomeUsuario();
+            if ($usuario[0]->GetTreinador()) {
+                $_SESSION['treinador'] = true;
+            }
+            header("Location: ./times.php");
+        } else {
+            echo "Falha ao logar! E-mail ou senha incorretos";
+        }
+    }
+}
+if (!isset($_SESSION['id_usuario'])) {
+    // define o caminho do icone em uma constante
+    define('FAVICON', "../img/bolas.ico");
+    // define o caminho do css da página
+    define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/style.css"));
+    // define o caminho da logo no header
+    define('LOGO_HEADER', "../img/bolas.png");
+    // define os nomes dasa páginas e seus respectivos caminhos
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php']));
+    include '../componentes/header.php';
+?>
+    <main>
+        <div class="container">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form action="" method="post">
+                    <div class="mb-3 container">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
+                        <div class="error" id="email-required-error">Email é obrigatório</div>
+                        <div class="error" id="email-invalid-error">Email é inválido</div>
+                    </div>
+                    <div class="mb-3 container">
+                        <div><label class="form-label" for="senha">Senha</label></div>
+                        <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                        <div class="error" id="senha-required-error">Senha é obrigatória</div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn" id="recover-senha-button" disabled="true" style="background-color: #FDDE5C;">Recuperar
+                            senha</button>
+                    </div>
+                    <div>
+                        <button type="submit" class=" btn" id="login-button" disabled="true" style="background-color: #FDDE5C; margin-top: 15px;">Entrar</button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-              <label for="senha" class="form-label">Senha:</label>
-              <input type="password" name="senha" id="senha" class="form-control" aria-describedby="SenhaCliente" required>
-            </div>
-            <div class="text-center mb-3">
-              <button type="submit" class="btn btn-primary">Logar</button>
-            </div>
-            <div class="text-center mb-3">
-              <a href="cadastro.php">Cadastrar-se</a>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-QWTG5Zo2tdbMQE1A/1rBtRf6j6c6wqX0FSh5nH1/86oxu7bSCguM6oqDs3Hp/T6e" crossorigin="anonymous"></script>
-</body>
-
-</html>
+        </div>
+    </main>
+    <?php
+    include '../componentes/footer.php';
+    ?>
+    <script type="module" src="../js/login.js"></script>
+<?php
+} else {
+?>
+    <script>
+        window.location.href = "./times.php"
+    </script>
+<?php
+}

@@ -9,45 +9,45 @@
 
 :root {
     --preto: #000;
-    --amarelo: #FDDE5C;
+
+    --cinza: #E6E4E1;
+    --amarelo:#FDDE5C;
+    --azul-claro: #7AB5CB;
     --marrom: #261515;
-    --laranja-escuro: #590902;
-    --laranja-claro: #F25C05;
-    --branco: #E6E4E1;
-    --cinza: #F2F2F2;
+    --branco: #fff;
+    --cinza-claro: #F2F2F2;
 }
 
 
 /*  PARTE DO LOGIN */
-/*
 .login-form {
     width: 360px;
-    background-color: var(--laranja);  Cor de fundo do formulário em laranja 
+    background-color: var(--azul-claro); /* Cor de fundo do formulário em azul */
     padding: 40px;
-    margin: 100px auto;  Centraliza o formulário verticalmente e na horizontal 
-    border-radius: 10px;  Borda arredondada 
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);  Sombra suave 
+    margin: 100px auto;  /*Centraliza o formulário verticalmente e na horizontal*/ 
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);  /*Sombra suave */
   }
   .login-form h2 {
-    color: var(--preto);  Texto branco 
+    color: var(--cinza); /* Texto preto */
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 30px; 
   }
   .login-form .form-control {
-    background-color: #ffe6c1;  Cor de fundo dos campos de input em laranja claro 
-    color: var(--preto);  Cor do texto dos campos de input 
-    border-color: #ffa45c;  Cor da borda dos campos de input 
+    background-color: var(--cinza); /* Cor de fundo dos campos de input em cinza */
+    color: var(--preto); /* Cor do texto dos campos de input */
+    border-color: var(--cinza); /* Cor da borda dos campos de input */
   }
   .login-form .btn {
-    background-color: #ff814a;  Botão laranja 
-    border-color: #ff814a;  Borda do botão laranja 
+    background-color: var(--amarelo); /* Botão amarelo*/
+    border-color: var(--amarelo); /* Borda do botão amarelo */
   }
   .login-form .btn:hover {
-    background-color: #ff9d6f;  Cor do botão ao passar o mouse 
-    border-color: #ff9d6f;  Cor da borda do botão ao passar o mouse 
+    background-color: var(--amarelo); /* Cor do botão ao passar o mouse */
+    border-color: var(--amarelo); /* Cor da borda do botão ao passar o mouse */
   }
   .form-label{
-    color: var(--preto);
+    color: var(--cinza);
   }
 
 */
@@ -55,6 +55,9 @@
 /*PARTE DE LOGIN*/
 
 
+body {
+    background-color: var(--cinza);
+}
 
 #logo {
     width: 80px;
@@ -67,8 +70,11 @@
     padding: 0;
 }
 
+#nav_container {
+    background-color: var(--amarelo);
+}
 main {
-    background-color: var(--branco);
+    background-color: var(--cinza);
     width: 100%;
     height: 100%;
 }
@@ -101,13 +107,12 @@ button.botao_deslogar:hover {
 }
 
 button {
-    background-color: var(--laranja);
+    background-color: var(--amarelo);
     color: var(--cinza);
 }
 
 button[disabled] {
-    opacity: 0.7;
-    background-color: var(--laranja-claro);
+    background-color: var(--amarelo);
     color: var(--cinza);
 }
 
@@ -124,11 +129,11 @@ div {
 .clear {
     background: transparent;
     border: none;
-    color: var(--laranja-claro);
+    color: var(--preto);
 }
 
 .solid {
-    background: var(--laranja);
+    background: var(--amarelo);
     border: none;
     color: rgb(45, 211, 111);
 }

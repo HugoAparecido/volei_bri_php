@@ -7,7 +7,9 @@
 :root {
     --amarelo:#FDDE5C;
     --preto: #000;
-    --cinza: #E6E4E1;
+    --marrom: #261515;
+    --branco: #fff;
+    --cinza: #F2F2F2;
 }
 
 main {
@@ -51,7 +53,7 @@ table {
 }
 
 th {
-    color: var(--amarelo);
+    color: var(--cinza);
 }
 
 td {
@@ -59,9 +61,9 @@ td {
 }
 
 legend {
-    color: var(--amarelo)
+    color: var(--cinza)
 }
 
 label {
-    color: var(--preto)
+    color: var(--cinza)
 }

@@ -1,27 +1,31 @@
 :root {
     --amarelo:#FDDE5C;
-    --amarelo-escuro:#e0ca06c2;
-    --preto: #000;   
-    --cinza: #E6E4E1;
-
+    --preto: #000;
+    --laranja: #F24405;
+    --marrom: #261515;
+    --laranja-escuro: #590902;
+    --laranja-claro: #F25C05;
+    --branco: #fff;
+    --cinza: #F2F2F2;
+    --cor-de-fundo-insercoes: #F49054;
 }
 
 h1 {
-    color: var(--amarelo);
+    color: var(--cinza);
 }
 
 h2 {
-    margin: 30px;
-    color: var(--preto)
+    margin: 1px;
+    color: var(--cinza)
 }
 
 h3 {
     font-size: 15px;
-    color: var(--amarelo);
+    color: var(--cinza);
 }
 
 body {
-    background-color: var(--cinza);
+    background-color: var(--preto);
 }
 
 main {
@@ -48,9 +52,9 @@ main {
 }
 
 .botao_time:hover {
-    background-color: var(--amarelo-escuro);
+    background-color: var(--laranja-escuro);
     color: var(--amarelo);
-    border: 2px solid var(--amarelo);
+    border: 2px solid var(--laranja-claro);
 }
 
 #timeSelecionado {
@@ -143,7 +147,7 @@ main {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid var(--preto);
+    border: 1px solid var(--cinza);
     padding: 1px;
     border-radius: 10px;
     margin: 1px;
@@ -165,7 +169,7 @@ main {
 #novo_jogador {
     width: auto;
     background-color: var(--);
-    color: var(--preto);
+    color: var(--cinza);
     height: 50px;
     font-size: 20px;
     border: 1px solid var(--laranja-escuro);

@@ -15,7 +15,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav">
     <div class="container-fluid" id="nav_container">
       <a class="navbar-brand" href="#">
-        <img src="../img/raposa2.png" alt="Logo" id="logo">
+        <img src="../img/bolas.png" alt="Logo" id="logo">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
         aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,9 +66,21 @@
             </div>
           </div>
         </div>
-          
-      </form>
-        
+        <div class="mb-3 container">
+          <div><label class="form-label" for="password">Senha</label></div>
+          <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
+          <div class="error" id="password-required-error">Senha é obrigatória</div>
+        </div>
+        <div>
+          <button type="button" class="btn" id="recover-password-button" disabled="true"
+            style="background-color: #FDDE5C;">Recuperar
+            senha</button>
+        </div>
+        <div>
+          <button type="button" class=" btn" id="login-button" disabled="true"
+            style="background-color: #FDDE5C; margin-top: 15px;">Entrar</button>
+        </div>
+      </div>
     </div>
   <script src="../js/login.js" type="module"></script>
 </body>

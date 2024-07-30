@@ -5,11 +5,8 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #E6E4E1;
 }
-body{
-    background-color: #E6E4E1;
-}
+
 .times {
     margin-top: 10px;
     width: 100%;

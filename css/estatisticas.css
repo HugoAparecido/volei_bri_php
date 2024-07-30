@@ -14,11 +14,11 @@ main {
 }
 
 select {
-    background-color: var(--amarelo);
-    color: var(--preto);
+    background-color: var(--laranja);
+    color: var(--cinza);
     height: 30px;
     font-size: 20px;
-    border: 2px solid var(--amarelo);
+    border: 2px solid var(--laranja-escuro);
     border-radius: 10px;
     margin: 5px;
 }
@@ -71,6 +71,6 @@ canvas {
 
 #time {
     width: 20%;
-    background-color: var(--amarelo);
+    background-color: var(--amarelo );
     border: var(--amarelo);
 }
