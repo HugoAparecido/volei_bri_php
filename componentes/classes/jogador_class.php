@@ -1,5 +1,5 @@
 <?php
-require_once "./database_class.php";
+require_once "database_class.php";
 abstract class Jogador
 {
     /**
