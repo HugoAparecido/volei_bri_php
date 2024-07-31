@@ -2,7 +2,7 @@
 include('../componentes/protect.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
-  define('FAVICON', "../img/logo-volei.ico");
+  define('FAVICON', "../img/bolas.ico");
   // define o caminho do css da página
   define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
   // define o caminho da logo no header
