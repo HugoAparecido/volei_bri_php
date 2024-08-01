@@ -5,7 +5,7 @@
 }
 
 :root {
-    --amarelo:#FDDE5C;
+    --amarelo: #FDDE5C;
     --preto: #000;
     --marrom: #261515;
     --branco: #fff;
@@ -45,6 +45,7 @@ button {
 label {
     padding-right: 10px;
     white-space: nowrap;
+    color: var(--amarelo);
 }
 
 table {
