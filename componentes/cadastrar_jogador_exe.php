@@ -23,3 +23,4 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
 } else {
     echo "Não foi possível cadastrar o jogador";
 }
+header("Location: ../pages/exibir_jogadores.php");
