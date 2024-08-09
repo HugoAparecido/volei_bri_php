@@ -33,6 +33,12 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
                             </li>
+                        <?php }
+                        if (isset($_SESSION['treinador']))
+                            if ($_SESSION['treinador']) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="./cadastrar_usuario">cadastrar Usuário</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>

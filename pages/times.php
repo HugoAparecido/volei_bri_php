@@ -8,7 +8,7 @@ if (isset($_SESSION['id_usuario'])) {
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/bolas.png");
   // define os nomes dasa páginas e seus respectivos caminhos
-  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
+  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
 ?>
   <button type="button" class="botao_deslogar" id="logout"><a href="../componentes/logout.php">Sair</a></button>
