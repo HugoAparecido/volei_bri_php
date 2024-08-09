@@ -1,6 +1,6 @@
 <?php
 include '../componentes/protect.php';
-require_once '../componentes/classes/login_class.php';
+require_once '../componentes/classes/usuario_class.php';
 if (isset($_POST['email']) || isset($_POST['senha'])) {
     if (strlen($_POST['email']) == 0) {
         echo "Preencha seu e-mail";

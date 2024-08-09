@@ -18,12 +18,24 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
     <form action="cadastroClienteExe.php" method="post">
       <fieldset>
         <legend>Cadastro</legend>
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required>
         <label for="email">Email:</label>
-        <input type="text" name="email" id="email" aria-describedby="EmailCliente" required>
+        <input type="text" name="email" id="email" required>
         <label for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha" aria-describedby="SenhaCliente" required>
+        <input type="password" name="senha" id="senha" required>
         <label for="confirmasenha">confirmar Senha:</label>
-        <input type="password" name="confirmsenha" id="confirmasenha" aria-describedby="ConfirmaSenhaCliente" required>
+        <input type="password" name="confirmasenha" id="confirmasenha" required>
+        <label>É jogador</label>
+        <input type="radio" name="jogador" id="ejogador" value="1">
+        <label for="ejogador">Sim</label>
+        <input type="radio" name="jogador" id="naoejogador" value="0">
+        <label for="naoejogador">Não</label>
+        <label>É Treinador</label>
+        <input type="radio" name="treinador" id="etreinador" value="1">
+        <label for="etreinador">Sim</label>
+        <input type="radio" name="treinador" id="naoetreinador" value="0">
+        <label for="naoetreinador">Não</label>
         <button type="submit">Cadastrar</button>
       </fieldset>
     </form>
