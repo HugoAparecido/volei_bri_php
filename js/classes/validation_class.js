@@ -5,62 +5,62 @@ export class Validation {
         this.senha = senha;
     }
     // Função para mudanças no campo email
-    OnChangeEmail(emailRequiredError, emailInvalidError, recoverSenha, loginButton) {
-        this.ToggleButtonDisabled(recoverSenha, loginButton);
-        this.ToggleEmailErrors(emailRequiredError, emailInvalidError);
+    OnChangeEmail(ErroEmailRequerido, EmailEmailInvalido, RecuperarBotao, BotaoLogin) {
+        this.ToggleButtonDisabled(RecuperarBotao, BotaoLogin);
+        this.ToggleEmailErros(ErroEmailRequerido, EmailEmailInvalido);
     }
     // Função para mudanças no campo email do register.html
-    OnChangeEmailRegister(emailRequiredError, emailInvalidError, registerButton) {
+    OnChangeEmailCadastro(ErroEmailRequerido, EmailEmailInvalido, BotaoCadastro) {
         const email = this.email.value;
-        emailRequiredError().style.display = email ? "none" : "block";
-        emailInvalidError().style.display = this.ValidateEmail(email) ? "none" : "block";
-        this.ToggleRegisterButtonDisabled(registerButton);
+        ErroEmailRequerido().style.display = email ? "none" : "block";
+        EmailEmailInvalido().style.display = this.ValidarEmail(email) ? "none" : "block";
+        this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
     // Função para mudanças no campo senha
-    OnChangeSenha(recoverSenha, loginButton, senhaRequiredError) {
-        this.ToggleButtonDisabled(recoverSenha, loginButton);
-        this.ToggleSenhaErrors(senhaRequiredError);
+    OnChangeSenha(RecuperarBotao, BotaoLogin, ErroRequerimentoSenha) {
+        this.ToggleButtonDisabled(RecuperarBotao, BotaoLogin);
+        this.ToggleSenhaErros(ErroRequerimentoSenha);
     }
     // Função para mudanças no campo email do register.html
-    OnChangeSenhaRegister(senhaRequiredError, senhaMinLenghtError, registerButton, confirmarSenhaForm, confirmarSenhaDoesntMatchError) {
+    OnChangeSenhaRegister(ErroRequerimentoSenha, senhaMinLenghtError, BotaoCadastro, confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
         const senha = this.senha.value;
-        senhaRequiredError().style.display = senha ? "none" : "block";
+        ErroRequerimentoSenha().style.display = senha ? "none" : "block";
         senhaMinLenghtError().style.display = senha.length >= 6 ? "none" : "block";
-        this.ValidateSenhaMatch(confirmarSenhaForm, confirmarSenhaDoesntMatchError);
-        this.ToggleRegisterButtonDisabled(registerButton);
+        this.ValidarSenhaNaoCorresponde(confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro);
+        this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
     // Função para mudanças no campo confirmar senha do register.html
-    OnChangeConfirmarSenha(confirmarSenha, confirmarSenhaDoesntMatchError, registerButton) {
-        this.ValidateSenhaMatch(confirmarSenha, confirmarSenhaDoesntMatchError);
-        this.ToggleRegisterButtonDisabled(registerButton);
+    OnChangeConfirmarSenha(confirmarSenha, ConfirmarSenhaNaoCorrespondeErro, BotaoCadastro) {
+        this.ValidarSenhaNaoCorresponde(confirmarSenha, ConfirmarSenhaNaoCorrespondeErro);
+        this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
     // verificar se  verificação de senha é igual a senha
-    ValidateSenhaMatch(confirmarSenhaForm, confirmarSenhaDoesntMatchError) {
+    ValidarSenhaNaoCorresponde(confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
         const senha = this.senha.value;
         const confirmarSenha = confirmarSenhaForm().value;
-        confirmarSenhaDoesntMatchError().style.display = senha == confirmarSenha ? "none" : "block";
+        ConfirmarSenhaNaoCorrespondeErro().style.display = senha == confirmarSenha ? "none" : "block";
     }
     // Mostrar os erros do email
-    ToggleEmailErrors(emailRequiredError, emailInvalidError) {
+    ToggleEmailErros(ErroEmailRequerido, EmailEmailInvalido) {
         const email = this.email.value;
-        emailRequiredError().style.display = email ? "none" : "block";
-        emailInvalidError().style.display = this.ValidateEmail(email) ? "none" : "block";
+        ErroEmailRequerido().style.display = email ? "none" : "block";
+        EmailEmailInvalido().style.display = this.ValidarEmail(email) ? "none" : "block";
     }
     // Mostrar os erros da senha
-    ToggleSenhaErrors(senhaRequiredError) {
+    ToggleSenhaErros(ErroRequerimentoSenha) {
         const senha = this.senha.value;
-        senhaRequiredError().style.display = senha ? "none" : "block";
+        ErroRequerimentoSenha().style.display = senha ? "none" : "block";
     }
     // Ativar o botao de login
-    ToggleButtonDisabled(recoverSenha, loginButton) {
+    ToggleButtonDisabled(RecuperarBotao, BotaoLogin) {
         const emailValid = this.EmailValido();
-        recoverSenha().disabled = !emailValid;
+        RecuperarBotao().disabled = !emailValid;
         const senhaValid = this.SenhaValida();
-        loginButton().disabled = !emailValid || !senhaValid;
+        BotaoLogin().disabled = !emailValid || !senhaValid;
     }
     // Ativar o botão de registrar
-    ToggleRegisterButtonDisabled(registerButton) {
-        registerButton().disabled = !this.IsFormValid();
+    ToggleBotaoCadastroDisabled(BotaoCadastro) {
+        BotaoCadastro().disabled = !this.FormValido();
     }
     // Se o campo senha tem um valor diferente de ""
     SenhaValida() {
@@ -76,12 +76,12 @@ export class Validation {
         if (!email) {
             return false;
         }
-        return this.ValidateEmail(email);
+        return this.ValidarEmail(email);
     }
     // Se o formulario é válido
-    IsFormValid() {
+    FormValido() {
         const email = this.email.value;
-        if (!email || !this.ValidateEmail(email)) {
+        if (!email || !this.ValidarEmail(email)) {
             return false;
         }
         const senha = this.senha.value;
@@ -92,32 +92,7 @@ export class Validation {
         return true;
     }
     // Forma para validar o email
-    ValidateEmail(email) {
+    ValidarEmail(email) {
         return /\S+@\S+\.\S+/.test(email);
-    }
-    // Funções para evitar erros
-    RemoverDepoisDoSegundoCaractere(str, char) { //Função gerada pela IA Bing e adapatada para a aplicação
-        var partes = str.split(char);
-        if (partes.length <= 2) {
-            return str; // O caractere não aparece duas vezes
-        }
-        return partes[0] + char + partes[1]; // Retorna a string até o segundo caractere
-    }
-    TratarInputTextComoNumber(constInput) {
-        constInput.value = this.RemoverDepoisDoSegundoCaractere(constInput.value, '.')
-        constInput.value = this.RemoverDepoisDoSegundoCaractere(constInput.value, ',')
-        constInput.value = constInput.value.replace(',', '.')
-        constInput.addEventListener('input', function (e) {
-            // Verificando se o valor é um número de ponto flutuante
-            if (!/^[-+]?[0-9]*\.?[0-9]+$/g.test(this.value)) {
-                // Se não for, limpa o valor
-                this.value = '';
-            }
-        });
-    }
-    VerificarTimeSelecionadoExistente() {
-        if (localStorage.getItem("timeAtualID") === null) {
-            window.location.href = "./times.html";
-        }
     }
 }

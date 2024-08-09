@@ -64,7 +64,7 @@ class Usuario
         session_destroy();
         header("Location: $redirecionar");
     }
-    public function Cadastrar()
+    public function Cadastrar($nome, $email, $senha, $jogador, $treinador, $id_jogador = null)
     {
         if ($this->treinador) {
             //INSERIR O USUÁRIO NO BANCO

@@ -15,7 +15,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
     <a href="#">
       <img src="../img/Logo.png" alt="Logo">
     </a>
-    <form action="cadastroClienteExe.php" method="post">
+    <form action="../componentes/cadastrar_usuario_exe.php" method="post">
       <fieldset>
         <legend>Cadastro</legend>
         <label for="nome">Nome:</label>
