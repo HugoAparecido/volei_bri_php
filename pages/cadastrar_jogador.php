@@ -41,12 +41,12 @@ if (isset($_SESSION['id_usuario'])) {
                 <input type="text" id="altura_jogador" name="altura_jogador">
                 <label for="peso_jogador">Peso do jogador: </label>
                 <input type="text" id="peso_jogador" name="peso_jogador"><br>
-                <button id="cadastrar_jogador" type="submit" style="background-color: #FDDE5C;">Cadastar Jogador</button>
+                <button id="cadastrar_jogador">Cadastar Jogador</button>
             </fieldset>
         </form>
-        <button id="update_jogadores_cadastrados"><a href="./atualizar_jogador.php" style="color:  rgb(0, 0, 0);">Atualizar Jogador
+        <button id="update_jogadores_cadastrados"><a href="./atualizar_jogador.php">Atualizar Jogador
                 Existente</a></button>
-        <button id="mostrar_jogadores_cadastrados" style="background-color: #FDDE5C;"><a href="./exibir_jogador.php"> Mostar Jogadores Cadastrados</a></button>
+        <button id="mostrar_jogadores_cadastrados"><a href="./exibir_jogador.php"> Mostar Jogadores Cadastrados</a></button>
         </section>
     </main>
 <?php

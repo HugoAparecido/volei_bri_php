@@ -46,9 +46,9 @@ if (!isset($_SESSION['id_usuario'])) {
                 <div><label for="senha">Senha</label></div>
                 <input type="password" name="senha" id="senha" placeholder="Senha">
                 <div id="senha-required-error">Senha é obrigatória</div>
-                <button type="button" id="recover-senha-button" disabled="true" style="background-color: #FDDE5C;">Recuperar
+                <button type="button" id="recover-senha-button" disabled="true">Recuperar
                     senha</button>
-                <button type="submit" id="login-button" disabled="true" style="background-color: #FDDE5C; margin-top: 15px;">Entrar</button>
+                <button type="submit" id="login-button" disabled="true">Entrar</button>
         </form>
     </main>
     <?php
