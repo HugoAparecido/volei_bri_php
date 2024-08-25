@@ -6,12 +6,12 @@ abstract class Jogador
      * Identificador único do jogador
      * @var integer
      */
-    protected $id_jogador;
+    public $id_jogador;
     /**
      * Nome do Jogador
      * @var string
      */
-    protected $nome_jogador;
+    public $nome_jogador;
     /**
      * Apelido do jogador
      * @var string
@@ -26,7 +26,7 @@ abstract class Jogador
      * Número da camisa
      * @var int
      */
-    protected $numero_camisa;
+    public $numero_camisa;
     /**
      * Altura do jogador
      * @var float

@@ -1,5 +1,6 @@
 <?php
 include('../componentes/protect.php');
+include('../componentes/classes/componenetes_class.php');
 if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
@@ -31,6 +32,10 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
         <label for="ejogador">Sim</label>
         <input type="radio" name="jogador" id="naoejogador" value="0">
         <label for="naoejogador">Não</label>
+        <label for="idJogador">Qual jogador é?</label>
+        <select name="idJogador" id="idJogador">
+          <?php Componentes::InputJogadores() ?>
+        </select>
         <label>É Treinador</label>
         <input type="radio" name="treinador" id="etreinador" value="1">
         <label for="etreinador">Sim</label>
