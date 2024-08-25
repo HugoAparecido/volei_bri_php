@@ -1,0 +1,10 @@
+:root{
+  --amarelo: #FDDE5C;
+  --azul:#7AB5CB;
+  --cinza-barra:#D4D2D2;
+  --cinza-fundo:#E6E4E1;
+  --preto:#000;
+}
+#container{
+  background-color: var(--azul);
+}
