@@ -17,8 +17,8 @@
 <body>
     <header>
         <!--Barra de Navegação-->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" id="nav">
-            <div class="container-fluid" id="nav_container">
+        <nav class="navbar navbar-expand-lg" id="nav" style="background-color:#FDDE5C;">
+            <div class="container-fluid" id="nav_container" >
                 <a class="navbar-brand" href="#">
                     <img src="<?= LOGO_HEADER ?>" alt="Logo" id="logo">
                 </a>

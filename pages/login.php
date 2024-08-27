@@ -35,49 +35,31 @@ if (!isset($_SESSION['id_usuario'])) {
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php']));
     include '../componentes/header.php';
 ?>
-    <main>
-        
-
-    <div class="form-container d-flex flex-column justify-content-center align-items-center">
-      <form action="loginExe.php" method="post">
-        <div class="row g-3 align-items-center">
-          <div class="col-auto">
-              <label class="form-label" for="email">Email</label>
-              <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
-              <div class="error" id="email-required-error">Email é obrigatório</div>
-              <div class="error" id="email-invalid-error">Email é inválido</div>
-            </div>
-            <div class="col-ato">
-              <div><label class="form-label" for="password">Senha</label></div>
-              <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
-              <div class="error" id="password-required-error">Senha é obrigatória</div>
-            </div>
-            <div class="col-auto">
-              <button type="button" class="btn" id="recover-password-button" disabled="true">Recuperar
-                senha</button>
-            </div>
-            <div class="col-auto">
-              <button type="button" class=" btn" id="login-button" disabled="true" >Entrar</button>
-            </div>
-          </div>
+    <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <div class="card p-4 shadow-sm" id="card">
+            <h2 class="text-center text-white mb-4">Cadastro</h2>
+            <form action="loginExe.php" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
+                    <div class="error text-danger" id="email-required-error">Email é obrigatório</div>
+                    <div class="error text-danger" id="email-invalid-error">Email é inválido</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Senha</label>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
+                    <div class="error text-danger" id="password-required-error">Senha é obrigatória</div>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <button type="button" class="btn" id="recover-password-button" disabled>Recuperar senha</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn" id="login-button" disabled>Entrar</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-3 container">
-          <div><label class="form-label" for="password">Senha</label></div>
-          <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
-          <div class="error" id="password-required-error">Senha é obrigatória</div>
-        </div>
-        <div>
-          <button type="button" class="btn" id="recover-password-button" disabled="true">Recuperar
-            senha</button>
-        </div>
-        <div>
-          <button type="button" class=" btn" id="login-button" disabled="true">Entrar</button>
-        </div>
-      </div>
-    </div>
-        
-        
     </main>
+
     <?php
     include '../componentes/footer.php';
     ?>
