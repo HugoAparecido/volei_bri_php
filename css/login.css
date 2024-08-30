@@ -25,14 +25,13 @@ body {
 #card {
   background-color: var(--azul); /* Fundo azul escuro para o card */
   color: var(--cinza-fundo); /* Cor do texto em branco */
-  border-radius: 8px; /* Bordas arredondadas no card */
+  border-radius: 30px; /* Bordas arredondadas no card */
   max-width: 400px; width: 100%;
 }
 
 h2 {
   margin-bottom: 1rem; /* Espaçamento abaixo do título */
 }
-
 .form-control {
   background-color: var(--cinza-barra); /* Caixas de entrada em cinza claro */
   color: #333; /* Texto dentro das caixas em cinza escuro para contraste */

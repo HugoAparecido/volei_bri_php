@@ -43,5 +43,8 @@
                     </ul>
                 </div>
             </div>
+                <a class="navbar-brand" href="#">
+                    <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
+                </a>
         </nav>
     </header>

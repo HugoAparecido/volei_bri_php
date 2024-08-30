@@ -1,5 +1,5 @@
 <?php
-include '../componentes/protect.php';
+// include '../componentes/protect.php';
 require_once '../componentes/classes/usuario_class.php';
 if (isset($_POST['email']) || isset($_POST['password'])) {
     if (strlen($_POST['email']) == 0) {
@@ -31,8 +31,9 @@ if (!isset($_SESSION['id_usuario'])) {
     define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css"));
     // define o caminho da logo no header
     define('LOGO_HEADER', "../img/bolas.png");
+    define('LOGO_USUARIO', "../img/login.png");
     // define os nomes dasa páginas e seus respectivos caminhos
-    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php']));
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
     include '../componentes/header.php';
 ?>
     <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
@@ -55,6 +56,9 @@ if (!isset($_SESSION['id_usuario'])) {
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn" id="login-button" disabled>Entrar</button>
+                </div>
+                <div class="mt-3">
+                    <a href="cadastrar_usuario.php">Cadastrar-se</a>
                 </div>
             </form>
         </div>

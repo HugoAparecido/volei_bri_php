@@ -1,6 +1,6 @@
 <?php
-include('../componentes/protect.php');
-if (isset($_SESSION['id_usuario'])) {
+// include('../componentes/protect.php');
+// if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
   // define o caminho do css da página
@@ -110,9 +110,9 @@ if (isset($_SESSION['id_usuario'])) {
   </main>
 <?php
   include '../componentes/footer.php';
-} else {
-?>
-  <script>
-    window.location.href = "./login.php"
-  </script><?php
-          }
+// } else {
+// ?>
+//   <script>
+//     window.location.href = "./login.php"
+//   </script><?php
+//           }

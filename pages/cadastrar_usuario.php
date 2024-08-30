@@ -1,5 +1,5 @@
 <?php
-include('../componentes/protect.php');
+// include('../componentes/protect.php');
 include('../componentes/classes/componenetes_class.php');
 if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
   // define o caminho do icone em uma constante
@@ -8,6 +8,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
   define('FOLHAS_DE_ESTILO', array("../css/cadastro.css", "../css/style.css"));
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/bolas.png");
+  define('LOGO_USUARIO', "../img/login.png");
   // define os nomes dasa páginas e seus respectivos caminhos
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
