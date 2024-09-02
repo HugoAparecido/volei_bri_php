@@ -1,13 +1,4 @@
 <?php
-/*session_set_cookie_params(['httponly' => true]);
-// lifetime = 0 significa que o cookie será excluído após o navegador ser fechado, para outros valores corresponderá ao tempo em segundo de expiração do cookie
-session_start();
-//sessions servem para pegar a variável em qualquer parte do sistema, isto é feito por meio de cookies
-// Segurança: criar a sessao com http Only e com o protolo ssl
-//Para toda vez que logar o usuário utilizar a função abaixo
-//Gera outro cookie com um novo id
-//com true deleta a sessao antiga
-session_regenerate_id(true);*/
 // define o caminho do icone em uma constante
 define('FAVICON', "./img/bolas.ico");
 // define o caminho do css da página
@@ -17,5 +8,7 @@ define('LOGO_HEADER', "./img/bolas.png");
 define('LOGO_USUARIO', "./img/login.png");
 // define os nomes dasa páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(['Página Principal', './index.php'], ['Times', './pages/times.php'], ['Estatísticas', './pages/estatisticas.php'], ['Login', './pages/login.php']));
+// inclui o header à página
 include __DIR__ . '/componentes/header.php';
+// inclui o footer à página
 include __DIR__ . '/componentes/footer.php';

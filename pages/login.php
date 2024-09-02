@@ -6,17 +6,17 @@ include '../componentes/protect.php';
 require_once '../componentes/classes/usuario_class.php';
 
 // Verifica se os dados do formulário foram enviados via método POST
-if (isset($_POST['email']) || isset($_POST['password'])) {
+if (isset($_POST['email']) || isset($_POST['senha'])) {
     // Verifica se o campo de e-mail está vazio
     if (strlen($_POST['email']) == 0) {
         echo "Preencha seu e-mail";
     }
     // Verifica se o campo de senha está vazio
-    else if (strlen($_POST['password']) == 0) {
+    else if (strlen($_POST['senha']) == 0) {
         echo "Preencha sua senha";
     } else {
         // Tenta fazer o login do usuário com as credenciais fornecidas
-        $usuario = Usuario::Logar($_POST['email'], $_POST['password']);
+        $usuario = Usuario::Logar($_POST['email'], $_POST['senha']);
         $quantidade = count($usuario);
 
         // Se o login for bem-sucedido (apenas um usuário retornado)
@@ -67,21 +67,21 @@ if (!isset($_SESSION['id_usuario'])) {
                 <div class="mb-3">
                     <label class="form-label" for="email">Email</label>
                     <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
-                    <div class="error text-danger" id="email-required-error">Email é obrigatório</div>
-                    <div class="error text-danger" id="email-invalid-error">Email é inválido</div>
+                    <div class="erro text-danger" id="email-requerido-erro">Email é obrigatório</div>
+                    <div class="erro text-danger" id="email-invalido-erro">Email é inválido</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="password">Senha</label>
-                    <input class="form-control" type="password" name="password" id="password" placeholder="Senha">
-                    <div class="error text-danger" id="password-required-error">Senha é obrigatória</div>
+                    <label class="form-label" for="senha">Senha</label>
+                    <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                    <div class="erro text-danger" id="senha-requerido-erro">Senha é obrigatória</div>
                 </div>
                 <div class="d-grid gap-2 mb-3">
                     <!-- Botão de recuperação de senha (desativado) -->
-                    <button type="button" class="btn" id="recover-password-button" disabled>Recuperar senha</button>
+                    <button type="button" class="btn" id="recuperar-senha-botao" disabled>Recuperar senha</button>
                 </div>
                 <div class="d-grid gap-2">
                     <!-- Botão de login (desativado) -->
-                    <button type="submit" class="btn" id="login-button" disabled>Entrar</button>
+                    <button type="submit" class="btn" id="login-botao" disabled>Entrar</button>
                 </div>
                 <div class="mt-3">
                     <!-- Link para página de cadastro -->
