@@ -1,12 +1,13 @@
 <?php
-// include('../componentes/protect.php');
-// if (isset($_SESSION['id_usuario'])) {
+include('../componentes/protect.php');
+if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
   // define o caminho do css da página
   define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/bolas.png");
+  define('LOGO_USUARIO', "../img/login.png");
   // define os nomes dasa páginas e seus respectivos caminhos
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
@@ -110,9 +111,9 @@
   </main>
 <?php
   include '../componentes/footer.php';
-// } else {
-// ?>
-//   <script>
-//     window.location.href = "./login.php"
-//   </script><?php
-//           }
+} else {
+?>
+  <script>
+    window.location.href = "./login.php"
+  </script><?php
+          }

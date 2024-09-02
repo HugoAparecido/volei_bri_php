@@ -1,5 +1,5 @@
 <?php
-// include('../componentes/protect.php');
+include('../componentes/protect.php');
 include('../componentes/classes/componenetes_class.php');
 if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
   // define o caminho do icone em uma constante
@@ -46,6 +46,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
       </fieldset>
     </form>
   </main>
+  <script type="module" src="../js/cadastrar_usuario.js"></script>
 <?php
   include '../componentes/footer.php';
 } else {

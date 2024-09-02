@@ -18,7 +18,7 @@
     <header>
         <!--Barra de Navegação-->
         <nav class="navbar navbar-expand-lg" id="nav" style="background-color:#FDDE5C;">
-            <div class="container-fluid" id="nav_container" >
+            <div class="container-fluid" id="nav_container">
                 <a class="navbar-brand" href="#">
                     <img src="<?= LOGO_HEADER ?>" alt="Logo" id="logo">
                 </a>
@@ -37,14 +37,14 @@
                         if (isset($_SESSION['treinador']))
                             if ($_SESSION['treinador']) { ?>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="./cadastrar_usuario">cadastrar Usuário</a>
+                                <a class="nav-link active" aria-current="page" href="./cadastrar_usuario.php">Cadastrar Usuário</a>
                             </li>
                         <?php } ?>
                     </ul>
                 </div>
             </div>
-                <a class="navbar-brand" href="#">
-                    <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
-                </a>
+            <a class="navbar-brand" href="#">
+                <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
+            </a>
         </nav>
     </header>
