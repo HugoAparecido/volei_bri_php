@@ -1,5 +1,5 @@
 <?php
-require_once './classes/usuario_class.php';
+require_once '../classes/usuario_class.php';
 $nomeUsuario = $_POST['nome'];
 $emailUsuario = $_POST['email'];
 $senhaUsuario = $_POST['senha'];
@@ -11,12 +11,12 @@ if (isset($nomeUsuario) && isset($emailUsuario) && isset($senhaUsuario) && isset
         $usuario->Cadastrar($nomeUsuario, $emailUsuario, $senhaUsuario, $eJogador, $eTreinador, intval($_POST['idJogador']));
     else
         $usuario->Cadastrar($nomeUsuario, $emailUsuario, $senhaUsuario, $eJogador, $eTreinador);
-    header("Location: ../pages/times.php");
+    // header("Location: ../../pages/times.php");
 } else {
 ?>
     <script>
         alert("Não foi possível cadastrar o Usuário")
     </script>
 <?php
-    header("Location: ../pages/cadastrar_usuario.php");
+    header("Location: ../../pages/cadastrar_usuario.php");
 }

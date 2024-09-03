@@ -6,7 +6,7 @@ include '../componentes/protect.php';
 require_once '../componentes/classes/usuario_class.php';
 
 // Verifica se os dados do formulário foram enviados via método POST
-if (isset($_POST['email']) || isset($_POST['senha'])) {
+if (isset($_POST['email']) && isset($_POST['senha'])) {
     // Verifica se o campo de e-mail está vazio
     if (strlen($_POST['email']) == 0) {
         echo "Preencha seu e-mail";
@@ -16,11 +16,13 @@ if (isset($_POST['email']) || isset($_POST['senha'])) {
         echo "Preencha sua senha";
     } else {
         // Tenta fazer o login do usuário com as credenciais fornecidas
-        $usuario = Usuario::Logar($_POST['email'], $_POST['senha']);
+        $usuario = Usuario::Logar($_POST['email']);
         $quantidade = count($usuario);
 
         // Se o login for bem-sucedido (apenas um usuário retornado)
-        if ($quantidade == 1) {
+        var_dump($_POST['senha']);
+        var_dump($usuario[0]->GetSenha());
+        if (password_verify($_POST['senha'], $usuario[0]->GetSenha())) {
             // Inicia a sessão se ainda não estiver iniciada
             if (!isset($_SESSION)) {
                 session_start();
@@ -83,10 +85,6 @@ if (!isset($_SESSION['id_usuario'])) {
                     <!-- Botão de login (desativado) -->
                     <button type="submit" class="btn" id="login-botao" disabled>Entrar</button>
                 </div>
-                <div class="mt-3">
-                    <!-- Link para página de cadastro -->
-                    <a href="cadastrar_usuario.php">Cadastrar-se</a>
-                </div>
             </form>
         </div>
     </main>
@@ -97,12 +95,6 @@ if (!isset($_SESSION['id_usuario'])) {
     include '../componentes/footer.php';
     ?>
 <?php
-} else {
+} else
     // Se o usuário já estiver logado, redireciona para a página de times
-?>
-    <script>
-        window.location.href = "./times.php";
-    </script>
-<?php
-}
-?>
+    header("Location: ./times.php");

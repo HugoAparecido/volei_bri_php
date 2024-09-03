@@ -1,98 +1,122 @@
 export class Validation {
-    //Toda vez que a classe é istanciada ela já recebe o campo email e senha
+    // Construtor da classe, recebe e inicializa os campos de email e senha
     constructor(email, senha) {
         this.email = email;
         this.senha = senha;
     }
-    // Função para mudanças no campo email
+
+    // Função para lidar com mudanças no campo de email
     OnChangeEmail(ErroEmailRequerido, EmailEmailInvalido, RecuperarBotao, BotaoLogin) {
+        // Atualiza o estado dos botões com base na validade do email
         this.ToggleButtonDisabled(RecuperarBotao, BotaoLogin);
+        // Atualiza a visibilidade dos erros de email
         this.ToggleEmailErros(ErroEmailRequerido, EmailEmailInvalido);
     }
-    // Função para mudanças no campo email do register.html
+
+    // Função para lidar com mudanças no campo de email durante o cadastro
     OnChangeEmailCadastro(ErroEmailRequerido, EmailEmailInvalido, BotaoCadastro) {
         const email = this.email.value;
+        // Exibe ou oculta o erro de email requerido baseado na presença do valor
         ErroEmailRequerido().style.display = email ? "none" : "block";
+        // Exibe ou oculta o erro de email inválido baseado na validação do email
         EmailEmailInvalido().style.display = this.ValidarEmail(email) ? "none" : "block";
+        // Atualiza o estado do botão de cadastro com base na validade do email
         this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
-    // Função para mudanças no campo senha
+
+    // Função para lidar com mudanças no campo de senha
     OnChangeSenha(RecuperarBotao, BotaoLogin, ErroRequerimentoSenha) {
+        // Atualiza o estado dos botões com base na validade da senha e email
         this.ToggleButtonDisabled(RecuperarBotao, BotaoLogin);
+        // Atualiza a visibilidade do erro de senha requerido
         this.ToggleSenhaErros(ErroRequerimentoSenha);
     }
-    // Função para mudanças no campo email do register.html
+
+    // Função para lidar com mudanças no campo de senha durante o cadastro
     OnChangeSenhaRegister(ErroRequerimentoSenha, senhaMinLenghtError, BotaoCadastro, confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
         const senha = this.senha.value;
+        // Exibe ou oculta o erro de senha requerido baseado na presença do valor
         ErroRequerimentoSenha().style.display = senha ? "none" : "block";
+        // Exibe ou oculta o erro de senha com menos de 6 caracteres
         senhaMinLenghtError().style.display = senha.length >= 6 ? "none" : "block";
+        // Valida se a senha confirmada corresponde à senha original
         this.ValidarSenhaNaoCorresponde(confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro);
+        // Atualiza o estado do botão de cadastro com base na validade da senha e email
         this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
-    // Função para mudanças no campo confirmar senha do register.html
+
+    // Função para lidar com mudanças no campo de confirmação de senha
     OnChangeConfirmarSenha(confirmarSenha, ConfirmarSenhaNaoCorrespondeErro, BotaoCadastro) {
+        // Valida se a senha confirmada corresponde à senha original
         this.ValidarSenhaNaoCorresponde(confirmarSenha, ConfirmarSenhaNaoCorrespondeErro);
+        // Atualiza o estado do botão de cadastro com base na validade da confirmação de senha
         this.ToggleBotaoCadastroDisabled(BotaoCadastro);
     }
-    // verificar se  verificação de senha é igual a senha
+
+    // Valida se a senha confirmada corresponde à senha original
     ValidarSenhaNaoCorresponde(confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
         const senha = this.senha.value;
         const confirmarSenha = confirmarSenhaForm().value;
+        // Exibe ou oculta o erro se as senhas não corresponderem
         ConfirmarSenhaNaoCorrespondeErro().style.display = senha == confirmarSenha ? "none" : "block";
     }
-    // Mostrar os erros do email
+
+    // Atualiza a visibilidade dos erros de email
     ToggleEmailErros(ErroEmailRequerido, EmailEmailInvalido) {
         const email = this.email.value;
+        // Exibe ou oculta o erro de email requerido baseado na presença do valor
         ErroEmailRequerido().style.display = email ? "none" : "block";
+        // Exibe ou oculta o erro de email inválido baseado na validação do email
         EmailEmailInvalido().style.display = this.ValidarEmail(email) ? "none" : "block";
     }
-    // Mostrar os erros da senha
+
+    // Atualiza a visibilidade dos erros de senha
     ToggleSenhaErros(ErroRequerimentoSenha) {
         const senha = this.senha.value;
+        // Exibe ou oculta o erro de senha requerido baseado na presença do valor
         ErroRequerimentoSenha().style.display = senha ? "none" : "block";
     }
-    // Ativar o botao de login
+
+    // Ativa ou desativa o botão de recuperação e o botão de login
     ToggleButtonDisabled(RecuperarBotao, BotaoLogin) {
         const emailValid = this.EmailValido();
+        // Ativa ou desativa o botão de recuperação baseado na validade do email
         RecuperarBotao().disabled = !emailValid;
         const senhaValid = this.SenhaValida();
+        // Ativa ou desativa o botão de login baseado na validade do email e da senha
         BotaoLogin().disabled = !emailValid || !senhaValid;
     }
-    // Ativar o botão de registrar
+
+    // Ativa ou desativa o botão de cadastro baseado na validade do formulário
     ToggleBotaoCadastroDisabled(BotaoCadastro) {
         BotaoCadastro().disabled = !this.FormValido();
     }
-    // Se o campo senha tem um valor diferente de ""
+
+    // Verifica se a senha tem um valor não vazio
     SenhaValida() {
-        const senha = this.senha.value
-        if (!senha) {
-            return false;
-        }
-        return true;
+        const senha = this.senha.value;
+        // A senha é válida se não estiver vazia
+        return !!senha;
     }
-    // Se o campo senha tem um valor diferente de ""
+
+    // Verifica se o email é válido e não está vazio
     EmailValido() {
         const email = this.email.value;
-        if (!email) {
-            return false;
-        }
-        return this.ValidarEmail(email);
+        // O email é válido se não estiver vazio e a validação do email passar
+        return !!email && this.ValidarEmail(email);
     }
-    // Se o formulario é válido
+
+    // Verifica se o formulário é válido
     FormValido() {
         const email = this.email.value;
-        if (!email || !this.ValidarEmail(email)) {
-            return false;
-        }
         const senha = this.senha.value;
-        // se a senha tiver menos de 6 caracteres ele não aceitará
-        if (!senha || senha.length < 6) {
-            return false;
-        }
-        return true;
+        // O formulário é válido se o email não estiver vazio, for válido, e a senha não estiver vazia e tiver pelo menos 6 caracteres
+        return !!email && this.ValidarEmail(email) && !!senha && senha.length >= 6;
     }
-    // Forma para validar o email
+
+    // Valida o formato do email usando expressão regular
     ValidarEmail(email) {
+        // Verifica se o email tem o formato correto
         return /\S+@\S+\.\S+/.test(email);
     }
 }
