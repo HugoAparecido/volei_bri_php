@@ -1,71 +1,137 @@
-:root{
-    --amarelo: #FDDE5C;
-    --azul:#7AB5CB;
-    --cinza-barra:#D4D2D2;
-    --cinza-fundo:#E6E4E1;
-    --preto:#000;
-  }
-  #logo{
-    width: 80px;
-    height: 80px;
-  }
-  #login{
-    margin: 10px;
-    width: 50px;
-    height: 50px;
-  }
-  body {
-    background-color: #f8f9fa; /* Cor de fundo leve para o corpo */
-  }
-  
-  body {
-    background-color: #f8f9fa; /* Cor de fundo leve para o corpo */
-  }
-  
-  #card {
-    background-color: var(--azul); /* Fundo azul escuro para o card */
-    color: var(--cinza-fundo); /* Cor do texto em branco */
-    border-radius: 30px; /* Bordas arredondadas no card */
-    max-width: 600px; width: 100%;
-  }
-  
-  h2 {
-    margin-bottom: 1rem; /* Espaçamento abaixo do título */
-  }
-  
-  .form-control {
-    background-color: var(--cinza-barra); /* Caixas de entrada em cinza claro */
-    color: #333; /* Texto dentro das caixas em cinza escuro para contraste */
-    border: 1px solid #ccc; /* Borda padrão para as caixas de entrada */
-  }
-  #altura_jogador, #peso_jogador, #posicao_jogador, #num_camisa_jogador, #sexo_jogador, #nome_jogador, #apelido_jogador {
-    background-color: var(--cinza-barra); /* Caixas de entrada em cinza claro */
-    color: #333; /* Texto dentro das caixas em cinza escuro para contraste */
-    border: 1px solid #ccc; /* Borda padrão para as caixas de entrada */
-  }
-  #update_jogadores_cadastrados{
-    background-color: var(--amarelo); /* Botões em amarelo pastel */
-    color: #003366; /* Texto dos botões em azul escuro */
-    border: none; /* Remove a borda padrão dos botões */
+:root {
+  --amarelo: #FDDE5C;
+  --azul: #7AB5CB;
+  --cinza-barra: #D4D2D2;
+  --cinza-fundo: #E6E4E1;
+  --preto: #000;
+}
 
-  }#mostrar_jogadores_cadastrados{
-    background-color: var(--amarelo); /* Botões em amarelo pastel */
-    color: #003366; /* Texto dos botões em azul escuro */
-    border: none; /* Remove a borda padrão dos botões */
-  }
-  #cadastrar_jogador{
-    background-color: var(--amarelo); /* Botões em amarelo pastel */
-    color: #003366; /* Texto dos botões em azul escuro */
-    border: none; /* Remove a borda padrão dos botões */
-  }
-  #logout{
-    background-color: var(--amarelo); /* Botões em amarelo pastel */
-    color: #003366; /* Texto dos botões em azul escuro */
-    border: none; /* Remove a borda padrão dos botões */   
-  }
-  #botao_flutuante{
-    top: 100px;
-  }
+#logo {
+  width: 80px;
+  height: 80px;
+}
+
+#login {
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+body {
+  background-color: #f8f9fa;
+  /* Cor de fundo leve para o corpo */
+}
+
+body {
+  background-color: #f8f9fa;
+  /* Cor de fundo leve para o corpo */
+}
+
+#card {
+  background-color: var(--azul);
+  /* Fundo azul escuro para o card */
+  color: var(--cinza-fundo);
+  /* Cor do texto em branco */
+  border-radius: 30px;
+  /* Bordas arredondadas no card */
+  max-width: 600px;
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  /* Espaçamento abaixo do título */
+}
+
+.form-control {
+  background-color: var(--cinza-barra);
+  /* Caixas de entrada em cinza claro */
+  color: #333;
+  /* Texto dentro das caixas em cinza escuro para contraste */
+  border: 1px solid #ccc;
+  /* Borda padrão para as caixas de entrada */
+}
+
+/* Para o cadastro de Usuário */
+
+.erro {
+  font-size: 0.875rem;
+  /* Tamanho da fonte menor para mensagens de erro */
+  display: none;
+  /* Oculta mensagens de erro por padrão */
+}
+
+#botao_cadastro {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#idJogador {
+  display: none;
+}
+
+/* Para o cadastro de Jogador */
+
+#altura_jogador,
+#peso_jogador,
+#posicao_jogador,
+#num_camisa_jogador,
+#sexo_jogador,
+#nome_jogador,
+#apelido_jogador {
+  background-color: var(--cinza-barra);
+  /* Caixas de entrada em cinza claro */
+  color: #333;
+  /* Texto dentro das caixas em cinza escuro para contraste */
+  border: 1px solid #ccc;
+  /* Borda padrão para as caixas de entrada */
+}
+
+#update_jogadores_cadastrados {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+
+}
+
+#mostrar_jogadores_cadastrados {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#cadastrar_jogador {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#logout {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#botao_flutuante {
+  top: 100px;
+}
+
 /* {
     margin: 0;
     padding: 0;

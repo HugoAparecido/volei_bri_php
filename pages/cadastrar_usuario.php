@@ -45,18 +45,19 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
         <!-- Campo para inserir o email -->
         <label for="email">Email:</label>
         <input type="text" name="email" id="email" required>
-        <div class="erro text-danger" id="email-requerido-erro">Email é obrigatório</div>
-        <div class="erro text-danger" id="email-invalido-erro">Email é inválido</div>
+        <div class="erro text-danger" id="email_requerido_erro">Email é obrigatório</div>
+        <div class="erro text-danger" id="email_invalido_erro">Email é inválido</div>
 
         <!-- Campo para inserir a senha -->
         <label for="senha">Senha:</label>
         <input type="password" name="senha" id="senha" required>
-        <div class="erro text-danger" id="senha-requerido-erro">Senha é obrigatória</div>
+        <div class="erro text-danger" id="senha_requerida_erro">Senha é obrigatória</div>
+        <div class="erro" id="senha_min_length_erro">A senha deve ter pelo menos 6 caracteres</div>
 
         <!-- Campo para confirmar a senha -->
         <label for="confirmasenha">Confirmar Senha:</label>
-        <input type="password" name="confirmasenha" id="confirmasenha" required>
-        <div class="erro text-danger" id="senha-confirmacao-erro">Senha é obrigatória</div>
+        <input type="password" name="confirmasenha" id="confirmar_senha" required>
+        <div class="erro" id="senha_nao_corresponde_erro">Senha e confirmar senha devem ser iguais</div>
 
         <!-- Opção para marcar se o usuário é jogador -->
         <label>É jogador</label>
@@ -80,7 +81,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
         <label for="naoetreinador">Não</label>
 
         <!-- Botão para submeter o formulário -->
-        <button type="submit">Cadastrar</button>
+        <button type="submit" id="botao_cadastro" disabled>Cadastrar</button>
       </fieldset>
     </form>
   </main>

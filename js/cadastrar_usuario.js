@@ -1,39 +1,54 @@
-// importações necessárias
-import { Validation } from "./classes/validation_class.js"; // Importa a classe `Validation` de um arquivo externo, que fornece métodos para validar os campos do formulário.
+// Importações necessárias
+import { Validation } from "./classes/validation_class.js";
+// Importa a classe `Validation` de um arquivo externo. Esta classe fornece métodos para validar os campos do formulário, como email e senha.
 
-// Elementos htmls
+// Elementos HTML
 const form = {
-    email: () => document.getElementById('email'), // Função que retorna o elemento HTML com o ID 'email'.
-    erroEmailInvalido: () => document.getElementById("email-invalido-erro"), // Função que retorna o elemento HTML para exibir erros de email inválido.
-    erroEmailRequerido: () => document.getElementById("email-requerido-erro"), // Função que retorna o elemento HTML para exibir erros quando o email é requerido e não fornecido.
-    botaoLogin: () => document.getElementById("login-botao"), // Função que retorna o botão de login.
-    senha: () => document.getElementById('senha'), // Função que retorna o elemento HTML com o ID 'senha'.
-    erroSenhaRequerida: () => document.getElementById("senha-requerido-erro"), // Função que retorna o elemento HTML para exibir erros quando a senha é requerida e não fornecida.
-    recuperarSenha: () => document.getElementById("recuperar-senha-botao"), // Função que retorna o botão para recuperar senha.
-    cadastrar: () => document.getElementById("cadastrar-botao") // Função que retorna o botão para cadastro (não utilizado no restante do código).
-}
+    confirmarSenha: () => document.getElementById('confirmar_senha'), // Obtém o elemento do campo de confirmação de senha
+    confirmarSenhaErroCorrespondencia: () => document.getElementById('senha_nao_corresponde_erro'), // Obtém o elemento que exibe o erro de correspondência de senha
+    email: () => document.getElementById('email'), // Obtém o elemento do campo de email
+    emailInvalidoErro: () => document.getElementById('email_invalido_erro'), // Obtém o elemento que exibe o erro de email inválido
+    emailRequiredoErro: () => document.getElementById('email_requerido_erro'), // Obtém o elemento que exibe o erro quando o email é obrigatório
+    senha: () => document.getElementById('senha'), // Obtém o elemento do campo de senha
+    senhaMinLenghtErro: () => document.getElementById('senha_min_length_erro'), // Obtém o elemento que exibe o erro de comprimento mínimo da senha
+    senhaRequeridaErro: () => document.getElementById('senha_requerida_erro'), // Obtém o elemento que exibe o erro quando a senha é obrigatória
+    inputEhJogador: () => document.getElementById('ejogador'), // Obtém o elemento do campo de seleção se é jogador
+    selectJogador: () => document.getElementById('idJogador'), // Obtém o elemento de seleção do jogador
+    botaoCadastro: () => document.getElementById("botao_cadastro") // Obtém o elemento do botão de cadastro
+};
 
-// validacoes
-let validacoes = new Validation(form.email(), form.senha()); // Cria uma instância da classe `Validation`, passando os campos de email e senha para serem validados.
+// Inicializa o valor do seletor de jogador como uma string vazia
+form.selectJogador().value = '';
 
-// eventos
-form.email().addEventListener('input', () => { // Adiciona um ouvinte de evento para mudanças no campo de email.
-    validacoes.OnChangeEmail( // Quando o conteúdo do campo de email muda, chama o método `OnChangeEmail` da instância `validacoes`.
-        form.erroEmailRequerido, // Passa a função para obter o elemento de erro para email requerido.
-        form.erroEmailInvalido, // Passa a função para obter o elemento de erro para email inválido.
-        form.recuperarSenha, // Passa a função para obter o botão de recuperação de senha.
-        form.botaoLogin // Passa a função para obter o botão de login.
-    );
+// Cria uma instância da classe `Validation` passando os elementos de email e senha
+let validacoes = new Validation(form.email(), form.senha());
+
+// Adiciona um ouvinte de eventos para o campo de email
+form.email().addEventListener('input', () => {
+    // Chama o método `OnChangeEmailCadastro` da instância de validação para verificar e atualizar os erros de email e o estado do botão de cadastro
+    validacoes.OnChangeEmailCadastro(form.emailRequiredoErro, form.emailInvalidoErro, form.botaoCadastro);
 });
 
-form.senha().addEventListener('input', () => { // Adiciona um ouvinte de evento para mudanças no campo de senha.
-    validacoes.OnChangeSenha( // Quando o conteúdo do campo de senha muda, chama o método `OnChangeSenha` da instância `validacoes`.
-        form.recuperarSenha, // Passa a função para obter o botão de recuperação de senha.
-        form.botaoLogin, // Passa a função para obter o botão de login.
-        form.erroSenhaRequerida // Passa a função para obter o elemento de erro para senha requerida.
-    );
+// Adiciona um ouvinte de eventos para o campo de senha
+form.senha().addEventListener('input', () => {
+    // Chama o método `OnChangeSenhaRegister` da instância de validação para verificar e atualizar os erros de senha e o estado do botão de cadastro
+    validacoes.OnChangeSenhaRegister(form.senhaRequeridaErro, form.senhaMinLenghtErro, form.botaoCadastro, form.confirmarSenha, form.confirmarSenhaErroCorrespondencia);
 });
 
-form.recuperarSenha().addEventListener('click', () => { // Adiciona um ouvinte de evento para o clique no botão de recuperação de senha.
-    window.location.href = './recuperar_senha.php' // Redireciona o navegador para a página de recuperação de senha.
+// Adiciona um ouvinte de eventos para o campo de confirmação de senha
+form.confirmarSenha().addEventListener('input', () => {
+    // Chama o método `OnChangeConfirmarSenha` da instância de validação para verificar e atualizar o erro de correspondência de senha e o estado do botão de cadastro
+    validacoes.OnChangeConfirmarSenha(form.confirmarSenha, form.confirmarSenhaErroCorrespondencia, form.botaoCadastro);
+});
+
+// Adiciona um ouvinte de eventos para o campo de seleção de jogador
+form.inputEhJogador().addEventListener('change', (event) => {
+    if (event.target.checked) {
+        // Se a opção de ser jogador estiver marcada, exibe o seletor de jogador
+        form.selectJogador().style.display = 'block';
+    } else {
+        // Se a opção de ser jogador não estiver marcada, oculta o seletor de jogador e limpa seu valor
+        form.selectJogador().style.display = 'none';
+        form.selectJogador().value = '';
+    }
 });

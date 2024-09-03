@@ -33,7 +33,7 @@ export class Validation {
     }
 
     // Função para lidar com mudanças no campo de senha durante o cadastro
-    OnChangeSenhaRegister(ErroRequerimentoSenha, senhaMinLenghtError, BotaoCadastro, confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
+    OnChangeSenhaCadastro(ErroRequerimentoSenha, senhaMinLenghtError, BotaoCadastro, confirmarSenhaForm, ConfirmarSenhaNaoCorrespondeErro) {
         const senha = this.senha.value;
         // Exibe ou oculta o erro de senha requerido baseado na presença do valor
         ErroRequerimentoSenha().style.display = senha ? "none" : "block";
