@@ -20,7 +20,7 @@ if (isset($_SESSION['id_usuario'])) {
       </button>
     </div>
     <div id="duvidas">
-      <div id="botao_duvidas"><button>?</button></div>
+      <button class="btn" type="button" id="botao_duvidas">?</button>
       <div id="descricao_botoes">
         <p><strong>Def:</strong> defesa bem sucedida</p>
         <p><strong>Def Err:</strong> defesa em que a bola não pode ser pega pelo companheiro</p>
@@ -37,9 +37,9 @@ if (isset($_SESSION['id_usuario'])) {
     <?php
     if (isset($_POST['id_time'])) {
     ?>
-      <h2 id="time_exportado">
-        </h1>
-        <h2 id="sexo_time"></h2>
+      <form action="../componentes/execucoes/enviar_dados.php" method="post">
+        <h2>Time:</h2>
+        <h2>Sexo:</h2>
         <h3>Jogadores Principais no Momento</h3>
         <p>Levantador</p>
         <p>Líbero</p>
@@ -48,26 +48,23 @@ if (isset($_SESSION['id_usuario'])) {
         <p>Oposto</p>
         <p>Central 1</p>
         <p>Central 2</p>
-        <label class="form-label" for="novo_jogador">Novo Jogador</label>
-        <select class="form-select" name="novo_jogador" id="novo_jogador"></select>
-        <button id="adicionar_jogador_button" type="button" class="btn botao_time">Adicionar
-          Jogador</button>
-        <button id="salvar_informacoes" type="button" class="botao_time btn">Enviar Dados</button>
-        <button type="button" class="btn botao_time"><a href="./cadastrar_jogador.php" class="nav-link">Cadastrar
-            Jogador</a></button>
-        </form>
-      <?php
+        <button type="submit">Enviar Dados</button>
+      </form>
+      <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
+        <label for="novo_jogador">Novo Jogador</label>
+        <select name="novo_jogador"></select>
+        <button type="submit">Adicionar Jogador</button>
+      </form>
+      <button type="button"><a href="./cadastrar_jogador.php">Cadastrar Jogador</a></button>
+    <?php
     }
-      ?>
-      <h2>Masculino</h2>
-      <button class="btn"><a href="cadastrar_time.php?sexo=M" class="nav-link">Cadastrar
-          Time</a></button>
-      <h2>Feminino</h2>
-      <button class="btn"><a href="cadastrar_time.php?sexo=F" class="nav-link">Cadastrar
-          Time</a></button>
-      <h2>Misto</h2>
-      <button class="btn "><a href="cadastrar_time.php?sexo=Mis" class="nav-link">Cadastrar
-          Time</a></button>
+    ?>
+    <h2>Masculino</h2>
+    <button class="btn"><a href="cadastrar_time.php?sexo=M">Cadastrar Time</a></button>
+    <h2>Feminino</h2>
+    <button class="btn"><a href="cadastrar_time.php?sexo=F">Cadastrar Time</a></button>
+    <h2>Misto</h2>
+    <button class="btn "><a href="cadastrar_time.php?sexo=Mis">Cadastrar Time</a></button>
   </main>
 <?php
   include '../componentes/footer.php';

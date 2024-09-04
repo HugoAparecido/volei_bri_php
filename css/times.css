@@ -1,3 +1,7 @@
 #duvidas {
     margin-top: 50px;
 }
+
+#descricao_botoes {
+    display: none;
+}
