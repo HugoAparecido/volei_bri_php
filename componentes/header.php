@@ -43,8 +43,11 @@
                     </ul>
                 </div>
             </div>
-            <a class="navbar-brand" href="#">
-                <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
-            </a>
+            <?php
+            if (isset($_SESSION['id_usuario'])) { ?>
+                <a class="navbar-brand" href="#">
+                    <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
+                </a>
+            <?php } ?>
         </nav>
     </header>

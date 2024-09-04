@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 // define o caminho do icone em uma constante
 define('FAVICON', "./img/bolas.ico");
 // define o caminho do css da página
