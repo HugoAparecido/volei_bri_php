@@ -1,31 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  :root{
-    --amarelo: #FDDE5C;
-    --azul:#7AB5CB;
-    --cinza-barra:#D4D2D2;
-    --cinza-fundo:#E6E4E1;
-    --preto:#000;
-  }
-/*LOGIN*/
-#conteiner{
-    width: 360px;
-    background-color: var(--azul);/*formulário em azul*/
-    padding: 40px;
-    margin: 100px auto;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px 0px var(--preto);  
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-#logo{
+
+:root {
+  --amarelo: #FDDE5C;
+  --azul: #7AB5CB;
+  --cinza-barra: #D4D2D2;
+  --cinza-fundo: #E6E4E1;
+  --preto: #000;
+}
+
+/*LOGIN*/
+#conteiner {
+  width: 360px;
+  background-color: var(--azul);
+  /*formulário em azul*/
+  padding: 40px;
+  margin: 100px auto;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px var(--preto);
+}
+
+#logo {
   width: 80px;
   height: 80px;
 }
-#login{
+
+#login {
   margin: 10px;
   width: 50px;
   height: 50px;
+}
+
+#logout {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#botao_flutuante {
+  top: 100px;
 }
