@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="./cadastrar_usuario.php">Cadastrar Usuário</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="./cadastrar_instituicao.php">Cadastrar Instituição</a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </div>

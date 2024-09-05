@@ -1,6 +1,6 @@
 <?php
 // Inclui a classe de manipulação do banco de dados
-require_once "./database_class.php";
+require_once "database_class.php";
 
 class Time
 {

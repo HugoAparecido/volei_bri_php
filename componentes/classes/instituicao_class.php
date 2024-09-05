@@ -1,6 +1,6 @@
 <?php
 // Inclui a classe de manipulação do banco de dados
-require_once "./database_class.php";
+require_once "database_class.php";
 
 class Instituicao
 {
@@ -26,8 +26,10 @@ class Instituicao
      * Método responsável por cadastrar uma nova instituicao no banco
      * @return boolean
      */
-    public function Cadastrar()
+    public function Cadastrar($nome, $tipo)
     {
+        $this->nome_instituicao = $nome;
+        $this->tipo_instituicao = $tipo;
         // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
         $obDatabase = new Database('instituicao');
 
