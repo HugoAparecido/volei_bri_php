@@ -2,6 +2,7 @@
 // Inclui arquivos de proteção e classes necessários
 include('../componentes/protect.php');
 include('../componentes/classes/componenetes_class.php');
+include('../componentes/classes/usuario_class.php');
 
 // Verifica se o usuário está logado e se é um treinador
 if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
@@ -84,6 +85,40 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
         <button type="submit" id="botao_cadastro" disabled>Cadastrar</button>
       </fieldset>
     </form>
+    <button><a href="./cadastrar_usuario.php?mostrar=sim">Mostrar Usuários cadastradas</a></button>
+    <?php
+    if (isset($_GET['mostrar'])) {
+    ?>
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Nome</td>
+            <td>E-mail</td>
+            <td>É jogador</td>
+            <td>É treinador</td>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $usuarios = Usuario::GetUsuarios();
+          foreach ($usuarios as $usuario) {
+          ?>
+            <tr>
+              <td><?= $usuario->GetID() ?></td>
+              <td><?= $usuario->GetNomeUsuario() ?></td>
+              <td><?= $usuario->GetEmailUsuario() ?></td>
+              <td><?= $usuario->GetJogador() ? "Sim" : "Não" ?></td>
+              <td><?= $usuario->GetTreinador() ? "Sim" : "Não" ?></td>
+            </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    <?php
+    }
+    ?>
   </main>
 
   <!-- Inclui o script JavaScript para a página -->

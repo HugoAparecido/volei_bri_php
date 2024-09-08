@@ -1,6 +1,7 @@
 <?php
 // Inclui a classe de banco de dados que fornece métodos para interagir com o banco de dados
 require_once "database_class.php";
+require_once "outras_posicoes_class.php";
 
 class Usuario
 {
@@ -64,6 +65,11 @@ class Usuario
         return $this->nome_usuario; // Correção: Retornar $this->nome_usuario em vez de $this->id_usuario
     }
 
+    public function GetEmailUsuario()
+    {
+        return $this->nome_usuario; // Correção: Retornar $this->nome_usuario em vez de $this->id_usuario
+    }
+
     /**
      * Verifica se o usuário é um treinador
      * @return bool
@@ -71,6 +77,11 @@ class Usuario
     public function GetTreinador()
     {
         return $this->treinador;
+    }
+
+    public function GetJogador()
+    {
+        return $this->jogador;
     }
 
     /**
@@ -167,5 +178,34 @@ class Usuario
 
         // Retorna true indicando sucesso na operação de cadastro
         return true;
+    }
+
+    public function Atualizar($nome, $email, $senha, $jogador, $treinador, $id_jogador = null)
+    {
+        $this->SetAll($nome, $email, password_hash($senha, PASSWORD_DEFAULT), $jogador, $treinador, $id_jogador);
+        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        return (new Database('usuario'))->update('id = ' . $this->id_usuario, [
+            'nome_usuario' => $this->nome_usuario,
+            'email_usuario' => $this->email_usuario,
+            'senha_usuario_site' => $this->senha_usuario_site,
+            'jogador' => $this->jogador,
+            'id_jogador' => $this->id_jogador,
+            'treinador' => $this->treinador
+        ]);
+    }
+    public function Excluir()
+    {
+        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        return (new Database('usuario'))->delete('id = ' . $this->id_usuario);
+    }
+    public static function GetUsuarios($where = null, $order = null, $limit = null)
+    {
+        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        return (new Database('usuario'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetUsuario($id_usuario)
+    {
+        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        return (new Database('usuario'))->select('id = ' . $id_usuario)->fetchObject(self::class);
     }
 }
