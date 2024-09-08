@@ -22,6 +22,18 @@ class Instituicao
      */
     public $tipo_instituicao;
 
+    public function GetID()
+    {
+        return $this->id_instituicao;
+    }
+    public function GetNome()
+    {
+        return $this->nome_instituicao;
+    }
+    public function GetTipo()
+    {
+        return $this->tipo_instituicao;
+    }
     /**
      * Método responsável por cadastrar uma nova instituicao no banco
      * @return boolean

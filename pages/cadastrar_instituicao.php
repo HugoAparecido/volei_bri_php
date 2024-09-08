@@ -1,6 +1,7 @@
 <?php
 // Inclui arquivos de proteção e classes necessários
 include('../componentes/protect.php');
+include('../componentes/classes/instituicao_class.php');
 
 // Verifica se o usuário está logado e se é um treinador
 if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
@@ -53,6 +54,36 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                 <button type="submit" id="botao_cadastro">Cadastrar</button>
             </fieldset>
         </form>
+        <button><a href="./cadastrar_instituicao.php?mostrar=sim">Mostrar Instituições cadastradas</a></button>
+        <?php
+        if (isset($_GET['mostrar'])) {
+        ?>
+            <table>
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nome</td>
+                        <td>Tipo</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $instituicoes = Instituicao::GetInstituicoes();
+                    foreach ($instituicoes as $instituicao) {
+                    ?>
+                        <tr>
+                            <td><?= $instituicao->GetID() ?></td>
+                            <td><?= $instituicao->GetNome() ?></td>
+                            <td><?= $instituicao->GetTipo() ?></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        <?php
+        }
+        ?>
     </main>
 <?php
     // Inclui o arquivo do rodapé da página
