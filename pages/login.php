@@ -52,6 +52,8 @@ if (!isset($_SESSION['id_usuario'])) {
     define('FAVICON', "../img/bolas.ico");
     // Define os caminhos dos arquivos CSS para a página
     define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css"));
+    define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
+    define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     // Define o caminho do logo no cabeçalho
     define('LOGO_HEADER', "../img/bolas.png");
     define('LOGO_USUARIO', "../img/login.png");

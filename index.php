@@ -6,6 +6,8 @@ if (!isset($_SESSION)) {
 define('FAVICON', "./img/bolas.ico");
 // define o caminho do css da página
 define('FOLHAS_DE_ESTILO', array("./css/index.css", "./css/style.css"));
+define('LINK_CADASTRO_USUARIO', './pages/cadastrar_usuario.php');
+define('LINK_CADASTRO_INSTITUICAO', './pages/cadastrar_instituicao.php');
 // define o caminho da logo no header
 define('LOGO_HEADER', "./img/bolas.png");
 define('LOGO_USUARIO', "./img/login.png");

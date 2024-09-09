@@ -22,11 +22,6 @@ body {
   /* Cor de fundo leve para o corpo */
 }
 
-body {
-  background-color: #f8f9fa;
-  /* Cor de fundo leve para o corpo */
-}
-
 #card {
   background-color: var(--azul);
   /* Fundo azul escuro para o card */
@@ -36,6 +31,10 @@ body {
   /* Bordas arredondadas no card */
   max-width: 600px;
   width: 100%;
+}
+
+#btn {
+  background-color: var(--amarelo);
 }
 
 h2 {

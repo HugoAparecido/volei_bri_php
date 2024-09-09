@@ -6,6 +6,11 @@
     --preto: #000;
 }
 
+body {
+    background-color: #f8f9fa;
+    /* Cor de fundo leve para o corpo */
+}
+
 #card {
     background-color: var(--azul);
     max-width: 400px;

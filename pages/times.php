@@ -5,6 +5,8 @@ if (isset($_SESSION['id_usuario'])) {
   define('FAVICON', "../img/bolas.ico");
   // define o caminho do css da página
   define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css"));
+  define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
+  define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/bolas.png");
   define('LOGO_USUARIO', "../img/login.png");
@@ -12,7 +14,7 @@ if (isset($_SESSION['id_usuario'])) {
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
 ?>
-  <main class="justify-content-center align-items-center min-vh-100 bg-light">
+  <main class="justify-content-center align-items-center min-vh-100">
     <!-- Botão flutuante no canto superior direito da página -->
     <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
       <button type="button" class="btn" id="logout">
@@ -44,7 +46,7 @@ if (isset($_SESSION['id_usuario'])) {
     <?php
     }
     ?>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-5">
       <div class="card p-4 shadow-sm" id="card">
 
         <h2 class="text-center text-white mb-3">Masculino</h2>

@@ -9,6 +9,8 @@ if (isset($_SESSION['id_usuario'])) {
 
     // Define uma constante para o caminho dos arquivos CSS usados na página.
     define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/cadastro.css"));
+    define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
+    define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
 
     // Define uma constante para o caminho da imagem da logo exibida no cabeçalho.
     define('LOGO_HEADER', "../img/bolas.png");
@@ -30,7 +32,7 @@ if (isset($_SESSION['id_usuario'])) {
 ?>
 
     <!-- Principal conteúdo da página -->
-    <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
         <!-- Botão flutuante no canto superior direito da página -->
         <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
             <button type="button" class="btn" id="logout">
@@ -104,16 +106,12 @@ if (isset($_SESSION['id_usuario'])) {
 
             <!-- Botão para atualizar jogador existente -->
             <div class="d-grid gap-2 mb-3">
-                <button id="update_jogadores_cadastrados" class="btn">
-                    <a href="./atualizar_jogador.php">Atualizar Jogador Existente</a>
-                </button>
+                <a href="./atualizar_jogador.php" class="btn" id="update_jogadores_cadastrados">Atualizar Jogador Existente</a>
             </div>
 
             <!-- Botão para mostrar jogadores cadastrados -->
             <div class="d-grid gap-2 mb-3">
-                <button id="mostrar_jogadores_cadastrados" class="btn">
-                    <a href="./exibir_jogador.php">Mostrar Jogadores Cadastrados</a>
-                </button>
+                <a href="./exibir_jogador.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
             </div>
         </div>
     </main>

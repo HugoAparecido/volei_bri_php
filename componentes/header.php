@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-light">
     <header>
         <!--Barra de Navegação-->
         <nav class="navbar navbar-expand-lg" id="nav" style="background-color:#FDDE5C;">
@@ -37,10 +37,10 @@
                         if (isset($_SESSION['treinador']))
                             if ($_SESSION['treinador']) { ?>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="./cadastrar_usuario.php">Cadastrar Usuário</a>
+                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_USUARIO ?>">Cadastrar Usuário</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="./cadastrar_instituicao.php">Cadastrar Instituição</a>
+                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
                             </li>
                         <?php } ?>
                     </ul>
