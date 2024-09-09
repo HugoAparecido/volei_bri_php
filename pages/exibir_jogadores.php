@@ -5,6 +5,7 @@ define('FAVICON', "../img/bolas.ico");
 // define o caminho do css da página
 define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
 // define o caminho da logo no header
+define('LINK_LOGIN', './pages/login.php');
 define('LOGO_HEADER', "../img/bolas.png");
 // define os nomes dasa páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
@@ -53,28 +54,28 @@ if (isset($_SESSION['id_usuario'])) {
         </tbody>
     </table>
     </div>
-<div>
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Nome Jogador: </h5>
-        <p class="card-title">Posição</p>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Fundamento
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Passe</a></li>
-                <li><a class="dropdown-item" href="#">Ataque</a></li>
-                <li><a class="dropdown-item" href="#">Defesa...</a></li>
-            </ul>
+    <div>
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Nome Jogador: </h5>
+                        <p class="card-title">Posição</p>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Fundamento
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Passe</a></li>
+                                <li><a class="dropdown-item" href="#">Ataque</a></li>
+                                <li><a class="dropdown-item" href="#">Defesa...</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-</div>

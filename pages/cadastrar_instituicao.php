@@ -12,6 +12,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
     define('FOLHAS_DE_ESTILO', array("../css/cadastro.css", "../css/style.css"));
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
+    define('LINK_LOGIN', './pages/login.php');
 
     // Define o caminho da logo no header em uma constante
     define('LOGO_HEADER', "../img/bolas.png");

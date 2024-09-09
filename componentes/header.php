@@ -42,7 +42,14 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
                             </li>
-                        <?php } ?>
+                        <?php }
+                        if (!isset($_SESSION['id_usuario'])) {
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="<?= LINK_LOGIN ?>">Login</a>
+                            </li>
+                        <?php }
+                        ?>
                     </ul>
                 </div>
             </div>
