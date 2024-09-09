@@ -19,21 +19,6 @@ if (isset($_SESSION['id_usuario'])) {
         <a href="../componentes/logout.php">Sair</a>
       </button>
     </div>
-    <div id="duvidas">
-      <button class="btn" type="button" id="botao_duvidas">?</button>
-      <div id="descricao_botoes">
-        <p><strong>Def:</strong> defesa bem sucedida</p>
-        <p><strong>Def Err:</strong> defesa em que a bola não pode ser pega pelo companheiro</p>
-        <p><strong>Pas:</strong> ato de passar a bola entre os jogadores, considerando a altura máxima entre
-          a
-          jogado de um e o recebimneto do outro. <strong>A:</strong> acima das antenas da rede;
-          <strong>B:</strong>o flutuante
-          acima da rede e na altura das antenas; <strong>C:</strong> abaixo das antenas e na altura da
-          rede;
-          <strong>D:</strong> abaixo da rede;
-        </p>
-      </div>
-    </div>
     <?php
     if (isset($_POST['id_time'])) {
     ?>
