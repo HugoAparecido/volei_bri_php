@@ -1,7 +1,25 @@
+:root {
+    --amarelo: #FDDE5C;
+    --azul: #7AB5CB;
+    --cinza-barra: #D4D2D2;
+    --cinza-fundo: #E6E4E1;
+    --preto: #000;
+}
+
 #duvidas {
     margin-top: 50px;
 }
 
 #descricao_botoes {
     display: none;
+}
+
+#card {
+    background-color: var(--azul);
+    max-width: 400px;
+    width: 100%;
+}
+
+#btn {
+    background-color: var(--amarelo);
 }

@@ -12,7 +12,7 @@ if (isset($_SESSION['id_usuario'])) {
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
 ?>
-  <main>
+  <main class="justify-content-center align-items-center min-vh-100 bg-light">
     <!-- Botão flutuante no canto superior direito da página -->
     <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
       <button type="button" class="btn" id="logout">
@@ -27,7 +27,7 @@ if (isset($_SESSION['id_usuario'])) {
         <p><strong>Pas:</strong> ato de passar a bola entre os jogadores, considerando a altura máxima entre
           a
           jogado de um e o recebimneto do outro. <strong>A:</strong> acima das antenas da rede;
-          <strong>B:</strong>
+          <strong>B:</strong>o flutuante
           acima da rede e na altura das antenas; <strong>C:</strong> abaixo das antenas e na altura da
           rede;
           <strong>D:</strong> abaixo da rede;
@@ -59,12 +59,20 @@ if (isset($_SESSION['id_usuario'])) {
     <?php
     }
     ?>
-    <h2>Masculino</h2>
-    <button class="btn"><a href="cadastrar_time.php?sexo=M">Cadastrar Time</a></button>
-    <h2>Feminino</h2>
-    <button class="btn"><a href="cadastrar_time.php?sexo=F">Cadastrar Time</a></button>
-    <h2>Misto</h2>
-    <button class="btn "><a href="cadastrar_time.php?sexo=Mis">Cadastrar Time</a></button>
+    <div class="d-flex justify-content-center">
+      <div class="card p-4 shadow-sm" id="card">
+
+        <h2 class="text-center text-white mb-3">Masculino</h2>
+        <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
+
+        <h2 class="text-center text-white mb-3">Feminino</h2>
+        <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
+
+        <h2 class="text-center text-white mb-3">Misto</h2>
+        <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
+      </div>
+    </div>
+
   </main>
 <?php
   include '../componentes/footer.php';
