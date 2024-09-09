@@ -7,7 +7,7 @@ if (isset($_SESSION['id_usuario'])) {
   define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css"));
   define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
   define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
-  define('LINK_LOGIN', './pages/login.php');
+  define('LINK_LOGIN', './login.php');
   // define o caminho da logo no header
   define('LOGO_HEADER', "../img/bolas.png");
   define('LOGO_USUARIO', "../img/login.png");

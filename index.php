@@ -1,6 +1,7 @@
 <?php
-// Inclui um arquivo que contém funções ou códigos para proteger o acesso à página, geralmente verificando se o usuário está autenticado.
-include('./componentes/protect.php');
+if (!isset($_SESSION)) {
+    session_start();
+}
 // define o caminho do icone em uma constante
 define('FAVICON', "./img/bolas.ico");
 // define o caminho do css da página

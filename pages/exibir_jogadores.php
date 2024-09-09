@@ -5,7 +5,7 @@ define('FAVICON', "../img/bolas.ico");
 // define o caminho do css da página
 define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/times.css"));
 // define o caminho da logo no header
-define('LINK_LOGIN', './pages/login.php');
+define('LINK_LOGIN', './login.php');
 define('LOGO_HEADER', "../img/bolas.png");
 // define os nomes dasa páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
