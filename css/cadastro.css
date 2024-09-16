@@ -4,6 +4,7 @@
   --cinza-barra: #D4D2D2;
   --cinza-fundo: #E6E4E1;
   --preto: #000;
+  --branco: #fff;
 }
 
 #logo {
@@ -27,7 +28,7 @@ body {
   /* Fundo azul escuro para o card */
   color: var(--cinza-fundo);
   /* Cor do texto em branco */
-  border-radius: 30px;
+  border-radius: 20px;
   /* Bordas arredondadas no card */
   max-width: 600px;
   width: 100%;
@@ -110,6 +111,51 @@ h2 {
 }
 
 #cadastrar_jogador {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#cadastrar_time {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#mostrar_times {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#mostrar_instituição {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#botao_cadastro {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}
+
+#mostra_usuario {
   background-color: var(--amarelo);
   /* Botões em amarelo pastel */
   color: #003366;

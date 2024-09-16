@@ -31,90 +31,56 @@ if (isset($_SESSION['id_usuario'])) {
 ?>
 
     <!-- Principal conteúdo da página -->
-    <main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
+    <main class="d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
         <!-- Botão flutuante no canto superior direito da página -->
         <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
             <button type="button" class="btn" id="logout">
                 <a href="../componentes/logout.php">Sair</a>
             </button>
         </div>
-
-        <!-- Cartão que contém o formulário de cadastro de jogador -->
-        <div class="card p-4 shadow-sm" id="card">
-            <form action="../componentes/execucoes/cadastrar_jogador_exe.php" method="post">
-                <h2 class="text-center text-white mb-4">Cadastrar Jogador</h2>
-
-                <!-- Campo para nome do jogador -->
+        <!--Forms do cadastro time-->
+        <div class="card p-5 shadow-sm mb-5" id="card">
+            <form action="../componentes/execucoes/cadastrar_time_exe.php" method="post">
                 <div class="mb-3">
-                    <label for="nome_jogador">Nome: </label>
-                    <input type="text" class="form-control" id="nome_jogador" name="nome_jogador" required>
+                    <label class="form-label" for="nome_time">Nome do Time:</label>
+                    <input class="form-control" type="text" id="nome_time" name="nome_time" value="">
                 </div>
-
-                <!-- Campo para apelido do jogador -->
                 <div class="mb-3">
-                    <label for="apelido_jogador">Apelido: </label>
-                    <input type="text" class="form-control" id="apelido_jogador" name="apelido_jogador">
-                </div>
-
-                <!-- Campo para número da camisa do jogador -->
-                <div class="mb-3">
-                    <label for="num_camisa_jogador">Número da camisa do jogador: </label>
-                    <input type="number" class="form-control" id="num_camisa_jogador" name="num_camisa_jogador">
-                </div>
-
-                <!-- Campo para posição do jogador -->
-                <div class="mb-3">
-                    <label for="posicao_jogador">Posição do jogador: </label>
-                    <select name="posicao_jogador" class="form-select" id="posicao_jogador" required>
-                        <option value="Não Definida">Não definida</option>
-                        <option value="Levantador">Levantador</option>
-                        <option value="Central">Central</option>
-                        <option value="Ponta 1">Ponta 1</option>
-                        <option value="Ponta 2">Ponta 2</option>
-                        <option value="Oposto">Oposto</option>
-                        <option value="Líbero">Líbero</option>
-                    </select>
-                </div>
-
-                <!-- Campo para sexo do jogador -->
-                <div class="mb-3">
-                    <label for="sexo_jogador">Sexo do jogador: </label>
-                    <select name="sexo_jogador" class="form-select" id="sexo_jogador" required>
+                    <label class="form-label" for="sexo_time">Sexo do Time:</label>
+                    <select class="form-select" name="sexo_time" id="sexo_time" required>
                         <option value="M">Masculino</option>
                         <option value="F">Feminino</option>
+                        <option value="Mis">Misto</option>
                     </select>
                 </div>
-
-                <!-- Campo para altura do jogador -->
                 <div class="mb-3">
-                    <label for="altura_jogador">Altura do jogador: </label>
-                    <input type="text" class="form-control" id="altura_jogador" name="altura_jogador">
-                </div>
-
-                <!-- Campo para peso do jogador -->
-                <div class="mb-3">
-                    <label for="peso_jogador">Peso do jogador: </label>
-                    <input type="text" class="form-control" id="peso_jogador" name="peso_jogador">
-                </div>
-
-                <!-- Botão para cadastrar o jogador -->
-                <div class="d-grid gap-2 mb-3">
-                    <button id="cadastrar_jogador" class="btn">Cadastrar Jogador</button>
+                    <button id="cadastrar_time" class="btn" type="button">Cadastar Time</button>
+                    <a href="./cadastrar_jogador.php" class="btn" id="update_jogadores_cadastrados">Cadastrar
+                        Jogador</a>
                 </div>
             </form>
-
-            <!-- Botão para atualizar jogador existente -->
-            <div class="d-grid gap-2 mb-3">
-                <a href="./atualizar_jogador.php" class="btn" id="update_jogadores_cadastrados">Atualizar Jogador Existente</a>
-            </div>
-
-            <!-- Botão para mostrar jogadores cadastrados -->
-            <div class="d-grid gap-2 mb-3">
-                <a href="./exibir_jogador.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
+        </div>
+        </div>
+        <div class="card p-4 shadow-sm " id="card">
+            <button class="btn id=" id="mostrar_times" type="button">Mostrar
+                Time</button>
+            <div class="tabela">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Sexo</th>
+                            <th>Jogadores</th>
+                        </tr>
+                    </thead>
+                    <tbody id="times_cadastrados">
+                    </tbody>
+                </table>
             </div>
         </div>
+        </div>
     </main>
-
 <?php
     // Inclui o arquivo do rodapé da página, geralmente contendo scripts ou informações finais.
     include '../componentes/footer.php';

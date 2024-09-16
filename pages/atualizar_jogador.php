@@ -110,7 +110,7 @@ if (isset($_SESSION['id_usuario'])) {
 
             <!-- Botão para mostrar jogadores cadastrados -->
             <div class="d-grid gap-2 mb-3">
-                <a href="./exibir_jogador.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
+                <a href="./exibir_jogadores.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
             </div>
         </div>
     </main>
