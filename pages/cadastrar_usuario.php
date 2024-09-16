@@ -75,9 +75,9 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
           <label for="naoejogador">Não</label>
         </div>
 
-        <div class="mb-3"> <!-- Seleção de qual jogador é, se for o caso -->
+        <div class="mb-3" id="idJogador"> <!-- Seleção de qual jogador é, se for o caso -->
           <label for="idJogador">Qual jogador é?</label>
-          <select name="idJogador" class="form-select" id="idJogador">
+          <select name="idJogador" class="form-select">
             <!-- Chama o método da classe Componentes para gerar opções de jogadores -->
             <?php Componentes::InputJogadores() ?>
           </select>

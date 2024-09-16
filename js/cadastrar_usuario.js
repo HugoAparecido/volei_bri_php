@@ -13,6 +13,7 @@ const form = {
     senhaMinLenghtErro: () => document.getElementById('senha_min_length_erro'), // Obtém o elemento que exibe o erro de comprimento mínimo da senha
     senhaRequeridaErro: () => document.getElementById('senha_requerida_erro'), // Obtém o elemento que exibe o erro quando a senha é obrigatória
     inputEhJogador: () => document.getElementById('ejogador'), // Obtém o elemento do campo de seleção se é jogador
+    inputNaoEhJogador: () => document.getElementById('naoejogador'), // Obtém o elemento do campo de seleção se não é jogador
     selectJogador: () => document.getElementById('idJogador'), // Obtém o elemento de seleção do jogador
     botaoCadastro: () => document.getElementById("botao_cadastro") // Obtém o elemento do botão de cadastro
 };
@@ -46,9 +47,14 @@ form.inputEhJogador().addEventListener('change', (event) => {
     if (event.target.checked) {
         // Se a opção de ser jogador estiver marcada, exibe o seletor de jogador
         form.selectJogador().style.display = 'block';
-    } else {
-        // Se a opção de ser jogador não estiver marcada, oculta o seletor de jogador e limpa seu valor
+    }
+});
+
+// Adiciona um ouvinte de eventos para o campo de seleção de jogador
+form.inputNaoEhJogador().addEventListener('change', (event) => {
+    if (event.target.checked) {
+        // Se a opção de ser jogador estiver marcada, exibe o seletor de jogador
         form.selectJogador().style.display = 'none';
-        form.selectJogador().value = '';
+        form.selectJogador().valuey = '';
     }
 });
