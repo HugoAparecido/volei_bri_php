@@ -6,12 +6,12 @@ abstract class Jogador
      * Identificador único do jogador
      * @var integer
      */
-    public $id_jogador;
+    protected $id_jogador;
     /**
      * Nome do Jogador
      * @var string
      */
-    public $nome_jogador;
+    protected $nome_jogador;
     /**
      * Apelido do jogador
      * @var string
@@ -26,7 +26,7 @@ abstract class Jogador
      * Número da camisa
      * @var int
      */
-    public $numero_camisa;
+    protected $numero_camisa;
     /**
      * Altura do jogador
      * @var float
@@ -47,6 +47,14 @@ abstract class Jogador
      * @var int
      */
     protected $defesa_jogador;
+    public function GetID()
+    {
+        return $this->id_jogador;
+    }
+    public function GetNome()
+    {
+        return $this->nome_jogador;
+    }
     /**
      * Método responsável por Cadastrar um novo jogador no banco
      * @return boolean

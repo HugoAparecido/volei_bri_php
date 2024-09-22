@@ -103,6 +103,16 @@ class Database
         $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' ' . $where . ' ' . $order . ' ' . $limit;
         return $this->execute($query);
     }
+    public function selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null, $fields = '*')
+    {
+        //DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : '';
+        $order = strlen($order) ? 'ORDER BY ' . $order : '';
+        $limit = strlen($limit) ? 'LIMIT ' . $limit : '';
+        //MONTA A QUERY
+        $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' LEFT JOIN ' . $tabelaPai . ' ON ' . $this->table . '.' . $campoIDFilho . ' = ' . $tabelaPai . '.' . $campoIDPai . ' ' . $where . ' ' . $order . ' ' . $limit;
+        return $this->execute($query);
+    }
     /**
      * Método responsável por executar atualizações no banco de dados
      * @param string $where
