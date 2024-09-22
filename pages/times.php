@@ -1,6 +1,7 @@
 <?php
 include('../componentes/protect.php');
 include('../componentes/classes/time_class.php');
+include('../componentes/classes/libero_class.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
@@ -25,10 +26,11 @@ if (isset($_SESSION['id_usuario'])) {
     </div>
     <?php
     if (isset($_GET['id_time'])) {
+      $time = Time::GetTime((int)$_GET['id_time']);
     ?>
       <form action="../componentes/execucoes/enviar_dados.php" method="post">
-        <h2>Time:</h2>
-        <h2>Sexo:</h2>
+        <h2>Time: <?= $time->GetNome() ?></h2>
+        <h2>Sexo: <?= $time->GetSexo() ?></h2>
         <h3>Jogadores Principais no Momento</h3>
         <p>Levantador</p>
         <p>Líbero</p>
@@ -40,8 +42,27 @@ if (isset($_SESSION['id_usuario'])) {
         <button type="submit">Enviar Dados</button>
       </form>
       <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
-        <label for="novo_jogador">Novo Jogador</label>
-        <select name="novo_jogador"></select>
+        <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
+        <select name="novo_jogador_libero">
+        </select>
+        <label for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
+        <select name="novo_jogador_Levantador">
+        </select>
+        <label for="novo_jogador_oposto">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Opost<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?></label>
+        <select name="novo_jogador_oposto">
+        </select>
+        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
+        <select name="novo_jogador_Libero">
+        </select>
+        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
+        <select name="novo_jogador_Libero">
+        </select>
+        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
+        <select name="novo_jogador_Libero">
+        </select>
+        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
+        <select name="novo_jogador_Libero">
+        </select>
         <button type="submit">Adicionar Jogador</button>
       </form>
       <button type="button"><a href="./cadastrar_jogador.php">Cadastrar Jogador</a></button>

@@ -57,6 +57,10 @@ class Time
     {
         return $this->nome_time;
     }
+    public function GetSexo()
+    {
+        return $this->sexo_time;
+    }
 
     /**
      * Método responsável por cadastrar um novo time no banco
@@ -130,6 +134,6 @@ class Time
     public static function GetTime($id_time)
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'time'
-        return (new Database('time'))->select('id = ' . $id_time)->fetchObject(self::class);
+        return (new Database('time'))->select('id_time = ' . $id_time)->fetchObject(self::class);
     }
 }
