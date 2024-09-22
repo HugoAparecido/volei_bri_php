@@ -27,6 +27,10 @@ if (isset($_SESSION['id_usuario'])) {
     <?php
     if (isset($_GET['id_time'])) {
       $time = Time::GetTime((int)$_GET['id_time']);
+      $sexoProcura = null;
+      if ($time->GetSexo() != 'MIS') {
+        $sexoProcura = $time->GetSexo();
+      }
     ?>
       <form action="../componentes/execucoes/enviar_dados.php" method="post">
         <h2>Time: <?= $time->GetNome() ?></h2>
@@ -44,6 +48,9 @@ if (isset($_SESSION['id_usuario'])) {
       <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
         <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
         <select name="novo_jogador_libero">
+          <?php
+          $liberos = Libero::getJogadores("sexo_");
+          ?>
         </select>
         <label for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
         <select name="novo_jogador_Levantador">

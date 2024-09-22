@@ -18,16 +18,16 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
     // Cria um objeto da classe apropriada com base na posição do jogador
     if ($posicaoJogador === "Líbero") {
         // Se a posição for "Líbero", cria um objeto da classe Libero e chama o método para cadastrar o jogador
-        $obLibero = new Libero(null, $nomeJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador, $sexoJogador);
-        $obLibero->CadastrarLibero();
+        $obLibero = new Libero();
+        $obLibero->CadastrarLibero($nomeJogador, $sexoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
     } elseif ($posicaoJogador === "Levantador") {
         // Se a posição for "Levantador", cria um objeto da classe Levantador e chama o método para cadastrar o jogador
-        $obLevantador = new Levantador(null, $nomeJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador, $sexoJogador);
-        $obLevantador->CadastrarLevantador();
+        $obLevantador = new Levantador();
+        $obLevantador->CadastrarLevantador($nomeJogador, $sexoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
     } else {
         // Para outras posições, cria um objeto da classe OutrasPosicoes e chama o método para cadastrar o jogador
-        $obOutrasPosicoes = new OutrasPosicoes(null, $nomeJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador, $sexoJogador, $posicaoJogador);
-        $obOutrasPosicoes->CadastrarPosicao();
+        $obOutrasPosicoes = new OutrasPosicoes();
+        $obOutrasPosicoes->CadastrarPosicao($nomeJogador, $sexoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
     }
 } else {
     // Se os dados obrigatórios não estiverem definidos, exibe uma mensagem de erro
@@ -35,4 +35,4 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
 }
 
 // Redireciona o usuário para a página onde os jogadores cadastrados são exibidos
-header("Location: ../pages/exibir_jogadores.php");
+header("Location: ../../pages/exibir_jogadores.php");
