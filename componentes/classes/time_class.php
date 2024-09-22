@@ -48,6 +48,16 @@ class Time
         $this->id_istituicao = $id_istituicao;
     }
 
+    public function GetID()
+    {
+        return $this->id_time;
+    }
+
+    public function GetNome()
+    {
+        return $this->nome_time;
+    }
+
     /**
      * Método responsável por cadastrar um novo time no banco
      * @return boolean

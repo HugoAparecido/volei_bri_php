@@ -1,5 +1,6 @@
 <?php
 include('../componentes/protect.php');
+include('../componentes/classes/time_class.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
@@ -23,7 +24,7 @@ if (isset($_SESSION['id_usuario'])) {
       </button>
     </div>
     <?php
-    if (isset($_POST['id_time'])) {
+    if (isset($_GET['id_time'])) {
     ?>
       <form action="../componentes/execucoes/enviar_dados.php" method="post">
         <h2>Time:</h2>
@@ -51,12 +52,36 @@ if (isset($_SESSION['id_usuario'])) {
       <div class="card p-4 shadow-sm" id="card">
 
         <h2 class="text-center text-white mb-3">Masculino</h2>
+        <?php
+        $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
+        foreach ($timeMasculino as $time) {
+        ?>
+          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+        <?php
+        }
+        ?>
         <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
 
         <h2 class="text-center text-white mb-3">Feminino</h2>
+        <?php
+        $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
+        foreach ($timeFeminino as $time) {
+        ?>
+          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+        <?php
+        }
+        ?>
         <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
 
         <h2 class="text-center text-white mb-3">Misto</h2>
+        <?php
+        $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
+        foreach ($timeMisto as $time) {
+        ?>
+          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+        <?php
+        }
+        ?>
         <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
       </div>
     </div>
