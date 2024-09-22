@@ -40,12 +40,21 @@ class Time
      */
     public $id_istituicao;
 
+    private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)
+    {
+        $this->nome_time = $nome;
+        $this->sexo_time = $sexo_time;
+        $this->id_usuario = $id_usuario;
+        $this->id_istituicao = $id_istituicao;
+    }
+
     /**
      * Método responsável por cadastrar um novo time no banco
      * @return boolean
      */
-    public function Cadastrar()
+    public function Cadastrar($nome, $sexo_time, $id_usuario, $id_istituicao)
     {
+        $this->SetALL($nome, $sexo_time, $id_usuario, $id_istituicao);
         // Define a data e hora atuais para a criação do time
         $this->data_hora_criacao = date('Y-m-d H:i:s');
 
@@ -58,7 +67,7 @@ class Time
             'data_hora_criacao' => $this->data_hora_criacao,
             'sexo_time' => $this->sexo_time,
             'id_usuario' => $this->id_usuario,
-            'id_istituicao' => $this->id_istituicao
+            'id_instituicao' => $this->id_istituicao
         ]);
 
         // Retorna verdadeiro indicando sucesso na operação

@@ -106,7 +106,7 @@ class Usuario
      * @param bool $treinador Indica se o usuário é um treinador (true) ou não (false)
      * @param int $id_jogador ID do jogador, caso o usuário seja um jogador
      */
-    public function SetAll($nome, $email, $senha, $jogador, $treinador, $id_jogador)
+    private function SetAll($nome, $email, $senha, $jogador, $treinador, $id_jogador)
     {
         // Define o nome do usuário
         $this->nome_usuario = $nome;

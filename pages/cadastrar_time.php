@@ -1,6 +1,7 @@
 <?php
 // Inclui um arquivo que contém funções ou códigos para proteger o acesso à página, geralmente verificando se o usuário está autenticado.
 include('../componentes/protect.php');
+include('../componentes/classes/instituicao_class.php');
 
 // Verifica se a variável de sessão 'id_usuario' está definida, o que indica que o usuário está autenticado.
 if (isset($_SESSION['id_usuario'])) {
@@ -48,13 +49,24 @@ if (isset($_SESSION['id_usuario'])) {
                 <div class="mb-3">
                     <label class="form-label" for="sexo_time">Sexo do Time:</label>
                     <select class="form-select" name="sexo_time" id="sexo_time" required>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="Mis">Misto</option>
+                        <option value="M" <?= $_GET['sexo'] == 'M' ? "selected" : "" ?>>Masculino</option>
+                        <option value="F" <?= $_GET['sexo'] == 'F' ? "selected" : "" ?>>Feminino</option>
+                        <option value="Mis" <?= $_GET['sexo'] == 'Mis' ? "selected" : "" ?>>Misto</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <button id="cadastrar_time" class="btn" type="button">Cadastar Time</button>
+                    <label class="form-label" for="instituicao">Instituição do Time:</label>
+                    <select class="form-select" name="instituicao" id="instituicao" required>
+                        <?php
+                        $instituicao = Instituicao::GetInstituicoes();
+                        foreach ($instituicao as $instituicao) {
+                        ?>
+                            <option value="<?= $instituicao->GetID() ?>"><?= $instituicao->GetNome() ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <button id="cadastrar_time" class="btn" type="submit">Cadastar Time</button>
                     <a href="./cadastrar_jogador.php" class="btn" id="update_jogadores_cadastrados">Cadastrar
                         Jogador</a>
                 </div>
