@@ -10,7 +10,7 @@ define('LINK_CADASTRO_USUARIO', './pages/cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './pages/cadastrar_instituicao.php');
 define('LINK_LOGIN', './pages/login.php');
 // define o caminho da logo no header
-define('LOGO_HEADER', "./img/bolas.png");
+define('LOGO_HEADER', "./img/logo.png");
 define('LOGO_USUARIO', "./img/login.png");
 // define os nomes dasa páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(['Página Principal', './index.php'], ['Times', './pages/times.php'], ['Estatísticas', './pages/estatisticas.php']));

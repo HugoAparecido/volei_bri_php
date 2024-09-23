@@ -15,7 +15,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
     define('LINK_LOGIN', './login.php');
 
     // Define o caminho da logo no header em uma constante
-    define('LOGO_HEADER', "../img/bolas.png");
+    define('LOGO_HEADER', "../img/logo.png");
 
     // Define o caminho da logo de login em uma constante
     define('LOGO_USUARIO', "../img/login.png");

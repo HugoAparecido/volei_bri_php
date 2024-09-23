@@ -7,7 +7,7 @@ define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
 define('LINK_LOGIN', './login.php');
 // define o caminho da logo no header
-define('LOGO_HEADER', "../img/bolas.png");
+define('LOGO_HEADER', "../img/logo.png");
 // define os nomes dasa páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php']));
 include '../componentes/header.php';
