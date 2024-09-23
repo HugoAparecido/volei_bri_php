@@ -27,7 +27,7 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
     } else {
         // Para outras posições, cria um objeto da classe OutrasPosicoes e chama o método para cadastrar o jogador
         $obOutrasPosicoes = new OutrasPosicoes();
-        $obOutrasPosicoes->CadastrarPosicao($nomeJogador, $sexoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
+        $obOutrasPosicoes->CadastrarPosicao($nomeJogador, $sexoJogador, $posicaoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
     }
 } else {
     // Se os dados obrigatórios não estiverem definidos, exibe uma mensagem de erro

@@ -2,6 +2,8 @@
 include('../componentes/protect.php');
 include('../componentes/classes/time_class.php');
 include('../componentes/classes/libero_class.php');
+include('../componentes/classes/levantador_class.php');
+include('../componentes/classes/outras_posicoes_class.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
@@ -49,7 +51,7 @@ if (isset($_SESSION['id_usuario'])) {
         <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
         <select name="novo_jogador_libero">
           <?php
-          $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', "jogador.sexo_jogador = '" . $time->GetSexo() . "'");
+          $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', "jogador.sexo_jogador = '" . $time->GetSexo() . "'", 'nome_jogador');
           foreach ($liberos as $libero) {
           ?>
             <option value="<?= $libero->GetID() ?>"><?= $libero->GetNome() ?></option>
@@ -59,21 +61,45 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
         <select name="novo_jogador_Levantador">
+          <?php
+          $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', "jogador.sexo_jogador = '" . $time->GetSexo() . "'", 'nome_jogador');
+          foreach ($levantadores as $levantador) {
+          ?>
+            <option value="<?= $levantador->GetID() ?>"><?= $levantador->GetNome() ?></option>
+          <?php
+          }
+          ?>
         </select>
         <label for="novo_jogador_oposto">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Opost<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?></label>
         <select name="novo_jogador_oposto">
+          <?php
+          $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND outras_posicoes.posicao = 'Oposto'", 'nome_jogador');
+          foreach ($opostos as $oposto) {
+          ?>
+            <option value="<?= $oposto->GetID() ?>"><?= $oposto->GetNome() ?></option>
+          <?php
+          }
+          ?>
         </select>
-        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
-        <select name="novo_jogador_Libero">
+        <label for="novo_jogador_ponta_1">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
+        <select name="novo_jogador_ponta_1">
+          <?php
+          $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND outras_posicoes.posicao = 'ponta 1'", 'nome_jogador');
+          foreach ($pontas1 as $ponta1) {
+          ?>
+            <option value="<?= $ponta1->GetID() ?>"><?= $ponta1->GetNome() ?></option>
+          <?php
+          }
+          ?>
         </select>
-        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
-        <select name="novo_jogador_Libero">
+        <label for="novo_jogador_ponta_2">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
+        <select name="novo_jogador_ponta_2">
         </select>
-        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
-        <select name="novo_jogador_Libero">
+        <label for="novo_jogador_central">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
+        <select name="novo_jogador_central">
         </select>
-        <label for="novo_jogador_Libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
-        <select name="novo_jogador_Libero">
+        <label for="novo_jogador_outra_posicao">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
+        <select name="novo_jogador_outra_posicao">
         </select>
         <button type="submit">Adicionar Jogador</button>
       </form>

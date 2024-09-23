@@ -30,4 +30,8 @@ class Levantador extends Jogador
         //RETORNAR SUCESSO
         return true;
     }
+    public static function JuntarTabelas($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null)
+    {
+        return (new Database('levantador'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
 }
