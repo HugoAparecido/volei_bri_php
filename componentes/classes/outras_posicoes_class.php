@@ -21,15 +21,24 @@ class OutrasPosicoes extends Jogador
     public function CadastrarPosicao($nome, $sexo, $posicao, $apelido = null, $numero = null, $altura = null, $peso = null)
     {
         $this->SetAll($nome, $sexo, $posicao, $apelido, $numero, $altura, $peso);
-        //INSERIR O JOGADOR NO BANCO
-        $this->Cadastrar();
-        $obDatabase = new Database('outras_posicoes');
-        $this->id_jogador = $obDatabase->insert([
-            'id_jogador' => $this->id_jogador,
-            'posicao' => $this->posicao_jogador
-        ]);
+        $jogadores = $this->getJogadores("nome_jogador = '$nome'");
+        if (count($jogadores) > 0) {
+            $this->id_jogador = $jogadores[0]->id_jogador;
+            $obDatabase = new Database('outras_posicoes');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador,
+                'posicao' => $this->posicao_jogador
+            ]);
+        } else {
+            //INSERIR O JOGADOR NO BANCO
+            $this->Cadastrar();
+            $obDatabase = new Database('outras_posicoes');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador,
+                'posicao' => $this->posicao_jogador
+            ]);
+        }
         //RETORNAR SUCESSO
-        return true;
     }
     /**
      * Método responsável por obter os jogadores do banco de dados

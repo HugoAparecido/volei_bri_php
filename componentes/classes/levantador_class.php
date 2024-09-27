@@ -21,14 +21,34 @@ class Levantador extends Jogador
     public function CadastrarLevantador($nome, $sexo, $apelido = null, $numero = null, $altura = null, $peso = null)
     {
         $this->SetAll($nome, $sexo, $apelido, $numero, $altura, $peso);
-        //INSERIR O JOGADOR NO BANCO
-        $this->Cadastrar();
-        $obDatabase = new Database('levantador');
-        $this->id_jogador = $obDatabase->insert([
-            'id_jogador' => $this->id_jogador
-        ]);
+        $jogadores = $this->getJogadores("nome_jogador = '$nome'");
+        if (count($jogadores) > 0) {
+            $this->id_jogador = $jogadores[0]->id_jogador;
+            $obDatabase = new Database('levantador');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador
+            ]);
+        } else {
+            //INSERIR O JOGADOR NO BANCO
+            $this->Cadastrar();
+            $obDatabase = new Database('levantador');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador
+            ]);
+        }
         //RETORNAR SUCESSO
         return true;
+    }
+    /**
+     * Método responsável por obter os jogadores do banco de dados
+     * @param string $where
+     * @param string $order
+     * @param string $limit
+     * @return array
+     */
+    public static function getJogadores($where = null, $order = null, $limit = null)
+    {
+        return (new Database('jogador'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
     public static function JuntarTabelas($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null)
     {

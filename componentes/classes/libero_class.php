@@ -22,15 +22,22 @@ class Libero extends Jogador
     {
         $this->SetAll($nome, $sexo, $apelido, $numero, $altura, $peso);
         $jogadores = $this->getJogadores("nome_jogador = '$nome'");
-        print_r($jogadores);
-        // //INSERIR O JOGADOR NO BANCO
-        // $this->Cadastrar();
-        // $obDatabase = new Database('libero');
-        // $this->id_jogador = $obDatabase->insert([
-        //     'id_jogador' => $this->id_jogador
-        // ]);
-        // //RETORNAR SUCESSO
-        // return true;
+        if (count($jogadores) > 0) {
+            $this->id_jogador = $jogadores[0]->id_jogador;
+            $obDatabase = new Database('libero');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador
+            ]);
+        } else {
+            //INSERIR O JOGADOR NO BANCO
+            $this->Cadastrar();
+            $obDatabase = new Database('libero');
+            $this->id_jogador = $obDatabase->insert([
+                'id_jogador' => $this->id_jogador
+            ]);
+        }
+        //RETORNAR SUCESSO
+        return true;
     }
     /**
      * Método responsável por obter os jogadores do banco de dados
