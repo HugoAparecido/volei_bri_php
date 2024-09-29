@@ -8,37 +8,38 @@ class Time
      * Identificador único do time
      * @var integer
      */
-    public $id_time;
+    private $id_time;
 
     /**
      * Nome do Time
      * @var string
      */
-    public $nome_time;
+    private $nome_time;
 
     /**
      * Data de criação do time
      * @var string
      */
-    public $data_hora_criacao;
+    private $data_hora_criacao;
 
     /**
      * Sexo do Time
      * @var string(M/F/MIS)
      */
-    public $sexo_time;
+    private $sexo_time;
 
     /**
      * Usuário que cadastrou o time
      * @var int
      */
-    public $id_usuario;
+    private $id_usuario;
 
     /**
      * Instituição do time
      * @var int
      */
-    public $id_istituicao;
+    private $id_istituicao;
+    private $jogadores;
 
     // Método privado para definir todas as propriedades do time
     private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)

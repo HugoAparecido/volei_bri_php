@@ -4,6 +4,22 @@ require_once "jogador_class.php";
 
 class Levantador extends Jogador
 {
+    private $ataque_dentro;
+    private $ataque_errado;
+    private $bloqueio_convertido;
+    private $bloqueio_errado;
+    private $errou_levantamento;
+    private $levantamento_para_oposto;
+    private $levantamento_para_ponta;
+    private $levantamento_para_pipe;
+    private $levantamento_para_centro;
+    private $saque_fora;
+    private $saque_cima;
+    private $saque_flutuante;
+    private $saque_viagem;
+    private $saque_cima_ace;
+    private $saque_flutuante_ace;
+    private $saque_viagem_ace;
     // Definindo a posição do jogador como 'Levantador'
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {

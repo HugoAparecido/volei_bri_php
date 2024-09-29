@@ -4,6 +4,10 @@ require_once "jogador_class.php";
 
 class Libero extends Jogador
 {
+    private $passe_a;
+    private $passe_b;
+    private $passe_c;
+    private $passe_d;
     // Definindo a posição do jogador como 'Líbero'
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {

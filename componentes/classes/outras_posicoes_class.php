@@ -6,6 +6,21 @@ class OutrasPosicoes extends Jogador
 {
     // Propriedade para armazenar o ID da posição do jogador
     private $id_posicao;
+    private $passe_a;
+    private $passe_b;
+    private $passe_c;
+    private $passe_;
+    private $bloqueio_convertido;
+    private $bloqueio_errado;
+    private $ataque_dentro;
+    private $ataque_fora;
+    private $saque_ace_cima;
+    private $saque_ace_flutuante;
+    private $saque_ace_viagem;
+    private $saque_cima;
+    private $saque_flutuante;
+    private $saque_viagem;
+    private $saque_errado;
 
     // Método privado para definir todos os atributos do jogador
     private function SetAll($nome, $sexo, $posicao, $apelido, $numero, $altura, $peso)
