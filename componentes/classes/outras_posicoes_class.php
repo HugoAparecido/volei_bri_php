@@ -2,6 +2,7 @@
 require_once "jogador_class.php";
 class OutrasPosicoes extends Jogador
 {
+    private $id_posicao;
     // Definindo a posição para Líbero
     private function SetAll($nome, $sexo, $posicao, $apelido, $numero, $altura, $peso)
     {
@@ -25,7 +26,7 @@ class OutrasPosicoes extends Jogador
         if (count($jogadores) > 0) {
             $this->id_jogador = $jogadores[0]->id_jogador;
             $obDatabase = new Database('outras_posicoes');
-            $this->id_jogador = $obDatabase->insert([
+            $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,
                 'posicao' => $this->posicao_jogador
             ]);
@@ -33,7 +34,7 @@ class OutrasPosicoes extends Jogador
             //INSERIR O JOGADOR NO BANCO
             $this->Cadastrar();
             $obDatabase = new Database('outras_posicoes');
-            $this->id_jogador = $obDatabase->insert([
+            $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,
                 'posicao' => $this->posicao_jogador
             ]);
