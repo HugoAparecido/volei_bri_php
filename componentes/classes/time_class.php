@@ -40,26 +40,29 @@ class Time
      */
     public $id_istituicao;
 
+    // Método privado para definir todas as propriedades do time
     private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)
     {
-        $this->nome_time = $nome;
-        $this->sexo_time = $sexo_time;
-        $this->id_usuario = $id_usuario;
-        $this->id_istituicao = $id_istituicao;
+        $this->nome_time = $nome; // Nome do time
+        $this->sexo_time = $sexo_time; // Sexo do time
+        $this->id_usuario = $id_usuario; // ID do usuário que cadastrou
+        $this->id_istituicao = $id_istituicao; // ID da instituição
     }
 
+    // Métodos getters para obter informações do time
     public function GetID()
     {
-        return $this->id_time;
+        return $this->id_time; // Retorna o ID do time
     }
 
     public function GetNome()
     {
-        return $this->nome_time;
+        return $this->nome_time; // Retorna o nome do time
     }
+
     public function GetSexo()
     {
-        return $this->sexo_time;
+        return $this->sexo_time; // Retorna o sexo do time
     }
 
     /**
@@ -68,6 +71,7 @@ class Time
      */
     public function Cadastrar($nome, $sexo_time, $id_usuario, $id_istituicao)
     {
+        // Chama o método SetALL para atribuir os valores ao time
         $this->SetALL($nome, $sexo_time, $id_usuario, $id_istituicao);
         // Define a data e hora atuais para a criação do time
         $this->data_hora_criacao = date('Y-m-d H:i:s');

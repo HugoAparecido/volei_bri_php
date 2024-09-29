@@ -30,7 +30,7 @@ class Usuario
     private $senha_usuario_site;
 
     /**
-     * É jogador
+     * Indica se o usuário é jogador
      * @var bool
      */
     private $jogador;
@@ -42,7 +42,7 @@ class Usuario
     private $id_jogador;
 
     /**
-     * É treinador
+     * Indica se o usuário é treinador
      * @var bool
      */
     private $treinador;
@@ -53,7 +53,7 @@ class Usuario
      */
     public function GetID()
     {
-        return $this->id_usuario;
+        return $this->id_usuario; // Retorna o ID do usuário
     }
 
     /**
@@ -62,12 +62,16 @@ class Usuario
      */
     public function GetNomeUsuario()
     {
-        return $this->nome_usuario; // Correção: Retornar $this->nome_usuario em vez de $this->id_usuario
+        return $this->nome_usuario; // Retorna o nome do usuário
     }
 
+    /**
+     * Retorna o email do usuário
+     * @return string
+     */
     public function GetEmailUsuario()
     {
-        return $this->nome_usuario; // Correção: Retornar $this->nome_usuario em vez de $this->id_usuario
+        return $this->email_usuario; // Retorna o email do usuário
     }
 
     /**
@@ -76,21 +80,25 @@ class Usuario
      */
     public function GetTreinador()
     {
-        return $this->treinador;
-    }
-
-    public function GetJogador()
-    {
-        return $this->jogador;
+        return $this->treinador; // Retorna se o usuário é um treinador
     }
 
     /**
-     * Verifica se o usuário é um treinador
+     * Verifica se o usuário é um jogador
      * @return bool
+     */
+    public function GetJogador()
+    {
+        return $this->jogador; // Retorna se o usuário é um jogador
+    }
+
+    /**
+     * Retorna a senha do usuário
+     * @return string
      */
     public function GetSenha()
     {
-        return $this->senha_usuario_site;
+        return $this->senha_usuario_site; // Retorna a senha do usuário
     }
 
     /**
@@ -128,14 +136,13 @@ class Usuario
     }
 
     /**
-     * Tenta logar um usuário com o e-mail e senha fornecidos
+     * Tenta logar um usuário com o e-mail fornecido
      * @param string $email E-mail do usuário
-     * @param string $senha Senha do usuário
-     * @return array Lista de usuários que correspondem ao e-mail e senha
+     * @return array Lista de usuários que correspondem ao e-mail
      */
     public static function Logar($email)
     {
-        // Cria uma nova instância da classe Database e faz uma consulta para encontrar usuários com o e-mail e senha fornecidos
+        // Cria uma nova instância da classe Database e faz uma consulta para encontrar usuários com o e-mail fornecido
         return (new Database('usuario'))->select("email_usuario = '$email'", null, 1)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 
@@ -163,6 +170,7 @@ class Usuario
      */
     public function Cadastrar($nome, $email, $senha, $jogador, $treinador, $id_jogador = null)
     {
+        // Configura todos os atributos do usuário
         $this->SetAll($nome, $email, password_hash($senha, PASSWORD_DEFAULT), $jogador, $treinador, $id_jogador);
         // Cria uma nova instância da classe Database para realizar a operação de inserção
         $obDatabase = new Database('usuario');
@@ -180,10 +188,21 @@ class Usuario
         return true;
     }
 
+    /**
+     * Atualiza os dados do usuário no banco de dados
+     * @param string $nome Nome do usuário
+     * @param string $email E-mail do usuário
+     * @param string $senha Senha do usuário
+     * @param bool $jogador Indica se o usuário é um jogador
+     * @param bool $treinador Indica se o usuário é um treinador
+     * @param int|null $id_jogador ID do jogador (opcional)
+     * @return boolean Retorna true se a atualização for bem-sucedida
+     */
     public function Atualizar($nome, $email, $senha, $jogador, $treinador, $id_jogador = null)
     {
+        // Configura todos os atributos do usuário
         $this->SetAll($nome, $email, password_hash($senha, PASSWORD_DEFAULT), $jogador, $treinador, $id_jogador);
-        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        // Cria uma nova instância da classe Database para manipulação da tabela 'usuario'
         return (new Database('usuario'))->update('id = ' . $this->id_usuario, [
             'nome_usuario' => $this->nome_usuario,
             'email_usuario' => $this->email_usuario,
@@ -193,19 +212,38 @@ class Usuario
             'treinador' => $this->treinador
         ]);
     }
+
+    /**
+     * Exclui o usuário do banco de dados
+     * @return boolean Retorna true se a exclusão for bem-sucedida
+     */
     public function Excluir()
     {
-        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        // Cria uma nova instância da classe Database para manipulação da tabela 'usuario'
         return (new Database('usuario'))->delete('id = ' . $this->id_usuario);
     }
+
+    /**
+     * Obtém uma lista de usuários do banco de dados
+     * @param string|null $where Condição de filtragem dos registros
+     * @param string|null $order Ordem dos registros
+     * @param string|null $limit Limite de registros retornados
+     * @return array Array de objetos do tipo Usuario
+     */
     public static function GetUsuarios($where = null, $order = null, $limit = null)
     {
-        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        // Cria uma nova instância da classe Database para manipulação da tabela 'usuario'
         return (new Database('usuario'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
+    /**
+     * Obtém um usuário específico com base em seu ID
+     * @param integer $id_usuario Identificador do usuário
+     * @return Usuario Objeto do tipo Usuario correspondente ao ID fornecido
+     */
     public static function GetUsuario($id_usuario)
     {
-        // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
+        // Cria uma nova instância da classe Database para manipulação da tabela 'usuario'
         return (new Database('usuario'))->select('id = ' . $id_usuario)->fetchObject(self::class);
     }
 }

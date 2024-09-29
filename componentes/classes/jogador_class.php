@@ -118,5 +118,3 @@ abstract class Jogador
         return (new Database('jogador'))->select('id = ' . $id)->fetchObject(self::class);
     }
 }
-//Select para puxar os dados no time e também os dados da posição
-//SELECT * FROM jogador INNER JOIN libero on libero.id_jogador = jogador.id_jogador INNER JOIN jogador_no_time on jogador_no_time.id_jogador = jogador.id_jogador;

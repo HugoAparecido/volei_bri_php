@@ -1,47 +1,54 @@
 <?php
 // Inclui a classe de manipulação do banco de dados
-require_once "database_class.php";
+require_once "database_class.php"; // Carrega a classe que gerencia as operações no banco de dados
 
 class Instituicao
 {
     /**
-     * Identificador único da Inatituição
+     * Identificador único da Instituição
      * @var integer
      */
-    public $id_instituicao;
+    public $id_instituicao; // Propriedade para armazenar o ID da instituição
 
     /**
      * Nome da Instituição
      * @var string
      */
-    public $nome_instituicao;
+    public $nome_instituicao; // Propriedade para armazenar o nome da instituição
 
     /**
      * Tipo da instituição
      * @var string
      */
-    public $tipo_instituicao;
+    public $tipo_instituicao; // Propriedade para armazenar o tipo da instituição
+
+    // Métodos para obter os valores das propriedades
 
     public function GetID()
     {
-        return $this->id_instituicao;
+        return $this->id_instituicao; // Retorna o ID da instituição
     }
+
     public function GetNome()
     {
-        return $this->nome_instituicao;
+        return $this->nome_instituicao; // Retorna o nome da instituição
     }
+
     public function GetTipo()
     {
-        return $this->tipo_instituicao;
+        return $this->tipo_instituicao; // Retorna o tipo da instituição
     }
+
     /**
-     * Método responsável por cadastrar uma nova instituicao no banco
+     * Método responsável por cadastrar uma nova instituição no banco
      * @return boolean
      */
     public function Cadastrar($nome, $tipo)
     {
+        // Atribui os parâmetros às propriedades da classe
         $this->nome_instituicao = $nome;
         $this->tipo_instituicao = $tipo;
+
         // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
         $obDatabase = new Database('instituicao');
 
@@ -56,7 +63,7 @@ class Instituicao
     }
 
     /**
-     * Método responsável por atualizar os dados da instituicao no banco
+     * Método responsável por atualizar os dados da instituição no banco
      * @return boolean
      */
     public function Atualizar()
@@ -69,7 +76,7 @@ class Instituicao
     }
 
     /**
-     * Método responsável por excluir uma instituicao do banco
+     * Método responsável por excluir uma instituição do banco
      * @return boolean
      */
     public function Excluir()
@@ -79,7 +86,7 @@ class Instituicao
     }
 
     /**
-     * Método responsável por obter a lista de instituicoes do banco de dados
+     * Método responsável por obter a lista de instituições do banco de dados
      * @param string $where Condição de filtragem dos registros
      * @param string $order Ordem dos registros
      * @param string $limit Limite de registros retornados
@@ -92,7 +99,7 @@ class Instituicao
     }
 
     /**
-     * Método responsável por buscar uma instituição específico com base em seu ID
+     * Método responsável por buscar uma instituição específica com base em seu ID
      * @param integer $id_instituicao Identificador da instituição
      * @return Instituicao Objeto do tipo Instituicao correspondente ao ID fornecido
      */
