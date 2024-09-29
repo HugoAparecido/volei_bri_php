@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 22-Set-2024 às 21:41
+-- Tempo de geração: 29-Set-2024 às 15:52
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -59,17 +59,16 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `peso_jogador` decimal(3,2) DEFAULT NULL,
   `sexo_jogador` enum('M','F') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_jogador`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `jogador`
 --
 
 INSERT INTO `jogador` (`id_jogador`, `nome_jogador`, `apelido_jogador`, `numero_camisa`, `defesa_jogador`, `altura_jogador`, `peso_jogador`, `sexo_jogador`) VALUES
-(6, 'Aaron', '', 15, 0, '0.00', '0.00', 'M'),
-(7, 'Eduardo Pereira Xavier', 'Dudu', 12, 0, '0.00', '0.00', 'M'),
-(9, 'Sophia Passos', 'Soso', 0, 0, '0.00', '0.00', 'F'),
-(10, 'Victor', '', 0, 0, '0.00', '0.00', 'M');
+(1, 'Aaron Kenzo Hukuda Castro Kanashiro', '', 0, 0, '0.00', '0.00', 'M'),
+(2, 'Sophia Passos de Oliveira', '', 0, 0, '0.00', '0.00', 'F'),
+(3, 'Andrus Neves Roman', '', 0, 0, '0.00', '0.00', 'M');
 
 -- --------------------------------------------------------
 
@@ -141,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `levantador` (
 --
 
 INSERT INTO `levantador` (`id_jogador`, `posicao`, `ataque_dentro`, `ataque_errado`, `bloqueio_convertido`, `bloqueio_errado`, `errou_levantamento`, `levantamento_para_oposto`, `levantamento_para_ponta`, `levantamento_para_pipe`, `levantamento_para_centro`, `saque_fora`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_cima_ace`, `saque_flutuante_ace`, `saque_viagem_ace`) VALUES
-(10, 'Levantador', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(3, 'Levantador', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -165,8 +164,7 @@ CREATE TABLE IF NOT EXISTS `libero` (
 --
 
 INSERT INTO `libero` (`id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `posicao`) VALUES
-(7, 0, 0, 0, 0, 'Líbero'),
-(9, 0, 0, 0, 0, 'Líbero');
+(2, 0, 0, 0, 0, 'Líbero');
 
 -- --------------------------------------------------------
 
@@ -176,6 +174,7 @@ INSERT INTO `libero` (`id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, 
 
 DROP TABLE IF EXISTS `outras_posicoes`;
 CREATE TABLE IF NOT EXISTS `outras_posicoes` (
+  `id_posicao` int NOT NULL AUTO_INCREMENT,
   `id_jogador` int NOT NULL,
   `passe_a` int UNSIGNED NOT NULL DEFAULT '0',
   `passe_b` int UNSIGNED NOT NULL DEFAULT '0',
@@ -193,15 +192,17 @@ CREATE TABLE IF NOT EXISTS `outras_posicoes` (
   `saque_viagem` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_errado` int UNSIGNED NOT NULL DEFAULT '0',
   `posicao` enum('Oposto','Central','Ponta 1','Ponta 2','Não Definida') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id_jogador`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_posicao`),
+  KEY `posicao_jogador` (`id_jogador`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `outras_posicoes`
 --
 
-INSERT INTO `outras_posicoes` (`id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `bloqueio_convertido`, `bloqueio_errado`, `ataque_dentro`, `ataque_fora`, `saque_ace_cima`, `saque_ace_flutuante`, `saque_ace_viagem`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_errado`, `posicao`) VALUES
-(6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Oposto');
+INSERT INTO `outras_posicoes` (`id_posicao`, `id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `bloqueio_convertido`, `bloqueio_errado`, `ataque_dentro`, `ataque_fora`, `saque_ace_cima`, `saque_ace_flutuante`, `saque_ace_viagem`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_errado`, `posicao`) VALUES
+(1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Oposto'),
+(2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Ponta 2');
 
 -- --------------------------------------------------------
 
@@ -301,7 +302,7 @@ ALTER TABLE `libero`
 -- Limitadores para a tabela `outras_posicoes`
 --
 ALTER TABLE `outras_posicoes`
-  ADD CONSTRAINT `jogador_posicao` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `posicao_jogador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `time`
