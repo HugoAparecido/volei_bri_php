@@ -48,6 +48,7 @@ if (isset($_SESSION['id_usuario'])) {
         <button type="submit">Enviar Dados</button>
       </form>
       <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
+        <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
         <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
         <select name="novo_jogador_libero">
           <?php

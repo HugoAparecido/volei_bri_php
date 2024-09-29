@@ -1,6 +1,7 @@
 <?php
 // Inclui a classe de manipulação do banco de dados
 require_once "database_class.php";
+require_once 'jogador_time_class.php';
 
 class Time
 {
@@ -140,5 +141,10 @@ class Time
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'time'
         return (new Database('time'))->select('id_time = ' . $id_time)->fetchObject(self::class);
+    }
+    public function AdicionarJogadorAoTime($id_jogador, $id_time, $posicao_jogador)
+    {
+        $jogador = new JogadorTime();
+        $jogador->Cadastrar($id_jogador, $id_time, $posicao_jogador);
     }
 }
