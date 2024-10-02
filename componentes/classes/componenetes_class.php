@@ -17,4 +17,12 @@ class Componentes
             echo "<option value='" . $jogador->id_jogador . "'>" . $jogador->numero_camisa . " : " . $jogador->nome_jogador . "</option>";
         }
     }
+    public static function LocalInsercaoLibero($idJogador, $nomeJogador, $numeroJogador)
+    {
+?>
+        <div class="insercao_individual">
+            <h3><?= $numeroJogador == null ? "" : $numeroJogador ?> <?= $nomeJogador ?></h3>
+        </div>
+<?php
+    }
 }

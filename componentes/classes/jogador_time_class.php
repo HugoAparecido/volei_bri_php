@@ -3,6 +3,8 @@ require_once 'database_class.php';
 class JogadorTime
 {
     private int $id_jogador;
+    private string $nome_jogador;
+    private int $numero_camisa;
     private int $id_time;
     private int $defesa_no_time;
     private int $ataque_dentro_no_time;
@@ -26,6 +28,18 @@ class JogadorTime
     private int $saque_cima_no_time;
     private int $saque_viagem_no_time;
     private int $saque_flutuante_no_time;
+    public function GetID()
+    {
+        return $this->id_jogador;
+    }
+    public function GetPosicao()
+    {
+        return $this->posicao_jogador;
+    }
+    public function GetNome()
+    {
+        return $this->nome_jogador;
+    }
     private function SetIDs($id_jogador, $id_time): void
     {
         $this->id_jogador = $id_jogador;
@@ -42,5 +56,9 @@ class JogadorTime
             'posicao_jogador' => $this->posicao_jogador,
         ]);
         return true;
+    }
+    public static function getJogadores($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null)
+    {
+        return (new Database('jogador_no_time'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 }

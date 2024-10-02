@@ -4,6 +4,7 @@ include('../componentes/classes/time_class.php');
 include('../componentes/classes/libero_class.php');
 include('../componentes/classes/levantador_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
+include('../componentes/classes/componenetes_class.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
@@ -46,6 +47,16 @@ if (isset($_SESSION['id_usuario'])) {
         <p>Central 1</p>
         <p>Central 2</p>
         <button type="submit">Enviar Dados</button>
+        <?php
+        $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
+        foreach ($time->GetJogadores() as $jogador) {
+          switch ($jogador->GetPosicao()) {
+            case "Líbero":
+              Componentes::LocalInsercaoLibero($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao());
+              break;
+          }
+        }
+        ?>
       </form>
       <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
         <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">

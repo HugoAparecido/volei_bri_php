@@ -41,7 +41,14 @@ class Time
      */
     private $id_istituicao;
     private $jogadores;
-
+    public function DefinirJogadores($jogadores)
+    {
+        $this->jogadores = $jogadores;
+    }
+    public function GetJogadores()
+    {
+        return $this->jogadores;
+    }
     // Método privado para definir todas as propriedades do time
     private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)
     {
