@@ -40,6 +40,10 @@ class JogadorTime
     {
         return $this->nome_jogador;
     }
+    public function GetNumeroCamisa()
+    {
+        return $this->numero_camisa;
+    }
     private function SetIDs($id_jogador, $id_time): void
     {
         $this->id_jogador = $id_jogador;

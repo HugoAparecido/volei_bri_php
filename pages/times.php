@@ -9,7 +9,7 @@ if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");
   // define o caminho do css da página
-  define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css"));
+  define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css", "../css/inserir_informacoes.css"));
   define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
   define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
   define('LINK_LOGIN', './login.php');
@@ -49,10 +49,17 @@ if (isset($_SESSION['id_usuario'])) {
         <button type="submit">Enviar Dados</button>
         <?php
         $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
+        $componentes = new Componentes();
         foreach ($time->GetJogadores() as $jogador) {
           switch ($jogador->GetPosicao()) {
             case "Líbero":
-              Componentes::LocalInsercaoLibero($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao());
+              $componentes->LocalInsercaoLibero($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
+              break;
+            case "Levantador":
+              $componentes->LocalInsercaoLevantador($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
+              break;
+            default:
+              $componentes->LocalInsercaoOutrasPosicoes($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
               break;
           }
         }
