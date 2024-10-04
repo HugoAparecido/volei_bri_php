@@ -14,7 +14,7 @@ echo $idLevantador;
 if (isset($idTime)) {
     $time = new Time();
     if ($idLibero != "") {
-        // $time->AdicionarJogadorAoTime((int)$idLibero, (int)$idTime, 'Líbero');
+        $time->AdicionarJogadorAoTime((int)$idLibero, (int)$idTime, 'Líbero');
     }
     if ($idLevantador != "") {
         echo $idLevantador;
@@ -35,7 +35,7 @@ if (isset($idTime)) {
     if ($idOutraPosicao != "") {
         $time->AdicionarJogadorAoTime((int)$idOutraPosicao, (int)$idTime, 'Não Definida');
     }
-    // header("Location: ../../pages/times.php");
+    header("Location: ../../pages/times.php");
 } else {
     header("Location: ../../pages/times.php");
 }
