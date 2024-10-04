@@ -74,6 +74,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
         <select name="novo_jogador_Levantador">
+          <option value="">Escolha uma posição</option>
           <?php
           $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'"), 'nome_jogador');
           foreach ($levantadores as $levantador) {

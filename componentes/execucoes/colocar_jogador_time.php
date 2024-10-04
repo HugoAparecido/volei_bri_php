@@ -10,27 +10,29 @@ $idCentral = $_POST['novo_jogador_central'];
 $idOutraPosicao = $_POST['novo_jogador_outra_posicao'];
 $idTime = $_POST['id_time'];
 // $posicao = $_POST['posicao'];
+echo $idLevantador;
 if (isset($idTime)) {
     $time = new Time();
-    if (isset($idLibero)) {
-        $time->AdicionarJogadorAoTime((int)$idLibero, (int)$idTime, 'Líbero');
+    if ($idLibero != "") {
+        // $time->AdicionarJogadorAoTime((int)$idLibero, (int)$idTime, 'Líbero');
     }
-    if (isset($idLevantador)) {
+    if ($idLevantador != "") {
+        echo $idLevantador;
         $time->AdicionarJogadorAoTime((int)$idLevantador, (int)$idTime, 'Levantador');
     }
-    if (isset($idOposto)) {
+    if ($idOposto != "") {
         $time->AdicionarJogadorAoTime((int)$idOposto, (int)$idTime, 'Oposto');
     }
-    if (isset($idPonta1)) {
+    if ($idPonta1 != "") {
         $time->AdicionarJogadorAoTime((int)$idPonta1, (int)$idTime, 'Ponta 1');
     }
-    if (isset($idPonta2)) {
+    if ($idPonta2 != "") {
         $time->AdicionarJogadorAoTime((int)$idPonta2, (int)$idTime, 'Ponta 2');
     }
-    if (isset($idCentral)) {
+    if ($idCentral != "") {
         $time->AdicionarJogadorAoTime((int)$idCentral, (int)$idTime, 'Central');
     }
-    if (isset($idOutraPosicao)) {
+    if ($idOutraPosicao != "") {
         $time->AdicionarJogadorAoTime((int)$idOutraPosicao, (int)$idTime, 'Não Definida');
     }
     // header("Location: ../../pages/times.php");
