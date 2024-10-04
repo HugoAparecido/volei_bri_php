@@ -71,19 +71,6 @@ class OutrasPosicoes extends Jogador
     }
 
     /**
-     * Método responsável por obter jogadores do banco de dados
-     * @param string $where Condição para a consulta
-     * @param string $order Ordem dos resultados
-     * @param string $limit Limite de resultados
-     * @return array Retorna um array com os jogadores encontrados
-     */
-    public static function getJogadores($where = null, $order = null, $limit = null)
-    {
-        // Executa a consulta ao banco de dados e retorna os resultados como objetos da classe atual
-        return (new Database('jogador'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
-    }
-
-    /**
      * Método para juntar tabelas no banco de dados
      * @param string $tabelaPai Nome da tabela pai
      * @param string $campoIDFilho Campo da tabela filha

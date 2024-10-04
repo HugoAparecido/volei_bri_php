@@ -43,7 +43,7 @@ if (isset($_SESSION['id_usuario'])) {
 
         <!-- Cartão que contém o formulário de cadastro de jogador -->
         <div class="card p-4 shadow-sm" id="card">
-            <form action="<?= isset($_POST['id_jogador']) ? '../componentes/execucoes/cadastrar_jogador_exe.php' : './atualizar_jogador.php' ?>" method="post">
+            <form action="<?= isset($_POST['id_jogador']) ? '../componentes/execucoes/atualizar_jogador_exe.php' : './atualizar_jogador.php' ?>" method="post">
                 <h2 class="text-center text-white mb-4">Atualizar Jogador(a)</h2>
                 <?php if (!isset($_POST['id_jogador'])) { ?>
                     <div class="mb-3"> <!-- Seleção de qual jogador é, se for o caso -->
@@ -78,21 +78,21 @@ if (isset($_SESSION['id_usuario'])) {
                     <div class="mb-3">
                         <label for="sexo_jogador">Sexo do(a) jogador(a): </label>
                         <select name="sexo_jogador" class="form-select" id="sexo_jogador" required>
-                            <option value="M">Masculino</option>
-                            <option value="F">Feminino</option>
+                            <option value="M" <?= $jogador->GetSexo() == "M" ? 'selected' : "" ?>>Masculino</option>
+                            <option value="F" <?= $jogador->GetSexo() == "F" ? 'selected' : "" ?>>Feminino</option>
                         </select>
                     </div>
 
                     <!-- Campo para altura do jogador -->
                     <div class="mb-3">
                         <label for="altura_jogador">Altura do(a) jogador(a): </label>
-                        <input type="text" class="form-control" id="altura_jogador" name="altura_jogador">
+                        <input type="text" class="form-control" id="altura_jogador" name="altura_jogador" value="<?= $jogador->GetAltura() ?>">
                     </div>
 
                     <!-- Campo para peso do jogador -->
                     <div class="mb-3">
                         <label for="peso_jogador">Peso do(a) jogador(a): </label>
-                        <input type="text" class="form-control" id="peso_jogador" name="peso_jogador">
+                        <input type="text" class="form-control" id="peso_jogador" name="peso_jogador" value="<?= $jogador->GetPeso() ?>">
                     </div>
                 <?php } ?>
                 <!-- Botão para cadastrar o jogador -->

@@ -57,19 +57,6 @@ class Libero extends Jogador
     }
 
     /**
-     * Método responsável por obter os jogadores do banco de dados
-     * @param string $where Condição de filtragem dos registros
-     * @param string $order Ordem dos registros
-     * @param string $limit Limite de registros retornados
-     * @return array Array de objetos do tipo Libero
-     */
-    public static function getJogadores($where = null, $order = null, $limit = null)
-    {
-        // Cria uma nova instância da classe Database para manipulação da tabela 'jogador'
-        return (new Database('jogador'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
-    }
-
-    /**
      * Método responsável por juntar tabelas usando LEFT JOIN
      * @param string $tabelaPai Nome da tabela pai para o JOIN
      * @param string $campoIDFilho Nome do campo ID da tabela filha

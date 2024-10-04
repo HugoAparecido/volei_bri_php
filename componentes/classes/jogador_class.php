@@ -63,11 +63,23 @@ class Jogador
     {
         return $this->apelido_jogador;
     }
+    public function GetSexo()
+    {
+        return $this->sexo_jogador;
+    }
+    public function GetAltura()
+    {
+        return $this->altura_jogador;
+    }
+    public function GetPeso()
+    {
+        return $this->peso_jogador;
+    }
     /**
      * Método responsável por Cadastrar um novo jogador no banco
      * @return boolean
      */
-    public function Cadastrar()
+    protected function Cadastrar()
     {
         //INSERIR O JOGADOR NO BANCO
         $obDatabase = new Database('jogador');
@@ -101,7 +113,7 @@ class Jogador
      * Método responsável por excluir o jogador do banco
      * @return boolean
      */
-    public function Excluir()
+    protected function Excluir()
     {
         return (new Database('jogador'))->delete('id = ' . $this->id_jogador);
     }
