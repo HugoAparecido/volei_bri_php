@@ -45,12 +45,14 @@ class Componentes
             $this->ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador);
             ?>
             </div>
-        <?php
+        </div>
+    <?php
         }
         public function LocalInsercaoLevantador($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
         {
             $this->ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador);
-        ?>
+    ?>
+        </div>
         </div>
     <?php
         }
@@ -58,6 +60,7 @@ class Componentes
         {
             $this->ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador);
     ?>
+        </div>
         </div>
 <?php
         }
