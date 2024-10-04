@@ -62,6 +62,7 @@ if (isset($_SESSION['id_usuario'])) {
         <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
         <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
         <select name="novo_jogador_libero">
+          <option value="">Escolha uma posição</option>
           <?php
           $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'"), 'nome_jogador');
           foreach ($liberos as $libero) {
@@ -84,6 +85,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_oposto">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Opost<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?></label>
         <select name="novo_jogador_oposto">
+          <option value="">Escolha uma posição</option>
           <?php
           $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Oposto'", 'nome_jogador');
           foreach ($opostos as $oposto) {
@@ -95,6 +97,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_ponta_1">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
         <select name="novo_jogador_ponta_1">
+          <option value="">Escolha uma posição</option>
           <?php
           $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'", 'nome_jogador');
           foreach ($pontas1 as $ponta1) {
@@ -106,6 +109,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_ponta_2">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
         <select name="novo_jogador_ponta_2">
+          <option value="">Escolha uma posição</option>
           <?php
           $pontas2 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'", 'nome_jogador');
           foreach ($pontas2 as $ponta2) {
@@ -117,6 +121,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_central">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
         <select name="novo_jogador_central">
+          <option value="">Escolha uma posição</option>
           <?php
           $central = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'", 'nome_jogador');
           foreach ($central as $central) {
@@ -128,6 +133,7 @@ if (isset($_SESSION['id_usuario'])) {
         </select>
         <label for="novo_jogador_outra_posicao">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
         <select name="novo_jogador_outra_posicao">
+          <option value="">Escolha uma posição</option>
           <?php
           $naoDefinidas = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'", 'nome_jogador');
           foreach ($naoDefinidas as $naoDefinida) {
