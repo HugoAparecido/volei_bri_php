@@ -1,6 +1,6 @@
 <?php
 require_once "database_class.php";
-abstract class Jogador
+class Jogador
 {
     /**
      * Identificador único do jogador
@@ -54,6 +54,14 @@ abstract class Jogador
     public function GetNome()
     {
         return $this->nome_jogador;
+    }
+    public function GetNumeroCamisa()
+    {
+        return ($this->numero_camisa == 0 ? "" : $this->numero_camisa);
+    }
+    public function GetApelido()
+    {
+        return $this->apelido_jogador;
     }
     /**
      * Método responsável por Cadastrar um novo jogador no banco
@@ -115,6 +123,6 @@ abstract class Jogador
      */
     public static function getJogador($id)
     {
-        return (new Database('jogador'))->select('id = ' . $id)->fetchObject(self::class);
+        return (new Database('jogador'))->select('id_jogador = ' . $id)->fetchObject(self::class);
     }
 }

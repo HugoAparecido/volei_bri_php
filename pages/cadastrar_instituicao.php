@@ -59,11 +59,6 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                     <button type="submit" id="botao_cadastro" class="btn">Cadastrar</button>
                     </fieldset>
                 </div>
-
-
-
-
-
             </form>
         </div>
         <!-- Formulário para cadastro de usuário -->

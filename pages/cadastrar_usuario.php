@@ -1,7 +1,7 @@
 <?php
 // Inclui arquivos de proteção e classes necessários
 include('../componentes/protect.php');
-include('../componentes/classes/componenetes_class.php');
+include('../componentes/classes/componentes_class.php');
 include('../componentes/classes/usuario_class.php');
 
 // Verifica se o usuário está logado e se é um treinador

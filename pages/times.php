@@ -4,7 +4,7 @@ include('../componentes/classes/time_class.php');
 include('../componentes/classes/libero_class.php');
 include('../componentes/classes/levantador_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
-include('../componentes/classes/componenetes_class.php');
+include('../componentes/classes/componentes_class.php');
 if (isset($_SESSION['id_usuario'])) {
   // define o caminho do icone em uma constante
   define('FAVICON', "../img/bolas.ico");

@@ -82,7 +82,8 @@ h2 {
 #num_camisa_jogador,
 #sexo_jogador,
 #nome_jogador,
-#apelido_jogador {
+#apelido_jogador,
+#id_jogador {
   background-color: var(--cinza-barra);
   /* Caixas de entrada em cinza claro */
   color: #333;
