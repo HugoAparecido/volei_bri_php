@@ -44,12 +44,12 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
         <div class="mb-3">
           <!-- Campo para inserir o nome -->
           <label for="nome">Nome:</label>
-          <input type="text" class="form-control"="nome" id="nome" required>
+          <input type="text" class="form-control" name="nome" id="nome" required>
         </div>
 
         <div class="mb-3"> <!-- Campo para inserir o email -->
           <label for="email">Email:</label>
-          <input type="text" class="form-control"="email" id="email" required>
+          <input type="text" class="form-control" name="email" id="email" required>
           <div class="erro text-danger" id="email_requerido_erro">Email é obrigatório</div>
           <div class="erro text-danger" id="email_invalido_erro">Email é inválido</div>
         </div>

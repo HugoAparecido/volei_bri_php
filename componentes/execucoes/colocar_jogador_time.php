@@ -9,8 +9,6 @@ $idPonta2 = $_POST['novo_jogador_ponta_2'];
 $idCentral = $_POST['novo_jogador_central'];
 $idOutraPosicao = $_POST['novo_jogador_outra_posicao'];
 $idTime = $_POST['id_time'];
-// $posicao = $_POST['posicao'];
-echo $idLevantador;
 if (isset($idTime)) {
     $time = new Time();
     if ($idLibero != "") {
