@@ -17,55 +17,100 @@ class Componentes
             echo "<option value='" . $jogador->GetID() . "'>" . $jogador->GetNumeroCamisa() . " : " . $jogador->GetNome() . "</option>";
         }
     }
+    // Método privado que gera um bloco HTML para exibição de informações e controles de atributos de um jogador específico
     private function ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
     { ?>
-
+        <!-- Bloco arrastável que representa o jogador -->
         <div class="itemArrastavel card m-5" draggable="true">
+            <!-- Cabeçalho do card com a posição, número e nome do jogador -->
             <div class="card-header">
-                <h3><?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?></h3>
+                <h3>
+                    <?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?>
+                </h3>
             </div>
+
+            <!-- Área de controle de atributos individuais do jogador -->
             <div class="insercao_individual m-lg-1">
+
+                <!-- Controle de "Defesa" -->
                 <div class="defesa m-2">
                     <?php
+                    // Substitui espaços no nome da posição do jogador por underscores, caso existam, para formar IDs únicos
                     $posicaoJogador = str_replace(' ', '_', $posicaoJogador);
                     ?>
                     <span><strong>Def: </strong></span>
                     <div>
-                        <span id="<?= $idJogador ?>_aumentar_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value++">+</span>
-                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>" />
-                        <span id="<?= $idJogador ?>_diminuir_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value--">-</span>
+                        <!-- Botão para aumentar o valor de "Defesa" -->
+                        <span id="<?= $idJogador ?>_aumentar_defesa_<?= $posicaoJogador ?>" class="atributos_span"
+                            onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value++">+</span>
+
+                        <!-- Campo numérico para exibir o valor atual de "Defesa" -->
+                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>"
+                            id="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>" />
+
+                        <!-- Botão para diminuir o valor de "Defesa" -->
+                        <span id="<?= $idJogador ?>_diminuir_defesa_<?= $posicaoJogador ?>" class="atributos_span"
+                            onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value--">-</span>
                     </div>
                 </div>
+
+                <!-- Controle de "Erro de Defesa" -->
                 <div class="defesa m-2">
                     <span><strong>Err_def: </strong></span>
                     <div>
-                        <span id="<?= $idJogador ?>_aumentar_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value++">+</span>
-                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>" />
-                        <span id="<?= $idJogador ?>_diminuir_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value--">-</span>
+                        <!-- Botão para aumentar o valor de "Erro de Defesa" -->
+                        <span id="<?= $idJogador ?>_aumentar_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span"
+                            onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value++">+</span>
+
+                        <!-- Campo numérico para exibir o valor atual de "Erro de Defesa" -->
+                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>"
+                            id="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>" />
+
+                        <!-- Botão para diminuir o valor de "Erro de Defesa" -->
+                        <span id="<?= $idJogador ?>_diminuir_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span"
+                            onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value--">-</span>
                     </div>
                 </div>
             <?php
         }
+        // Método público para exibir a interface de controle de atributos de passe para um jogador Líbero específico
         public function LocalInsercaoLibero($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
         {
+            // Chama o método ComecoLocalInsercao para gerar o início do bloco de atributos do jogador (nome, posição, número)
             $this->ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador);
-            ?><div class="passes">
+            ?>
+
+                <!-- Div principal contendo os controles para os tipos de passe do jogador -->
+                <div class="passes">
                     <span><strong>Pas: </strong></span>
+
+                    <!-- Controle de atributo para o passe tipo A -->
                     <div>
+                        <!-- Botão para aumentar o valor do passe A -->
                         <span id="<?= $idJogador ?>_aumentar_passe_A_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>').value++">+A</span>
+
+                        <!-- Campo numérico exibindo o valor atual do passe A -->
                         <input type="number" value="0" readonly class="input_number" min="0" name="<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>" />
+
+                        <!-- Botão para diminuir o valor do passe A -->
                         <span id="<?= $idJogador ?>_diminuir_passe_A_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_passe_A_<?= $posicaoJogador ?>').value--">-A</span>
                     </div>
+
+                    <!-- Controle de atributo para o passe tipo B -->
                     <div>
                         <span id="<?= $idJogador ?>_aumentar_passe_B_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>').value++">+B</span>
                         <input type="number" value="0" readonly class="input_number" min="0" name="<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>" />
                         <span id="<?= $idJogador ?>_diminuir_passe_B_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_passe_B_<?= $posicaoJogador ?>').value--">-B</span>
                     </div>
+
+                    <!-- Controle de atributo para o passe tipo C -->
                     <div>
                         <span id="<?= $idJogador ?>_aumentar_passe_C_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>').value++">+C</span>
                         <input type="number" value="0" readonly class="input_number" min="0" name="<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>" />
                         <span id="<?= $idJogador ?>_diminuir_passe_C_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_passe_C_<?= $posicaoJogador ?>').value--">-C</span>
                     </div>
+
+                    <!-- Controle de atributo para o passe tipo D -->
                     <div>
                         <span id="<?= $idJogador ?>_aumentar_passe_D_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_passe_D_<?= $posicaoJogador ?>').value++">+D</span>
                         <input type="number" value="0" readonly class="input_number" min="0" name="<?= $idJogador ?>_passe_D_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_passe_D_<?= $posicaoJogador ?>" />
