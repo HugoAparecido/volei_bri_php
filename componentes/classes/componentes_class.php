@@ -23,19 +23,22 @@ class Componentes
             <h3><?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?></h3>
             <div class="insercao_individual">
                 <div class="defesa">
+                    <?php
+                    $posicaoJogador = str_replace(' ', '_', $posicaoJogador);
+                    ?>
                     <span><strong>Def: </strong></span>
                     <div>
-                        <span id="<?= $idJogador ?>_aumentar_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa').value++">+</span>
-                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa" id="<?= $idJogador ?>_defesa" />
-                        <span id="<?= $idJogador ?>_diminuir_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa').value = 0 : document.getElementById('<?= $idJogador ?>_defesa').value--">-</span>
+                        <span id="<?= $idJogador ?>_aumentar_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value++">+</span>
+                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>" />
+                        <span id="<?= $idJogador ?>_diminuir_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value--">-</span>
                     </div>
                 </div>
                 <div class="defesa">
                     <span><strong>Err_def: </strong></span>
                     <div>
-                        <span id="<?= $idJogador ?>_aumentar_erro_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa').value++">+</span>
-                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_erro_defesa" id="<?= $idJogador ?>_erro_defesa" />
-                        <span id="<?= $idJogador ?>_diminuir_erro_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa').value == 0 ? document.getElementById('<?= $idJogador ?>_erro_defesa').value = 0 : document.getElementById('<?= $idJogador ?>_erro_defesa').value--">-</span>
+                        <span id="<?= $idJogador ?>_aumentar_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value++">+</span>
+                        <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>" id="<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>" />
+                        <span id="<?= $idJogador ?>_diminuir_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value--">-</span>
                     </div>
                 </div>
             <?php

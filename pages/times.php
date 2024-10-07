@@ -46,7 +46,6 @@ if (isset($_SESSION['id_usuario'])) {
         <p>Oposto</p>
         <p>Central 1</p>
         <p>Central 2</p>
-        <button type="submit">Enviar Dados</button>
         <?php
         $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
         $jogadoresNoTimeIDLibero = [];
@@ -90,6 +89,7 @@ if (isset($_SESSION['id_usuario'])) {
           }
         }
         ?>
+        <button type="submit">Enviar Dados</button>
       </form>
       <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
         <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
