@@ -34,6 +34,11 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
   <!-- Início do conteúdo principal da página -->
   <main class="d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
 
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+      <button type="button" class="btn" id="logout">
+        <a href="../componentes/logout.php">Sair</a>
+      </button>
+    </div>
     <div class="card p-4 shadow-sm mb-5" id="card">
       <!-- Formulário para cadastro de usuário -->
       <form action="../componentes/execucoes/cadastrar_usuario_exe.php" method="post">

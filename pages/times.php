@@ -35,191 +35,208 @@ if (isset($_SESSION['id_usuario'])) {
         $sexoProcura = $time->GetSexo();
       }
     ?>
-      <form action="../componentes/execucoes/enviar_dados.php" method="post">
-        <h2>Time: <?= $time->GetNome() ?></h2>
-        <h2>Sexo: <?= $time->GetSexo() ?></h2>
-        <h3>Jogadores Principais no Momento</h3>
-        <p>Levantador</p>
-        <p>Líbero</p>
-        <p>Ponta 1</p>
-        <p>Ponta 2</p>
-        <p>Oposto</p>
-        <p>Central 1</p>
-        <p>Central 2</p>
-        <?php
-        $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
-        $jogadoresNoTimeIDLibero = [];
-        $jogadoresNoTimeIDLevantador = [];
-        $jogadoresNoTimeIDOposto = [];
-        $jogadoresNoTimeIDPonta1 = [];
-        $jogadoresNoTimeIDPonta2 = [];
-        $jogadoresNoTimeIDCentral = [];
-        $jogadoresNoTimeIDNaoDefinida = [];
-        $componentes = new Componentes();
-        foreach ($time->GetJogadores() as $jogador) {
-          switch ($jogador->GetPosicao()) {
-            case "Líbero":
-              array_push($jogadoresNoTimeIDLibero, $jogador->GetID());
-              $componentes->LocalInsercaoLibero($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
-              break;
-            case "Levantador":
-              array_push($jogadoresNoTimeIDLevantador, $jogador->GetID());
-              $componentes->LocalInsercaoLevantador($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
-              break;
-            default:
+      <div class="d-flex justify-content-center mt-5">
+        <form action="../componentes/execucoes/enviar_dados.php" method="post">
+          <div class="card mb-3 mt-5">
+            <div class="card-header">
+              <h2>Time: <?= $time->GetNome() ?></h2>
+            </div>
+            <div class="col-auto m-3">
+              <h2>Sexo: <?= $time->GetSexo() ?></h2>
+            </div>
+            <div class="col-auto m-3">
+              <h3>Jogadores Principais no Momento</h3>
+              <p>Levantador</p>
+              <p>Líbero</p>
+              <p>Ponta 1</p>
+              <p>Ponta 2</p>
+              <p>Oposto</p>
+              <p>Central 1</p>
+              <p>Central 2</p>
+            </div>
+          </div>
+          <div class="card">
+            <?php
+            $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
+            $jogadoresNoTimeIDLibero = [];
+            $jogadoresNoTimeIDLevantador = [];
+            $jogadoresNoTimeIDOposto = [];
+            $jogadoresNoTimeIDPonta1 = [];
+            $jogadoresNoTimeIDPonta2 = [];
+            $jogadoresNoTimeIDCentral = [];
+            $jogadoresNoTimeIDNaoDefinida = [];
+            $componentes = new Componentes();
+            foreach ($time->GetJogadores() as $jogador) {
               switch ($jogador->GetPosicao()) {
-                case 'Oposto':
-                  array_push($jogadoresNoTimeIDOposto, $jogador->GetID());
+                case "Líbero":
+                  array_push($jogadoresNoTimeIDLibero, $jogador->GetID());
+                  $componentes->LocalInsercaoLibero($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
                   break;
-                case 'Ponta 1':
-                  array_push($jogadoresNoTimeIDPonta1, $jogador->GetID());
+                case "Levantador":
+                  array_push($jogadoresNoTimeIDLevantador, $jogador->GetID());
+                  $componentes->LocalInsercaoLevantador($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
                   break;
-                case 'Ponta 2':
-                  array_push($jogadoresNoTimeIDPonta2, $jogador->GetID());
-                  break;
-                case 'Central':
-                  array_push($jogadoresNoTimeIDCentral, $jogador->GetID());
-                  break;
-                case 'Não Definida':
-                  array_push($jogadoresNoTimeIDNaoDefinida, $jogador->GetID());
+                default:
+                  switch ($jogador->GetPosicao()) {
+                    case 'Oposto':
+                      array_push($jogadoresNoTimeIDOposto, $jogador->GetID());
+                      break;
+                    case 'Ponta 1':
+                      array_push($jogadoresNoTimeIDPonta1, $jogador->GetID());
+                      break;
+                    case 'Ponta 2':
+                      array_push($jogadoresNoTimeIDPonta2, $jogador->GetID());
+                      break;
+                    case 'Central':
+                      array_push($jogadoresNoTimeIDCentral, $jogador->GetID());
+                      break;
+                    case 'Não Definida':
+                      array_push($jogadoresNoTimeIDNaoDefinida, $jogador->GetID());
+                      break;
+                  }
+                  $componentes->LocalInsercaoOutrasPosicoes($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
                   break;
               }
-              $componentes->LocalInsercaoOutrasPosicoes($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
-              break;
-          }
-        }
-        ?>
-        <button type="submit">Enviar Dados</button>
-      </form>
-      <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
-        <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
-        <label for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
-        <select name="novo_jogador_libero">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTimeIDLibero) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDLibero) . ') ' : ''), 'nome_jogador');
-          foreach ($liberos as $libero) {
-          ?>
-            <option value="<?= $libero->GetID() ?>"><?= $libero->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
-        <select name="novo_jogador_Levantador">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTimeIDLevantador) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDLevantador) . ') ' : ''), 'nome_jogador');
-          foreach ($levantadores as $levantador) {
-          ?>
-            <option value="<?= $levantador->GetID() ?>"><?= $levantador->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_oposto">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Opost<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?></label>
-        <select name="novo_jogador_oposto">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTimeIDOposto) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDOposto) . ')' : ''), 'nome_jogador');
-          foreach ($opostos as $oposto) {
-          ?>
-            <option value="<?= $oposto->GetID() ?>"><?= $oposto->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_ponta_1">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
-        <select name="novo_jogador_ponta_1">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTimeIDPonta1) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDPonta1) . ')' : ''), 'nome_jogador');
-          foreach ($pontas1 as $ponta1) {
-          ?>
-            <option value="<?= $ponta1->GetID() ?>"><?= $ponta1->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_ponta_2">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
-        <select name="novo_jogador_ponta_2">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $pontas2 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTimeIDPonta2) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDPonta2) . ')' : ''), 'nome_jogador');
-          foreach ($pontas2 as $ponta2) {
-          ?>
-            <option value="<?= $ponta2->GetID() ?>"><?= $ponta2->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_central">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
-        <select name="novo_jogador_central">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $central = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTimeIDCentral) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDCentral) . ')' : ''), 'nome_jogador');
-          foreach ($central as $central) {
-          ?>
-            <option value="<?= $central->GetID() ?>"><?= $central->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <label for="novo_jogador_outra_posicao">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
-        <select name="novo_jogador_outra_posicao">
-          <option value="">Escolha uma posição</option>
-          <?php
-          $naoDefinidas = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTimeIDNaoDefinida) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDNaoDefinida) . ')' : ''), 'nome_jogador');
-          foreach ($naoDefinidas as $naoDefinida) {
-          ?>
-            <option value="<?= $naoDefinida->GetID() ?>"><?= $naoDefinida->GetNome() ?></option>
-          <?php
-          }
-          ?>
-        </select>
-        <button type="submit">Adicionar Jogador</button>
-      </form>
-      <button type="button"><a href="./cadastrar_jogador.php">Cadastrar Jogador</a></button>
-    <?php
+            }
+            ?>
+            <button type="submit" class="btn m-5" id="btn">Enviar Dados</button>
+          </div>
+
+
+        </form>
+        <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
+          <div class="card m-lg-5 w-100">
+            <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+            <label class="m-3" for="novo_jogador_libero">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Líbero</label>
+            <select class="form-select m-3 w-50" name="novo_jogador_libero">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTimeIDLibero) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDLibero) . ') ' : ''), 'nome_jogador');
+              foreach ($liberos as $libero) {
+              ?>
+                <option value="<?= $libero->GetID() ?>"><?= $libero->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_Levantador">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Levantador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?></label>
+            <select class="form-select m-3 w-50" name="novo_jogador_Levantador">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTimeIDLevantador) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDLevantador) . ') ' : ''), 'nome_jogador');
+              foreach ($levantadores as $levantador) {
+              ?>
+                <option value="<?= $levantador->GetID() ?>"><?= $levantador->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_oposto">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Opost<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?></label>
+            <select class="form-select m-3 w-50" name="novo_jogador_oposto">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTimeIDOposto) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDOposto) . ')' : ''), 'nome_jogador');
+              foreach ($opostos as $oposto) {
+              ?>
+                <option value="<?= $oposto->GetID() ?>"><?= $oposto->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_ponta_1">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 1</label>
+            <select class="form-select m-3 w-50" name="novo_jogador_ponta_1">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTimeIDPonta1) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDPonta1) . ')' : ''), 'nome_jogador');
+              foreach ($pontas1 as $ponta1) {
+              ?>
+                <option value="<?= $ponta1->GetID() ?>"><?= $ponta1->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_ponta_2">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Ponta 2</label>
+            <select class="form-select m-3 w-50" name="novo_jogador_ponta_2">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $pontas2 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTimeIDPonta2) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDPonta2) . ')' : ''), 'nome_jogador');
+              foreach ($pontas2 as $ponta2) {
+              ?>
+                <option value="<?= $ponta2->GetID() ?>"><?= $ponta2->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_central">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> Central</label>
+            <select class="form-select m-3 w-50" name="novo_jogador_central">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $central = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTimeIDCentral) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDCentral) . ')' : ''), 'nome_jogador');
+              foreach ($central as $central) {
+              ?>
+                <option value="<?= $central->GetID() ?>"><?= $central->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <label class="m-3" for="novo_jogador_outra_posicao">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> de posição Não Definida</label>
+            <select class="form-select m-3 w-50" name="novo_jogador_outra_posicao">
+              <option value="">Escolha uma posição</option>
+              <?php
+              $naoDefinidas = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTimeIDNaoDefinida) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTimeIDNaoDefinida) . ')' : ''), 'nome_jogador');
+              foreach ($naoDefinidas as $naoDefinida) {
+              ?>
+                <option value="<?= $naoDefinida->GetID() ?>"><?= $naoDefinida->GetNome() ?></option>
+              <?php
+              }
+              ?>
+            </select>
+            <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
+        </form>
+        <a href="./cadastrar_jogador.php" type="button" class="btn m-3 " id="btn">Cadastrar Jogador</a>
+      <?php
     }
-    ?>
-    <div class="d-flex justify-content-center mt-5">
-      <div class="card p-4 shadow-sm" id="card">
-
-        <h2 class="text-center text-white mb-3">Masculino</h2>
-        <?php
-        $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
-        foreach ($timeMasculino as $time) {
-        ?>
-          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-        <?php
-        }
-        ?>
-        <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
-
-        <h2 class="text-center text-white mb-3">Feminino</h2>
-        <?php
-        $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
-        foreach ($timeFeminino as $time) {
-        ?>
-          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-        <?php
-        }
-        ?>
-        <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
-
-        <h2 class="text-center text-white mb-3">Misto</h2>
-        <?php
-        $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
-        foreach ($timeMisto as $time) {
-        ?>
-          <a href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-        <?php
-        }
-        ?>
-        <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
+      ?>
       </div>
-    </div>
+      </div>
+      <div class="d-flex justify-content-center mt-5 mb-5">
+
+        <div class="card p-4 shadow-sm" id="card">
+
+          <h2 class="text-center text-white mb-3">Masculino</h2>
+          <?php
+          $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
+          foreach ($timeMasculino as $time) {
+          ?>
+            <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <?php
+          }
+          ?>
+          <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
+
+          <h2 class="text-center text-white mb-3">Feminino</h2>
+          <?php
+          $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
+          foreach ($timeFeminino as $time) {
+          ?>
+            <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <?php
+          }
+          ?>
+          <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
+
+          <h2 class="text-center text-white mb-3">Misto</h2>
+          <?php
+          $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
+          foreach ($timeMisto as $time) {
+          ?>
+            <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <?php
+          }
+          ?>
+          <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
+        </div>
+      </div>
 
   </main>
 <?php

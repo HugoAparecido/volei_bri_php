@@ -19,10 +19,13 @@ class Componentes
     }
     private function ComecoLocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
     { ?>
-        <div class="itemArrastavel" draggable="true">
-            <h3><?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?></h3>
-            <div class="insercao_individual">
-                <div class="defesa">
+
+        <div class="itemArrastavel card m-5" draggable="true">
+            <div class="card-header">
+                <h3><?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?></h3>
+            </div>
+            <div class="insercao_individual m-lg-1">
+                <div class="defesa m-2">
                     <?php
                     $posicaoJogador = str_replace(' ', '_', $posicaoJogador);
                     ?>
@@ -33,7 +36,7 @@ class Componentes
                         <span id="<?= $idJogador ?>_diminuir_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value = 0 : document.getElementById('<?= $idJogador ?>_defesa_<?= $posicaoJogador ?>').value--">-</span>
                     </div>
                 </div>
-                <div class="defesa">
+                <div class="defesa m-2">
                     <span><strong>Err_def: </strong></span>
                     <div>
                         <span id="<?= $idJogador ?>_aumentar_erro_defesa_<?= $posicaoJogador ?>" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_erro_defesa_<?= $posicaoJogador ?>').value++">+</span>

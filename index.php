@@ -17,7 +17,49 @@ define('OUTRAS_PAGINAS', array(['Página Principal', './index.php'], ['Times', '
 // inclui o header à página
 include __DIR__ . '/componentes/header.php';
 ?>
+<style>
+    .container-esquerdo {
+        height: 500px;
+        background-color: #e9ecef;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .container-direito {
+        height: 1020px;
+        background-color: #ced4da;
+        border-radius: 10px;
+    }
+</style>
 <main>
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <a href="./componentes/logout.php">Sair</a>
+        </button>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Coluna da esquerda com dois containers -->
+            <div class="col-md-8">
+                <div class="container-esquerdo p-3">
+                    <h5>Container Superior</h5>
+                    <p>Conteúdo do container superior.</p>
+                </div>
+                <div class="container-esquerdo p-3">
+                    <h5>Container Inferior</h5>
+                    <p>Conteúdo do container inferior.</p>
+                </div>
+            </div>
+
+            <!-- Coluna da direita com um container fino -->
+            <div class="col-md-4">
+                <div class="container-direito p-3">
+                    <h5>Container Fino</h5>
+                    <p>Conteúdo do container fino.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="duvidas">
         <button class="btn" type="button" id="botao_duvidas">?</button>
         <div id="descricao_botoes">

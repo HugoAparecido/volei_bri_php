@@ -4,7 +4,7 @@ include '../componentes/protect.php';
 // Define o caminho do ícone da página
 define('FAVICON', "../img/bolas.ico");
 // Define os caminhos dos arquivos CSS para a página
-define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css"));
+define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css", "../css/style.css"));
 define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
 define('LINK_LOGIN', './login.php');
@@ -17,7 +17,15 @@ define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', 
 // Inclui o arquivo de cabeçalho da página
 include '../componentes/header.php';
 ?>
-    <?php
-    // Inclui o arquivo de rodapé da página
-    include '../componentes/footer.php';
-    ?>
+<main>
+
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <a href="../componentes/logout.php">Sair</a>
+        </button>
+    </div>
+</main>
+<?php
+// Inclui o arquivo de rodapé da página
+include '../componentes/footer.php';
+?>

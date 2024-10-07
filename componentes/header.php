@@ -55,8 +55,8 @@
             </div>
             <?php
             if (isset($_SESSION['id_usuario'])) { ?>
-                <a class="navbar-brand" href="#">
-                    <img src="<?= LOGO_USUARIO ?>" alt="Logo" id="logo">
+                <a class="navbar-brand">
+                    <?= $_SESSION['nome_usuario'] ?>
                 </a>
             <?php } ?>
         </nav>
