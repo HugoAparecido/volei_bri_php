@@ -1,70 +1,74 @@
 <?php
-// Inclui o arquivo de proteção, para verificar permissões ou autenticação
+// Inclui o arquivo de proteção para verificar permissões ou autenticação do usuário.
 include '../componentes/protect.php';
 
-// Inclui a classe de usuário que contém a lógica de autenticação
+// Inclui a classe de usuário, que contém métodos de autenticação e manipulação de dados do usuário.
 require_once '../componentes/classes/usuario_class.php';
 
-// Verifica se os dados do formulário foram enviados via método POST
+// Verifica se os dados foram enviados via formulário POST.
 if (isset($_POST['email']) && isset($_POST['senha'])) {
-    // Verifica se o campo de e-mail está vazio
+    // Verifica se o campo de e-mail está vazio e exibe uma mensagem de erro caso esteja.
     if (strlen($_POST['email']) == 0) {
         echo "Preencha seu e-mail";
     }
-    // Verifica se o campo de senha está vazio
+    // Verifica se o campo de senha está vazio e exibe uma mensagem de erro caso esteja.
     else if (strlen($_POST['senha']) == 0) {
         echo "Preencha sua senha";
     } else {
-        // Tenta fazer o login do usuário com as credenciais fornecidas
+        // Tenta realizar o login buscando o usuário pelo e-mail fornecido.
         $usuario = Usuario::Logar($_POST['email']);
         $quantidade = count($usuario);
 
-        // Se o login for bem-sucedido (apenas um usuário retornado)
-        var_dump($_POST['senha']);
-        var_dump($usuario[0]->GetSenha());
+        // Verifica se a senha informada coincide com a armazenada no banco de dados.
+        var_dump($_POST['senha']); // Exibe a senha fornecida (para depuração).
+        var_dump($usuario[0]->GetSenha()); // Exibe a senha do usuário do banco (para depuração).
         if (password_verify($_POST['senha'], $usuario[0]->GetSenha())) {
-            // Inicia a sessão se ainda não estiver iniciada
+            // Inicia a sessão se ainda não estiver ativa.
             if (!isset($_SESSION)) {
                 session_start();
             }
-            // Armazena informações do usuário na sessão
+            // Armazena informações essenciais do usuário na sessão.
             $_SESSION['id_usuario'] = $usuario[0]->GetID();
             $_SESSION['nome_usuario'] = $usuario[0]->GetNomeUsuario();
 
-            // Se o usuário for um treinador, armazena essa informação na sessão
+            // Se o usuário é treinador, registra essa informação na sessão.
             if ($usuario[0]->GetTreinador()) {
                 $_SESSION['treinador'] = true;
             }
 
-            // Redireciona para a página de times
+            // Redireciona para a página de times após login bem-sucedido.
             header("Location: ./times.php");
         }
-        // Se a autenticação falhar
+        // Exibe mensagem de erro caso a autenticação falhe.
         else {
             echo "Falha ao logar! E-mail ou senha incorretos";
         }
     }
 }
 
-// Se o usuário não estiver logado (variável de sessão 'id_usuario' não está definida)
+// Caso o usuário não esteja logado (não tenha 'id_usuario' na sessão).
 if (!isset($_SESSION['id_usuario'])) {
-    // Define o caminho do ícone da página
+    // Define o caminho do favicon da página.
     define('FAVICON', "../img/bolas.ico");
-    // Define os caminhos dos arquivos CSS para a página
+    // Define os caminhos dos arquivos CSS.
     define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css"));
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     define('LINK_LOGIN', './login.php');
-    // Define o caminho do logo no cabeçalho
+    // Define o caminho do logo para o cabeçalho.
     define('LOGO_HEADER', "../img/logo.png");
     define('LOGO_USUARIO', "../img/login.png");
-    // Define os nomes e caminhos de outras páginas
-    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
+    // Define as páginas para navegação, como a página inicial e de estatísticas.
+    define('OUTRAS_PAGINAS', array(
+        ['Página Principal', '../index.php'],
+        ['Times', './times.php'],
+        ['Estatísticas', './estatisticas.php']
+    ));
 
-    // Inclui o arquivo de cabeçalho da página
+    // Inclui o cabeçalho da página.
     include '../componentes/header.php';
 ?>
-    <!-- Estrutura HTML para o formulário de login -->
+    <!-- HTML para o formulário de login do usuário -->
     <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
         <div class="card p-4 shadow-sm" id="card">
             <h2 class="text-center text-white mb-4">Login</h2>
@@ -72,12 +76,14 @@ if (!isset($_SESSION['id_usuario'])) {
                 <div class="mb-3">
                     <label class="form-label" for="email">Email</label>
                     <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
+                    <!-- Mensagens de erro para validação do campo de e-mail -->
                     <div class="erro text-danger" id="email-requerido-erro">Email é obrigatório</div>
                     <div class="erro text-danger" id="email-invalido-erro">Email é inválido</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="senha">Senha</label>
                     <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                    <!-- Mensagem de erro para validação do campo de senha -->
                     <div class="erro text-danger" id="senha-requerido-erro">Senha é obrigatória</div>
                 </div>
                 <div class="d-grid gap-2 mb-3">
@@ -91,13 +97,16 @@ if (!isset($_SESSION['id_usuario'])) {
             </form>
         </div>
     </main>
-    <!-- Inclui o arquivo JavaScript para manipulação do formulário -->
+    <!-- Inclui o arquivo JavaScript para validação do formulário de login -->
     <script type="module" src="../js/login.js"></script>
     <?php
-    // Inclui o arquivo de rodapé da página
+    // Inclui o rodapé da página.
     include '../componentes/footer.php';
     ?>
 <?php
-} else
-    // Se o usuário já estiver logado, redireciona para a página de times
+}
+// Se o usuário já estiver logado, redireciona diretamente para a página de times.
+else {
     header("Location: ./times.php");
+}
+?>

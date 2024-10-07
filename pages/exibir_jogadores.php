@@ -1,19 +1,41 @@
 <?php
+// Inclui o arquivo de proteção, responsável por verificar permissões e autenticação do usuário.
 include('../componentes/protect.php');
-// define o caminho do icone em uma constante
+
+// Define o caminho do ícone (favicon) da página.
 define('FAVICON', "../img/bolas.ico");
-// define o caminho do css da página
-// define o caminho da logo no header
+
+// Define o caminho dos arquivos CSS a serem utilizados na página.
 define('FOLHAS_DE_ESTILO', array("../css/cadastro.css", "../css/style.css"));
+
+// Define os links para outras páginas importantes: cadastro de usuário, cadastro de instituição, e login.
 define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
 define('LINK_LOGIN', './login.php');
+
+// Define o caminho da logo a ser exibida no cabeçalho.
 define('LOGO_HEADER', "../img/logo.png");
+
+// Define o caminho do ícone de login do usuário.
 define('LOGO_USUARIO', "../img/login.png");
-// define os nomes dasa páginas e seus respectivos caminhos
-define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Login', './login.php'], ['Registrar Usuário', './registro.php']));
+
+// Define um array com os nomes das páginas e seus respectivos caminhos para navegação.
+define('OUTRAS_PAGINAS', array(
+    ['Página Principal', '../index.php'],
+    ['Times', './times.php'],
+    ['Estatísticas', './estatisticas.php'],
+    ['Login', './login.php'],
+    ['Registrar Usuário', './registro.php']
+));
+
+// Inclui o cabeçalho da página, que contém a estrutura inicial do HTML e a inclusão de CSS e ícones.
 include '../componentes/header.php';
+
+// Verifica se o usuário está autenticado através da variável de sessão 'id_usuario'.
 if (isset($_SESSION['id_usuario'])) {
 ?>
+    <!-- Botão para logout, redirecionando para o script de logout ao clicar -->
     <button type="button" class="botao_deslogar" id="logout"><a href="../componentes/logout.php">Sair</a></button>
+
+    <!-- Início da seção de tabela ou conteúdo restrito para usuários autenticados -->
     <div class="tabela"><?php } ?>

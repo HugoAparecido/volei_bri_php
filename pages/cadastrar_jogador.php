@@ -1,68 +1,71 @@
 <?php
-// Inclui um arquivo que contém funções ou códigos para proteger o acesso à página, geralmente verificando se o usuário está autenticado.
+// Inclui um arquivo para proteger o acesso à página, verificando a autenticação do usuário.
 include('../componentes/protect.php');
 
-// Verifica se a variável de sessão 'id_usuario' está definida, o que indica que o usuário está autenticado.
+// Verifica se a variável de sessão 'id_usuario' está definida para garantir que o usuário está autenticado.
 if (isset($_SESSION['id_usuario'])) {
-    // Define uma constante para o caminho do ícone da página.
+    // Define uma constante para o caminho do ícone da página (favicon).
     define('FAVICON', "../img/bolas.ico");
 
-    // Define uma constante para o caminho dos arquivos CSS usados na página.
+    // Define uma constante para o caminho dos arquivos CSS utilizados na página.
     define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/cadastro.css"));
+
+    // Define constantes para links específicos de funcionalidades de cadastro e login.
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     define('LINK_LOGIN', './login.php');
 
-    // Define uma constante para o caminho da imagem da logo exibida no cabeçalho.
+    // Define uma constante para o caminho da imagem do logo que aparece no cabeçalho.
     define('LOGO_HEADER', "../img/logo.png");
 
-    // Define uma constante para o caminho da imagem da logo de usuário.
+    // Define uma constante para o caminho da imagem do ícone do usuário.
     define('LOGO_USUARIO', "../img/login.png");
 
-    // Define uma constante para um array contendo os nomes e caminhos de outras páginas do site.
+    // Define uma constante para um array contendo outras páginas do site e seus respectivos links.
     define('OUTRAS_PAGINAS', array(
         ['Página Principal', '../index.php'],
         ['Times', './times.php'],
         ['Estatísticas', './estatisticas.php']
     ));
 
-    // Inclui o arquivo do cabeçalho da página, geralmente contendo a estrutura HTML inicial e a inclusão de recursos como CSS.
+    // Inclui o cabeçalho da página, contendo a estrutura inicial de HTML e links para CSS e favicon.
     include '../componentes/header.php';
 ?>
 
     <!-- Principal conteúdo da página -->
     <main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
-        <!-- Botão flutuante no canto superior direito da página -->
+
+        <!-- Botão flutuante no topo direito para logout -->
         <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
             <button type="button" class="btn" id="logout">
                 <a href="../componentes/logout.php">Sair</a>
             </button>
         </div>
 
-        <!-- Cartão que contém o formulário de cadastro de jogador -->
+        <!-- Cartão contendo o formulário de cadastro de um jogador -->
         <div class="card p-4 shadow-sm" id="card">
             <form action="../componentes/execucoes/cadastrar_jogador_exe.php" method="post">
                 <h2 class="text-center text-white mb-4">Cadastrar Jogador</h2>
 
-                <!-- Campo para nome do jogador -->
+                <!-- Campo para o nome do jogador -->
                 <div class="mb-3">
                     <label for="nome_jogador">Nome: </label>
                     <input type="text" class="form-control" id="nome_jogador" name="nome_jogador" required>
                 </div>
 
-                <!-- Campo para apelido do jogador -->
+                <!-- Campo para o apelido do jogador -->
                 <div class="mb-3">
                     <label for="apelido_jogador">Apelido: </label>
                     <input type="text" class="form-control" id="apelido_jogador" name="apelido_jogador">
                 </div>
 
-                <!-- Campo para número da camisa do jogador -->
+                <!-- Campo para o número da camisa do jogador -->
                 <div class="mb-3">
                     <label for="num_camisa_jogador">Número da camisa do jogador: </label>
                     <input type="number" class="form-control" id="num_camisa_jogador" name="num_camisa_jogador">
                 </div>
 
-                <!-- Campo para posição do jogador -->
+                <!-- Campo para a posição do jogador -->
                 <div class="mb-3">
                     <label for="posicao_jogador">Posição do jogador: </label>
                     <select name="posicao_jogador" class="form-select" id="posicao_jogador" required>
@@ -76,7 +79,7 @@ if (isset($_SESSION['id_usuario'])) {
                     </select>
                 </div>
 
-                <!-- Campo para sexo do jogador -->
+                <!-- Campo para o sexo do jogador -->
                 <div class="mb-3">
                     <label for="sexo_jogador">Sexo do jogador: </label>
                     <select name="sexo_jogador" class="form-select" id="sexo_jogador" required>
@@ -85,30 +88,30 @@ if (isset($_SESSION['id_usuario'])) {
                     </select>
                 </div>
 
-                <!-- Campo para altura do jogador -->
+                <!-- Campo para a altura do jogador -->
                 <div class="mb-3">
                     <label for="altura_jogador">Altura do jogador: </label>
                     <input type="text" class="form-control" id="altura_jogador" name="altura_jogador">
                 </div>
 
-                <!-- Campo para peso do jogador -->
+                <!-- Campo para o peso do jogador -->
                 <div class="mb-3">
                     <label for="peso_jogador">Peso do jogador: </label>
                     <input type="text" class="form-control" id="peso_jogador" name="peso_jogador">
                 </div>
 
-                <!-- Botão para cadastrar o jogador -->
+                <!-- Botão para submeter o cadastro do jogador -->
                 <div class="d-grid gap-2 mb-3">
                     <button id="cadastrar_jogador" class="btn">Cadastrar Jogador</button>
                 </div>
             </form>
 
-            <!-- Botão para atualizar jogador existente -->
+            <!-- Link para a página de atualização de dados de jogadores existentes -->
             <div class="d-grid gap-2 mb-3">
                 <a href="./atualizar_jogador.php" class="btn" id="update_jogadores_cadastrados">Atualizar Jogador Existente</a>
             </div>
 
-            <!-- Botão para mostrar jogadores cadastrados -->
+            <!-- Link para a página de exibição de jogadores cadastrados -->
             <div class="d-grid gap-2 mb-3">
                 <a href="./exibir_jogadores.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
             </div>
@@ -116,10 +119,10 @@ if (isset($_SESSION['id_usuario'])) {
     </main>
 
 <?php
-    // Inclui o arquivo do rodapé da página, geralmente contendo scripts ou informações finais.
+    // Inclui o rodapé da página, contendo scripts adicionais ou informações finais.
     include '../componentes/footer.php';
 } else {
-    // Se a variável de sessão 'id_usuario' não estiver definida, redireciona o usuário para a página de login.
+    // Redireciona o usuário para a página de login caso não esteja autenticado.
     header("Location: ./login.php");
 }
 ?>

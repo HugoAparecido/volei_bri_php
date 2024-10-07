@@ -1,61 +1,69 @@
 <?php
-// Inclui um arquivo que contém funções ou códigos para proteger o acesso à página, geralmente verificando se o usuário está autenticado.
+// Inclui um arquivo para proteger o acesso à página, geralmente validando a autenticação do usuário.
 include('../componentes/protect.php');
+
+// Inclui arquivos de classes de componentes que serão usados na página.
 include('../componentes/classes/componentes_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
 
-// Verifica se a variável de sessão 'id_usuario' está definida, o que indica que o usuário está autenticado.
+// Verifica se a sessão contém a variável 'id_usuario', indicando que o usuário está autenticado.
 if (isset($_SESSION['id_usuario'])) {
-    // Define uma constante para o caminho do ícone da página.
+    // Define uma constante para o caminho do ícone (favicon) da página.
     define('FAVICON', "../img/bolas.ico");
 
-    // Define uma constante para o caminho dos arquivos CSS usados na página.
+    // Define uma constante contendo caminhos dos arquivos CSS da página.
     define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/cadastro.css"));
+
+    // Define links constantes para páginas específicas do sistema.
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     define('LINK_LOGIN', './login.php');
 
-    // Define uma constante para o caminho da imagem da logo exibida no cabeçalho.
+    // Define o caminho da imagem da logo usada no cabeçalho.
     define('LOGO_HEADER', "../img/logo.png");
 
-    // Define uma constante para o caminho da imagem da logo de usuário.
+    // Define o caminho da imagem do ícone de usuário.
     define('LOGO_USUARIO', "../img/login.png");
 
-    // Define uma constante para um array contendo os nomes e caminhos de outras páginas do site.
+    // Define uma constante para uma lista de páginas adicionais do site.
     define('OUTRAS_PAGINAS', array(
         ['Página Principal', '../index.php'],
         ['Times', './times.php'],
         ['Estatísticas', './estatisticas.php']
     ));
 
-    // Inclui o arquivo do cabeçalho da página, geralmente contendo a estrutura HTML inicial e a inclusão de recursos como CSS.
+    // Inclui o arquivo de cabeçalho, que contém a estrutura HTML inicial.
     include '../componentes/header.php';
 ?>
 
-    <!-- Principal conteúdo da página -->
+    <!-- Início do conteúdo principal da página -->
     <main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
-        <!-- Botão flutuante no canto superior direito da página -->
+        <!-- Botão flutuante de logout no canto superior direito da página -->
         <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
             <button type="button" class="btn" id="logout">
                 <a href="../componentes/logout.php">Sair</a>
             </button>
         </div>
 
-        <!-- Cartão que contém o formulário de cadastro de jogador -->
+        <!-- Cartão que contém o formulário de atualização de jogador -->
         <div class="card p-4 shadow-sm" id="card">
             <form action="<?= isset($_POST['id_jogador']) ? '../componentes/execucoes/atualizar_jogador_exe.php' : './atualizar_jogador.php' ?>" method="post">
                 <h2 class="text-center text-white mb-4">Atualizar Jogador(a)</h2>
+
                 <?php if (!isset($_POST['id_jogador'])) { ?>
-                    <div class="mb-3"> <!-- Seleção de qual jogador é, se for o caso -->
+                    <!-- Campo de seleção para escolher um jogador -->
+                    <div class="mb-3">
                         <label for="id_jogador">Qual jogador é?</label>
                         <select name="id_jogador" class="form-select" id="id_jogador" required>
-                            <!-- Chama o método da classe Componentes para gerar opções de jogadores -->
+                            <!-- Gera opções de jogadores usando o método da classe Componentes -->
                             <?php Componentes::InputJogadores(); ?>
                         </select>
                     </div>
                 <?php } else {
+                    // Obtém os dados do jogador selecionado.
                     $jogador = Jogador::getJogador(intval($_POST['id_jogador']));
                 ?>
+
                     <!-- Campo para nome do jogador -->
                     <div class="mb-3">
                         <label for="nome_jogador">Nome: </label>
@@ -95,12 +103,14 @@ if (isset($_SESSION['id_usuario'])) {
                         <input type="text" class="form-control" id="peso_jogador" name="peso_jogador" value="<?= $jogador->GetPeso() ?>">
                     </div>
                 <?php } ?>
-                <!-- Botão para cadastrar o jogador -->
+
+                <!-- Botão de atualização do jogador -->
                 <div class="d-grid gap-2 mb-3">
                     <button id="cadastrar_jogador" class="btn">Atualizar Jogador(a)</button>
                 </div>
             </form>
-            <!-- Botão para mostrar jogadores cadastrados -->
+
+            <!-- Link para exibir jogadores cadastrados -->
             <div class="d-grid gap-2 mb-3">
                 <a href="./exibir_jogadores.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
             </div>
@@ -108,10 +118,10 @@ if (isset($_SESSION['id_usuario'])) {
     </main>
 
 <?php
-    // Inclui o arquivo do rodapé da página, geralmente contendo scripts ou informações finais.
+    // Inclui o rodapé da página, geralmente com scripts ou informações finais.
     include '../componentes/footer.php';
 } else {
-    // Se a variável de sessão 'id_usuario' não estiver definida, redireciona o usuário para a página de login.
+    // Redireciona o usuário para a página de login caso não esteja autenticado.
     header("Location: ./login.php");
 }
 ?>
