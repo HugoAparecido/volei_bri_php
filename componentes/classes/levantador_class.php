@@ -2,25 +2,28 @@
 // Inclui a classe Jogador que a classe Levantador irá estender
 require_once "jogador_class.php";
 
+// Classe Levantador que herda da classe Jogador
 class Levantador extends Jogador
 {
-    private $ataque_dentro;
-    private $ataque_errado;
-    private $bloqueio_convertido;
-    private $bloqueio_errado;
-    private $errou_levantamento;
-    private $levantamento_para_oposto;
-    private $levantamento_para_ponta;
-    private $levantamento_para_pipe;
-    private $levantamento_para_centro;
-    private $saque_fora;
-    private $saque_cima;
-    private $saque_flutuante;
-    private $saque_viagem;
-    private $saque_cima_ace;
-    private $saque_flutuante_ace;
-    private $saque_viagem_ace;
-    // Definindo a posição do jogador como 'Levantador'
+    // Atributos específicos da classe Levantador
+    private $ataque_dentro; // Contador de ataques realizados dentro do time
+    private $ataque_errado; // Contador de ataques errados
+    private $bloqueio_convertido; // Contador de bloqueios convertidos
+    private $bloqueio_errado; // Contador de bloqueios errados
+    private $errou_levantamento; // Contador de levantamentos errados
+    private $levantamento_para_oposto; // Contador de levantamentos para jogador oposto
+    private $levantamento_para_ponta; // Contador de levantamentos para jogador de ponta
+    private $levantamento_para_pipe; // Contador de levantamentos para jogador de pipe
+    private $levantamento_para_centro; // Contador de levantamentos para jogador de centro
+    private $saque_fora; // Contador de saques fora do time
+    private $saque_cima; // Contador de saques do tipo cima
+    private $saque_flutuante; // Contador de saques do tipo flutuante
+    private $saque_viagem; // Contador de saques do tipo viagem
+    private $saque_cima_ace; // Contador de saques ace do tipo cima
+    private $saque_flutuante_ace; // Contador de saques ace do tipo flutuante
+    private $saque_viagem_ace; // Contador de saques ace do tipo viagem
+
+    // Método privado para definir os atributos do jogador
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {
         // Atribui os parâmetros às propriedades da classe
@@ -34,7 +37,7 @@ class Levantador extends Jogador
     }
 
     /**
-     * Método responsável por cadastrar um novo jogador no banco
+     * Método responsável por cadastrar um novo jogador do tipo Levantador no banco
      * @return boolean
      */
     public function CadastrarLevantador($nome, $sexo, $apelido = null, $numero = null, $altura = null, $peso = null)
@@ -49,8 +52,10 @@ class Levantador extends Jogador
         if (count($jogadores) > 0) {
             // Se encontrado, pega o ID do jogador existente
             $this->id_jogador = $jogadores[0]->id_jogador;
+
             // Cria uma nova instância da classe Database para manipulação da tabela 'levantador'
             $obDatabase = new Database('levantador');
+
             // Insere o ID do jogador na tabela 'levantador'
             $this->id_jogador = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador
@@ -58,12 +63,16 @@ class Levantador extends Jogador
         } else {
             // Se não encontrado, insere o jogador no banco
             $this->Cadastrar(); // Método da classe pai para cadastrar o jogador
-            $obDatabase = new Database('levantador'); // Cria nova instância da classe Database
+
+            // Cria nova instância da classe Database
+            $obDatabase = new Database('levantador');
+
             // Insere o ID do jogador na tabela 'levantador'
             $this->id_jogador = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador
             ]);
         }
+
         // Retorna verdadeiro indicando sucesso na operação
         return true;
     }

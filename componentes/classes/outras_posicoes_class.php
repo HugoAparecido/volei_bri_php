@@ -2,36 +2,37 @@
 // Importa a classe Jogador que provavelmente contém as propriedades e métodos básicos de um jogador
 require_once "jogador_class.php";
 
+// Classe OutrasPosicoes que herda da classe Jogador
 class OutrasPosicoes extends Jogador
 {
-    // Propriedade para armazenar o ID da posição do jogador
-    private $id_posicao;
-    private $passe_a;
-    private $passe_b;
-    private $passe_c;
-    private $passe_;
-    private $bloqueio_convertido;
-    private $bloqueio_errado;
-    private $ataque_dentro;
-    private $ataque_fora;
-    private $saque_ace_cima;
-    private $saque_ace_flutuante;
-    private $saque_ace_viagem;
-    private $saque_cima;
-    private $saque_flutuante;
-    private $saque_viagem;
-    private $saque_errado;
+    // Propriedades para armazenar dados do jogador
+    private $id_posicao; // ID da posição do jogador
+    private $passe_a; // Contador de passes do tipo A
+    private $passe_b; // Contador de passes do tipo B
+    private $passe_c; // Contador de passes do tipo C
+    private $passe_; // Contador de passes (provavelmente um erro de digitação)
+    private $bloqueio_convertido; // Contador de bloqueios convertidos
+    private $bloqueio_errado; // Contador de bloqueios errados
+    private $ataque_dentro; // Contador de ataques realizados dentro
+    private $ataque_fora; // Contador de ataques realizados fora
+    private $saque_ace_cima; // Contador de saques ace
+    private $saque_ace_flutuante; // Contador de saques flutuantes ace
+    private $saque_ace_viagem; // Contador de saques em viagem ace
+    private $saque_cima; // Contador de saques acima
+    private $saque_flutuante; // Contador de saques flutuantes
+    private $saque_viagem; // Contador de saques em viagem
+    private $saque_errado; // Contador de saques errados
 
     // Método privado para definir todos os atributos do jogador
     private function SetAll($nome, $sexo, $posicao, $apelido, $numero, $altura, $peso)
     {
         // Atribui os valores recebidos aos atributos da classe
-        $this->nome_jogador = $nome;
-        $this->apelido_jogador = $apelido;
-        $this->numero_camisa = $numero;
-        $this->sexo_jogador = $sexo;
-        $this->altura_jogador = $altura;
-        $this->peso_jogador = $peso;
+        $this->nome_jogador = $nome; // Nome do jogador
+        $this->apelido_jogador = $apelido; // Apelido do jogador
+        $this->numero_camisa = $numero; // Número da camisa do jogador
+        $this->sexo_jogador = $sexo; // Sexo do jogador
+        $this->altura_jogador = $altura; // Altura do jogador
+        $this->peso_jogador = $peso; // Peso do jogador
         $this->posicao_jogador = $posicao; // Define a posição do jogador
     }
 
@@ -52,6 +53,7 @@ class OutrasPosicoes extends Jogador
 
             // Cria uma nova instância do banco de dados para inserir a posição
             $obDatabase = new Database('outras_posicoes');
+
             // Insere a posição do jogador no banco de dados
             $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,
@@ -59,8 +61,11 @@ class OutrasPosicoes extends Jogador
             ]);
         } else {
             // Se o jogador não existe, o método Cadastrar() deve inserir o jogador no banco
-            $this->Cadastrar();
+            $this->Cadastrar(); // Método da classe pai para cadastrar o jogador
+
+            // Cria nova instância do banco de dados
             $obDatabase = new Database('outras_posicoes');
+
             // Insere a posição do novo jogador
             $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,

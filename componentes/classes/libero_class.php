@@ -2,13 +2,16 @@
 // Inclui a classe Jogador que a classe Libero irá estender
 require_once "jogador_class.php";
 
+// Classe Libero que herda da classe Jogador
 class Libero extends Jogador
 {
-    private $passe_a;
-    private $passe_b;
-    private $passe_c;
-    private $passe_d;
-    // Definindo a posição do jogador como 'Líbero'
+    // Atributos específicos da classe Libero
+    private $passe_a; // Contador de passes do tipo A
+    private $passe_b; // Contador de passes do tipo B
+    private $passe_c; // Contador de passes do tipo C
+    private $passe_d; // Contador de passes do tipo D
+
+    // Método privado para definir os atributos do jogador
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {
         // Atribui os parâmetros às propriedades da classe
@@ -22,7 +25,7 @@ class Libero extends Jogador
     }
 
     /**
-     * Método responsável por cadastrar um novo jogador no banco
+     * Método responsável por cadastrar um novo jogador do tipo Líbero no banco
      * @return boolean
      */
     public function CadastrarLibero($nome, $sexo, $apelido = null, $numero = null, $altura = null, $peso = null)
@@ -37,8 +40,10 @@ class Libero extends Jogador
         if (count($jogadores) > 0) {
             // Se encontrado, pega o ID do jogador existente
             $this->id_jogador = $jogadores[0]->id_jogador;
+
             // Cria uma nova instância da classe Database para manipulação da tabela 'libero'
             $obDatabase = new Database('libero');
+
             // Insere o ID do jogador na tabela 'libero'
             $this->id_jogador = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador
@@ -46,12 +51,16 @@ class Libero extends Jogador
         } else {
             // Se não encontrado, insere o jogador no banco
             $this->Cadastrar(); // Método da classe pai para cadastrar o jogador
-            $obDatabase = new Database('libero'); // Cria nova instância da classe Database
+
+            // Cria nova instância da classe Database
+            $obDatabase = new Database('libero');
+
             // Insere o ID do jogador na tabela 'libero'
             $this->id_jogador = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador
             ]);
         }
+
         // Retorna verdadeiro indicando sucesso na operação
         return true;
     }

@@ -1,51 +1,52 @@
 <?php
 // Inclui a classe de banco de dados que fornece métodos para interagir com o banco de dados
-require_once "database_class.php";
-require_once "outras_posicoes_class.php";
+require_once "database_class.php"; // Importa a classe de manipulação de banco de dados
+require_once "outras_posicoes_class.php"; // Importa outra classe relacionada a posições
 
+// Definição da classe Usuario
 class Usuario
 {
     /**
      * Identificador único do Usuário
      * @var integer
      */
-    private $id_usuario;
+    private $id_usuario; // ID único do usuário
 
     /**
      * Nome do Usuário
      * @var string
      */
-    private $nome_usuario;
+    private $nome_usuario; // Nome do usuário
 
     /**
      * Email do Usuário
      * @var string
      */
-    private $email_usuario;
+    private $email_usuario; // Email do usuário
 
     /**
      * Senha do Usuário
      * @var string
      */
-    private $senha_usuario_site;
+    private $senha_usuario_site; // Senha do usuário para autenticação
 
     /**
      * Indica se o usuário é jogador
      * @var bool
      */
-    private $jogador;
+    private $jogador; // Verdadeiro se o usuário é jogador, falso caso contrário
 
     /**
      * ID caso seja jogador
      * @var int
      */
-    private $id_jogador;
+    private $id_jogador; // ID do jogador, se o usuário for um jogador
 
     /**
      * Indica se o usuário é treinador
      * @var bool
      */
-    private $treinador;
+    private $treinador; // Verdadeiro se o usuário é treinador, falso caso contrário
 
     /**
      * Retorna o ID do usuário
