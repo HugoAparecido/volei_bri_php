@@ -25,7 +25,7 @@ class Componentes
                 <div class="defesa">
                     <span><strong>Def: </strong></span>
                     <div>
-                        <span id="<?= $idJogador ?>_aumentar_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>defesa').value++">+</span>
+                        <span id="<?= $idJogador ?>_aumentar_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa').value++">+</span>
                         <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa" id="<?= $idJogador ?>_defesa" />
                         <span id="<?= $idJogador ?>_diminuir_defesa" class="atributos_span" onclick="document.getElementById('<?= $idJogador ?>_defesa').value == 0 ? document.getElementById('<?= $idJogador ?>_defesa').value = 0 : document.getElementById('<?= $idJogador ?>_defesa').value--">-</span>
                     </div>
