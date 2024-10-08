@@ -81,7 +81,7 @@ if (isset($_SESSION['id_usuario'])) {
 
         <!-- Formulário para adicionar jogador em cada posição -->
         <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
-          <div class="card m-lg-5 w-80">
+          <div class="card m-lg-5 w-100">
             <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
 
             <!-- Seletor de jogadores para cada posição (ex. Líbero, Levantador, Oposto, etc.) -->
@@ -178,16 +178,20 @@ if (isset($_SESSION['id_usuario'])) {
       </div>
       <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
       </div>
-      <div class="d-flex justify-content-center mt-5 mb-5">
-        <div class="card p-4 shadow-sm" id="card">
+    <?php
+    }
+    ?>
+    <div class="d-flex justify-content-center mt-5 mb-5">
+      <div class="card p-4 shadow-sm" id="card">
+
+        <h2 class="text-center text-white mb-3">Masculino</h2>
         <?php
-      }
-      $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
-      foreach ($timeMasculino as $time) {
+        $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
+        foreach ($timeMasculino as $time) {
         ?>
           <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
         <?php
-      }
+        }
         ?>
         <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
 
@@ -212,8 +216,9 @@ if (isset($_SESSION['id_usuario'])) {
         }
         ?>
         <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
-        </div>
       </div>
+    </div>
+    </div>
   </main>
 
 <?php
