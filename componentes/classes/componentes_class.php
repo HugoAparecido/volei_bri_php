@@ -1,6 +1,7 @@
 <?php
 // Inclui a classe 'OutrasPosicoes' que contém métodos relacionados a jogadores
 require_once "jogador_class.php";
+require_once "time_class.php";
 
 class Componentes
 {
@@ -15,6 +16,19 @@ class Componentes
             // Cria um elemento <option> para cada jogador
             // O valor do option é o ID do jogador, e o texto exibido inclui o número da camisa e o nome do jogador
             echo "<option value='" . $jogador->GetID() . "'>" . $jogador->GetNumeroCamisa() . " : " . $jogador->GetNome() . "</option>";
+        }
+    }
+    // Método estático para gerar opções de times para um formulário
+    public static function InputTimes()
+    {
+        // Obtém a lista de times usando um método da classe 'OutrasPosicoes'
+        $times = Time::getTimes();
+
+        // Itera sobre cada time na lista
+        foreach ($times as $time) {
+            // Cria um elemento <option> para cada time
+            // O valor do option é o ID do time, e o texto exibido inclui o número da camisa e o nome do time
+            echo "<option value='" . $time->GetID() . "'>" . $time->GetNome() . "</option>";
         }
     }
     public function LocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)

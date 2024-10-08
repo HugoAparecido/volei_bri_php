@@ -1,6 +1,8 @@
 <?php
 // Inclui o arquivo de proteção para verificar permissões ou autenticação do usuário.
 include '../componentes/protect.php';
+include '../componentes/classes/time_class.php';
+include '../componentes/classes/componentes_class.php';
 
 // Define o caminho do ícone (favicon) da página.
 define('FAVICON', "../img/bolas.ico");
@@ -39,8 +41,29 @@ include '../componentes/header.php';
             <a href="../componentes/logout.php">Sair</a>
         </button>
     </div>
+    <?php if (!isset($_GET['id_time'])) { ?>
+        <form action="./estatisticas.php" method="get" class="mt-5">
+            <select name="id_time" id="id_time">
+                <?php
+                Componentes::InputTimes();
+                ?>
+            </select>
+            <button type="submit">Mostrar</button>
+        </form>
+    <?php } else { ?>
+        <h1>Estatísticas</h1>
+        <?php
+        $estatisticas = JogadorTime::GetEstatiticasSomaGeral(intval($_GET['id_time']));
+        $estatisticas = $estatisticas[0];
+        echo '<script>var passes = ' . $estatisticas->GetPasses() . ';</script>';
+        ?>
+        <div id="grafico_passe_local" style="width: 500px;">
+            <h2>Passes</h2>
+        </div>
+    <?php } ?>
 </main>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="../js/estatisticas_time.js"></script>
 <?php
 // Inclui o rodapé da página, contendo scripts e informações finais.
 include '../componentes/footer.php';

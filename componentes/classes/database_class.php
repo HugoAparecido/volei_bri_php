@@ -185,4 +185,18 @@ class Database
         // RETORNA SUCESSO
         return true; // Indica que a operação foi bem-sucedida
     }
+    public function SomarCampos($fields, $where = null)
+    {
+        // DADOS DA QUERY
+        $where = strlen($where) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
+        $sums = ' ';
+        foreach ($fields as $field) {
+            $sums .= 'SUM(' . $field . ') AS ' . $field . ', ';
+        }
+        $sums = substr($sums, 0, -2);
+
+        // MONTA A QUERY
+        $query = 'SELECT ' . $sums . ' FROM ' . $this->table . ' ' . $where;
+        return $this->execute($query); // Executa a query e retorna o resultado
+    }
 }

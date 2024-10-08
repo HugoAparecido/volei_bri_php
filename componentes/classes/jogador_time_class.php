@@ -61,6 +61,11 @@ class JogadorTime
         return $this->numero_camisa;
     }
 
+    public function GetPasses()
+    {
+        return '[' . $this->passe_a_no_time . ',' . $this->passe_b_no_time . ',' . $this->passe_c_no_time . ',' . $this->passe_d_no_time . ']';
+    }
+
     // Método privado para definir o ID do jogador e do time
     private function SetIDs($id_jogador, $id_time): void
     {
@@ -95,5 +100,32 @@ class JogadorTime
     {
         // Realiza a consulta no banco de dados utilizando um LEFT JOIN
         return (new Database('jogador_no_time'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetEstatiticasSomaGeral($idTime)
+    {
+        return (new Database('jogador_no_time'))->SomarCampos([
+            'defesa_no_time', // Defesas realizadas pelo jogador no time
+            'ataque_dentro_no_time', // Ataques realizados dentro do time
+            'ataque_fora_no_time', // Ataques realizados fora do time
+            'bloqueio_convertido_no_time', // Bloqueios convertidos no time
+            'bloqueio_errado_no_time', // Bloqueios errados no time
+            'passe_a_no_time', // Passes do tipo A realizados no time
+            'passe_b_no_time', // Passes do tipo B realizados no time
+            'passe_c_no_time', // Passes do tipo C realizados no time
+            'passe_d_no_time', // Passes do tipo D realizados no time
+            'levantamento_para_oposto_no_time', // Levantamentos para jogador oposto
+            'levantamento_para_pipe_no_time', // Levantamentos para jogador de pipe
+            'levantamento_para_ponta_no_time', // Levantamentos para jogador de ponta
+            'levantamento_para_centro_no_time', // Levantamentos para jogador de centro
+            'errou_levantamento_no_time', // Contador de levantamentos errados
+            // Atributos relacionados ao saque do jogador no time
+            'saque_fora_no_time', // Saques fora do time
+            'saque_ace_cima_no_time', // Saques ace do tipo cima
+            'saque_ace_viagem_no_time', // Saques ace do tipo viagem
+            'saque_ace_flutuante_no_time', // Saques ace do tipo flutuante
+            'saque_cima_no_time', // Saques do tipo cima
+            'saque_viagem_no_time', // Saques do tipo viagem
+            'saque_flutuante_no_time', // Saques do tipo flutuante
+        ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 }
