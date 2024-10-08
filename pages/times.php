@@ -51,17 +51,52 @@ if (isset($_SESSION['id_usuario'])) {
             </div>
             <div class="col-auto m-3">
               <h3>Jogadores Principais no Momento</h3>
-              <p>Levantador</p>
-              <p>Líbero</p>
-              <p>Ponta 1</p>
-              <p>Ponta 2</p>
-              <p>Oposto</p>
-              <p>Central 1</p>
-              <p>Central 2</p>
+              <div class="card" id="Levantador" style="min-height: 100px; ">
+                <div class="card-header">
+                  <p>Levantador</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px; ">
+                <div class="card-header">
+                  <p>Líbero</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px; ">
+                <div class="card-header">
+                  <p>Ponta 1</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px;">
+                <div class="card-header">
+                  <p>Ponta 2</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px;">
+                <div class="card-header">
+                  <p>Oposto</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px;">
+                <div class="card-header">
+                  <p>Central 1</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
+              <div class="card" style="min-height: 100px;">
+                <div class="card-header">
+                  <p>Central 2</p>
+                </div>
+                <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+              </div>
             </div>
           </div>
           <!-- Card para listar jogadores de diferentes posições e adicionar no time -->
-          <div class="card">
+          <div class="card containerItem">
             <?php
             // Recupera jogadores e os divide em listas por posição para exibição
             $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
@@ -81,7 +116,7 @@ if (isset($_SESSION['id_usuario'])) {
 
         <!-- Formulário para adicionar jogador em cada posição -->
         <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
-          <div class="card m-lg-5 w-100">
+          <div class="card m-lg-5 w-80">
             <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
 
             <!-- Seletor de jogadores para cada posição (ex. Líbero, Levantador, Oposto, etc.) -->
@@ -220,7 +255,7 @@ if (isset($_SESSION['id_usuario'])) {
     </div>
     </div>
   </main>
-
+  <script src="../js/times.js"></script>
 <?php
   // Inclui o footer da página
   include '../componentes/footer.php';
