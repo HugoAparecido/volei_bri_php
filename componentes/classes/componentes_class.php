@@ -69,7 +69,7 @@ class Componentes
                     onclick="document.getElementById('<?= $idJogador ?>_defesa').value++">+</span>
 
                 <!-- Campo numérico para exibir o valor atual de "Defesa" -->
-                <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_defesa"
+                <input type="number" value="0" readonly class="input_number" name="jogador_<?= $idJogador ?>[defesa]"
                     id="<?= $idJogador ?>_defesa" />
 
                 <!-- Botão para diminuir o valor de "Defesa" -->
@@ -87,7 +87,7 @@ class Componentes
                     onclick="document.getElementById('<?= $idJogador ?>_erro_defesa').value++">+</span>
 
                 <!-- Campo numérico para exibir o valor atual de "Erro de Defesa" -->
-                <input type="number" value="0" readonly class="input_number" name="<?= $idJogador ?>_erro_defesa"
+                <input type="number" value="0" readonly class="input_number" name="jogador_<?= $idJogador ?>[erro_defesa]"
                     id="<?= $idJogador ?>_erro_defesa" />
 
                 <!-- Botão para diminuir o valor de "Erro de Defesa" -->
