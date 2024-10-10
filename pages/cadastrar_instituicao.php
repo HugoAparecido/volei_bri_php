@@ -60,9 +60,13 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                     <!-- Campo de seleção para o tipo de instituição -->
                     <label for="tipo_instituicao">Tipo da Instituição de Ensino:</label>
                     <select name="tipo_instituicao" class="form-select" id="tipo_instituicao" required>
-                        <option value="Superior e Médio Técnico">Superior e Médio Técnico</option>
-                        <option value="Superior">Superior</option>
-                        <option value="Médio Técnico">Médio Técnico</option>
+                        <option value="pré-mirim">Pré-mirim</option>
+                        <option value="mirim">Mirim</option>
+                        <option value="infantil">infantil</option>
+                        <option value="infanto juvenil">infanto juvenil</option>
+                        <option value="juvenil">juvenil</option>
+                        <option value="adulto">adulto</option>
+                        <option value="máster">máster</option>
                     </select>
                 </div>
 
