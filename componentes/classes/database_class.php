@@ -199,4 +199,22 @@ class Database
         $query = 'SELECT ' . $sums . ' FROM ' . $this->table . ' ' . $where;
         return $this->execute($query); // Executa a query e retorna o resultado
     }
+    public function AtualizarEstatisticas($where, $values)
+    {
+
+        // DADOS DA QUERY
+        $fields = array_keys($values); // Obtém os campos da array de valores
+
+        $locais = ' ';
+        foreach ($fields as $field) {
+            $locais .= ' SET ' . $field . ' = ' . $field . '+?';
+        }
+        // MONTA A QUERY
+        $query = 'UPDATE ' . $this->table . $locais . '=? WHERE ' . $where;
+        echo $query; // Exibe a query para depuração
+        // $this->execute($query, array_values($values)); // Executa a query de atualização
+
+        // RETORNA SUCESSO
+        return true; // Indica que a operação foi bem-sucedida
+    }
 }

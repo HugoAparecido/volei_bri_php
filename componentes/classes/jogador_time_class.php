@@ -128,4 +128,11 @@ class JogadorTime
             'saque_flutuante_no_time', // Saques do tipo flutuante
         ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+    public function AtualizarEstatisticas($idJogador, $idTime, $valores)
+    {
+
+        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        $obDatabase = new Database('jogador_no_time');
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $valores);
+    }
 }
