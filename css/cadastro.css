@@ -111,7 +111,8 @@ h2 {
   /* Remove a borda padrão dos botões */
 }
 
-#cadastrar_jogador {
+#cadastrar_jogador,
+#cadastrar_instituicao {
   background-color: var(--amarelo);
   /* Botões em amarelo pastel */
   color: #003366;

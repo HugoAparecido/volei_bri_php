@@ -85,7 +85,8 @@ if (isset($_SESSION['id_usuario'])) {
                 <!-- Botões para cadastrar o time e redirecionar para o cadastro de jogadores -->
                 <div class="mb-3">
                     <button id="cadastrar_time" class="btn" type="submit">Cadastrar Time</button>
-                    <a href="./cadastrar_jogador.php" class="btn" id="update_jogadores_cadastrados">Cadastrar Jogador</a>
+                    <a href="./cadastrar_jogador.php" class="btn" id="cadastrar_jogador">Cadastrar Jogador</a>
+                    <a href="./cadastrar_instituicao.php" class="btn" id="cadastrar_instituicao">Cadastrar Instituição</a>
                 </div>
             </form>
         </div>
