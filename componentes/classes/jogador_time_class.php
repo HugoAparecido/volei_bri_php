@@ -130,9 +130,18 @@ class JogadorTime
     }
     public function AtualizarEstatisticas($idJogador, $idTime, $valores)
     {
-
+        $valores = $this->ModificarChavesArray($valores);
         // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
         $obDatabase = new Database('jogador_no_time');
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $valores);
+    }
+    private function ModificarChavesArray($valores)
+    {
+        $chaves = array_keys($valores);
+        $novasChaves = [];
+        foreach ($chaves as $chave) {
+            array_push($novasChaves, $chave . '_no_time');
+        }
+        return $valores = array_combine($novasChaves, $valores);
     }
 }

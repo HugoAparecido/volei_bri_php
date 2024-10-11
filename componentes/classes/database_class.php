@@ -205,14 +205,14 @@ class Database
         // DADOS DA QUERY
         $fields = array_keys($values); // Obtém os campos da array de valores
 
-        $locais = ' ';
+        $locais = ' SET ';
         foreach ($fields as $field) {
-            $locais .= ' SET ' . $field . ' = ' . $field . '+?';
+            $locais .= ' ' . $field . ' = ' . $field . ' + ?, ';
         }
+        $locais = substr($locais, 0, -2);
         // MONTA A QUERY
-        $query = 'UPDATE ' . $this->table . $locais . '=? WHERE ' . $where;
-        echo $query; // Exibe a query para depuração
-        // $this->execute($query, array_values($values)); // Executa a query de atualização
+        $query = 'UPDATE ' . $this->table . $locais . ' WHERE ' . $where;
+        $this->execute($query, array_values($values)); // Executa a query de atualização
 
         // RETORNA SUCESSO
         return true; // Indica que a operação foi bem-sucedida
