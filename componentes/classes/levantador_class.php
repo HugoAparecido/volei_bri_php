@@ -92,4 +92,10 @@ class Levantador extends Jogador
         // Cria uma nova instância da classe Database para manipulação da tabela 'levantador'
         return (new Database('levantador'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+    public function AtualizarEstatisticas($idJogador, $valores)
+    {
+        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        $obDatabase = new Database('levantador');
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
+    }
 }

@@ -80,4 +80,10 @@ class Libero extends Jogador
         // Cria uma nova instância da classe Database para manipulação da tabela 'libero'
         return (new Database('libero'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+    public function AtualizarEstatisticas($idJogador, $valores)
+    {
+        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        $obDatabase = new Database('libero');
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
+    }
 }

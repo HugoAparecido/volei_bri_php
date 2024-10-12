@@ -90,4 +90,10 @@ class OutrasPosicoes extends Jogador
         // Executa uma junção de tabelas e retorna os resultados como objetos da classe atual
         return (new Database('outras_posicoes'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+    public function AtualizarEstatisticas($idJogador, $posicao, $valores)
+    {
+        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        $obDatabase = new Database('outras_posicoes');
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . " AND posicao = '" . $posicao . "'", $valores);
+    }
 }

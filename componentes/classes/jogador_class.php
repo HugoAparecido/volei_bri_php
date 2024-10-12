@@ -197,4 +197,10 @@ class Jogador
         // Realiza a consulta para buscar um jogador pelo ID e retorna o objeto correspondente
         return (new Database('jogador'))->select('id_jogador = ' . $id)->fetchObject(self::class);
     }
+    public function AtualizarDefesas($idJogador, $valores)
+    {
+        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        $obDatabase = new Database('jogador');
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
+    }
 }

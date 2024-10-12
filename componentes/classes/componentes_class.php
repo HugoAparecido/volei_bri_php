@@ -42,6 +42,7 @@ class Componentes
 
             <!-- Área de controle de atributos individuais do jogador -->
             <div class="insercao_individual m-lg-1">
+                <input type="hidden" name="jogador_<?= $idJogador ?>[posicao]" value="<?= $posicaoJogador ?>">
                 <?php
                 $this->LocalDefesas($idJogador);
                 if ($posicaoJogador != "Levantador") {
