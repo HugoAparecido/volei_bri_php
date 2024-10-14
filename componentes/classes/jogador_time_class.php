@@ -13,7 +13,8 @@ class JogadorTime
     private int $id_time; // Identificador do time ao qual o jogador pertence
 
     // Atributos relacionados a estatísticas do jogador no time
-    private int $defesa_no_time; // Defesas realizadas pelo jogador no time
+    private int $defesa_jogador_no_time; // Defesas realizadas pelo jogador no time
+    private int $erro_defesa_no_time; // Defesas realizadas pelo jogador no time
     private int $ataque_dentro_no_time; // Ataques realizados dentro do time
     private int $ataque_fora_no_time; // Ataques realizados fora do time
     private int $bloqueio_convertido_no_time; // Bloqueios convertidos no time
@@ -41,7 +42,7 @@ class JogadorTime
     // Método para obter o ID do jogador
     public function GetID()
     {
-        return $this->id_jogador;
+        return $this->id_jogador_time;
     }
 
     // Método para obter a posição do jogador
@@ -67,6 +68,10 @@ class JogadorTime
         return '[' . $this->passe_a_no_time . ',' . $this->passe_b_no_time . ',' . $this->passe_c_no_time . ',' . $this->passe_d_no_time . ']';
     }
 
+    public function GetDefesas()
+    {
+        return '[' . $this->defesa_jogador_no_time . ',' . $this->erro_defesa_no_time . ']';
+    }
     // Método privado para definir o ID do jogador e do time
     private function SetIDs($id_jogador, $id_time): void
     {
@@ -116,10 +121,32 @@ class JogadorTime
         // Realiza a consulta no banco de dados utilizando um LEFT JOIN
         return (new Database('jogador_no_time'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+    public static function getJogadoresTime($where = null, $order = null, $limit = null, $fields = null)
+    {
+        // Realiza a consulta no banco de dados e retorna um array de objetos da classe Jogador
+        return (new Database('jogador_no_time'))->select($where, $order, $limit, $fields)->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetEstatiticasSomaGeralDefesas($idTime)
+    {
+        return (new Database('jogador_no_time'))->SomarCampos([
+            'defesa_jogador_no_time', // Defesas realizadas pelo jogador no time
+            'erro_defesa_no_time'
+        ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetEstatiticasSomaGeralPasses($jogadorTime)
+    {
+        return (new Database('libero_no_time'))->SomarCampos([
+            'passe_a_no_time', // Passes do tipo A realizados no time
+            'passe_b_no_time', // Passes do tipo B realizados no time
+            'passe_c_no_time', // Passes do tipo C realizados no time
+            'passe_d_no_time' // Passes do tipo D realizados no time
+        ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
     public static function GetEstatiticasSomaGeral($idTime)
     {
         return (new Database('jogador_no_time'))->SomarCampos([
-            'defesa_no_time', // Defesas realizadas pelo jogador no time
+            'defesa_jogador_no_time', // Defesas realizadas pelo jogador no time
+            'erro_defesa_no_time',
             'ataque_dentro_no_time', // Ataques realizados dentro do time
             'ataque_fora_no_time', // Ataques realizados fora do time
             'bloqueio_convertido_no_time', // Bloqueios convertidos no time

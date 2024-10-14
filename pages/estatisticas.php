@@ -52,13 +52,30 @@ include '../componentes/header.php';
         </form>
     <?php } else { ?>
         <h1>Estatísticas</h1>
-        <?php
-        $estatisticas = JogadorTime::GetEstatiticasSomaGeral(intval($_GET['id_time']));
-        $estatisticas = $estatisticas[0];
-        echo '<script>var passes = ' . $estatisticas->GetPasses() . ';</script>';
-        ?>
-        <div id="grafico_passe_local" style="width: 500px;">
-            <h2>Passes</h2>
+        <div class="card">
+            <?php
+            $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador');
+            $ids = [];
+            foreach ($objetos as $objeto) {
+                array_push($ids, $objeto->GetID());
+            }
+            echo "<pre>";
+            print_r($objetos);
+            print_r($ids);
+            echo "</pre>";
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time']));
+            $estatisticas = $estatisticas[0];
+            echo '<script>var defesas = ' . $estatisticas->GetDefesas() . ';</script>';
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids);
+            $estatisticas = $estatisticas[0];
+            echo '<script>var passes = ' . $estatisticas->GetPasses() . ';</script>';
+            ?>
+            <div id="grafico_passe_local" style="width: 500px;">
+                <h2>Passes</h2>
+            </div>
+            <div id="grafico_defesa_local" style="width: 500px;">
+                <h2>Defsas</h2>
+            </div>
         </div>
     <?php } ?>
 </main>

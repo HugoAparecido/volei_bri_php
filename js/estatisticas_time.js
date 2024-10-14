@@ -8,3 +8,10 @@ function GraficoPasse(dados) {
     ], 'grafico_passe_local', 'grafico_passe')
 }
 GraficoPasse(passes)
+function GraficoDefesa(dados) {
+    Graficos.FazerGrafico(dados, ['Acerto', 'Erro'], 'Defesa', [
+        'rgb(0, 37, 228)',
+        'rgb(2, 183, 86)',
+    ], 'grafico_defesa_local', 'grafico_defesa')
+}
+GraficoDefesa(defesas)
