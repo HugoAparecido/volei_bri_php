@@ -133,9 +133,9 @@ class JogadorTime
             'erro_defesa_no_time'
         ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
-    public static function GetEstatiticasSomaGeralPasses($jogadorTime)
+    public static function GetEstatiticasSomaGeralPasses($jogadorTime, $tabelaBanco)
     {
-        return (new Database('libero_no_time'))->SomarCampos([
+        return (new Database($tabelaBanco))->SomarCampos([
             'passe_a_no_time', // Passes do tipo A realizados no time
             'passe_b_no_time', // Passes do tipo B realizados no time
             'passe_c_no_time', // Passes do tipo C realizados no time

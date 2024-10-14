@@ -66,15 +66,27 @@ include '../componentes/header.php';
             $estatisticas = JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time']));
             $estatisticas = $estatisticas[0];
             echo '<script>var defesas = ' . $estatisticas->GetDefesas() . ';</script>';
-            $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids);
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'libero_no_time');
             $estatisticas = $estatisticas[0];
-            echo '<script>var passes = ' . $estatisticas->GetPasses() . ';</script>';
+            echo '<script>var passesLibero = ' . $estatisticas->GetPasses() . ';</script>';
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time');
+            $estatisticas = $estatisticas[0];
+            echo '<script>var passesOutrasPosicoes = ' . $estatisticas->GetPasses() . ';</script>';
             ?>
-            <div id="grafico_passe_local" style="width: 500px;">
+            <div style="width: 500px;">
                 <h2>Passes</h2>
+                <div id="grafico_passe_libero_local">
+                    <h3>Líbero</h3>
+                </div>
+                <div id="grafico_passe_outras_local">
+                    <h3>Outras Posições</h3>
+                </div>
+                <div id="grafico_passe_total_local">
+                    <h3>Outras Posições</h3>
+                </div>
             </div>
             <div id="grafico_defesa_local" style="width: 500px;">
-                <h2>Defsas</h2>
+                <h2>Defesas</h2>
             </div>
         </div>
     <?php } ?>
