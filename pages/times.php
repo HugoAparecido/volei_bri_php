@@ -51,21 +51,34 @@ if (isset($_SESSION['id_usuario'])) {
               <h2>Sexo: <?= $time->GetSexo() ?></h2>
             </div>
             <div class="col-auto m-3">
+              <!-- Título para os jogadores principais com ajuste de gênero ('Jogadoras' ou 'Jogadores') -->
               <h3>Jogador<?= ($time->GetSexo() == 'F' ? 'as' : 'es') ?> Principais no Momento</h3>
+
               <?php
+              // Array contendo as posições dos jogadores para exibir nos cards
               $cardPosicoes = ['Levantador', 'Líbero', 'Ponta 1', 'Ponta 2', 'Oposto', 'Central 1', 'Central 2'];
+
+              // Loop para criar um card para cada posição dentro do array $cardPosicoes
               foreach ($cardPosicoes as $cardPosicao) {
               ?>
-                <div class="card" style="min-height: 100px; ">
+
+                <!-- Estrutura de um card para cada posição, com estilo mínimo de altura para manter tamanho uniforme -->
+                <div class="card" style="min-height: 100px;">
+
+                  <!-- Cabeçalho do card que mostra o nome da posição -->
                   <div class="card-header">
                     <p><?= $cardPosicao ?></p>
                   </div>
+
+                  <!-- Div para conter o conteúdo principal do card, com altura mínima para evitar colapso -->
                   <div class="containerItemPrincipal" style="min-height: 100px;"></div>
                 </div>
+
               <?php
               }
               ?>
             </div>
+
           </div>
           <!-- Card para listar jogadores de diferentes posições e adicionar no time -->
           <div class="card containerItem">
@@ -89,8 +102,13 @@ if (isset($_SESSION['id_usuario'])) {
         <!-- Formulário para adicionar jogador em cada posição -->
         <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
           <div class="card m-lg-5 w-80">
+            <!-- Campo oculto para armazenar o ID do time -->
             <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+
             <?php
+            // Array associativo que define cada posição de jogador com:
+            // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
+            // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
             $selectsPosicao = [
               'novo_jogador_libero' => ['Líber' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o")), $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
               'novo_jogador_Levantador' => ['Levantador' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "")), $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
@@ -100,22 +118,34 @@ if (isset($_SESSION['id_usuario'])) {
               'novo_jogador_central' => ['Central', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
               'novo_jogador_outra_posicao' => ['de posição Não Definida', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
             ];
+
+            // Loop para criar um campo de seleção para cada posição
             foreach ($selectsPosicao as $name => $conteudo) {
             ?>
+
+              <!-- Rótulo com base no sexo e na posição do jogador -->
               <label class="m-3" for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> <?= $conteudo[0] ?></label>
+
+              <!-- Campo de seleção para escolher o jogador disponível na posição -->
               <select class="form-select m-3 w-50" name="<?= $name ?>">
                 <option value="">Escolha uma posição</option>
+
                 <?php
+                // Loop para preencher cada opção com os jogadores disponíveis na posição atual
                 foreach ($conteudo[1] as $jogador) {
                 ?>
                   <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
                 <?php
                 }
                 ?>
+
               </select>
+
             <?php
             }
             ?>
+
+            <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
             <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
         </form>
 

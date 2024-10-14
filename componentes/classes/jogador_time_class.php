@@ -7,6 +7,7 @@ class JogadorTime
 {
     // Atributos privados da classe
     private int $id_jogador; // Identificador único do jogador
+    private int $id_jogador_time;
     private string $nome_jogador; // Nome do jogador
     private int $numero_camisa; // Número da camisa do jogador
     private int $id_time; // Identificador do time ao qual o jogador pertence
@@ -86,11 +87,25 @@ class JogadorTime
         $obDatabase = new Database('jogador_no_time');
 
         // Insere os dados do jogador e do time na tabela
-        $obDatabase->insert([
+        $this->id_jogador_time = $obDatabase->insert([
             'id_jogador' => $this->id_jogador,
             'id_time' => $this->id_time,
             'posicao_jogador' => $this->posicao_jogador,
         ]);
+        switch ($posicao_jogador) {
+            case 'Levantador':
+                $levantador = new Database('levantador_no_time');
+                $levantador->insert(['id_jogador_time' => $this->id_jogador_time]);
+                break;
+            case 'Líbero':
+                $libero = new Database('libero_no_time');
+                $libero->insert(['id_jogador_time' => $this->id_jogador_time]);
+                break;
+            default:
+                $levantador = new Database('outras_posicoes_no_time');
+                $levantador->insert(['id_jogador_time' => $this->id_jogador_time]);
+                break;
+        }
 
         return true; // Retorna sucesso
     }

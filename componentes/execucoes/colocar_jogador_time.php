@@ -25,7 +25,6 @@ if (isset($idTime)) {
         $time->AdicionarJogadorAoTime((int)$idLibero, (int)$idTime, 'Líbero'); // Adiciona Líbero
     }
     if ($idLevantador != "") {
-        echo $idLevantador; // Exibe o ID do Levantador (provavelmente para debug)
         $time->AdicionarJogadorAoTime((int)$idLevantador, (int)$idTime, 'Levantador'); // Adiciona Levantador
     }
     if ($idOposto != "") {
