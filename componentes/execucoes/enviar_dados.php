@@ -13,9 +13,6 @@ if (isset($_POST)) {
 
     // Extrai os dados dos jogadores, ignorando o primeiro elemento (id_time)
     $jogadores = array_slice($_POST, 2);
-    echo "<pre>";
-    var_dump($jogadores);
-    echo "</pre>";
     $resultado = [];
     // Percorre cada jogador enviado no POST
     foreach ($jogadores as $idJogador => $jogador) {
@@ -68,15 +65,12 @@ if (isset($_POST)) {
         return str_replace('_jogador', '', $chave);
     }, array_keys($resultado));
     $resultado = array_combine($novasChaves, array_values($resultado));
-    echo "<pre>";
-    var_dump($resultado);
-    echo "</pre>";
     $competicaoDados->AtualizarEstatisticas($_POST['id_competicao'],  $_POST['id_time'], $resultado);
 
 
     // Redireciona para a página de estatísticas após a atualização
-    // header("Location: ../../pages/estatisticas.php");
+    header("Location: ../../pages/estatisticas.php");
 } else {
     // Se não há dados enviados, redireciona para a página de times
-    // header("Location: ../../pages/times.php");
+    header("Location: ../../pages/times.php");
 }
