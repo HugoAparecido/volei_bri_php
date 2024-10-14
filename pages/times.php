@@ -42,6 +42,7 @@ if (isset($_SESSION['id_usuario'])) {
         <!-- Formulário para envio de dados do time -->
         <form action="../componentes/execucoes/enviar_dados.php" method="post">
           <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+          <input type="hidden" name="id_competicao" value="1">
           <!-- Card com informações do time e jogadores principais -->
           <div class="card mb-3 mt-5">
             <div class="card-header">

@@ -4,6 +4,7 @@ include_once '../classes/jogador_time_class.php';
 include_once '../classes/levantador_class.php';
 include_once '../classes/libero_class.php';
 include_once '../classes/outras_posicoes_class.php';
+include_once '../classes/competicao_time.php';
 
 // Verifica se há dados enviados via POST
 if (isset($_POST)) {
@@ -11,19 +12,29 @@ if (isset($_POST)) {
     $jogadores_no_time = new JogadorTime();
 
     // Extrai os dados dos jogadores, ignorando o primeiro elemento (id_time)
-    $jogadores = array_slice($_POST, 1);
-
+    $jogadores = array_slice($_POST, 2);
+    echo "<pre>";
+    var_dump($jogadores);
+    echo "</pre>";
+    $resultado = [];
     // Percorre cada jogador enviado no POST
     foreach ($jogadores as $idJogador => $jogador) {
         // Extrai o ID do jogador a partir do nome do campo (ex: "novo_jogador_1")
         $idJogador = explode('_', $idJogador)[1];
 
+        var_dump($jogador);
         // Armazena e remove a posição do array $jogador
         $posicao = $jogador['posicao'];
         unset($jogador['posicao']);
 
         // Converte os valores do array $jogador para inteiros
         $jogador = array_map('intval', $jogador);
+        foreach ($jogador as $movimento => $valor) {
+            if (!isset($resultado[$movimento])) {
+                $resultado[$movimento] = 0;
+            }
+            $resultado[$movimento] += $valor;
+        }
 
 
         // Cria um objeto Jogador para atualizar as defesas
@@ -52,10 +63,20 @@ if (isset($_POST)) {
             $outraPosicoes->AtualizarEstatisticas($idJogador, $posicao, $jogador);
         }
     }
+    $competicaoDados = new CompeticaoTime();
+    $novasChaves = array_map(function ($chave) {
+        return str_replace('_jogador', '', $chave);
+    }, array_keys($resultado));
+    $resultado = array_combine($novasChaves, array_values($resultado));
+    echo "<pre>";
+    var_dump($resultado);
+    echo "</pre>";
+    $competicaoDados->AtualizarEstatisticas($_POST['id_competicao'],  $_POST['id_time'], $resultado);
+
 
     // Redireciona para a página de estatísticas após a atualização
-    header("Location: ../../pages/estatisticas.php");
+    // header("Location: ../../pages/estatisticas.php");
 } else {
     // Se não há dados enviados, redireciona para a página de times
-    header("Location: ../../pages/times.php");
+    // header("Location: ../../pages/times.php");
 }
