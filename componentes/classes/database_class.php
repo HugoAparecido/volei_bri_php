@@ -160,7 +160,6 @@ class Database
 
         // MONTA A QUERY
         $query = 'UPDATE ' . $this->table . ' SET ' . implode('=?,', $fields) . '=? WHERE ' . $where;
-        echo $query; // Exibe a query para depuração
 
         // EXECUTAR A QUERY
         $this->execute($query, array_values($values)); // Executa a query de atualização
@@ -212,7 +211,6 @@ class Database
         $locais = substr($locais, 0, -2);
         // MONTA A QUERY
         $query = 'UPDATE ' . $this->table . $locais . ' WHERE ' . $where;
-        echo $query;
         $this->execute($query, array_values($values)); // Executa a query de atualização
 
         // RETORNA SUCESSO

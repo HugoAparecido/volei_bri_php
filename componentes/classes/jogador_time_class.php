@@ -102,8 +102,8 @@ class JogadorTime
                 $libero->insert(['id_jogador_time' => $this->id_jogador_time]);
                 break;
             default:
-                $levantador = new Database('outras_posicoes_no_time');
-                $levantador->insert(['id_jogador_time' => $this->id_jogador_time]);
+                $outraPosicoes = new Database('outras_posicoes_no_time');
+                $outraPosicoes->insert(['id_jogador_time' => $this->id_jogador_time]);
                 break;
         }
 
@@ -143,12 +143,28 @@ class JogadorTime
             'saque_flutuante_no_time', // Saques do tipo flutuante
         ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
-    public function AtualizarEstatisticas($idJogador, $idTime, $valores)
+    public function AtualizarEstatisticas($idJogador, $idTime, $posicao, $defesas, $valores)
     {
         $valores = $this->ModificarChavesArray($valores);
+        $defesas = $this->ModificarChavesArray($defesas);
         // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
         $obDatabase = new Database('jogador_no_time');
-        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $valores);
+        $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $defesas);
+        $idJogadorTime = $obDatabase->select('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, null, null, 'id_jogador_time')->fetchAll()[0]['id_jogador_time'];
+        switch ($posicao) {
+            case 'Levantador':
+                $levantador = new Database('levantador_no_time');
+                $levantador->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
+                break;
+            case 'Líbero':
+                $libero = new Database('libero_no_time');
+                $libero->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
+                break;
+            default:
+                $outrasPosicoes = new Database('outras_posicoes_no_time');
+                $outrasPosicoes->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
+                break;
+        }
     }
     private function ModificarChavesArray($valores)
     {
