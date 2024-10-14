@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 11-Out-2024 às 23:36
+-- Tempo de geração: 14-Out-2024 às 13:32
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `competicao` (
   `data_hora_competicao` datetime NOT NULL,
   `nome_competicao` varchar(255) NOT NULL,
   PRIMARY KEY (`id_competicao`),
-  KEY `competicao_time_desafiante` (`id_time_desafiante`),
-  KEY `competicao_id_desafiado` (`id_time_desafiado`)
+  KEY `competicao_id_desafiado` (`id_time_desafiado`),
+  KEY `competicao_time_desafiante` (`id_time_desafiante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -63,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `competicao_time` (
   `levantamento_para_ponta_no_time` int UNSIGNED DEFAULT '0',
   `levantamento_para_centro_no_time` int UNSIGNED DEFAULT '0',
   `errou_levantamento_no_time` int UNSIGNED DEFAULT '0',
-  `posicao_jogador` enum('Líbero','Levantador','Oposto','Central','Ponta 1','Ponta 2','Não definida') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `saque_fora_no_time` int UNSIGNED DEFAULT '0',
   `saque_ace_cima_no_time` int UNSIGNED DEFAULT '0',
   `saque_ace_viagem_no_time` int UNSIGNED DEFAULT '0',
@@ -110,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `jogador` (
   `apelido_jogador` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `numero_camisa` int UNSIGNED DEFAULT NULL,
   `defesa_jogador` int UNSIGNED NOT NULL DEFAULT '0',
+  `erro_defesa` int UNSIGNED NOT NULL DEFAULT '0',
   `altura_jogador` decimal(2,2) DEFAULT NULL,
   `peso_jogador` decimal(3,2) DEFAULT NULL,
   `sexo_jogador` enum('M','F') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -120,12 +120,12 @@ CREATE TABLE IF NOT EXISTS `jogador` (
 -- Extraindo dados da tabela `jogador`
 --
 
-INSERT INTO `jogador` (`id_jogador`, `nome_jogador`, `apelido_jogador`, `numero_camisa`, `defesa_jogador`, `altura_jogador`, `peso_jogador`, `sexo_jogador`) VALUES
-(13, 'Aaron Kenzo Hukuda Castro Kanashiro', '', 9, 0, '0.00', '0.00', 'M'),
-(14, 'Andrus Neves Roman', '', 17, 0, '0.00', '0.00', 'M'),
-(15, 'Daniel Alves de Morais', '', 10, 0, '0.00', '0.00', 'M'),
-(16, 'Eduardo Pereira Xavier', 'Dudu', 12, 0, '0.00', '0.00', 'M'),
-(17, 'Victor Hugo Toneto dos Santos', '', 1, 0, '0.00', '0.00', 'M');
+INSERT INTO `jogador` (`id_jogador`, `nome_jogador`, `apelido_jogador`, `numero_camisa`, `defesa_jogador`, `erro_defesa`, `altura_jogador`, `peso_jogador`, `sexo_jogador`) VALUES
+(13, 'Aaron Kenzo Hukuda Castro Kanashiro', '', 9, 2, 2, '0.00', '0.00', 'M'),
+(14, 'Andrus Neves Roman', '', 17, 1, 1, '0.00', '0.00', 'M'),
+(15, 'Daniel Alves de Morais', '', 10, 2, 2, '0.00', '0.00', 'M'),
+(16, 'Eduardo Pereira Xavier', 'Dudu', 12, 2, 3, '0.00', '0.00', 'M'),
+(17, 'Victor Hugo Toneto dos Santos', '', 1, 2, 2, '0.00', '0.00', 'M');
 
 -- --------------------------------------------------------
 
@@ -140,25 +140,7 @@ CREATE TABLE IF NOT EXISTS `jogador_no_time` (
   `id_time` int NOT NULL,
   `defesa_jogador_no_time` int UNSIGNED NOT NULL DEFAULT '0',
   `erro_defesa_no_time` int UNSIGNED NOT NULL DEFAULT '0',
-  `ataque_dentro_no_time` int UNSIGNED DEFAULT '0',
-  `ataque_fora_no_time` int UNSIGNED DEFAULT '0',
-  `bloqueio_convertido_no_time` int UNSIGNED DEFAULT '0',
-  `bloqueio_errado_no_time` int UNSIGNED DEFAULT '0',
-  `passe_a_no_time` int UNSIGNED DEFAULT '0',
-  `passe_b_no_time` int UNSIGNED DEFAULT '0',
-  `passe_c_no_time` int UNSIGNED DEFAULT '0',
-  `passe_d_no_time` int UNSIGNED DEFAULT '0',
-  `levantamento_para_oposto_no_time` int UNSIGNED DEFAULT '0',
-  `levantamento_para_pipe_no_time` int UNSIGNED DEFAULT '0',
-  `levantamento_para_ponta_no_time` int UNSIGNED DEFAULT '0',
-  `levantamento_para_centro_no_time` int UNSIGNED DEFAULT '0',
-  `errou_levantamento_no_time` int UNSIGNED DEFAULT '0',
   `posicao_jogador` enum('Líbero','Levantador','Oposto','Central','Ponta 1','Ponta 2','Não definida') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `saque_fora_no_time` int UNSIGNED DEFAULT '0',
-  `saque_ace_no_time` int UNSIGNED DEFAULT '0',
-  `saque_cima_no_time` int UNSIGNED DEFAULT '0',
-  `saque_viagem_no_time` int UNSIGNED DEFAULT '0',
-  `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id_jogador_time`),
   KEY `jogador_jogador` (`id_jogador`),
   KEY `time_time` (`id_time`)
@@ -168,12 +150,12 @@ CREATE TABLE IF NOT EXISTS `jogador_no_time` (
 -- Extraindo dados da tabela `jogador_no_time`
 --
 
-INSERT INTO `jogador_no_time` (`id_jogador_time`, `id_jogador`, `id_time`, `defesa_jogador_no_time`, `erro_defesa_no_time`, `ataque_dentro_no_time`, `ataque_fora_no_time`, `bloqueio_convertido_no_time`, `bloqueio_errado_no_time`, `passe_a_no_time`, `passe_b_no_time`, `passe_c_no_time`, `passe_d_no_time`, `levantamento_para_oposto_no_time`, `levantamento_para_pipe_no_time`, `levantamento_para_ponta_no_time`, `levantamento_para_centro_no_time`, `errou_levantamento_no_time`, `posicao_jogador`, `saque_fora_no_time`, `saque_ace_no_time`, `saque_cima_no_time`, `saque_viagem_no_time`, `saque_flutuante_no_time`) VALUES
-(1, 14, 7, 3, 2, 1, 1, 1, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 'Oposto', 2, 1, 2, 1, 2),
-(2, 13, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 'Ponta 1', 1, 1, 1, 1, 1),
-(3, 15, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 'Central', 1, 1, 1, 1, 1),
-(4, 16, 7, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 'Líbero', 0, 0, 0, 0, 0),
-(5, 17, 7, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 'Levantador', 2, 2, 2, 2, 2);
+INSERT INTO `jogador_no_time` (`id_jogador_time`, `id_jogador`, `id_time`, `defesa_jogador_no_time`, `erro_defesa_no_time`, `posicao_jogador`) VALUES
+(1, 14, 7, 29, 29, 'Oposto'),
+(2, 13, 7, 3, 3, 'Ponta 1'),
+(3, 15, 7, 3, 3, 'Central'),
+(4, 16, 7, 9, 13, 'Líbero'),
+(5, 17, 7, 10, 10, 'Levantador');
 
 -- --------------------------------------------------------
 
@@ -186,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `levantador` (
   `id_jogador` int NOT NULL,
   `posicao` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Levantador',
   `ataque_dentro` int UNSIGNED NOT NULL DEFAULT '0',
-  `ataque_errado` int UNSIGNED NOT NULL DEFAULT '0',
+  `ataque_fora` int UNSIGNED NOT NULL DEFAULT '0',
   `bloqueio_convertido` int UNSIGNED NOT NULL DEFAULT '0',
   `bloqueio_errado` int UNSIGNED NOT NULL DEFAULT '0',
   `errou_levantamento` int UNSIGNED NOT NULL DEFAULT '0',
@@ -198,9 +180,7 @@ CREATE TABLE IF NOT EXISTS `levantador` (
   `saque_cima` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_flutuante` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_viagem` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_cima_ace` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_flutuante_ace` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_viagem_ace` int UNSIGNED NOT NULL DEFAULT '0',
+  `saque_ace` int UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_jogador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -208,8 +188,34 @@ CREATE TABLE IF NOT EXISTS `levantador` (
 -- Extraindo dados da tabela `levantador`
 --
 
-INSERT INTO `levantador` (`id_jogador`, `posicao`, `ataque_dentro`, `ataque_errado`, `bloqueio_convertido`, `bloqueio_errado`, `errou_levantamento`, `levantamento_para_oposto`, `levantamento_para_ponta`, `levantamento_para_pipe`, `levantamento_para_centro`, `saque_fora`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_cima_ace`, `saque_flutuante_ace`, `saque_viagem_ace`) VALUES
-(17, 'Levantador', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `levantador` (`id_jogador`, `posicao`, `ataque_dentro`, `ataque_fora`, `bloqueio_convertido`, `bloqueio_errado`, `errou_levantamento`, `levantamento_para_oposto`, `levantamento_para_ponta`, `levantamento_para_pipe`, `levantamento_para_centro`, `saque_fora`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_ace`) VALUES
+(17, 'Levantador', 4, 4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 6, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `levantador_no_time`
+--
+
+DROP TABLE IF EXISTS `levantador_no_time`;
+CREATE TABLE IF NOT EXISTS `levantador_no_time` (
+  `id_jogador_time` int NOT NULL,
+  `ataque_dentro_no_time` int UNSIGNED NOT NULL DEFAULT '0',
+  `ataque_fora_no_time` int UNSIGNED DEFAULT '0',
+  `bloqueio_convertido_no_time` int UNSIGNED DEFAULT '0',
+  `bloqueio_errado_no_time` int UNSIGNED DEFAULT '0',
+  `levantamento_para_oposto_no_time` int UNSIGNED DEFAULT '0',
+  `levantamento_para_pipe_no_time` int UNSIGNED DEFAULT '0',
+  `levantamento_para_ponta_no_time` int UNSIGNED DEFAULT '0',
+  `levantamento_para_centro_no_time` int UNSIGNED DEFAULT '0',
+  `errou_levantamento_no_time` int UNSIGNED DEFAULT '0',
+  `saque_fora_no_time` int UNSIGNED DEFAULT '0',
+  `saque_ace_no_time` int UNSIGNED DEFAULT '0',
+  `saque_cima_no_time` int UNSIGNED DEFAULT '0',
+  `saque_viagem_no_time` int UNSIGNED DEFAULT '0',
+  `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
+  PRIMARY KEY (`id_jogador_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -233,7 +239,23 @@ CREATE TABLE IF NOT EXISTS `libero` (
 --
 
 INSERT INTO `libero` (`id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `posicao`) VALUES
-(16, 0, 0, 0, 0, 'Líbero');
+(16, 9, 6, 6, 9, 'Líbero');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `libero_no_time`
+--
+
+DROP TABLE IF EXISTS `libero_no_time`;
+CREATE TABLE IF NOT EXISTS `libero_no_time` (
+  `id_jogador_time` int NOT NULL,
+  `passe_a_no_time` int UNSIGNED DEFAULT '0',
+  `passe_b_no_time` int UNSIGNED DEFAULT '0',
+  `passe_c_no_time` int UNSIGNED DEFAULT '0',
+  `passe_d_no_time` int UNSIGNED DEFAULT '0',
+  PRIMARY KEY (`id_jogador_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -253,13 +275,11 @@ CREATE TABLE IF NOT EXISTS `outras_posicoes` (
   `bloqueio_errado` int UNSIGNED NOT NULL DEFAULT '0',
   `ataque_dentro` int UNSIGNED NOT NULL DEFAULT '0',
   `ataque_fora` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_ace_cima` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_ace_flutuante` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_ace_viagem` int UNSIGNED NOT NULL DEFAULT '0',
+  `saque_ace` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_cima` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_flutuante` int UNSIGNED NOT NULL DEFAULT '0',
   `saque_viagem` int UNSIGNED NOT NULL DEFAULT '0',
-  `saque_errado` int UNSIGNED NOT NULL DEFAULT '0',
+  `saque_fora` int UNSIGNED NOT NULL DEFAULT '0',
   `posicao` enum('Oposto','Central','Ponta 1','Ponta 2','Não Definida') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id_posicao`),
   KEY `posicao_jogador` (`id_jogador`)
@@ -269,11 +289,36 @@ CREATE TABLE IF NOT EXISTS `outras_posicoes` (
 -- Extraindo dados da tabela `outras_posicoes`
 --
 
-INSERT INTO `outras_posicoes` (`id_posicao`, `id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `bloqueio_convertido`, `bloqueio_errado`, `ataque_dentro`, `ataque_fora`, `saque_ace_cima`, `saque_ace_flutuante`, `saque_ace_viagem`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_errado`, `posicao`) VALUES
-(1, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Ponta 1'),
-(2, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Ponta 2'),
-(3, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Oposto'),
-(4, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Central');
+INSERT INTO `outras_posicoes` (`id_posicao`, `id_jogador`, `passe_a`, `passe_b`, `passe_c`, `passe_d`, `bloqueio_convertido`, `bloqueio_errado`, `ataque_dentro`, `ataque_fora`, `saque_ace`, `saque_cima`, `saque_flutuante`, `saque_viagem`, `saque_fora`, `posicao`) VALUES
+(1, 13, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 'Ponta 1'),
+(2, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Ponta 2'),
+(3, 14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'Oposto'),
+(4, 15, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 'Central');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `outras_posicoes_no_time`
+--
+
+DROP TABLE IF EXISTS `outras_posicoes_no_time`;
+CREATE TABLE IF NOT EXISTS `outras_posicoes_no_time` (
+  `id_jogador_time` int NOT NULL,
+  `ataque_dentro_no_time` int UNSIGNED DEFAULT '0',
+  `ataque_fora_no_time` int UNSIGNED DEFAULT '0',
+  `bloqueio_convertido_no_time` int UNSIGNED DEFAULT '0',
+  `bloqueio_errado_no_time` int UNSIGNED DEFAULT '0',
+  `passe_a_no_time` int UNSIGNED DEFAULT '0',
+  `passe_b_no_time` int UNSIGNED DEFAULT '0',
+  `passe_c_no_time` int UNSIGNED DEFAULT '0',
+  `passe_d_no_time` int UNSIGNED DEFAULT '0',
+  `saque_fora_no_time` int UNSIGNED DEFAULT '0',
+  `saque_ace_no_time` int UNSIGNED DEFAULT '0',
+  `saque_cima_no_time` int UNSIGNED DEFAULT '0',
+  `saque_viagem_no_time` int UNSIGNED DEFAULT '0',
+  `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
+  PRIMARY KEY (`id_jogador_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -338,8 +383,8 @@ INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usu
 -- Limitadores para a tabela `competicao`
 --
 ALTER TABLE `competicao`
-  ADD CONSTRAINT `competicao_id_desafiado` FOREIGN KEY (`id_time_desafiado`) REFERENCES `time` (`id_time`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `competicao_time_desafiante` FOREIGN KEY (`id_time_desafiante`) REFERENCES `time` (`id_time`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `competicao_id_desafiado` FOREIGN KEY (`id_time_desafiado`) REFERENCES `time` (`id_time`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `competicao_time_desafiante` FOREIGN KEY (`id_time_desafiante`) REFERENCES `time` (`id_time`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `competicao_time`
@@ -352,20 +397,32 @@ ALTER TABLE `competicao_time`
 -- Limitadores para a tabela `jogador_no_time`
 --
 ALTER TABLE `jogador_no_time`
-  ADD CONSTRAINT `jogador_jogador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`),
-  ADD CONSTRAINT `time_time` FOREIGN KEY (`id_time`) REFERENCES `time` (`id_time`);
+  ADD CONSTRAINT `jogador_jogador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `time_time` FOREIGN KEY (`id_time`) REFERENCES `time` (`id_time`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `levantador`
 --
 ALTER TABLE `levantador`
-  ADD CONSTRAINT `jogador_levantador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `jogador_levantador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `levantador_no_time`
+--
+ALTER TABLE `levantador_no_time`
+  ADD CONSTRAINT `time_levantador` FOREIGN KEY (`id_jogador_time`) REFERENCES `jogador_no_time` (`id_jogador_time`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Limitadores para a tabela `libero`
 --
 ALTER TABLE `libero`
-  ADD CONSTRAINT `jogador_libero` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `jogador_libero` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `libero_no_time`
+--
+ALTER TABLE `libero_no_time`
+  ADD CONSTRAINT `libero_time` FOREIGN KEY (`id_jogador_time`) REFERENCES `jogador_no_time` (`id_jogador_time`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Limitadores para a tabela `outras_posicoes`
@@ -374,11 +431,17 @@ ALTER TABLE `outras_posicoes`
   ADD CONSTRAINT `posicao_jogador` FOREIGN KEY (`id_jogador`) REFERENCES `jogador` (`id_jogador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Limitadores para a tabela `outras_posicoes_no_time`
+--
+ALTER TABLE `outras_posicoes_no_time`
+  ADD CONSTRAINT `outras_posicoes_time` FOREIGN KEY (`id_jogador_time`) REFERENCES `jogador_no_time` (`id_jogador_time`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Limitadores para a tabela `time`
 --
 ALTER TABLE `time`
-  ADD CONSTRAINT `time_instituicao` FOREIGN KEY (`id_instituicao`) REFERENCES `instituicao` (`id_instituicao`),
-  ADD CONSTRAINT `time_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `time_instituicao` FOREIGN KEY (`id_instituicao`) REFERENCES `instituicao` (`id_instituicao`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `time_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
