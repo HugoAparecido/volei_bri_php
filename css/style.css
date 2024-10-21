@@ -48,3 +48,9 @@
 #botao_flutuante {
   top: 100px;
 }
+
+@media (max-width: 990px) {
+  #botao_flutuante {
+    top: 150px;
+  }
+}
