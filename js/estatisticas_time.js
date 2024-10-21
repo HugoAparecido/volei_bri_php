@@ -25,5 +25,17 @@ function GraficoTiposSaque(dados, idGrafico, localGrafico) {
         'rgb(2, 183, 86)',
         'rgb(230, 197, 1)',
         'rgb(242, 92, 5)',
+        'rgb(200, 08, 5)',
     ], localGrafico, idGrafico);
 }
+
+function GraficoAcertoSaque(dados, idGrafico, localGrafico) {
+    Graficos.FazerGrafico(dados, ['Dentro', 'Fora'], 'sques', [
+        'rgb(0, 37, 228)',
+        'rgb(2, 183, 86)'
+    ], localGrafico, idGrafico);
+}
+GraficoAcertoSaque([saquesOutrasPosicoes.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesOutrasPosicoes[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
+GraficoTiposSaque(saquesOutrasPosicoes.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')
+GraficoAcertoSaque([saquesLevantador.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesLevantador[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
+GraficoTiposSaque(saquesLevantador.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')

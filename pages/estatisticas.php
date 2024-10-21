@@ -42,23 +42,19 @@ include '../componentes/header.php';
         </button>
     </div>
 
+
+    <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
+    <form action="./estatisticas.php" method="get" class="mt-5">
+        <select name="id_time" id="id_time">
+            <?php
+            // Função que popula o 'select' com os times disponíveis
+            Componentes::InputTimes();
+            ?>
+        </select>
+        <button type="submit">Mostrar</button>
+    </form>
     <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
-    <?php if (!isset($_GET['id_time'])) { ?>
-
-        <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
-        <form action="./estatisticas.php" method="get" class="mt-5">
-            <select name="id_time" id="id_time">
-                <?php
-                // Função que popula o 'select' com os times disponíveis
-                Componentes::InputTimes();
-                ?>
-            </select>
-            <button type="submit">Mostrar</button>
-        </form>
-
-        <!-- Caso o 'id_time' já esteja presente na URL -->
-    <?php } else { ?>
-
+    <?php if (isset($_GET['id_time'])) { ?>
         <!-- Exibe o título "Estatísticas" -->
         <h1>Estatísticas</h1>
         <div class="card">
@@ -89,11 +85,15 @@ include '../componentes/header.php';
             $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time');
             $estatisticas = $estatisticas[0];
 
-            // Envia o valor dos passes das outras posições para o JavaScript
             echo '<script>var passesOutrasPosicoes = ' . $estatisticas->GetPasses() . ';</script>';
+
             $estatisticas = JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time');
             $estatisticas = $estatisticas[0];
             echo '<script>var saquesOutrasPosicoes = ' . $estatisticas->GetSaques() . ';</script>';
+
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'levantador_no_time');
+            $estatisticas = $estatisticas[0];
+            echo '<script>var saquesLevantador = ' . $estatisticas->GetSaques() . ';</script>';
             ?>
 
             <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
@@ -120,6 +120,27 @@ include '../componentes/header.php';
                     <h2>Defesas</h2>
                 </div>
                 <div id="grafico_defesa_local">
+                </div>
+            </div>
+
+            <!-- Gráfico para exibir as defesas -->
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Saques</h2>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="text-center" id="grafico_erros_saques_levantadores_local" style="width: 500px;">
+                        <h3>Erros e acertos dos levantadores</h3>
+                    </div>
+                    <div class="text-center" id="grafico_tipos_saques_levantadores_local" style="width: 500px;">
+                        <h3>Tipos de saques usados por levantadores</h3>
+                    </div>
+                    <div class="text-center" id="grafico_erros_saques_outras_posicoes_local" style="width: 500px;">
+                        <h3>Erros e acertos dos outros jogadores</h3>
+                    </div>
+                    <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local" style="width: 500px;">
+                        <h3>Tipos de saques usados por outros jogadores</h3>
+                    </div>
                 </div>
             </div>
         </div>
