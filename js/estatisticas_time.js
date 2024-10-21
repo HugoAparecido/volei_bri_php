@@ -18,3 +18,12 @@ function GraficoDefesa(dados) {
     ], 'grafico_defesa_local', 'grafico_defesa')
 }
 GraficoDefesa(defesas)
+
+function GraficoTiposSaque(dados, idGrafico, localGrafico) {
+    Graficos.FazerGrafico(dados, ['Ace', 'Por cima', 'Flutuante', 'Viagem'], 'sques', [
+        'rgb(0, 37, 228)',
+        'rgb(2, 183, 86)',
+        'rgb(230, 197, 1)',
+        'rgb(242, 92, 5)',
+    ], localGrafico, idGrafico);
+}

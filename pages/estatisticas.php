@@ -91,6 +91,9 @@ include '../componentes/header.php';
 
             // Envia o valor dos passes das outras posições para o JavaScript
             echo '<script>var passesOutrasPosicoes = ' . $estatisticas->GetPasses() . ';</script>';
+            $estatisticas = JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time');
+            $estatisticas = $estatisticas[0];
+            echo '<script>var saquesOutrasPosicoes = ' . $estatisticas->GetSaques() . ';</script>';
             ?>
 
             <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->

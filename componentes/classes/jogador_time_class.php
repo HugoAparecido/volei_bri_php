@@ -32,9 +32,7 @@ class JogadorTime
 
     // Atributos relacionados ao saque do jogador no time
     private int $saque_fora_no_time; // Saques fora do time
-    private int $saque_ace_cima_no_time; // Saques ace do tipo cima
-    private int $saque_ace_viagem_no_time; // Saques ace do tipo viagem
-    private int $saque_ace_flutuante_no_time; // Saques ace do tipo flutuante
+    private int $saque_ace_no_time; // Saques ace do tipo flutuante
     private int $saque_cima_no_time; // Saques do tipo cima
     private int $saque_viagem_no_time; // Saques do tipo viagem
     private int $saque_flutuante_no_time; // Saques do tipo flutuante
@@ -71,6 +69,24 @@ class JogadorTime
     public function GetDefesas()
     {
         return '[' . $this->defesa_jogador_no_time . ',' . $this->erro_defesa_no_time . ']';
+    }
+
+    public function GetAtaques()
+    {
+        return '[' . $this->ataque_dentro_no_time . ',' . $this->ataque_fora_no_time . ']';
+    }
+
+    public function GetBloqueios()
+    {
+        return '[' . $this->bloqueio_convertido_no_time . ',' . $this->bloqueio_errado_no_time . ']';
+    }
+    public function GetSaques()
+    {
+        return '[' . $this->saque_ace_no_time . ',' . $this->saque_viagem_no_time . ',' . $this->saque_flutuante_no_time . ',' . $this->saque_cima_no_time . ',' . $this->saque_fora_no_time . ']';
+    }
+    public function GetLeavtamentos()
+    {
+        return '[' . $this->levantamento_para_centro_no_time . ',' . $this->levantamento_para_oposto_no_time . ',' . $this->levantamento_para_pipe_no_time . ',' . $this->levantamento_para_ponta_no_time . ',' . $this->errou_levantamento_no_time . ']';
     }
     // Método privado para definir o ID do jogador e do time
     private function SetIDs($id_jogador, $id_time): void
@@ -140,6 +156,16 @@ class JogadorTime
             'passe_b_no_time', // Passes do tipo B realizados no time
             'passe_c_no_time', // Passes do tipo C realizados no time
             'passe_d_no_time' // Passes do tipo D realizados no time
+        ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetEstatiticasSomaGeralSaques($jogadorTime, $tabelaBanco)
+    {
+        return (new Database($tabelaBanco))->SomarCampos([
+            'saque_fora_no_time', // Saques fora do time
+            'saque_ace_no_time', // Saques ace
+            'saque_cima_no_time', // Saques do tipo cima
+            'saque_viagem_no_time', // Saques do tipo viagem
+            'saque_flutuante_no_time', // Saques do tipo flutuante
         ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
     }
     public static function GetEstatiticasSomaGeral($idTime)
