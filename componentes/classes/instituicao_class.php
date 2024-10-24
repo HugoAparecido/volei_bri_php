@@ -8,13 +8,13 @@ class Instituicao
      * Identificador único da Instituição
      * @var integer
      */
-    public $ID_INSTITUICAO; // Propriedade para armazenar o ID da instituição
+    public $id_instituicao; // Propriedade para armazenar o ID da instituição
 
     /**
      * Nome da Instituição
      * @var string
      */
-    public $NOME_INSTITUICAO; // Propriedade para armazenar o nome da instituição
+    public $nome_instituicao; // Propriedade para armazenar o nome da instituição
 
     /**
      * Tipo da instituição
@@ -26,12 +26,12 @@ class Instituicao
 
     public function GetID()
     {
-        return $this->ID_INSTITUICAO; // Retorna o ID da instituição
+        return $this->id_instituicao; // Retorna o ID da instituição
     }
 
     public function GetNome()
     {
-        return $this->NOME_INSTITUICAO; // Retorna o nome da instituição
+        return $this->nome_instituicao; // Retorna o nome da instituição
     }
 
     public function GetTipo()
