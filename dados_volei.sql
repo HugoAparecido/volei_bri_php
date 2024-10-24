@@ -513,7 +513,7 @@ ALTER TABLE `TIME`
     )
       REFERENCES `USUARIO` (
         `ID_USUARIO`
-      ) ON DELETE SET NULL ON UPDATE SET NULL;
+      );
 
 COMMIT;
 
