@@ -170,50 +170,67 @@ class Database
 
     /**
      * Método responsável por excluir dados do banco
-     * @param string $where
-     * @return boolean
+     * @param string $where Condição para exclusão dos dados no formato SQL (ex.: "id = 1").
+     * @return boolean Retorna true indicando que a exclusão foi realizada com sucesso.
      */
     public function delete($where)
     {
         // MONTA A QUERY
-        $query = 'DELETE FROM ' . $this->table . ' WHERE ' . $where; // Monta a query de exclusão
+        $query = 'DELETE FROM ' . $this->table . ' WHERE ' . $where; // Monta a query SQL de exclusão com base na tabela e condição fornecida.
 
         // EXECUTA A QUERY
-        $this->execute($query); // Executa a query de exclusão
+        $this->execute($query); // Executa a query SQL usando o método execute().
 
         // RETORNA SUCESSO
-        return true; // Indica que a operação foi bem-sucedida
+        return true; // Retorna true indicando que a exclusão foi bem-sucedida.
     }
+
+    /**
+     * Método responsável por somar valores de campos específicos no banco de dados
+     * @param array $fields Lista de campos a serem somados (ex.: ["campo1", "campo2"]).
+     * @param string|null $where Condição opcional para filtrar a soma (ex.: "status = 'ativo'").
+     * @return mixed Retorna o resultado da execução da query.
+     */
     public function SomarCampos($fields, $where = null)
     {
         // DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
-        $sums = ' ';
+        $where = strlen($where) ? 'WHERE ' . $where : ''; // Se a condição WHERE for fornecida, a adiciona à query; caso contrário, deixa vazio.
+
+        $sums = ' '; // Variável para armazenar os cálculos de soma.
         foreach ($fields as $field) {
-            $sums .= 'SUM(' . $field . ') AS ' . $field . ', ';
+            $sums .= 'SUM(' . $field . ') AS ' . $field . ', '; // Para cada campo, monta a soma e o alias com o nome do campo.
         }
-        $sums = substr($sums, 0, -2);
+        $sums = substr($sums, 0, -2); // Remove a última vírgula para garantir que a query fique válida.
 
         // MONTA A QUERY
-        $query = 'SELECT ' . $sums . ' FROM ' . $this->table . ' ' . $where;
-        return $this->execute($query); // Executa a query e retorna o resultado
+        $query = 'SELECT ' . $sums . ' FROM ' . $this->table . ' ' . $where; // Monta a query SQL para selecionar as somas dos campos especificados.
+
+        return $this->execute($query); // Executa a query e retorna o resultado.
     }
+
+    /**
+     * Método responsável por atualizar estatísticas somando valores nos campos existentes
+     * @param string $where Condição para definir quais registros serão atualizados (ex.: "id = 1").
+     * @param array $values Array associativo contendo os campos e os valores a serem somados (ex.: ["campo1" => 5, "campo2" => 10]).
+     * @return boolean Retorna true indicando que a operação foi bem-sucedida.
+     */
     public function AtualizarEstatisticas($where, $values)
     {
-
         // DADOS DA QUERY
-        $fields = array_keys($values); // Obtém os campos da array de valores
+        $fields = array_keys($values); // Obtém as chaves (nomes dos campos) do array de valores.
 
-        $locais = ' SET ';
+        $locais = ' SET '; // Inicializa a cláusula SET da query SQL.
         foreach ($fields as $field) {
-            $locais .= ' ' . $field . ' = ' . $field . ' + ?, ';
+            $locais .= ' ' . $field . ' = ' . $field . ' + ?, '; // Para cada campo, adiciona um incremento com o valor correspondente.
         }
-        $locais = substr($locais, 0, -2);
+        $locais = substr($locais, 0, -2); // Remove a última vírgula para manter a query válida.
+
         // MONTA A QUERY
-        $query = 'UPDATE ' . $this->table . $locais . ' WHERE ' . $where;
-        $this->execute($query, array_values($values)); // Executa a query de atualização
+        $query = 'UPDATE ' . $this->table . $locais . ' WHERE ' . $where; // Monta a query de atualização com a cláusula WHERE.
+
+        $this->execute($query, array_values($values)); // Executa a query de atualização com os valores a serem somados.
 
         // RETORNA SUCESSO
-        return true; // Indica que a operação foi bem-sucedida
+        return true; // Retorna true para indicar que a operação foi bem-sucedida.
     }
 }
