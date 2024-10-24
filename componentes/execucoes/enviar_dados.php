@@ -19,7 +19,6 @@ if (isset($_POST)) {
         // Extrai o ID do jogador a partir do nome do campo (ex: "novo_jogador_1")
         $idJogador = explode('_', $idJogador)[1];
 
-        var_dump($jogador);
         // Armazena e remove a posição do array $jogador
         $posicao = $jogador['posicao'];
         unset($jogador['posicao']);
@@ -66,8 +65,6 @@ if (isset($_POST)) {
     }, array_keys($resultado));
     $resultado = array_combine($novasChaves, array_values($resultado));
     $competicaoDados->AtualizarEstatisticas($_POST['id_competicao'],  $_POST['id_time'], $resultado);
-
-
     // Redireciona para a página de estatísticas após a atualização
     header("Location: ../../pages/estatisticas.php");
 } else {
