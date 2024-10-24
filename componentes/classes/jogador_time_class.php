@@ -38,6 +38,11 @@ class JogadorTime
     private int $saque_flutuante_no_time; // Saques do tipo flutuante
 
     // Método para obter o ID do jogador
+    public function GetIDJogador()
+    {
+        return $this->id_jogador;
+    }
+    // Método para obter o ID do jogador
     public function GetID()
     {
         return $this->id_jogador_time;
@@ -204,6 +209,7 @@ class JogadorTime
         $obDatabase = new Database('jogador_no_time');
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $defesas);
         $idJogadorTime = $obDatabase->select('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, null, null, 'id_jogador_time')->fetchAll()[0]['id_jogador_time'];
+        var_dump($idJogadorTime);
         switch ($posicao) {
             case 'Levantador':
                 $levantador = new Database('levantador_no_time');

@@ -91,8 +91,8 @@ if (isset($_SESSION['id_usuario'])) {
 
             // Lista jogadores por posição e insere no componente adequado
             foreach ($time->GetJogadores() as $jogador) {
-              $componentes->LocalInsercao($jogador->GetID(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
-              array_push($jogadoresNoTime, $jogador->GetID());
+              $componentes->LocalInsercao($jogador->GetIDJogador(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
+              array_push($jogadoresNoTime, $jogador->GetIDJogador());
             }
             ?>
             <!-- Botão para enviar dados do time -->

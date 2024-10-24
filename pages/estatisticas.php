@@ -61,7 +61,6 @@ include '../componentes/header.php';
             <?php
             // Obtenção de jogadores de um time específico
             $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador');
-
             // Cria um array de IDs de jogadores
             $ids = [];
             foreach ($objetos as $objeto) {
