@@ -45,15 +45,15 @@ class Componentes
                 <input type="hidden" name="jogador_<?= $idJogador ?>[posicao]" value="<?= $posicaoJogador ?>">
                 <?php
                 $this->LocalDefesas($idJogador);
-                if ($posicaoJogador != "Levantador") {
+                if ($posicaoJogador != "levantador") {
                     $this->LocalPasses($idJogador);
                 }
-                if ($posicaoJogador != "Líbero") {
+                if ($posicaoJogador != "líbero") {
                     $this->LocalSaques($idJogador);
                     $this->LocalAtaques($idJogador);
                     $this->LocalBloqueios($idJogador);
                 }
-                if ($posicaoJogador == "Levantador") {
+                if ($posicaoJogador == "levantador") {
                     $this->LocalLevantamentos($idJogador);
                 }
                 ?>
