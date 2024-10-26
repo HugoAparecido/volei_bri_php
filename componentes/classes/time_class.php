@@ -39,45 +39,78 @@ class Time
      * Instituição do time
      * @var int
      */
-    private $id_istituicao; // ID da instituição à qual o time pertence
+    private $id_istituicao; // ID da instituição à qual o time pertenceprivate $jogadores; // Lista de jogadores do time
+
     private $jogadores; // Lista de jogadores do time
 
-    // Método para definir os jogadores do time
+    /**
+     * Método para definir os jogadores do time
+     * 
+     * @param array $jogadores Array contendo objetos dos jogadores que compõem o time
+     */
     public function DefinirJogadores($jogadores)
     {
-        $this->jogadores = $jogadores; // Atribui a lista de jogadores à propriedade
+        $this->jogadores = $jogadores; // Atribui a lista de jogadores à propriedade $jogadores
     }
 
-    // Método para obter os jogadores do time
+    /**
+     * Método para obter os jogadores do time
+     * 
+     * @return array Retorna a lista de jogadores do time
+     */
     public function GetJogadores()
     {
-        return $this->jogadores; // Retorna a lista de jogadores
+        return $this->jogadores; // Retorna a lista de jogadores do time
     }
 
-    // Método privado para definir todas as propriedades do time
+    /**
+     * Método privado para definir todas as propriedades do time
+     * 
+     * @param string $nome Nome do time
+     * @param string $sexo_time Categoria do time baseada em sexo (ex.: "Masculino" ou "Feminino")
+     * @param int $id_usuario ID do usuário responsável pelo cadastro do time
+     * @param int $id_istituicao ID da instituição associada ao time
+     */
     private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)
     {
         $this->nome_time = $nome; // Nome do time
-        $this->sexo_time = $sexo_time; // Sexo do time
-        $this->id_usuario = $id_usuario; // ID do usuário que cadastrou
-        $this->id_istituicao = $id_istituicao; // ID da instituição
+        $this->sexo_time = $sexo_time; // Categoria do time (masculino/feminino)
+        $this->id_usuario = $id_usuario; // ID do usuário responsável pelo cadastro
+        $this->id_istituicao = $id_istituicao; // ID da instituição associada
     }
 
     // Métodos getters para obter informações do time
+
+    /**
+     * Método para obter o ID do time
+     * 
+     * @return int Retorna o ID do time
+     */
     public function GetID()
     {
         return $this->id_time; // Retorna o ID do time
     }
 
+    /**
+     * Método para obter o nome do time
+     * 
+     * @return string Retorna o nome do time
+     */
     public function GetNome()
     {
         return $this->nome_time; // Retorna o nome do time
     }
 
+    /**
+     * Método para obter a categoria do time
+     * 
+     * @return string Retorna a categoria do time baseada em sexo (masculino/feminino)
+     */
     public function GetSexo()
     {
-        return $this->sexo_time; // Retorna o sexo do time
+        return $this->sexo_time; // Retorna a categoria do time (masculino/feminino)
     }
+
 
     /**
      * Método responsável por cadastrar um novo time no banco
