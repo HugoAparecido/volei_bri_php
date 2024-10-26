@@ -23,18 +23,29 @@ class OutrasPosicoes extends Jogador
     private $saque_viagem; // Contador de saques em viagem
     private $saque_errado; // Contador de saques errados
 
-    // Método privado para definir todos os atributos do jogador
+    /**
+     * Método privado para definir todos os atributos do jogador
+     * 
+     * @param string $nome Nome completo do jogador
+     * @param string $sexo Sexo do jogador
+     * @param string $posicao Posição do jogador em campo
+     * @param string $apelido Apelido ou nome curto do jogador
+     * @param int $numero Número da camisa do jogador
+     * @param float $altura Altura do jogador em metros
+     * @param float $peso Peso do jogador em quilogramas
+     */
     private function SetAll($nome, $sexo, $posicao, $apelido, $numero, $altura, $peso)
     {
         // Atribui os valores recebidos aos atributos da classe
-        $this->nome_jogador = $nome; // Nome do jogador
-        $this->apelido_jogador = $apelido; // Apelido do jogador
+        $this->nome_jogador = $nome; // Nome completo do jogador
+        $this->apelido_jogador = $apelido; // Apelido ou nome curto do jogador
         $this->numero_camisa = $numero; // Número da camisa do jogador
-        $this->sexo_jogador = $sexo; // Sexo do jogador
-        $this->altura_jogador = $altura; // Altura do jogador
-        $this->peso_jogador = $peso; // Peso do jogador
-        $this->posicao_jogador = $posicao; // Define a posição do jogador
+        $this->sexo_jogador = $sexo; // Sexo do jogador (ex.: "M" ou "F")
+        $this->altura_jogador = $altura; // Altura do jogador em metros
+        $this->peso_jogador = $peso; // Peso do jogador em quilogramas
+        $this->posicao_jogador = $posicao; // Posição do jogador em campo (ex.: "Líbero", "Atacante")
     }
+
 
     /**
      * Método responsável por cadastrar um novo jogador no banco de dados
