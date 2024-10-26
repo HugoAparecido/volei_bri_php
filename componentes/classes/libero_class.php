@@ -11,18 +11,30 @@ class Libero extends Jogador
     private $passe_c; // Contador de passes do tipo C
     private $passe_d; // Contador de passes do tipo D
 
-    // Método privado para definir os atributos do jogador
+    /**
+     * Método privado para definir os atributos do jogador
+     * 
+     * @param string $nome Nome completo do jogador
+     * @param string $sexo Sexo do jogador
+     * @param string $apelido Apelido ou nome curto do jogador
+     * @param int $numero Número da camisa do jogador
+     * @param float $altura Altura do jogador em metros
+     * @param float $peso Peso do jogador em quilogramas
+     */
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {
-        // Atribui os parâmetros às propriedades da classe
-        $this->nome_jogador = $nome; // Nome do jogador
-        $this->apelido_jogador = $apelido; // Apelido do jogador
+        // Atribui os parâmetros recebidos às propriedades da classe
+        $this->nome_jogador = $nome; // Nome completo do jogador
+        $this->apelido_jogador = $apelido; // Apelido ou nome curto do jogador
         $this->numero_camisa = $numero; // Número da camisa do jogador
-        $this->sexo_jogador = $sexo; // Sexo do jogador
-        $this->altura_jogador = $altura; // Altura do jogador
-        $this->peso_jogador = $peso; // Peso do jogador
-        $this->posicao_jogador = "Líbero"; // Define a posição como 'Líbero'
+        $this->sexo_jogador = $sexo; // Sexo do jogador (ex.: "M" ou "F")
+        $this->altura_jogador = $altura; // Altura do jogador em metros
+        $this->peso_jogador = $peso; // Peso do jogador em quilogramas
+
+        // Define a posição padrão do jogador como "Líbero"
+        $this->posicao_jogador = "Líbero";
     }
+
 
     /**
      * Método responsável por cadastrar um novo jogador do tipo Líbero no banco
