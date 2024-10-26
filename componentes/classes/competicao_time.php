@@ -171,20 +171,45 @@ class CompeticaoTime
      */
     private int $saque_flutuante_no_time;
 
+    /**
+     * Método responsável por atualizar as estatísticas de um time em uma competição
+     * @param int $idCompeticao ID da competição
+     * @param int $idTime ID do time
+     * @param array $valores Array contendo as estatísticas a serem atualizadas
+     */
     public function AtualizarEstatisticas($idCompeticao, $idTime, $valores)
     {
+        // Modifica as chaves do array de valores para refletir o formato esperado no banco de dados
         $valores = $this->ModificarChavesArray($valores);
+
         // Cria uma nova instância da classe Database para interagir com a tabela 'competicao_time'
         $obDatabase = new Database('competicao_time');
+
+        // Atualiza as estatísticas na tabela 'competicao_time' com os valores modificados, 
+        // aplicando a condição para um registro específico (baseado no ID da competição e do time)
         $obDatabase->AtualizarEstatisticas('id_competicao = ' . $idCompeticao . ' AND id_time = ' . $idTime, $valores);
     }
+
+    /**
+     * Método privado que modifica as chaves do array de valores, adicionando o sufixo '_no_time' a cada chave
+     * para refletir o formato esperado no banco de dados
+     * @param array $valores Array com as estatísticas a serem atualizadas
+     * @return array Array com as chaves modificadas
+     */
     private function ModificarChavesArray($valores)
     {
+        // Obtém as chaves originais do array de valores
         $chaves = array_keys($valores);
+
+        // Inicializa um novo array para armazenar as chaves modificadas
         $novasChaves = [];
+
+        // Itera por cada chave original e adiciona o sufixo '_no_time' a ela
         foreach ($chaves as $chave) {
             array_push($novasChaves, $chave . '_no_time');
         }
+
+        // Combina as novas chaves com os valores originais e retorna o array modificado
         return $valores = array_combine($novasChaves, $valores);
     }
 }
