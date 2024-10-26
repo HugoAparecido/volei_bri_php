@@ -1,18 +1,20 @@
+// Função para mover elementos de um elemento de origem para um elemento de destino
 function Mover(divOrigem, divDestino) {
-    console.log(divOrigem)
-    console.log(divDestino)
+    // Obtém o elemento DOM correspondente ao ID passado como 'divDestino'
     divDestino = document.getElementById(divDestino);
-    console.log(divDestino.children)
-    console.log(divDestino.children.length)
+
+    // Verifica se 'divDestino' contém apenas um filho
     if (divDestino.children.length === 1) {
-        divOrigemArray = Array.prototype.slice.call(divOrigem.children)
-        console.log(divOrigemArray)
-        console.log(divDestino)
+        // Converte a coleção de filhos de 'divOrigem' em um array para facilitar a iteração
+        divOrigemArray = Array.prototype.slice.call(divOrigem.children);
+
+        // Para cada elemento filho em 'divOrigem', adiciona-o como filho de 'divDestino'
         divOrigemArray.forEach(element => {
-            divDestino.appendChild(element)
+            divDestino.appendChild(element);
         });
     }
 }
+
 // Receber os seletores
 const containerItem = document.querySelectorAll(".containerItem")
 const containerItemPrncipal = document.querySelectorAll(".containerItemPrincipal")
