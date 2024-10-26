@@ -63,7 +63,7 @@ if (isset($_SESSION['id_usuario'])) {
                     // Obtém os dados do jogador selecionado.
                     $jogador = Jogador::getJogador(intval($_POST['id_jogador']));
                 ?>
-
+                    <input type="hidden" name="id_jogador" value="<?= $_POST['id_jogador'] ?>">
                     <!-- Campo para nome do jogador -->
                     <div class="mb-3">
                         <label for="nome_jogador">Nome: </label>

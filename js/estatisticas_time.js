@@ -7,10 +7,10 @@ function GraficoPasse(dados, idGrafico, localGrafico) {
         'rgb(242, 92, 5)',
     ], localGrafico, idGrafico);
 }
-const resultadoPasses = passesLibero.map((num, index) => num + passesOutrasPosicoes[index]);
-GraficoPasse(passesLibero, 'grafico_passe_libero', 'grafico_passe_libero_local')
-GraficoPasse(passesOutrasPosicoes, 'grafico_passe_outras_posicoes', 'grafico_passe_outras_local')
-GraficoPasse(resultadoPasses, 'grafico_passe_total_posicoes', 'grafico_passe_total_local')
+// const resultadoPasses = passesLibero.map((num, index) => num + passesOutrasPosicoes[index]);
+// GraficoPasse(passesLibero, 'grafico_passe_libero', 'grafico_passe_libero_local')
+// GraficoPasse(passesOutrasPosicoes, 'grafico_passe_outras_posicoes', 'grafico_passe_outras_local')
+// GraficoPasse(resultadoPasses, 'grafico_passe_total_posicoes', 'grafico_passe_total_local')
 function GraficoDefesa(dados) {
     Graficos.FazerGrafico(dados, ['Acerto', 'Erro'], 'Defesa', [
         'rgb(0, 37, 228)',
@@ -35,7 +35,7 @@ function GraficoAcertoSaque(dados, idGrafico, localGrafico) {
         'rgb(2, 183, 86)'
     ], localGrafico, idGrafico);
 }
-GraficoAcertoSaque([saquesOutrasPosicoes.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesOutrasPosicoes[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
-GraficoTiposSaque(saquesOutrasPosicoes.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')
-GraficoAcertoSaque([saquesLevantador.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesLevantador[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
-GraficoTiposSaque(saquesLevantador.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')
+// GraficoAcertoSaque([saquesOutrasPosicoes.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesOutrasPosicoes[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
+// GraficoTiposSaque(saquesOutrasPosicoes.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')
+// GraficoAcertoSaque([saquesLevantador.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesLevantador[4]], 'grafico_erros_saques_outras_posicoes', 'grafico_erros_saques_outras_posicoes_local')
+// GraficoTiposSaque(saquesLevantador.slice(0, 4), 'grafico_tipos_saques_outras_posicoes', 'grafico_tipos_saques_outras_posicoes_local')
