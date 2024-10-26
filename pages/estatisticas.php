@@ -67,37 +67,22 @@ include '../componentes/header.php';
                 array_push($ids, $objeto->GetID());
             }
             // Obtenção das estatísticas de defesas para o time selecionado
-            $estatisticas = ['defesas' => JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time']))];
+            $estatisticas = [
+                'defesas' => ['select' => JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time'])), 'dados' => 'GetDefesas'],
+                'passesLibero' => ['select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'libero_no_time'), 'dados' => 'GetPasses'],
+                'passesOutrasPosicoes' => ['select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time'), 'dados' => 'GetPasses'],
+                'saquesOutrasPosicoes' => ['select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time'), 'dados' => 'GetSaques'],
+                'saquesLevantador' => ['select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'levantador_no_time'), 'dados' => 'GetSaques']
+            ];
             foreach ($estatisticas as $movimento => $estatistica) {
-                if (is_object($estatistica[0])) {
+                if (is_object($estatistica['select'][0])) {
+                    $funcao = $estatistica['dados'];
                     // Envia o valor das defesas para o JavaScript
-                    echo '<script>var ' . $movimento . ' = ' . $estatistica[0]->GetDefesas() . ';</script>';
+                    echo '<script>var ' . $movimento . ' = ' . $estatistica['select'][0]->$funcao() . ';</script>';
                 } else {
                     echo '<script>var ' . $movimento . ' = [0, 0];</script>';
                 }
             }
-
-            // // Obtenção das estatísticas de passes para o líbero no time
-            // $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'libero_no_time');
-            // $estatisticas = $estatisticas[0];
-
-            // // Envia o valor dos passes do líbero para o JavaScript
-            // echo '<script>var passesLibero = ' . $estatisticas->GetPasses() . ';</script>';
-
-            // // Obtenção das estatísticas de passes para outras posições no time
-            // $estatisticas = JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time');
-            // $estatisticas = $estatisticas[0];
-
-            // echo '<script>var passesOutrasPosicoes = ' . $estatisticas->GetPasses() . ';</script>';
-
-            // $estatisticas = JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time');
-            // $estatisticas = $estatisticas[0];
-            // echo '<script>var saquesOutrasPosicoes = ' . $estatisticas->GetSaques() . ';</script>';
-
-            // $estatisticas = JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'levantador_no_time');
-            // $estatisticas = $estatisticas[0];
-            // echo '<script>var saquesLevantador = ' . $estatisticas->GetSaques() . ';</script>';
-            // 
             ?>
 
             <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
