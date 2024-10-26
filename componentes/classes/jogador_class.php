@@ -197,10 +197,21 @@ class Jogador
         // Realiza a consulta para buscar um jogador pelo ID e retorna o objeto correspondente
         return (new Database('jogador'))->select('id_jogador = ' . $id)->fetchObject(self::class);
     }
+
+    /**
+     * Atualiza as estatísticas de defesas de um jogador específico no banco de dados.
+     * 
+     * @param int $idJogador ID do jogador cujas defesas serão atualizadas
+     * @param array $valores Dados atualizados das estatísticas de defesa para o jogador
+     */
     public function AtualizarDefesas($idJogador, $valores)
     {
-        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        // Cria uma nova instância da classe Database para interagir com o banco de dados, 
+        // configurando o acesso à tabela 'jogador'
         $obDatabase = new Database('jogador');
+
+        // Atualiza as estatísticas do jogador com base na condição 'id_jogador = $idJogador', 
+        // utilizando o array $valores para definir os novos valores das colunas
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
     }
 }
