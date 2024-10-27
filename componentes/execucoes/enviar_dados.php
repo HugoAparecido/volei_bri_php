@@ -45,11 +45,11 @@ if (isset($_POST)) {
         $jogadores_no_time->AtualizarEstatisticas($idJogador, $_POST['id_time'], $posicao, $defesas, $jogador);
 
         // Atualiza estatísticas específicas conforme a posição do jogador
-        if ($posicao == 'Levantador') {
+        if ($posicao == 'levantador') {
             // Caso o jogador seja um levantador
             $levantador = new Levantador();
             $levantador->AtualizarEstatisticas($idJogador, $jogador);
-        } elseif ($posicao == 'Líbero') {
+        } elseif ($posicao == 'líbero') {
             // Caso o jogador seja um líbero
             $libero = new Libero();
             $libero->AtualizarEstatisticas($idJogador, $jogador);

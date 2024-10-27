@@ -211,11 +211,11 @@ class JogadorTime
         $idJogadorTime = $obDatabase->select('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, null, null, 'id_jogador_time')->fetchAll()[0]['id_jogador_time'];
         var_dump($idJogadorTime);
         switch ($posicao) {
-            case 'Levantador':
+            case 'levantador':
                 $levantador = new Database('levantador_no_time');
                 $levantador->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
                 break;
-            case 'Líbero':
+            case 'líbero':
                 $libero = new Database('libero_no_time');
                 $libero->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
                 break;
