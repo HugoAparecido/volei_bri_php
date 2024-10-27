@@ -74,13 +74,13 @@ GraficoTiposSaque(
 // Gera gráfico de acertos e erros para saques do levantador
 GraficoAcertoSaque(
     [saquesLevantador.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesLevantador[4]],
-    'grafico_erros_saques_levantador',
-    'grafico_erros_saques_levantador_local'
+    'grafico_erros_saques_levantadores',
+    'grafico_erros_saques_levantadores_local'
 );
 
 // Gera gráfico dos tipos de saque do levantador
 GraficoTiposSaque(
     saquesLevantador.slice(0, 4),
-    'grafico_tipos_saques_levantador',
-    'grafico_tipos_saques_levantador_local'
+    'grafico_tipos_saques_levantadores',
+    'grafico_tipos_saques_levantadores_local'
 );

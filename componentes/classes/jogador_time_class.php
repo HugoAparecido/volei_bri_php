@@ -31,11 +31,11 @@ class JogadorTime
     private string $posicao_jogador; // Posição do jogador no time
 
     // Atributos relacionados ao saque do jogador no time
-    private int $saque_fora_no_time; // Saques fora do time
-    private int $saque_ace_no_time; // Saques ace do tipo flutuante
-    private int $saque_cima_no_time; // Saques do tipo cima
-    private int $saque_viagem_no_time; // Saques do tipo viagem
-    private int $saque_flutuante_no_time; // Saques do tipo flutuante
+    private ?int $saque_fora_no_time; // Saques fora do time
+    private ?int $saque_ace_no_time; // Saques ace do tipo flutuante
+    private ?int $saque_cima_no_time; // Saques do tipo cima
+    private ?int $saque_viagem_no_time; // Saques do tipo viagem
+    private ?int $saque_flutuante_no_time; // Saques do tipo flutuante
 
     // Método para obter o ID do jogador
     public function GetIDJogador()
@@ -87,7 +87,7 @@ class JogadorTime
     }
     public function GetSaques()
     {
-        return '[' . $this->saque_ace_no_time . ',' . $this->saque_viagem_no_time . ',' . $this->saque_flutuante_no_time . ',' . $this->saque_cima_no_time . ',' . $this->saque_fora_no_time . ']';
+        return '[' . ($this->saque_ace_no_time ?? 0) . ',' . ($this->saque_viagem_no_time ?? 0) . ',' . ($this->saque_flutuante_no_time ?? 0) . ',' . ($this->saque_cima_no_time ?? 0) . ',' . ($this->saque_fora_no_time ?? 0) . ']';
     }
     public function GetLeavtamentos()
     {

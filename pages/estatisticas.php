@@ -83,6 +83,7 @@ include '../componentes/header.php';
                 // Verifica se a primeira posição da seleção é um objeto
                 if (is_object($estatistica['select'][0])) {
                     $funcao = $estatistica['dados']; // Obtém o nome da função para chamar
+                    var_dump($estatistica['select'][0]->$funcao());
                     // Envia o valor das estatísticas para o JavaScript como uma variável
                     echo '<script>var ' . $movimento . ' = ' . $estatistica['select'][0]->$funcao() . ';</script>';
                 } else {
@@ -91,7 +92,6 @@ include '../componentes/header.php';
                 }
             }
             ?>
-
 
             <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
             <div class="card">
