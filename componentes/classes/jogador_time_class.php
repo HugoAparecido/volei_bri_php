@@ -13,21 +13,21 @@ class JogadorTime
     private int $id_time; // Identificador do time ao qual o jogador pertence
 
     // Atributos relacionados a estatísticas do jogador no time
-    private int $defesa_jogador_no_time; // Defesas realizadas pelo jogador no time
-    private int $erro_defesa_no_time; // Defesas realizadas pelo jogador no time
-    private int $ataque_dentro_no_time; // Ataques realizados dentro do time
-    private int $ataque_fora_no_time; // Ataques realizados fora do time
-    private int $bloqueio_convertido_no_time; // Bloqueios convertidos no time
-    private int $bloqueio_errado_no_time; // Bloqueios errados no time
-    private int $passe_a_no_time; // Passes do tipo A realizados no time
-    private int $passe_b_no_time; // Passes do tipo B realizados no time
-    private int $passe_c_no_time; // Passes do tipo C realizados no time
-    private int $passe_d_no_time; // Passes do tipo D realizados no time
-    private int $levantamento_para_oposto_no_time; // Levantamentos para jogador oposto
-    private int $levantamento_para_pipe_no_time; // Levantamentos para jogador de pipe
-    private int $levantamento_para_ponta_no_time; // Levantamentos para jogador de ponta
-    private int $levantamento_para_centro_no_time; // Levantamentos para jogador de centro
-    private int $errou_levantamento_no_time; // Contador de levantamentos errados
+    private ?int $defesa_jogador_no_time; // Defesas realizadas pelo jogador no time
+    private ?int $erro_defesa_no_time; // Defesas realizadas pelo jogador no time
+    private ?int $ataque_dentro_no_time; // Ataques realizados dentro do time
+    private ?int $ataque_fora_no_time; // Ataques realizados fora do time
+    private ?int $bloqueio_convertido_no_time; // Bloqueios convertidos no time
+    private ?int $bloqueio_errado_no_time; // Bloqueios errados no time
+    private ?int $passe_a_no_time; // Passes do tipo A realizados no time
+    private ?int $passe_b_no_time; // Passes do tipo B realizados no time
+    private ?int $passe_c_no_time; // Passes do tipo C realizados no time
+    private ?int $passe_d_no_time; // Passes do tipo D realizados no time
+    private ?int $levantamento_para_oposto_no_time; // Levantamentos para jogador oposto
+    private ?int $levantamento_para_pipe_no_time; // Levantamentos para jogador de pipe
+    private ?int $levantamento_para_ponta_no_time; // Levantamentos para jogador de ponta
+    private ?int $levantamento_para_centro_no_time; // Levantamentos para jogador de centro
+    private ?int $errou_levantamento_no_time; // Contador de levantamentos errados
     private string $posicao_jogador; // Posição do jogador no time
 
     // Atributos relacionados ao saque do jogador no time
@@ -68,22 +68,22 @@ class JogadorTime
 
     public function GetPasses()
     {
-        return '[' . $this->passe_a_no_time . ',' . $this->passe_b_no_time . ',' . $this->passe_c_no_time . ',' . $this->passe_d_no_time . ']';
+        return '[' . ($this->passe_a_no_time ?? 0) . ',' . ($this->passe_b_no_time ?? 0) . ',' . ($this->passe_c_no_time ?? 0) . ',' . ($this->passe_d_no_time ?? 0) . ']';
     }
 
     public function GetDefesas()
     {
-        return '[' . $this->defesa_jogador_no_time . ',' . $this->erro_defesa_no_time . ']';
+        return '[' . ($this->defesa_jogador_no_time ?? 0) . ',' . ($this->erro_defesa_no_time ?? 0) . ']';
     }
 
     public function GetAtaques()
     {
-        return '[' . $this->ataque_dentro_no_time . ',' . $this->ataque_fora_no_time . ']';
+        return '[' . ($this->ataque_dentro_no_time ?? 0) . ',' . ($this->ataque_fora_no_time ?? 0) . ']';
     }
 
     public function GetBloqueios()
     {
-        return '[' . $this->bloqueio_convertido_no_time . ',' . $this->bloqueio_errado_no_time . ']';
+        return '[' . ($this->bloqueio_convertido_no_time ?? 0) . ',' . ($this->bloqueio_errado_no_time ?? 0) . ']';
     }
     public function GetSaques()
     {

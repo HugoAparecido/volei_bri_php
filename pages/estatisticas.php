@@ -62,36 +62,64 @@ include '../componentes/header.php';
             // Obtenção de jogadores de um time específico usando a função getJogadoresTime
             $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador');
 
-            // Cria um array para armazenar os IDs dos jogadores obtidos
-            $ids = [];
-            // Itera sobre os objetos retornados para extrair os IDs dos jogadores
-            foreach ($objetos as $objeto) {
-                array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
-            }
+            if (!empty($objetos)) {
+                // Cria um array para armazenar os IDs dos jogadores obtidos
+                $ids = [];
+                // Itera sobre os objetos retornados para extrair os IDs dos jogadores
+                foreach ($objetos as $objeto) {
+                    array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
+                }
 
-            // Obtenção das estatísticas de defesas e passes para o time selecionado
-            $estatisticas = [
-                'defesas' => ['select' => JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time'])), 'dados' => 'GetDefesas'], // Estatísticas de defesas
-                'passesLibero' => ['select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'libero_no_time'), 'dados' => 'GetPasses'], // Estatísticas de passes do líbero
-                'passesOutrasPosicoes' => ['select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time'), 'dados' => 'GetPasses'], // Estatísticas de passes de outras posições
-                'saquesOutrasPosicoes' => ['select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time'), 'dados' => 'GetSaques'], // Estatísticas de saques de outras posições
-                'saquesLevantador' => ['select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'levantador_no_time'), 'dados' => 'GetSaques'] // Estatísticas de saques do levantador
-            ];
+                // Definição das estatísticas de defesas e passes para o time selecionado
+                $estatisticas = [
+                    // Estatísticas de defesas
+                    'defesas' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralDefesas(intval($_GET['id_time'])),
+                        'dados' => 'GetDefesas'
+                    ],
+                    // Estatísticas de passes do líbero
+                    'passesLibero' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'libero_no_time'),
+                        'dados' => 'GetPasses'
+                    ],
+                    // Estatísticas de passes de outras posições
+                    'passesOutrasPosicoes' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralPasses($ids, 'outras_posicoes_no_time'),
+                        'dados' => 'GetPasses'
+                    ],
+                    // Estatísticas de saques de outras posições
+                    'saquesOutrasPosicoes' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'outras_posicoes_no_time'),
+                        'dados' => 'GetSaques'
+                    ],
+                    // Estatísticas de saques do levantador
+                    'saquesLevantador' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralSaques($ids, 'levantador_no_time'),
+                        'dados' => 'GetSaques'
+                    ]
+                ];
 
-            // Itera sobre o array de estatísticas para processar cada movimento
-            foreach ($estatisticas as $movimento => $estatistica) {
-                // Verifica se a primeira posição da seleção é um objeto
-                if (is_object($estatistica['select'][0])) {
-                    $funcao = $estatistica['dados']; // Obtém o nome da função para chamar
-                    var_dump($estatistica['select'][0]->$funcao());
-                    // Envia o valor das estatísticas para o JavaScript como uma variável
-                    echo '<script>var ' . $movimento . ' = ' . $estatistica['select'][0]->$funcao() . ';</script>';
-                } else {
-                    // Se não houver dados válidos, define a variável como um array padrão [0, 0]
-                    echo '<script>var ' . $movimento . ' = [0, 0];</script>';
+                // Itera sobre o array de estatísticas para processar cada movimento
+                foreach ($estatisticas as $movimento => $estatistica) {
+                    // Verifica se o primeiro elemento do array 'select' é um objeto
+                    if (is_object($estatistica['select'][0])) {
+                        $funcao = $estatistica['dados']; // Obtém o nome do método para ser chamado
+                        // Envia o valor das estatísticas para o JavaScript como uma variável
+                        echo '<script>var ' . $movimento . ' = ' . $estatistica['select'][0]->$funcao() . ';</script>';
+                    } else {
+                        // Se não houver dados válidos, define a variável como um array padrão [0, 0]
+                        echo '<script>var ' . $movimento . ' = [0, 0];</script>';
+                    }
+                }
+            } else {
+                // Se não houver jogadores, define valores padrão para cada movimento no JavaScript
+                $movimentos = ['defesas', 'passesLibero', 'passesOutrasPosicoes', 'saquesOutrasPosicoes', 'saquesLevantador'];
+                foreach ($movimentos as $movimento) {
+                    echo '<script>var ' . $movimento . ' = [0, 0, 0, 0, 0];</script>';
                 }
             }
             ?>
+
 
             <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
             <div class="card">
