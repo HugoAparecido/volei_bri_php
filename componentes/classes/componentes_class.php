@@ -47,7 +47,7 @@ class Componentes
     {
 ?>
         <!-- Bloco arrastável que representa o jogador -->
-        <div class="itemArrastavel card m-5" draggable="true">
+        <div class="itemArrastavel card m-3" style="width: auto;" draggable="true">
             <?php
             // Exibe o cabeçalho com o nome, número e posição do jogador
             $this->HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador);
@@ -85,9 +85,9 @@ class Componentes
     private function HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador)
     { ?>
         <div class="card-header">
-            <h3>
+            <p style="font-weight: 700; font-size: 25px;">
                 <?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?>
-            </h3>
+            </p>
         </div>
     <?php
     }
@@ -127,11 +127,11 @@ class Componentes
     private function LocalDefesas($idJogador)
     {
     ?>
-        <div class="defesa m-2">
+        <div class="defesa">
             <span><strong>Def: </strong></span>
             <?php $this->InputEstatistica($idJogador, 'defesa_jogador', ''); ?>
         </div>
-        <div class="defesa m-2">
+        <div class="defesa">
             <span><strong>Err_def: </strong></span>
             <?php $this->InputEstatistica($idJogador, 'erro_defesa', ''); ?>
         </div>
@@ -146,10 +146,12 @@ class Componentes
     ?>
         <div class="passes">
             <div><span><strong>Pas: </strong></span></div>
-            <?php $this->InputEstatistica($idJogador, 'passe_a', 'A'); ?>
-            <?php $this->InputEstatistica($idJogador, 'passe_b', 'B'); ?>
-            <?php $this->InputEstatistica($idJogador, 'passe_c', 'C'); ?>
-            <?php $this->InputEstatistica($idJogador, 'passe_d', 'D'); ?>
+            <div>
+                <?php $this->InputEstatistica($idJogador, 'passe_a', 'A'); ?>
+                <?php $this->InputEstatistica($idJogador, 'passe_b', 'B'); ?>
+                <?php $this->InputEstatistica($idJogador, 'passe_c', 'C'); ?>
+                <?php $this->InputEstatistica($idJogador, 'passe_d', 'D'); ?>
+            </div>
         </div>
     <?php
     }
@@ -161,12 +163,14 @@ class Componentes
     {
     ?>
         <div class="saques">
-            <strong><span>Saq: </span></strong>
-            <?php $this->InputEstatistica($idJogador, 'saque_flutuante', 'Flu'); ?>
-            <?php $this->InputEstatistica($idJogador, 'saque_ace', 'ACE'); ?>
-            <?php $this->InputEstatistica($idJogador, 'saque_viagem', 'Via'); ?>
-            <?php $this->InputEstatistica($idJogador, 'saque_cima', 'Cima'); ?>
-            <?php $this->InputEstatistica($idJogador, 'saque_fora', 'Fora'); ?>
+            <div><strong><span>Saq: </span></strong></div>
+            <div>
+                <?php $this->InputEstatistica($idJogador, 'saque_flutuante', 'Flu'); ?>
+                <?php $this->InputEstatistica($idJogador, 'saque_ace', 'ACE'); ?>
+                <?php $this->InputEstatistica($idJogador, 'saque_viagem', 'Via'); ?>
+                <?php $this->InputEstatistica($idJogador, 'saque_cima', 'Cima'); ?>
+                <?php $this->InputEstatistica($idJogador, 'saque_fora', 'Fora'); ?>
+            </div>
         </div>
     <?php
     }
@@ -178,9 +182,11 @@ class Componentes
     {
     ?>
         <div class="ataques">
-            <strong><span>Ataq: </span></strong>
-            <?php $this->InputEstatistica($idJogador, 'ataque_dentro', 'Dentro'); ?>
-            <?php $this->InputEstatistica($idJogador, 'ataque_fora', 'Fora'); ?>
+            <div><strong><span>Ataq: </span></strong></div>
+            <div>
+                <?php $this->InputEstatistica($idJogador, 'ataque_dentro', 'Dentro'); ?>
+                <?php $this->InputEstatistica($idJogador, 'ataque_fora', 'Fora'); ?>
+            </div>
         </div>
     <?php
     }
@@ -192,9 +198,11 @@ class Componentes
     {
     ?>
         <div class="bloqueios">
-            <strong><span>Bloq: </span></strong>
-            <?php $this->InputEstatistica($idJogador, 'bloqueio_convertido', 'Convertido'); ?>
-            <?php $this->InputEstatistica($idJogador, 'bloqueio_errado', 'Errado'); ?>
+            <div><strong><span>Bloq: </span></strong></div>
+            <div>
+                <?php $this->InputEstatistica($idJogador, 'bloqueio_convertido', 'Convertido'); ?>
+                <?php $this->InputEstatistica($idJogador, 'bloqueio_errado', 'Errado'); ?>
+            </div>
         </div>
     <?php
     }
@@ -206,12 +214,14 @@ class Componentes
     {
     ?>
         <div class="levantamentos">
-            <strong><span>Levant: </span></strong>
-            <?php $this->InputEstatistica($idJogador, 'levantamento_para_ponta', 'Ponta'); ?>
-            <?php $this->InputEstatistica($idJogador, 'levantamento_para_pipe', 'Pipe'); ?>
-            <?php $this->InputEstatistica($idJogador, 'levantamento_para_centro', 'Centro'); ?>
-            <?php $this->InputEstatistica($idJogador, 'levantamento_para_oposto', 'Oposto'); ?>
-            <?php $this->InputEstatistica($idJogador, 'errou_levantamento', 'Errou'); ?>
+            <div><strong><span>Levant: </span></strong></div>
+            <div>
+                <?php $this->InputEstatistica($idJogador, 'levantamento_para_ponta', 'Ponta'); ?>
+                <?php $this->InputEstatistica($idJogador, 'levantamento_para_pipe', 'Pipe'); ?>
+                <?php $this->InputEstatistica($idJogador, 'levantamento_para_centro', 'Centro'); ?>
+                <?php $this->InputEstatistica($idJogador, 'levantamento_para_oposto', 'Oposto'); ?>
+                <?php $this->InputEstatistica($idJogador, 'errou_levantamento', 'Errou'); ?>
+            </div>
         </div>
 <?php
     }

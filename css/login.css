@@ -72,3 +72,12 @@ h2 {
   border: none;
   /* Remove a borda padrão dos botões */
 }
+
+#btn {
+  background-color: var(--amarelo);
+  /* Botões em amarelo pastel */
+  color: #003366;
+  /* Texto dos botões em azul escuro */
+  border: none;
+  /* Remove a borda padrão dos botões */
+}

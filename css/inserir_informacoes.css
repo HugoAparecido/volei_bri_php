@@ -130,3 +130,31 @@ span {
     flex-direction: row;
     align-items: center;
 }
+
+.passes,
+.bloqueios,
+.ataques,
+.saques,
+.levantamentos {
+    flex-direction: column;
+}
+
+.passes>div,
+.bloqueios>div,
+.ataques>div,
+.saques>div,
+.levantamentos>div {
+    flex-direction: row;
+    text-align: center;
+}
+
+.passes>div>div,
+.bloqueios>div>div,
+.ataques>div>div,
+.saques>div>div,
+.levantamentos>div>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

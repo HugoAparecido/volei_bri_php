@@ -22,7 +22,7 @@ if (isset($_SESSION['id_usuario'])) {
   define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
   include '../componentes/header.php';
 ?>
-  <main class="justify-content-center align-items-center min-vh-100">
+  <main>
     <!-- Botão para logout no canto superior direito -->
     <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
       <button type="button" class="btn" id="logout">
@@ -40,11 +40,11 @@ if (isset($_SESSION['id_usuario'])) {
     ?>
       <div class="d-flex justify-content-center mt-5">
         <!-- Formulário para envio de dados do time -->
-        <form action="../componentes/execucoes/enviar_dados.php" method="post">
+        <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100">
           <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
           <input type="hidden" name="id_competicao" value="1">
           <!-- Card com informações do time e jogadores principais -->
-          <div class="card mb-3 mt-5">
+          <div class="card mb-3 mt-5 " style="width: 100%;">
             <div class="card-header">
               <h2>Time: <?= $time->GetNome() ?></h2>
             </div>
@@ -60,11 +60,11 @@ if (isset($_SESSION['id_usuario'])) {
               $cardPosicoes = ['Levantador', 'Líbero', 'Ponta 1', 'Ponta 2', 'Oposto', 'Central 1', 'Central 2'];
 
               // Loop para criar um card para cada posição dentro do array $cardPosicoes
-              foreach ($cardPosicoes as $cardPosicao) {
+              foreach ($cardPosicoes as $indice => $cardPosicao) {
               ?>
 
                 <!-- Estrutura de um card para cada posição, com estilo mínimo de altura para manter tamanho uniforme -->
-                <div class="card" style="min-height: 100px;">
+                <div class="card" style="min-height: 100px; height: auto; min-width:50%; width: auto; float:left;">
 
                   <!-- Cabeçalho do card que mostra o nome da posição -->
                   <div class="card-header">
@@ -99,6 +99,9 @@ if (isset($_SESSION['id_usuario'])) {
             <button type="submit" class="btn m-5" id="btn">Enviar Dados</button>
           </div>
         </form>
+
+      </div>
+      <div class="d-flex align-items-center justify-content-center">
 
         <!-- Formulário para adicionar jogador em cada posição -->
         <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
@@ -153,6 +156,7 @@ if (isset($_SESSION['id_usuario'])) {
         <!-- Link para cadastrar novo jogador -->
         <a href="./cadastrar_jogador.php" type="button" class="btn m-3 " id="btn">Cadastrar Jogador</a>
       </div>
+
       <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
       </div>
     <?php

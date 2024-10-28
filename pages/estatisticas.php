@@ -41,24 +41,28 @@ include '../componentes/header.php';
             <a href="../componentes/logout.php">Sair</a>
         </button>
     </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
+        <form action="./estatisticas.php" method="get" class="mt-5">
+            <select class="form-select" name="id_time" id="id_time">
+                <?php
+                // Função que popula o 'select' com os times disponíveis
+                Componentes::InputTimes();
+                ?>
+            </select>
+            <button class="btn" type="submit" id="btn">Mostrar</button>
+        </form>
+    </div>
+    <div class="text-center">
+        <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
+        <?php if (isset($_GET['id_time'])) { ?>
+            <!-- Exibe o título "Estatísticas" -->
+            <h1>Estatísticas</h1>
+    </div>
 
 
-    <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
-    <form action="./estatisticas.php" method="get" class="mt-5">
-        <select name="id_time" id="id_time">
-            <?php
-            // Função que popula o 'select' com os times disponíveis
-            Componentes::InputTimes();
-            ?>
-        </select>
-        <button type="submit">Mostrar</button>
-    </form>
-    <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
-    <?php if (isset($_GET['id_time'])) { ?>
-        <!-- Exibe o título "Estatísticas" -->
-        <h1>Estatísticas</h1>
-        <div class="card">
-            <?php
+    <div class="card">
+        <?php
             // Obtenção de jogadores de um time específico usando a função getJogadoresTime
             $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador');
 
@@ -118,60 +122,75 @@ include '../componentes/header.php';
                     echo '<script>var ' . $movimento . ' = [0, 0, 0, 0, 0];</script>';
                 }
             }
-            ?>
+        ?>
 
 
-            <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2>Passes</h2>
-                </div>
-                <div class="d-flex flex-row">
-                    <div class="text-center" id="grafico_passe_libero_local" style="width: 500px;">
+        <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Passes</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_passe_libero_local">
                         <h3>Líbero</h3>
                     </div>
-                    <div class="text-center" id="grafico_passe_outras_local" style="width: 500px;">
+                </div>
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_passe_outras_local">
                         <h3>Outras Posições</h3>
                     </div>
-                    <div class="text-center" id="grafico_passe_total_local" style="width: 500px;">
+                </div>
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_passe_total_local">
                         <h3>Total Passes Time</h3>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gráfico para exibir as defesas -->
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2>Defesas</h2>
-                </div>
-                <div id="grafico_defesa_local">
-                </div>
-            </div>
-
-            <!-- Gráfico para exibir as defesas -->
-            <div class="card">
-                <div class="card-header text-center">
-                    <h2>Saques</h2>
-                </div>
-                <div class="d-flex flex-row">
-                    <div class="text-center" id="grafico_erros_saques_levantadores_local" style="width: 500px;">
-                        <h3>Erros e acertos dos levantadores</h3>
-                    </div>
-                    <div class="text-center" id="grafico_tipos_saques_levantadores_local" style="width: 500px;">
-                        <h3>Tipos de saques usados por levantadores</h3>
-                    </div>
-                    <div class="text-center" id="grafico_erros_saques_outras_posicoes_local" style="width: 500px;">
-                        <h3>Erros e acertos dos outros jogadores</h3>
-                    </div>
-                    <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local" style="width: 500px;">
-                        <h3>Tipos de saques usados por outros jogadores</h3>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Fim da condição -->
-    <?php } ?>
+        <!-- Gráfico para exibir as defesas -->
+        <div class="card align-items-center" style="width: 100%;">
+            <div class="card-header text-center" style="width: 100%;">
+                <h2>Defesas</h2>
+            </div>
+            <div class="text-center" style="width: 33.3%;">
+                <div id="grafico_defesa_local"></div>
+            </div>
+        </div>
+
+        <!-- Gráfico para exibir as defesas -->
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Saques</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_erros_saques_levantadores_local">
+                        <h3>Erros e acertos dos levantadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_tipos_saques_levantadores_local">
+                        <h3>Tipos de saques usados por levantadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_erros_saques_outras_posicoes_local">
+                        <h3>Erros e acertos dos outros jogadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local">
+                        <h3>Tipos de saques usados por outros jogadores</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fim da condição -->
+<?php } ?>
 </main>
 
 <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
