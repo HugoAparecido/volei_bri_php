@@ -186,6 +186,45 @@ include '../componentes/header.php';
                     </div>
                 </div>
             </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 50%;">
+                    <div class="text-center" id="grafico_erros_saques_total_local">
+                        <h3>Total erros e acertos</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 50%;">
+                    <div class="text-center" id="grafico_tipos_saques_total_local">
+                        <h3>Total tipos de saques usados</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Ataques</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_erros_saques_levantadores_local">
+                        <h3>Erros e acertos dos levantadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_tipos_saques_levantadores_local">
+                        <h3>Tipos de saques usados por levantadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_erros_saques_outras_posicoes_local">
+                        <h3>Erros e acertos dos outros jogadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 25%;">
+                    <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local">
+                        <h3>Tipos de saques usados por outros jogadores</h3>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
