@@ -146,7 +146,6 @@ const dadosConstrução = [
 // Para cada conjunto de dados em 'dadosConstrução', chama a função de construção do gráfico
 dadosConstrução.forEach(
     function (dados) {
-        console.log(dados)  // Exibe os dados atuais no console para depuração
         Graficos.FazerGrafico(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5]); // Chama a função para criar o gráfico
     }
 );

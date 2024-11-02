@@ -32,8 +32,25 @@ export class Graficos {
                 // tipo área polar
                 type: 'pie',
                 // os valores citados acima
-                data: data
-            };
+                data: data,
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    const dataIndex = tooltipItem.dataIndex;
+                                    const dataset = tooltipItem.chart.data.datasets[0];
+                                    const currentValue = dataset.data[dataIndex];
+                                    const total = dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((currentValue / total) * 100).toFixed(2);
+                                    return currentValue + ' (' + percentage + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
             // função de criação do gráfico (local, confuguração)
             new Chart(ctx, config);
         }
