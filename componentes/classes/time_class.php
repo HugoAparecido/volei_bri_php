@@ -171,10 +171,10 @@ class Time
      * @param string $limit Limite dos registros retornados
      * @return array Array de objetos do tipo Time
      */
-    public static function GetTimes($where = null, $order = null, $limit = null)
+    public static function GetTimes($where = null, $order = null, $limit = null, $fields = '*')
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'time'
-        return (new Database('time'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class); // Retorna todos os times com base nas condições
+        return (new Database('time'))->select($where, $order, $limit, $fields)->fetchAll(PDO::FETCH_CLASS, self::class); // Retorna todos os times com base nas condições
     }
 
     /**

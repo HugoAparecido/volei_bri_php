@@ -21,6 +21,22 @@ class Componentes
         }
     }
 
+    public static function PesquisaDinamica($idCampo, $idForm, $item)
+    {
+?>
+        <div class="container">
+            <h1 class="mt-4 mb-4">Pesquisar <?= $item ?></h1>
+            <form action="" method="post" class="mb-4" id="<?= $idForm ?>">
+                <div class="col-12"><input type="text" name="<?= $idCampo ?>" id="<?= $idCampo ?>" class="form-control" placeholder="Digite o nome" onkeyup="CarregarNomes(this.value)"><span id="resultado_pesquisa"></span></div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Pesquisar</button>
+                </div>
+            </form>
+            <span id="listar_nomes"></span>
+        </div>
+    <?php
+    }
+
     /**
      * Método estático para gerar opções de times para um formulário de seleção
      */
@@ -45,7 +61,7 @@ class Componentes
      */
     public function LocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
     {
-?>
+    ?>
         <!-- Bloco arrastável que representa o jogador -->
         <div class="itemArrastavel card m-3" style="width: auto;" draggable="true">
             <?php

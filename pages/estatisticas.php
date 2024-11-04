@@ -41,6 +41,9 @@ include '../componentes/header.php';
             <a href="../componentes/logout.php">Sair</a>
         </button>
     </div>
+    <?php
+    Componentes::PesquisaDinamica('produto', 'pesq-produto-form', 'Time');
+    ?>
     <div class="d-flex justify-content-center align-items-center">
         <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
         <form action="./estatisticas.php" method="get" class="mt-5">
@@ -235,6 +238,7 @@ include '../componentes/header.php';
 <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="../js/estatisticas_time.js"></script>
+<script src="../js/pesquisa.js"></script>
 
 <?php
 // Inclui o rodapé da página, contendo scripts e informações finais.
