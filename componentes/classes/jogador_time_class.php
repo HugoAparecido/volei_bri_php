@@ -7,16 +7,16 @@ class JogadorTime
 {
     // Atributos privados da classe
     private int $id_jogador; // Identificador único do jogador
-    private int $id_jogador_time;
+    private int $id_jogador_time; // Identificador da relação entre jogador e time
     private string $nome_jogador; // Nome do jogador
     private int $numero_camisa; // Número da camisa do jogador
     private int $id_time; // Identificador do time ao qual o jogador pertence
 
     // Atributos relacionados a estatísticas do jogador no time
     private ?int $defesa_jogador_no_time; // Defesas realizadas pelo jogador no time
-    private ?int $erro_defesa_no_time; // Defesas realizadas pelo jogador no time
-    private ?int $ataque_dentro_no_time; // Ataques realizados dentro do time
-    private ?int $ataque_fora_no_time; // Ataques realizados fora do time
+    private ?int $erro_defesa_no_time; // Erros de defesa do jogador no time
+    private ?int $ataque_dentro_no_time; // Ataques convertidos dentro do time
+    private ?int $ataque_fora_no_time; // Ataques perdidos fora do time
     private ?int $bloqueio_convertido_no_time; // Bloqueios convertidos no time
     private ?int $bloqueio_errado_no_time; // Bloqueios errados no time
     private ?int $passe_a_no_time; // Passes do tipo A realizados no time
@@ -24,16 +24,16 @@ class JogadorTime
     private ?int $passe_c_no_time; // Passes do tipo C realizados no time
     private ?int $passe_d_no_time; // Passes do tipo D realizados no time
     private ?int $levantamento_para_oposto_no_time; // Levantamentos para jogador oposto
-    private ?int $levantamento_para_pipe_no_time; // Levantamentos para jogador de pipe
-    private ?int $levantamento_para_ponta_no_time; // Levantamentos para jogador de ponta
-    private ?int $levantamento_para_centro_no_time; // Levantamentos para jogador de centro
-    private ?int $errou_levantamento_no_time; // Contador de levantamentos errados
+    private ?int $levantamento_para_pipe_no_time; // Levantamentos para jogador pipe
+    private ?int $levantamento_para_ponta_no_time; // Levantamentos para jogador ponta
+    private ?int $levantamento_para_centro_no_time; // Levantamentos para jogador central
+    private ?int $errou_levantamento_no_time; // Erros de levantamento no time
     private string $posicao_jogador; // Posição do jogador no time
 
     // Atributos relacionados ao saque do jogador no time
-    private ?int $saque_fora_no_time; // Saques fora do time
-    private ?int $saque_ace_no_time; // Saques ace do tipo flutuante
-    private ?int $saque_cima_no_time; // Saques do tipo cima
+    private ?int $saque_fora_no_time; // Saques errados fora do time
+    private ?int $saque_ace_no_time; // Saques ace no time
+    private ?int $saque_cima_no_time; // Saques altos realizados pelo jogador
     private ?int $saque_viagem_no_time; // Saques do tipo viagem
     private ?int $saque_flutuante_no_time; // Saques do tipo flutuante
 
@@ -42,7 +42,8 @@ class JogadorTime
     {
         return $this->id_jogador;
     }
-    // Método para obter o ID do jogador
+
+    // Método para obter o ID do jogador no time
     public function GetID()
     {
         return $this->id_jogador_time;
@@ -66,6 +67,7 @@ class JogadorTime
         return $this->numero_camisa;
     }
 
+    // Métodos para obter estatísticas específicas em formato de array
     public function GetPasses()
     {
         return '[' . ($this->passe_a_no_time ?? 0) . ',' . ($this->passe_b_no_time ?? 0) . ',' . ($this->passe_c_no_time ?? 0) . ',' . ($this->passe_d_no_time ?? 0) . ']';
@@ -85,19 +87,22 @@ class JogadorTime
     {
         return '[' . ($this->bloqueio_convertido_no_time ?? 0) . ',' . ($this->bloqueio_errado_no_time ?? 0) . ']';
     }
+
     public function GetSaques()
     {
         return '[' . ($this->saque_ace_no_time ?? 0) . ',' . ($this->saque_viagem_no_time ?? 0) . ',' . ($this->saque_flutuante_no_time ?? 0) . ',' . ($this->saque_cima_no_time ?? 0) . ',' . ($this->saque_fora_no_time ?? 0) . ']';
     }
+
     public function GetLeavtamentos()
     {
         return '[' . $this->levantamento_para_centro_no_time . ',' . $this->levantamento_para_oposto_no_time . ',' . $this->levantamento_para_pipe_no_time . ',' . $this->levantamento_para_ponta_no_time . ',' . $this->errou_levantamento_no_time . ']';
     }
-    // Método privado para definir o ID do jogador e do time
+
+    // Método privado para definir IDs do jogador e do time
     private function SetIDs($id_jogador, $id_time): void
     {
-        $this->id_jogador = $id_jogador; // Atribui o ID do jogador
-        $this->id_time = $id_time; // Atribui o ID do time
+        $this->id_jogador = $id_jogador;
+        $this->id_time = $id_time;
     }
 
     // Método para cadastrar um jogador em um time
@@ -118,6 +123,8 @@ class JogadorTime
             'id_time' => $this->id_time,
             'posicao_jogador' => $this->posicao_jogador,
         ]);
+
+        // Define o tipo de posição do jogador e insere na respectiva tabela
         switch ($posicao_jogador) {
             case 'Levantador':
                 $levantador = new Database('levantador_no_time');
@@ -136,71 +143,55 @@ class JogadorTime
         return true; // Retorna sucesso
     }
 
-    // Método estático para obter jogadores relacionados a um time
+    // Métodos estáticos para obter dados de jogadores relacionados a um time com base em parâmetros específicos
     public static function getJogadores($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null)
     {
-        // Realiza a consulta no banco de dados utilizando um LEFT JOIN
         return (new Database('jogador_no_time'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
     public static function getJogadoresTime($where = null, $order = null, $limit = null, $fields = null)
     {
-        // Realiza a consulta no banco de dados e retorna um array de objetos da classe Jogador
         return (new Database('jogador_no_time'))->select($where, $order, $limit, $fields)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
+    // Métodos estáticos para obter somas das estatísticas gerais de defesa, passe e saque
     public static function GetEstatiticasSomaGeralDefesas($idTime)
     {
         return (new Database('jogador_no_time'))->SomarCampos([
-            'defesa_jogador_no_time', // Defesas realizadas pelo jogador no time
+            'defesa_jogador_no_time',
             'erro_defesa_no_time'
         ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
     public static function GetEstatiticasSomaGeralPasses($jogadorTime, $tabelaBanco)
     {
         return (new Database($tabelaBanco))->SomarCampos([
-            'passe_a_no_time', // Passes do tipo A realizados no time
-            'passe_b_no_time', // Passes do tipo B realizados no time
-            'passe_c_no_time', // Passes do tipo C realizados no time
-            'passe_d_no_time' // Passes do tipo D realizados no time
+            'passe_a_no_time',
+            'passe_b_no_time',
+            'passe_c_no_time',
+            'passe_d_no_time'
         ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
     public static function GetEstatiticasSomaGeralSaques($jogadorTime, $tabelaBanco)
     {
         return (new Database($tabelaBanco))->SomarCampos([
-            'saque_fora_no_time', // Saques fora do time
-            'saque_ace_no_time', // Saques ace
-            'saque_cima_no_time', // Saques do tipo cima
-            'saque_viagem_no_time', // Saques do tipo viagem
-            'saque_flutuante_no_time', // Saques do tipo flutuante
+            'saque_fora_no_time',
+            'saque_ace_no_time',
+            'saque_cima_no_time',
+            'saque_viagem_no_time',
+            'saque_flutuante_no_time'
         ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
     }
-    public static function GetEstatiticasSomaGeral($idTime)
+
+    public static function GetEstatiticasSomaGeralAtaques($jogadorTime, $tabelaBanco)
     {
-        return (new Database('jogador_no_time'))->SomarCampos([
-            'defesa_jogador_no_time', // Defesas realizadas pelo jogador no time
-            'erro_defesa_no_time',
-            'ataque_dentro_no_time', // Ataques realizados dentro do time
-            'ataque_fora_no_time', // Ataques realizados fora do time
-            'bloqueio_convertido_no_time', // Bloqueios convertidos no time
-            'bloqueio_errado_no_time', // Bloqueios errados no time
-            'passe_a_no_time', // Passes do tipo A realizados no time
-            'passe_b_no_time', // Passes do tipo B realizados no time
-            'passe_c_no_time', // Passes do tipo C realizados no time
-            'passe_d_no_time', // Passes do tipo D realizados no time
-            'levantamento_para_oposto_no_time', // Levantamentos para jogador oposto
-            'levantamento_para_pipe_no_time', // Levantamentos para jogador de pipe
-            'levantamento_para_ponta_no_time', // Levantamentos para jogador de ponta
-            'levantamento_para_centro_no_time', // Levantamentos para jogador de centro
-            'errou_levantamento_no_time', // Contador de levantamentos errados
-            // Atributos relacionados ao saque do jogador no time
-            'saque_fora_no_time', // Saques fora do time
-            'saque_ace_cima_no_time', // Saques ace do tipo cima
-            'saque_ace_viagem_no_time', // Saques ace do tipo viagem
-            'saque_ace_flutuante_no_time', // Saques ace do tipo flutuante
-            'saque_cima_no_time', // Saques do tipo cima
-            'saque_viagem_no_time', // Saques do tipo viagem
-            'saque_flutuante_no_time', // Saques do tipo flutuante
-        ], 'id_time = ' . $idTime)->fetchAll(PDO::FETCH_CLASS, self::class);
+        return (new Database($tabelaBanco))->SomarCampos([
+            'ataque_dentro_no_time',
+            'ataque_fora_no_time'
+        ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
     public function AtualizarEstatisticas($idJogador, $idTime, $posicao, $defesas, $valores)
     {
         $valores = $this->ModificarChavesArray($valores);

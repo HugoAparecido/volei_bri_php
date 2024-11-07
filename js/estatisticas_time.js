@@ -7,6 +7,8 @@ const totalPasses = passesLibero.map((num, index) => num + passesOutrasPosicoes[
 // Calcula o total de saques combinando os saques do levantador e os saques de outras posições
 const totalSaques = saquesLevantador.map((num, index) => num + saquesOutrasPosicoes[index]);
 
+const ataquesTotal = ataquesLevantador.map((num, index) => num + ataquesOutrasPosicoes[index]);
+
 // Configuração dos dados para construção de diferentes tipos de gráficos
 const dadosConstrução = [
     // Dados para gráfico de passes do líbero
@@ -140,6 +142,39 @@ const dadosConstrução = [
         ],
         'grafico_tipos_saques_total_local',
         'grafico_tipos_saques_total'
+    ],
+    [
+        ataquesLevantador,
+        ['Acerto', 'Erro'],
+        'Ataque',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_ataque_levantador_local',
+        'grafico_ataque_levantador'
+    ],
+    [
+        ataquesOutrasPosicoes,
+        ['Acerto', 'Erro'],
+        'Ataque',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_ataque_outras_posicoes_local',
+        'grafico_ataque_outras_posicoes'
+    ],
+    [
+        ataquesTotal,
+        ['Acerto', 'Erro'],
+        'Ataque',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_ataque_total_local',
+        'grafico_ataque_total'
     ]
 ];
 
