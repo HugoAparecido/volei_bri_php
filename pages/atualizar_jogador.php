@@ -5,6 +5,8 @@ include('../componentes/protect.php');
 // Inclui arquivos de classes de componentes que serão usados na página.
 include('../componentes/classes/componentes_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
+include('../componentes/classes/levantador_class.php');
+include('../componentes/classes/libero_class.php');
 
 // Verifica se a sessão contém a variável 'id_usuario', indicando que o usuário está autenticado.
 if (isset($_SESSION['id_usuario'])) {
@@ -62,13 +64,73 @@ if (isset($_SESSION['id_usuario'])) {
                 <?php } else {
                     // Obtém os dados do jogador selecionado.
                     $jogador = Jogador::getJogador(intval($_POST['id_jogador']));
+
+                    // Obtém uma instância do jogador na posição de libero, utilizando o ID passado pelo formulário
+                    $libero = Libero::getJogador(intval($_POST['id_jogador']));
+
+                    // Obtém uma instância do jogador na posição de levantador, utilizando o ID passado pelo formulário
+                    $levantador = Levantador::getJogador(intval($_POST['id_jogador']));
+
+                    // Obtém uma lista de jogadores em outras posições, utilizando o ID passado pelo formulário
+                    $outras = OutrasPosicoes::getJogadoresPosicao('id_jogador = ' . intval($_POST['id_jogador']));
+
+                    // Define um array para armazenar quais posições devem ser excluídas, com valores iniciais como "falso" para cada posição
+                    $posicoesExcluir = [
+                        'central' => false,
+                        'ponta 1' => false,
+                        'ponta 2' => false,
+                        'oposto' => false,
+                        'nao definida' => false
+                    ];
+
+                    // Itera sobre a lista de jogadores em outras posições
+                    foreach ($outras as $jogador) {
+                        // Verifica a posição do jogador atual e define o valor como "verdadeiro" no array, caso a posição corresponda
+                        foreach ($posicoesExcluir as $chave => &$valor) {
+                            if ($chave === $jogador->GetPosicao()) {
+                                $valor = true;
+                            }
+                        }
+                    }
+
                 ?>
+
+                    <!-- Campo oculto para armazenar o ID do jogador enviado via POST -->
                     <input type="hidden" name="id_jogador" value="<?= $_POST['id_jogador'] ?>">
-                    <!-- Campo para posicao do jogador -->
+
+                    <!-- Campo para selecionar a posição do jogador -->
                     <div class="mb-3">
-                        <label for="posicao_jogador">Nova Posição para o jogador: </label>
-                        <input type="text" class="form-control" id="posicao_jogador" name="posicao_jogador" value="<?= $jogador->GetNome() ?>">
+                        <label for="posicao_jogador">Posição do jogador: </label>
+
+                        <!-- Menu suspenso para seleção da posição -->
+                        <select name="posicao_jogador" class="form-select" id="posicao_jogador" required>
+
+                            <!-- Opção padrão para não atribuir outra posição -->
+                            <option value="">Não colocar em outra</option>
+
+                            <!-- Adiciona a opção "Não Definida" se ainda não estiver marcada para exclusão -->
+                            <?= !$posicoesExcluir['nao definida'] ? "<option value='não definida'>Não Definida</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Levantador" se o jogador ainda não está configurado como levantador -->
+                            <?= !$levantador ? "<option value='levantador'>Levantador</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Central" se a posição ainda não estiver marcada para exclusão -->
+                            <?= !$posicoesExcluir['central'] ? "<option value='central'>Central</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Ponta 1" se a posição ainda não estiver marcada para exclusão -->
+                            <?= !$posicoesExcluir['ponta 1'] ? "<option value='ponta 1'>Ponta 1</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Ponta 2" se a posição ainda não estiver marcada para exclusão -->
+                            <?= !$posicoesExcluir['ponta 2'] ? "<option value='ponta 2'>Ponta 2</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Oposto" se a posição ainda não estiver marcada para exclusão -->
+                            <?= !$posicoesExcluir['oposto'] ? "<option value='oposto'>Oposto</option>" : "" ?>
+
+                            <!-- Adiciona a opção "Líbero" se o jogador ainda não está configurado como líbero -->
+                            <?= !$libero ? "<option value='líbero'>líbero</option>" : "" ?>
+                        </select>
                     </div>
+
                     <!-- Campo para nome do jogador -->
                     <div class="mb-3">
                         <label for="nome_jogador">Nome: </label>

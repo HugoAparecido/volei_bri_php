@@ -7,21 +7,21 @@ class OutrasPosicoes extends Jogador
 {
     // Propriedades para armazenar dados do jogador
     private $id_posicao; // ID da posição do jogador
+    public $id_jogador; // ID do jogador
     private $passe_a; // Contador de passes do tipo A
     private $passe_b; // Contador de passes do tipo B
     private $passe_c; // Contador de passes do tipo C
-    private $passe_; // Contador de passes (provavelmente um erro de digitação)
+    private $passe_d; // Contador de passes (provavelmente um erro de digitação)
     private $bloqueio_convertido; // Contador de bloqueios convertidos
     private $bloqueio_errado; // Contador de bloqueios errados
     private $ataque_dentro; // Contador de ataques realizados dentro
     private $ataque_fora; // Contador de ataques realizados fora
-    private $saque_ace_cima; // Contador de saques ace
-    private $saque_ace_flutuante; // Contador de saques flutuantes ace
-    private $saque_ace_viagem; // Contador de saques em viagem ace
+    private $saque_ace; // Contador de saques ace
     private $saque_cima; // Contador de saques acima
     private $saque_flutuante; // Contador de saques flutuantes
     private $saque_viagem; // Contador de saques em viagem
-    private $saque_errado; // Contador de saques errados
+    private $saque_fora; // Contador de saques errados
+    private $posicao; // Posicao do jogador
 
     /**
      * Método privado para definir todos os atributos do jogador
@@ -46,6 +46,10 @@ class OutrasPosicoes extends Jogador
         $this->posicao_jogador = $posicao; // Posição do jogador em campo (ex.: "Líbero", "Atacante")
     }
 
+    public function GetPosicao()
+    {
+        return $this->posicao;
+    }
 
     /**
      * Método responsável por cadastrar um novo jogador no banco de dados
@@ -106,5 +110,28 @@ class OutrasPosicoes extends Jogador
         // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
         $obDatabase = new Database('outras_posicoes');
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . " AND posicao = '" . $posicao . "'", $valores);
+    }
+    /**
+     * Método responsável por buscar um jogador com base em seu ID
+     * @param integer $id ID do jogador
+     * @return Jogador Objeto do jogador
+     */
+    public static function getJogador($id)
+    {
+        // Realiza a consulta para buscar um jogador pelo ID e retorna o objeto correspondente
+        return (new Database('outras_posicoes'))->select('id_posicao = ' . $id)->fetchObject(self::class);
+    }
+
+    /**
+     * Método responsável por obter todos os jogadores do banco de dados
+     * @param string $where Condição para a consulta
+     * @param string $order Ordenação da consulta
+     * @param string $limit Limite de resultados
+     * @return array Lista de jogadores
+     */
+    public static function getJogadoresPosicao($where = null, $order = null, $limit = null)
+    {
+        // Realiza a consulta no banco de dados e retorna um array de objetos da classe Jogador
+        return (new Database('outras_posicoes'))->select($where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 }

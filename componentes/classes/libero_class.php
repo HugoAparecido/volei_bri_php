@@ -98,4 +98,15 @@ class Libero extends Jogador
         $obDatabase = new Database('libero');
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
     }
+
+    /**
+     * Método responsável por buscar um jogador com base em seu ID
+     * @param integer $id ID do jogador
+     * @return Jogador Objeto do jogador
+     */
+    public static function getJogador($id)
+    {
+        // Realiza a consulta para buscar um jogador pelo ID e retorna o objeto correspondente
+        return (new Database('libero'))->select('id_jogador = ' . $id)->fetchObject(self::class);
+    }
 }

@@ -69,13 +69,13 @@ if (isset($_SESSION['id_usuario'])) {
                 <div class="mb-3">
                     <label for="posicao_jogador">Posição do jogador: </label>
                     <select name="posicao_jogador" class="form-select" id="posicao_jogador" required>
-                        <option value="Não Definida">Não definida</option>
-                        <option value="Levantador">Levantador</option>
-                        <option value="Central">Central</option>
-                        <option value="Ponta 1">Ponta 1</option>
-                        <option value="Ponta 2">Ponta 2</option>
-                        <option value="Oposto">Oposto</option>
-                        <option value="Líbero">Líbero</option>
+                        <option value="Não Definida">não definida</option>
+                        <option value="Levantador">levantador</option>
+                        <option value="Central">central</option>
+                        <option value="Ponta 1">ponta 1</option>
+                        <option value="Ponta 2">ponta 2</option>
+                        <option value="Oposto">oposto</option>
+                        <option value="Líbero">líbero</option>
                     </select>
                 </div>
 
