@@ -21,18 +21,27 @@ class Componentes
         }
     }
 
-    public static function PesquisaDinamica($idCampo, $idForm, $item)
+    public static function PesquisaDinamica($idCampo, $idForm, $item) // Declaração de uma função estática que recebe três parâmetros: o ID do campo, o ID do formulário e o nome do item a ser pesquisado.
     {
 ?>
-        <div class="container text-center">
-            <h1 class="mt-4 mb-4">Pesquisar <?= $item ?></h1>
-            <form action="" method="post" class="mb-4" id="<?= $idForm ?>">
-                <div class="col-12"><input type="text" name="<?= $idCampo ?>" id="<?= $idCampo ?>" class="form-control" placeholder="Digite o nome" onkeyup="CarregarNomes(this.value)"><span id="resultado_pesquisa"></span></div>
+        <div class="container text-center"> <!-- Cria um container centralizado para a pesquisa -->
+            <h1 class="mt-4 mb-4">Pesquisar <?= $item ?></h1> <!-- Exibe o título da pesquisa com o nome do item passado por parâmetro -->
+
+            <form action="" method="post" class="mb-4" id="<?= $idForm ?>"> <!-- Formulário para a pesquisa, com método POST e ID dinâmico -->
+                <div class="col-12">
+                    <input type="text" name="<?= $idCampo ?>" id="<?= $idCampo ?>" class="form-control"
+                        placeholder="Digite o nome" onkeyup="CarregarNomes(this.value)">
+                    <!-- Campo de texto com ID e name dinâmicos. O evento 'onkeyup' chama a função 'CarregarNomes' com o valor digitado, permitindo uma pesquisa dinâmica -->
+                    <span id="resultado_pesquisa"></span> <!-- Span para exibir o resultado da pesquisa -->
+                </div>
+
                 <div class="col-12">
                     <button type="submit" class="btn btn-success mt-3" id="btn">Pesquisar</button>
+                    <!-- Botão de submissão do formulário -->
                 </div>
             </form>
-            <span id="listar_nomes"></span>
+
+            <span id="listar_nomes"></span> <!-- Span adicional onde podem ser listados nomes pesquisados -->
         </div>
     <?php
     }
