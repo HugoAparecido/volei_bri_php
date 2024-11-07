@@ -108,53 +108,54 @@ if (isset($_SESSION['id_usuario'])) {
           <div class="card m-lg-5 w-80">
             <!-- Campo oculto para armazenar o ID do time -->
             <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+            <div class="d-flex flex-row flex-wrap align-items-center justify-content-center">
+              <?php
+              // Array associativo que define cada posição de jogador com:
+              // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
+              // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
+              $selectsPosicao = [
+                'novo_jogador_libero' => ['Líber' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o")), $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
+                'novo_jogador_Levantador' => ['Levantador' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "")), $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
+                'novo_jogador_oposto' => ['Opost' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o")), $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                'novo_jogador_ponta_1' => ['Ponta 1', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                'novo_jogador_ponta_2' => ['Ponta 2', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                'novo_jogador_central' => ['Central', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                'novo_jogador_outra_posicao' => ['de posição Não Definida', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+              ];
 
-            <?php
-            // Array associativo que define cada posição de jogador com:
-            // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
-            // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
-            $selectsPosicao = [
-              'novo_jogador_libero' => ['Líber' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o")), $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
-              'novo_jogador_Levantador' => ['Levantador' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "")), $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "'") . (count($jogadoresNoTime) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
-              'novo_jogador_oposto' => ['Opost' . ($time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o")), $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-              'novo_jogador_ponta_1' => ['Ponta 1', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-              'novo_jogador_ponta_2' => ['Ponta 2', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-              'novo_jogador_central' => ['Central', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-              'novo_jogador_outra_posicao' => ['de posição Não Definida', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ($sexoProcura == null ? "" : "jogador.sexo_jogador = '" . $sexoProcura . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-            ];
+              // Loop para criar um campo de seleção para cada posição
+              foreach ($selectsPosicao as $name => $conteudo) {
+              ?>
 
-            // Loop para criar um campo de seleção para cada posição
-            foreach ($selectsPosicao as $name => $conteudo) {
-            ?>
+                <div class="align-self-center">
+                  <!-- Rótulo com base no sexo e na posição do jogador -->
+                  <label class="m-3" for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> <?= $conteudo[0] ?></label>
+                  <!-- Campo de seleção para escolher o jogador disponível na posição -->
+                  <select class="form-select m-3" style="width: auto;" name="<?= $name ?>">
+                    <option value="">Escolha uma posição</option>
+                    <?php
+                    // Loop para preencher cada opção com os jogadores disponíveis na posição atual
+                    foreach ($conteudo[1] as $jogador) {
+                    ?>
+                      <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
+                    <?php
+                    }
+                    ?>
+                  </select>
+                </div>
 
-              <!-- Rótulo com base no sexo e na posição do jogador -->
-              <label class="m-3" for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> <?= $conteudo[0] ?></label>
+              <?php
+              }
+              ?>
+            </div>
+            <div class="d-flex align-items-center justify-content-center flex-column">
+              <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
+              <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
 
-              <!-- Campo de seleção para escolher o jogador disponível na posição -->
-              <select class="form-select m-3 w-50" name="<?= $name ?>">
-                <option value="">Escolha uma posição</option>
-
-                <?php
-                // Loop para preencher cada opção com os jogadores disponíveis na posição atual
-                foreach ($conteudo[1] as $jogador) {
-                ?>
-                  <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
-                <?php
-                }
-                ?>
-
-              </select>
-
-            <?php
-            }
-            ?>
-
-            <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
-            <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
+              <!-- Link para cadastrar novo jogador -->
+              <a href="./cadastrar_jogador.php" type="button" class="btn m-3" id="btn">Cadastrar Jogador</a>
+            </div>
         </form>
-
-        <!-- Link para cadastrar novo jogador -->
-        <a href="./cadastrar_jogador.php" type="button" class="btn m-3 " id="btn">Cadastrar Jogador</a>
       </div>
 
       <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
