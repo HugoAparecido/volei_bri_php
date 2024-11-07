@@ -41,21 +41,21 @@ include '../componentes/header.php';
             <a href="../componentes/logout.php">Sair</a>
         </button>
     </div>
-    <?php
-    Componentes::PesquisaDinamica('produto', 'pesq-produto-form', 'Time');
-    ?>
     <div class="d-flex justify-content-center align-items-center">
         <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
-        <form action="./estatisticas.php" method="get" class="mt-5">
+        <form action="./estatisticas.php" method="get" class="mt-5 d-flex flex-column">
             <select class="form-select" name="id_time" id="id_time">
                 <?php
                 // Função que popula o 'select' com os times disponíveis
                 Componentes::InputTimes();
                 ?>
             </select>
-            <button class="btn" type="submit" id="btn">Mostrar</button>
+            <button class="btn mt-3 mb-3" type="submit" id="btn">Mostrar</button>
         </form>
     </div>
+    <?php
+    Componentes::PesquisaDinamica('produto', 'pesq-produto-form', 'Time');
+    ?>
     <div class="text-center">
         <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
         <?php if (isset($_GET['id_time'])) { ?>
