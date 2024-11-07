@@ -93,9 +93,9 @@ class JogadorTime
         return '[' . ($this->saque_ace_no_time ?? 0) . ',' . ($this->saque_viagem_no_time ?? 0) . ',' . ($this->saque_flutuante_no_time ?? 0) . ',' . ($this->saque_cima_no_time ?? 0) . ',' . ($this->saque_fora_no_time ?? 0) . ']';
     }
 
-    public function GetLeavtamentos()
+    public function GetLevantamentos()
     {
-        return '[' . $this->levantamento_para_centro_no_time . ',' . $this->levantamento_para_oposto_no_time . ',' . $this->levantamento_para_pipe_no_time . ',' . $this->levantamento_para_ponta_no_time . ',' . $this->errou_levantamento_no_time . ']';
+        return '[' . ($this->levantamento_para_centro_no_time ?? 0) . ',' . ($this->levantamento_para_oposto_no_time ?? 0) . ',' . ($this->levantamento_para_pipe_no_time ?? 0) . ',' . ($this->levantamento_para_ponta_no_time ?? 0) . ',' . ($this->errou_levantamento_no_time ?? 0) . ']';
     }
 
     // Método privado para definir IDs do jogador e do time
@@ -192,30 +192,66 @@ class JogadorTime
         ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
     }
 
+    public static function GetEstatiticasSomaGeralBloqueios($jogadorTime, $tabelaBanco)
+    {
+        return (new Database($tabelaBanco))->SomarCampos([
+            'bloqueio_convertido_no_time',
+            'bloqueio_errado_no_time'
+        ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+
+    public static function GetEstatiticasSomaGeralLevantamentos($jogadorTime, $tabelaBanco)
+    {
+        return (new Database($tabelaBanco))->SomarCampos([
+            'levantamento_para_centro_no_time',
+            'levantamento_para_oposto_no_time',
+            'levantamento_para_pipe_no_time',
+            'levantamento_para_ponta_no_time',
+            'errou_levantamento_no_time'
+        ], 'id_jogador_time IN (' . implode(',', $jogadorTime) . ')')->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+
     public function AtualizarEstatisticas($idJogador, $idTime, $posicao, $defesas, $valores)
     {
+        // Modifica as chaves do array de valores e defesas para o formato correto, se necessário
         $valores = $this->ModificarChavesArray($valores);
         $defesas = $this->ModificarChavesArray($defesas);
+
         // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
         $obDatabase = new Database('jogador_no_time');
+
+        // Atualiza as estatísticas de defesas do jogador na tabela 'jogador_no_time'
+        // A condição WHERE especifica o jogador e o time usando os IDs fornecidos
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, $defesas);
+
+        // Busca o 'id_jogador_time' correspondente ao jogador e time fornecidos para identificar a relação específica
         $idJogadorTime = $obDatabase->select('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, null, null, 'id_jogador_time')->fetchAll()[0]['id_jogador_time'];
+
+        // Exibe o valor de 'id_jogador_time' para depuração (opcional, pode ser removido em produção)
         var_dump($idJogadorTime);
+
+        // Atualiza as estatísticas do jogador na tabela específica com base em sua posição
         switch ($posicao) {
             case 'levantador':
+                // Cria uma instância para a tabela de levantadores e atualiza as estatísticas de valores para este jogador
                 $levantador = new Database('levantador_no_time');
                 $levantador->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
                 break;
+
             case 'líbero':
+                // Cria uma instância para a tabela de líberos e atualiza as estatísticas de valores para este jogador
                 $libero = new Database('libero_no_time');
                 $libero->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
                 break;
+
             default:
+                // Para posições que não sejam levantador ou líbero, cria uma instância para a tabela de outras posições
                 $outrasPosicoes = new Database('outras_posicoes_no_time');
                 $outrasPosicoes->AtualizarEstatisticas('id_jogador_time = ' . $idJogadorTime, $valores);
                 break;
         }
     }
+
     private function ModificarChavesArray($valores)
     {
         $chaves = array_keys($valores);

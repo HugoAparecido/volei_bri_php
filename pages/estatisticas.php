@@ -113,6 +113,20 @@ include '../componentes/header.php';
                     'ataquesOutrasPosicoes' => [
                         'select' => JogadorTime::GetEstatiticasSomaGeralAtaques($ids, 'outras_posicoes_no_time'),
                         'dados' => 'GetAtaques'
+                    ],
+                    // Estatísticas de bloqueios do levantador
+                    'bloqueiosLevantador' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralBloqueios($ids, 'levantador_no_time'),
+                        'dados' => 'GetBloqueios'
+                    ],
+                    // Estatísticas de bloqueios das outras posições
+                    'bloqueiosOutrasPosicoes' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralBloqueios($ids, 'outras_posicoes_no_time'),
+                        'dados' => 'GetBloqueios'
+                    ],
+                    'levantamentos' => [
+                        'select' => JogadorTime::GetEstatiticasSomaGeralLevantamentos($ids, 'levantador_no_time'),
+                        'dados' => 'GetLevantamentos'
                     ]
                 ];
 
@@ -130,7 +144,7 @@ include '../componentes/header.php';
                 }
             } else {
                 // Se não houver jogadores, define valores padrão para cada movimento no JavaScript
-                $movimentos = ['defesas', 'passesLibero', 'passesOutrasPosicoes', 'saquesOutrasPosicoes', 'saquesLevantador'];
+                $movimentos = ['defesas', 'passesLibero', 'passesOutrasPosicoes', 'saquesOutrasPosicoes', 'saquesLevantador', 'ataquesLevantador', 'ataquesOutrasPosicoes', 'bloqueiosLevantador', 'bloqueiosOutrasPosicoes', 'levantamentos'];
                 foreach ($movimentos as $movimento) {
                     echo '<script>var ' . $movimento . ' = [0, 0, 0, 0, 0];</script>';
                 }
@@ -229,6 +243,45 @@ include '../componentes/header.php';
                 <div class="card" style="width: 33.3%;">
                     <div class="text-center" id="grafico_ataque_total_local">
                         <h3>Erros e acertos totais</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Bloqueios</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_bloqueio_levantador_local">
+                        <h3>Erros e acertos dos levantadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_bloqueio_outras_posicoes_local">
+                        <h3>Erros e acertos dos outros jogadores</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 33.3%;">
+                    <div class="text-center" id="grafico_bloqueio_total_local">
+                        <h3>Erros e acertos totais</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header text-center">
+                <h2>Levantamentos</h2>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="card" style="width: 50%;">
+                    <div class="text-center" id="grafico_erros_levantamento_local">
+                        <h3>Erros e acertos</h3>
+                    </div>
+                </div>
+                <div class="card" style="width: 50%;">
+                    <div class="text-center" id="grafico_tipos_levantamento_local">
+                        <h3>Tipos acertados</h3>
                     </div>
                 </div>
             </div>

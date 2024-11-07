@@ -8,6 +8,7 @@ const totalPasses = passesLibero.map((num, index) => num + passesOutrasPosicoes[
 const totalSaques = saquesLevantador.map((num, index) => num + saquesOutrasPosicoes[index]);
 
 const ataquesTotal = ataquesLevantador.map((num, index) => num + ataquesOutrasPosicoes[index]);
+const bloqueiosTotal = bloqueiosLevantador.map((num, index) => num + bloqueiosOutrasPosicoes[index]);
 
 // Configuração dos dados para construção de diferentes tipos de gráficos
 const dadosConstrução = [
@@ -175,6 +176,65 @@ const dadosConstrução = [
         ],
         'grafico_ataque_total_local',
         'grafico_ataque_total'
+    ],
+    [
+        bloqueiosLevantador,
+        ['Acerto', 'Erro'],
+        'Bloqueios',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_bloqueio_levantador_local',
+        'grafico_bloqueio_levantador'
+    ],
+    [
+        bloqueiosOutrasPosicoes,
+        ['Acerto', 'Erro'],
+        'Bloqueios',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_bloqueio_outras_posicoes_local',
+        'grafico_bloqueio_outras_posicoes'
+    ],
+    [
+        bloqueiosTotal,
+        ['Acerto', 'Erro'],
+        'Bloqueios',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_bloqueio_total_local',
+        'grafico_bloqueio_total'
+    ],
+    // Dados para tipos de levantamentos do levantador
+    [
+        levantamentos.slice(0, 4),
+        ['Centro', 'Oposto', 'Pipe', 'Ponta'],
+        'saques',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)',
+            'rgb(230, 197, 1)',
+            'rgb(242, 92, 5)'
+        ],
+        'grafico_tipos_levantamento_local',
+        'grafico_tipos_levantamento'
+    ],
+    // Dados para gráfico de levantamentos (acertos e erros) do levantador
+    [
+        [levantamentos.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), levantamentos[4]],
+        ['Acertou', 'Errou'],
+        'saques',
+        [
+            'rgb(0, 37, 228)',
+            'rgb(2, 183, 86)'
+        ],
+        'grafico_erros_levantamento_local',
+        'grafico_erros_levantamento'
     ]
 ];
 
