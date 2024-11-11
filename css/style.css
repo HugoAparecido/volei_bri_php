@@ -49,6 +49,11 @@
   top: 100px;
 }
 
+select,
+option {
+  text-transform: capitalize;
+}
+
 @media (max-width: 990px) {
   #botao_flutuante {
     top: 150px;

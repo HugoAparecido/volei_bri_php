@@ -103,7 +103,7 @@ if (isset($_SESSION['id_usuario'])) {
                         <label for="posicao_jogador">Posição do jogador: </label>
 
                         <!-- Menu suspenso para seleção da posição -->
-                        <select name="posicao_jogador" class="form-select" id="posicao_jogador" required>
+                        <select name="posicao_jogador" class="form-select" id="posicao_jogador">
 
                             <!-- Opção padrão para não atribuir outra posição -->
                             <option value="">Não colocar em outra</option>
@@ -152,7 +152,7 @@ if (isset($_SESSION['id_usuario'])) {
                     <!-- Campo para sexo do jogador -->
                     <div class="mb-3">
                         <label for="sexo_jogador">Sexo do(a) jogador(a): </label>
-                        <select name="sexo_jogador" class="form-select" id="sexo_jogador" required>
+                        <select name="sexo_jogador" class="form-select" id="sexo_jogador" disabled>
                             <option value="M" <?= $jogador->GetSexo() == "M" ? 'selected' : "" ?>>Masculino</option>
                             <option value="F" <?= $jogador->GetSexo() == "F" ? 'selected' : "" ?>>Feminino</option>
                         </select>

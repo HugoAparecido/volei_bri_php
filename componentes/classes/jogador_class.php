@@ -147,6 +147,16 @@ class Jogador
         return true;
     }
 
+    public function DefinirDadosAtualizar(array $dados)
+    {
+        $this->id_jogador = $dados[0];
+        $this->nome_jogador = $dados[1];
+        $this->apelido_jogador = $dados[2];
+        $this->numero_camisa = $dados[3];
+        $this->altura_jogador = $dados[4];
+        $this->peso_jogador = $dados[5];
+    }
+
     /**
      * Método responsável por atualizar os dados do jogador no banco de dados
      * @return boolean
@@ -154,13 +164,12 @@ class Jogador
     public function Atualizar()
     {
         // Atualiza os dados do jogador com base no ID
-        return (new Database('jogador'))->update('id = ' . $this->id_jogador, [
+        return (new Database('jogador'))->update('id_jogador = ' . $this->id_jogador, [
             'nome_jogador' => $this->nome_jogador,
             'numero_camisa' => $this->numero_camisa,
             'apelido_jogador' => $this->apelido_jogador,
             'altura_jogador' => $this->altura_jogador,
-            'peso_jogador' => $this->peso_jogador,
-            'sexo_jogador' => $this->sexo_jogador
+            'peso_jogador' => $this->peso_jogador
         ]);
     }
 
