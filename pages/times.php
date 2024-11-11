@@ -41,7 +41,14 @@ if (isset($_SESSION['id_usuario'])) {
       <div class="d-flex justify-content-center mt-5">
         <!-- Formulário para envio de dados do time -->
         <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100">
-          <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+          <div class="card w-100 text-center">
+            <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+            <label for="competicao">Em qual competição ou treinamento o time está?</label>
+            <select name="competicao" id="competicao">
+              <option value="">Nenhuma</option>
+            </select>
+            <a href="./cadastrar_competicao.php" class="btn" id="btn">Cadastrar Competição</a>
+          </div>
           <input type="hidden" name="id_competicao" value="1">
           <!-- Card com informações do time e jogadores principais -->
           <div class="card mb-3 mt-5 " style="width: 100%;">
@@ -49,7 +56,7 @@ if (isset($_SESSION['id_usuario'])) {
               <h2>Time: <?= $time->GetNome() ?></h2>
             </div>
             <div class="col-auto m-3">
-              <h2>Sexo: <?= $time->GetSexo() ?></h2>
+              <h2>Sexo: <?= strtoupper($time->GetSexo()) ?></h2>
             </div>
             <div class="col-auto m-3">
               <!-- Título para os jogadores principais com ajuste de gênero ('Jogadoras' ou 'Jogadores') -->

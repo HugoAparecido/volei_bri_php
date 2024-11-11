@@ -2,6 +2,7 @@
 // Inclui os arquivos das classes 'jogador_class.php' e 'time_class.php' para fornecer acesso aos métodos e dados dos jogadores e times
 require_once "jogador_class.php";
 require_once "time_class.php";
+require_once "competicao_class.php";
 
 class Componentes
 {
@@ -20,7 +21,7 @@ class Componentes
             echo "<option value='" . $jogador->GetID() . "'>" . $jogador->GetNumeroCamisa() . " : " . $jogador->GetNome() . "</option>";
         }
     }
-
+    public static function InputCompeticoes() {}
     public static function PesquisaDinamica($idCampo, $idForm, $item) // Declaração de uma função estática que recebe três parâmetros: o ID do campo, o ID do formulário e o nome do item a ser pesquisado.
     {
 ?>
