@@ -13,6 +13,14 @@ class Competicao
         $this->id_time_desafiante = $dados[1];
         $this->id_time_desafiado = $dados[2];
     }
+    public function GetID()
+    {
+        return $this->id_competicao;
+    }
+    public function GetNome()
+    {
+        return $this->nome_competicao;
+    }
     public function Cadastrar(array $dados)
     {
         $this->SetAll($dados);
@@ -25,5 +33,10 @@ class Competicao
             'id_time_desafiado' => $this->id_time_desafiado,
             'data_hora_competicao' => $this->data_hora_competicao
         ]);
+    }
+    public static function GetCompeticoes($where = null, $order = null, $limit = null, $fields = '*')
+    {
+        // Cria uma nova instância da classe Database para manipulação da tabela 'competicao'
+        return (new Database('competicao'))->select($where, $order, $limit, $fields)->fetchAll(PDO::FETCH_CLASS, self::class); // Retorna todos os times com base nas condições
     }
 }

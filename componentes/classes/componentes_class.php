@@ -21,7 +21,13 @@ class Componentes
             echo "<option value='" . $jogador->GetID() . "'>" . $jogador->GetNumeroCamisa() . " : " . $jogador->GetNome() . "</option>";
         }
     }
-    public static function InputCompeticoes() {}
+    public static function InputCompeticoes($idTime)
+    {
+        $cmpeticoes = Competicao::GetCompeticoes("id_time_desafiante = $idTime OR id_time_desafiado = $idTime");
+        foreach ($cmpeticoes as $competicao) {
+            echo "<option value='" . $competicao->GetID() . "'>" . $competicao->GetNome() . "</option>";
+        }
+    }
     public static function PesquisaDinamica($idCampo, $idForm, $item) // Declaração de uma função estática que recebe três parâmetros: o ID do campo, o ID do formulário e o nome do item a ser pesquisado.
     {
 ?>
