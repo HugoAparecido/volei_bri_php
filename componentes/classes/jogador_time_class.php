@@ -248,14 +248,23 @@ class JogadorTime
                 break;
         }
     }
-
+    // Função privada chamada "ModificarChavesArray" que recebe um array como parâmetro.
     private function ModificarChavesArray($valores)
     {
+        // Obtém todas as chaves do array passado como argumento.
         $chaves = array_keys($valores);
+
+        // Inicializa um novo array para armazenar as chaves modificadas.
         $novasChaves = [];
+
+        // Itera sobre cada chave do array original.
         foreach ($chaves as $chave) {
+            // Adiciona a string "_no_time" ao final de cada chave e armazena no array $novasChaves.
             array_push($novasChaves, $chave . '_no_time');
         }
+
+        // Combina as novas chaves modificadas com os valores originais do array.
+        // O array_combine() cria um novo array onde $novasChaves são as chaves e $valores são os valores.
         return $valores = array_combine($novasChaves, $valores);
     }
 }

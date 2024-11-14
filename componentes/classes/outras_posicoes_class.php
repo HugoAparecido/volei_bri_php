@@ -105,12 +105,21 @@ class OutrasPosicoes extends Jogador
         // Executa uma junção de tabelas e retorna os resultados como objetos da classe atual
         return (new Database('outras_posicoes'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
+    // Método público chamado "AtualizarEstatisticas" para atualizar as estatísticas de um jogador em uma posição específica
     public function AtualizarEstatisticas($idJogador, $posicao, $valores)
     {
-        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        // Cria uma nova instância da classe Database para manipular a tabela 'outras_posicoes'
+        // A tabela 'outras_posicoes' é provavelmente usada para armazenar estatísticas de jogadores que não são líberos ou levantadores
         $obDatabase = new Database('outras_posicoes');
+
+        // Chama o método "AtualizarEstatisticas" da classe Database
+        // A condição de filtro usa o ID do jogador e a posição para garantir que a atualização seja feita corretamente
+        // O filtro "id_jogador = $idJogador AND posicao = '$posicao'" seleciona o jogador específico e a posição dele
+        // O argumento "$valores" é um array contendo os campos e seus novos valores
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador . " AND posicao = '" . $posicao . "'", $valores);
     }
+
     /**
      * Método responsável por buscar um jogador com base em seu ID
      * @param integer $id ID do jogador

@@ -147,13 +147,25 @@ class Jogador
         return true;
     }
 
+    // Método público chamado "DefinirDadosAtualizar" para definir os dados de um jogador
     public function DefinirDadosAtualizar(array $dados)
     {
+        // Define o ID do jogador usando o primeiro valor do array $dados
         $this->id_jogador = $dados[0];
+
+        // Define o nome do jogador usando o segundo valor do array $dados
         $this->nome_jogador = $dados[1];
+
+        // Define o apelido do jogador usando o terceiro valor do array $dados
         $this->apelido_jogador = $dados[2];
+
+        // Define o número da camisa do jogador usando o quarto valor do array $dados
         $this->numero_camisa = $dados[3];
+
+        // Define a altura do jogador usando o quinto valor do array $dados
         $this->altura_jogador = $dados[4];
+
+        // Define o peso do jogador usando o sexto valor do array $dados
         $this->peso_jogador = $dados[5];
     }
 

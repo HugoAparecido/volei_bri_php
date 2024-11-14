@@ -144,19 +144,29 @@ class CompeticaoTime
      */
     private int $saque_flutuante_no_time;
 
+    // Método privado chamado "SetIDs" para definir os IDs de competição e time
     private function SetIDs(array $ids)
     {
+        // Define o ID da competição usando o primeiro valor do array $ids
         $this->id_competicao = $ids[0];
+
+        // Define o ID do time usando o segundo valor do array $ids
         $this->id_time = $ids[1];
     }
+
+    // Método público para cadastrar a relação entre competição e time
     public function Cadastrar(array $ids)
     {
+        // Chama o método "SetIDs" para definir os IDs de competição e time
         $this->SetIDs($ids);
+
+        // Cria uma nova instância da classe Database para manipulação da tabela 'competicao_time'
         $obDatabase = new Database('competicao_time');
-        // Insere os dados do jogador na tabela e armazena o ID gerado
+
+        // Insere os dados de competição e time na tabela 'competicao_time'
         $obDatabase->insert([
-            'id_competicao' => $this->id_competicao,
-            'id_time' => $this->id_time
+            'id_competicao' => $this->id_competicao, // ID da competição
+            'id_time' => $this->id_time              // ID do time
         ]);
     }
 

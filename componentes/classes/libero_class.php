@@ -92,12 +92,20 @@ class Libero extends Jogador
         // Cria uma nova instância da classe Database para manipulação da tabela 'libero'
         return (new Database('libero'))->selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where, $order, $limit)->fetchAll(PDO::FETCH_CLASS, self::class);
     }
+
+    // Método público chamado "AtualizarEstatisticas" para atualizar estatísticas de um jogador líbero
     public function AtualizarEstatisticas($idJogador, $valores)
     {
-        // Cria uma nova instância da classe Database para interagir com a tabela 'jogador_no_time'
+        // Cria uma nova instância da classe Database para manipular a tabela 'libero'
+        // A tabela 'libero' provavelmente armazena estatísticas específicas para jogadores que atuam como líbero
         $obDatabase = new Database('libero');
+
+        // Chama o método "AtualizarEstatisticas" da classe Database
+        // O primeiro argumento é a condição de filtro "id_jogador = $idJogador", que seleciona o jogador a ser atualizado
+        // O segundo argumento "$valores" é um array contendo os dados a serem atualizados, no formato 'coluna' => 'novo valor'
         $obDatabase->AtualizarEstatisticas('id_jogador = ' . $idJogador, $valores);
     }
+
 
     /**
      * Método responsável por buscar um jogador com base em seu ID
