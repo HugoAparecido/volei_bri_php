@@ -227,9 +227,6 @@ class JogadorTime
         // Busca o 'id_jogador_time' correspondente ao jogador e time fornecidos para identificar a relação específica
         $idJogadorTime = $obDatabase->select('id_jogador = ' . $idJogador . ' AND id_time = ' . $idTime, null, null, 'id_jogador_time')->fetchAll()[0]['id_jogador_time'];
 
-        // Exibe o valor de 'id_jogador_time' para depuração (opcional, pode ser removido em produção)
-        var_dump($idJogadorTime);
-
         // Atualiza as estatísticas do jogador na tabela específica com base em sua posição
         switch ($posicao) {
             case 'levantador':

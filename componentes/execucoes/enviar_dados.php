@@ -4,7 +4,7 @@ include_once '../classes/jogador_time_class.php';
 include_once '../classes/levantador_class.php';
 include_once '../classes/libero_class.php';
 include_once '../classes/outras_posicoes_class.php';
-include_once '../classes/competicao_time.php';
+include_once '../classes/competicao_time_class.php';
 
 // Verifica se há dados enviados via POST
 if (isset($_POST)) {
@@ -64,10 +64,12 @@ if (isset($_POST)) {
         return str_replace('_jogador', '', $chave);
     }, array_keys($resultado));
     $resultado = array_combine($novasChaves, array_values($resultado));
-    $competicaoDados->AtualizarEstatisticas(intval($_POST['id_competicao']),  intval($_POST['id_time']), $resultado);
+    if ($_POST['id_competicao'] != '') {
+        $competicaoDados->AtualizarEstatisticas(intval($_POST['id_competicao']),  intval($_POST['id_time']), $resultado);
+    }
     // Redireciona para a página de estatísticas após a atualização
-    // header("Location: ../../pages/estatisticas.php");
+    header("Location: ../../pages/estatisticas.php");
 } else {
     // Se não há dados enviados, redireciona para a página de times
-    // header("Location: ../../pages/times.php");
+    header("Location: ../../pages/times.php");
 }
