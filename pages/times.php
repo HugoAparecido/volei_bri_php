@@ -43,8 +43,8 @@ if (isset($_SESSION['id_usuario'])) {
         <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100">
           <div class="card w-100 text-center">
             <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
-            <label for="competicao">Em qual competição ou treinamento o time está?</label>
-            <select name="competicao" id="competicao">
+            <label for="id_competicao">Em qual competição ou treinamento o time está?</label>
+            <select name="id_competicao" id="id_competicao">
               <option value="">Nenhuma</option>
               <?php
               Componentes::InputCompeticoes($time->GetID())
@@ -52,7 +52,6 @@ if (isset($_SESSION['id_usuario'])) {
             </select>
             <a href="./cadastrar_competicao.php" class="btn" id="btn">Cadastrar Competição</a>
           </div>
-          <input type="hidden" name="id_competicao" value="1">
           <!-- Card com informações do time e jogadores principais -->
           <div class="card mb-3 mt-5 " style="width: 100%;">
             <div class="card-header">

@@ -2,35 +2,8 @@
 class CompeticaoTime
 {
     // Atributos privados da classe
+    private int $id_competicao;
 
-    /**
-     * Identificador único do jogador
-     * @var int
-     */
-    private int $id_jogador;
-
-    /**
-     * Identificador do jogador dentro de um time específico
-     * @var int
-     */
-    private int $id_jogador_time;
-
-    /**
-     * Nome do jogador
-     * @var string
-     */
-    private string $nome_jogador;
-
-    /**
-     * Número da camisa do jogador
-     * @var int
-     */
-    private int $numero_camisa;
-
-    /**
-     * Identificador do time ao qual o jogador pertence
-     * @var int
-     */
     private int $id_time;
 
 
@@ -170,6 +143,22 @@ class CompeticaoTime
      * @var int
      */
     private int $saque_flutuante_no_time;
+
+    private function SetIDs(array $ids)
+    {
+        $this->id_competicao = $ids[0];
+        $this->id_time = $ids[1];
+    }
+    public function Cadastrar(array $ids)
+    {
+        $this->SetIDs($ids);
+        $obDatabase = new Database('competicao_time');
+        // Insere os dados do jogador na tabela e armazena o ID gerado
+        $obDatabase->insert([
+            'id_competicao' => $this->id_competicao,
+            'id_time' => $this->id_time
+        ]);
+    }
 
     /**
      * Método responsável por atualizar as estatísticas de um time em uma competição
