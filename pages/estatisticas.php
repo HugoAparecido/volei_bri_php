@@ -67,15 +67,30 @@ include '../componentes/header.php';
     <div class="card">
         <?php
             // Obtenção de jogadores de um time específico usando a função getJogadoresTime
-            $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador');
+            $objetos = JogadorTime::getJogadoresTime('id_time = ' . intval($_GET['id_time']), null, null, 'id_jogador_time, posicao_jogador, id_jogador');
 
             if (!empty($objetos)) {
                 // Cria um array para armazenar os IDs dos jogadores obtidos
                 $ids = [];
-                // Itera sobre os objetos retornados para extrair os IDs dos jogadores
-                foreach ($objetos as $objeto) {
-                    array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
-                }
+        ?>
+            <div>
+                <form action="./estatisticas_jogador.php">
+                    <label for="id_jogador">Estatíticas do jogador:</label>
+                    <select name="id_jogador" id="id_jogador">
+                        <?php
+                        // Itera sobre os objetos retornados para extrair os IDs dos jogadores
+                        foreach ($objetos as $objeto) {
+                            $nomeJogadorClass = JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador', " jogador_no_time.id_jogador = " . $objeto->GetIDJogador());
+                            $nomeJogador = $nomeJogadorClass[0]->GetNome();
+                            echo "<option value=" . $objeto->GetIDJogador() . ">" . $nomeJogador . ' (' . $objeto->GetPosicao() . ")</option>";
+                            array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
+                        }
+                        ?>
+                    </select>
+                    <button type="submit">Visualizar</button>
+                </form>
+            </div>
+        <?php
 
                 // Definição das estatísticas de defesas e passes para o time selecionado
                 $estatisticas = [
