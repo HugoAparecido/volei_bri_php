@@ -34,13 +34,19 @@ include '../componentes/header.php';
 
 <!-- Conteúdo principal da página -->
 <main>
-    <!-- Botão flutuante no topo direito da página, utilizado para logout -->
-    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-        <button type="button" class="btn" id="logout">
-            <!-- Link para o logout, redirecionando para o script de logout -->
-            <a href="../componentes/logout.php">Sair</a>
-        </button>
-    </div>
+    <?php
+    if (isset($_SESSION)) {
+    ?>
+        <!-- Botão flutuante no topo direito da página, utilizado para logout -->
+        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+            <button type="button" class="btn" id="logout">
+                <!-- Link para o logout, redirecionando para o script de logout -->
+                <a href="../componentes/logout.php">Sair</a>
+            </button>
+        </div>
+    <?php
+    }
+    ?>
     <div class="d-flex justify-content-center align-items-center">
         <!-- Formulário exibido quando o time não é selecionado, permitindo escolher um time -->
         <form action="./estatisticas.php" method="get" class="mt-5 d-flex flex-column">
