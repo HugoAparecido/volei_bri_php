@@ -138,9 +138,9 @@ class Database
     public function selectLeftJoin($tabelaPai, $campoIDFilho, $campoIDPai, $where = null, $order = null, $limit = null, $fields = '*')
     {
         // DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
-        $order = strlen($order) ? 'ORDER BY ' . $order : ''; // Define a cláusula ORDER BY, se houver
-        $limit = strlen($limit) ? 'LIMIT ' . $limit : ''; // Define a cláusula LIMIT, se houver
+        $where = ($where != null) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
+        $order = ($order != null) ? 'ORDER BY ' . $order : ''; // Define a cláusula ORDER BY, se houver
+        $limit = ($limit != null) ? 'LIMIT ' . $limit : ''; // Define a cláusula LIMIT, se houver
 
         // MONTA A QUERY
         $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' LEFT JOIN ' . $tabelaPai . ' ON ' . $this->table . '.' . $campoIDFilho . ' = ' . $tabelaPai . '.' . $campoIDPai . ' ' . $where . ' ' . $order . ' ' . $limit;
@@ -194,7 +194,7 @@ class Database
     public function SomarCampos($fields, $where = null)
     {
         // DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE ' . $where : ''; // Se a condição WHERE for fornecida, a adiciona à query; caso contrário, deixa vazio.
+        $where = ($where != null) ? 'WHERE ' . $where : ''; // Se a condição WHERE for fornecida, a adiciona à query; caso contrário, deixa vazio.
 
         $sums = ' '; // Variável para armazenar os cálculos de soma.
         foreach ($fields as $field) {
