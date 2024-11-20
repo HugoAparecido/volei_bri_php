@@ -9,6 +9,7 @@ const totalSaques = saquesLevantador.map((num, index) => num + saquesOutrasPosic
 
 const ataquesTotal = ataquesLevantador.map((num, index) => num + ataquesOutrasPosicoes[index]);
 const bloqueiosTotal = bloqueiosLevantador.map((num, index) => num + bloqueiosOutrasPosicoes[index]);
+console.log(saquesOutrasPosicoes)
 
 // Configuração dos dados para construção de diferentes tipos de gráficos
 const dadosConstrução = [
@@ -93,7 +94,7 @@ const dadosConstrução = [
     // Dados para tipos de saques de outras posições
     [
         saquesOutrasPosicoes.slice(0, 4),      // Dados para tipos de saques específicos
-        ['Ace', 'Por cima', 'Flutuante', 'Viagem'], // Etiquetas dos tipos de saques
+        ['Ace', 'Viagem', 'Flutuante', 'Por cima'], // Etiquetas dos tipos de saques
         'saques',
         [
             'rgb(0, 37, 228)',                 // Cor para saques Ace
@@ -107,7 +108,7 @@ const dadosConstrução = [
     // Dados para tipos de saques do levantador
     [
         saquesLevantador.slice(0, 4),
-        ['Ace', 'Por cima', 'Flutuante', 'Viagem'],
+        ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
         'saques',
         [
             'rgb(0, 37, 228)',
@@ -133,7 +134,7 @@ const dadosConstrução = [
     // Dados para tipos de saques totais
     [
         totalSaques.slice(0, 4),
-        ['Ace', 'Por cima', 'Flutuante', 'Viagem'],
+        ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
         'saques',
         [
             'rgb(0, 37, 228)',

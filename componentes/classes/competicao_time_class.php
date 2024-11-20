@@ -109,22 +109,10 @@ class CompeticaoTime
     private int $saque_fora_no_time;
 
     /**
-     * Saques ace do tipo cima realizados pelo jogador no time
+     * Saques ace realizados pelo jogador no time
      * @var int
      */
-    private int $saque_ace_cima_no_time;
-
-    /**
-     * Saques ace do tipo viagem realizados pelo jogador no time
-     * @var int
-     */
-    private int $saque_ace_viagem_no_time;
-
-    /**
-     * Saques ace do tipo flutuante realizados pelo jogador no time
-     * @var int
-     */
-    private int $saque_ace_flutuante_no_time;
+    private int $saque_ace_no_time;
 
     /**
      * Saques do tipo cima realizados pelo jogador no time
