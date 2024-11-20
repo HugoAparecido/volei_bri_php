@@ -9,18 +9,18 @@ include('../componentes/classes/componentes_class.php');
 
 // Verifica se o usuário está logado
 if (isset($_SESSION['id_usuario'])) {
-  // Define constantes para o caminho de ícone, CSS, links de cadastro e login, e logotipo
-  define('FAVICON', "../img/bolas.ico");
-  define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css", "../css/inserir_informacoes.css"));
-  define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
-  define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
-  define('LINK_LOGIN', './login.php');
-  define('LOGO_HEADER', "../img/logo.png");
-  define('LOGO_USUARIO', "../img/login.png");
+    // Define constantes para o caminho de ícone, CSS, links de cadastro e login, e logotipo
+    define('FAVICON', "../img/bolas.ico");
+    define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css", "../css/inserir_informacoes.css"));
+    define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
+    define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
+    define('LINK_LOGIN', './login.php');
+    define('LOGO_HEADER', "../img/logo.png");
+    define('LOGO_USUARIO', "../img/login.png");
 
-  // Define o nome e caminho das páginas disponíveis
-  define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
-  include '../componentes/header.php';
+    // Define o nome e caminho das páginas disponíveis
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
+    include '../componentes/header.php';
 ?>
 <main>
     <!-- Botão para logout no canto superior direito -->
@@ -30,10 +30,10 @@ if (isset($_SESSION['id_usuario'])) {
         </button>
     </div>
     <?php
-    // Se existe um ID de time na URL, obtem informações do time
-    if (isset($_GET['id_time'])) {
-      $time = Time::GetTime((int)$_GET['id_time']);
-    ?>
+        // Se existe um ID de time na URL, obtem informações do time
+        if (isset($_GET['id_time'])) {
+            $time = Time::GetTime((int)$_GET['id_time']);
+        ?>
     <div class="d-flex justify-content-center mt-5">
         <!-- Formulário para envio de dados do time -->
         <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100">
@@ -43,8 +43,8 @@ if (isset($_SESSION['id_usuario'])) {
                 <select name="id_competicao" id="id_competicao">
                     <option value="">Nenhuma</option>
                     <?php
-              Componentes::InputCompeticoes($time->GetID())
-              ?>
+                            Componentes::InputCompeticoes($time->GetID())
+                            ?>
                 </select>
                 <a href="./cadastrar_competicao.php" class="btn" id="btn">Cadastrar Competição</a>
             </div>
@@ -61,12 +61,12 @@ if (isset($_SESSION['id_usuario'])) {
                     <h3>Jogador<?= ($time->GetSexo() == 'F' ? 'as' : 'es') ?> Principais no Momento</h3>
 
                     <?php
-              // Array contendo as posições dos jogadores para exibir nos cards
-              $cardPosicoes = ['Levantador', 'Líbero', 'Ponta 1', 'Ponta 2', 'Oposto', 'Central 1', 'Central 2'];
+                            // Array contendo as posições dos jogadores para exibir nos cards
+                            $cardPosicoes = ['Levantador', 'Líbero', 'Ponta 1', 'Ponta 2', 'Oposto', 'Central 1', 'Central 2'];
 
-              // Loop para criar um card para cada posição dentro do array $cardPosicoes
-              foreach ($cardPosicoes as $indice => $cardPosicao) {
-              ?>
+                            // Loop para criar um card para cada posição dentro do array $cardPosicoes
+                            foreach ($cardPosicoes as $indice => $cardPosicao) {
+                            ?>
 
                     <!-- Estrutura de um card para cada posição, com estilo mínimo de altura para manter tamanho uniforme -->
                     <div class="card" style="min-height: 100px; height: auto; min-width:50%; width: auto; float:left;">
@@ -81,25 +81,25 @@ if (isset($_SESSION['id_usuario'])) {
                     </div>
 
                     <?php
-              }
-              ?>
+                            }
+                            ?>
                 </div>
 
             </div>
             <!-- Card para listar jogadores de diferentes posições e adicionar no time -->
             <div class="card containerItem">
                 <?php
-            // Recupera jogadores e os divide em listas por posição para exibição
-            $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
-            $jogadoresNoTime = [];
-            $componentes = new Componentes();
+                        // Recupera jogadores e os divide em listas por posição para exibição
+                        $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
+                        $jogadoresNoTime = [];
+                        $componentes = new Componentes();
 
-            // Lista jogadores por posição e insere no componente adequado
-            foreach ($time->GetJogadores() as $jogador) {
-              $componentes->LocalInsercao($jogador->GetIDJogador(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
-              array_push($jogadoresNoTime, $jogador->GetIDJogador());
-            }
-            ?>
+                        // Lista jogadores por posição e insere no componente adequado
+                        foreach ($time->GetJogadores() as $jogador) {
+                            $componentes->LocalInsercao($jogador->GetIDJogador(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
+                            array_push($jogadoresNoTime, $jogador->GetIDJogador());
+                        }
+                        ?>
                 <!-- Botão para enviar dados do time -->
                 <button type="submit" class="btn m-5" id="btn">Enviar Dados</button>
             </div>
@@ -115,22 +115,21 @@ if (isset($_SESSION['id_usuario'])) {
                 <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
                 <div class="d-flex flex-row flex-wrap align-items-center justify-content-center">
                     <?php
-              // Array associativo que define cada posição de jogador com:
-              // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
-              // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
-              $selectsPosicao = [
-                'novo_jogador_libero' => ['Líber' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "o(a)" : "o")), $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "'") . (count($jogadoresNoTime) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
-                'novo_jogador_Levantador' => ['Levantador' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "(a)" : "")), $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "'") . (count($jogadoresNoTime) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
-                'novo_jogador_oposto' => ['Opost' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "o(a)" : "o")), $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-                'novo_jogador_ponta_1' => ['Ponta 1', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-                'novo_jogador_ponta_2' => ['Ponta 2', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-                'novo_jogador_central' => ['Central', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-                'novo_jogador_outra_posicao' => ['de posição Não Definida', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'MIS' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
-              ];
-              var_dump($selectsPosicao);
-              // Loop para criar um campo de seleção para cada posição
-              foreach ($selectsPosicao as $name => $conteudo) {
-              ?>
+                            // Array associativo que define cada posição de jogador com:
+                            // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
+                            // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
+                            $selectsPosicao = [
+                                'novo_jogador_libero' => ['Líber' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'mis' ? "o(a)" : "o")), $liberos = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "'") . (count($jogadoresNoTime) ? ' AND libero.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
+                                'novo_jogador_Levantador' => ['Levantador' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'mis' ? "(a)" : "")), $levantadores = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "'") . (count($jogadoresNoTime) ? ' AND levantador.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ') ' : ''), 'nome_jogador')],
+                                'novo_jogador_oposto' => ['Opost' . ($time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'mis' ? "o(a)" : "o")), $opostos = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Oposto'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                                'novo_jogador_ponta_1' => ['Ponta 1', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Ponta 1'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                                'novo_jogador_ponta_2' => ['Ponta 2', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Ponta 2'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                                'novo_jogador_central' => ['Central', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Central'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                                'novo_jogador_outra_posicao' => ['de posição Não Definida', $pontas1 = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', (($time->GetSexo()) == 'mis' ? "" : "jogador.sexo_jogador = '" . $time->GetSexo() . "' AND ") . "outras_posicoes.posicao = 'Não Definida'" . (count($jogadoresNoTime) ? ' AND outras_posicoes.id_jogador NOT IN (' . implode(',', $jogadoresNoTime) . ')' : ''), 'nome_jogador')],
+                            ];
+                            // Loop para criar um campo de seleção para cada posição
+                            foreach ($selectsPosicao as $name => $conteudo) {
+                            ?>
 
                     <div class="align-self-center">
                         <!-- Rótulo com base no sexo e na posição do jogador -->
@@ -142,19 +141,19 @@ if (isset($_SESSION['id_usuario'])) {
                         <select class="form-select m-3" style="width: auto;" name="<?= $name ?>">
                             <option value="">Escolha uma posição</option>
                             <?php
-                    // Loop para preencher cada opção com os jogadores disponíveis na posição atual
-                    foreach ($conteudo[1] as $jogador) {
-                    ?>
+                                        // Loop para preencher cada opção com os jogadores disponíveis na posição atual
+                                        foreach ($conteudo[1] as $jogador) {
+                                        ?>
                             <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
                             <?php
-                    }
-                    ?>
+                                        }
+                                        ?>
                         </select>
                     </div>
 
                     <?php
-              }
-              ?>
+                            }
+                            ?>
                 </div>
                 <div class="d-flex align-items-center justify-content-center flex-column">
                     <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
@@ -169,48 +168,48 @@ if (isset($_SESSION['id_usuario'])) {
     <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
     </div>
     <?php
-    }
-    ?>
+        }
+        ?>
     <div class="d-flex justify-content-center mt-5 mb-5">
         <div class="card p-4 shadow-sm" id="card">
 
             <h2 class="text-center text-white mb-3">Masculino</h2>
             <?php
-        $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
-        if (!empty($timeMasculino))
-          foreach ($timeMasculino as $time) {
-        ?>
+                $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
+                if (!empty($timeMasculino))
+                    foreach ($timeMasculino as $time) {
+                ?>
             <a class="btn m-1" id="btn-time"
                 href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
             <?php
-          }
-        ?>
+                    }
+                ?>
             <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
 
             <h2 class="text-center text-white mb-3">Feminino</h2>
             <?php
-        $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
-        if (!empty($timeFeminino))
-          foreach ($timeFeminino as $time) {
-        ?>
+                $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
+                if (!empty($timeFeminino))
+                    foreach ($timeFeminino as $time) {
+                ?>
             <a class="btn m-1" id="btn-time"
                 href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
             <?php
-          }
-        ?>
+                    }
+                ?>
             <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
 
             <h2 class="text-center text-white mb-3">Misto</h2>
             <?php
-        $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
-        if (!empty($timeMisto))
-          foreach ($timeMisto as $time) {
-        ?>
+                $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
+                if (!empty($timeMisto))
+                    foreach ($timeMisto as $time) {
+                ?>
             <a class="btn m-1" id="btn-time"
                 href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
             <?php
-          }
-        ?>
+                    }
+                ?>
             <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
         </div>
     </div>
@@ -218,9 +217,9 @@ if (isset($_SESSION['id_usuario'])) {
 </main>
 <script src="../js/times.js"></script>
 <?php
-  // Inclui o footer da página
-  include '../componentes/footer.php';
+    // Inclui o footer da página
+    include '../componentes/footer.php';
 } else
-  // Redireciona para a página de login se o usuário não estiver logado
-  header("Location: ./login.php");
+    // Redireciona para a página de login se o usuário não estiver logado
+    header("Location: ./login.php");
 ?>
