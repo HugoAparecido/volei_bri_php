@@ -39,7 +39,7 @@ class Time
      * Instituição do time
      * @var int
      */
-    private $id_istituicao; // ID da instituição à qual o time pertenceprivate $jogadores; // Lista de jogadores do time
+    private $id_instituicao; // ID da instituição à qual o time pertenceprivate $jogadores; // Lista de jogadores do time
 
     private $jogadores; // Lista de jogadores do time
 
@@ -69,14 +69,14 @@ class Time
      * @param string $nome Nome do time
      * @param string $sexo_time Categoria do time baseada em sexo (ex.: "Masculino" ou "Feminino")
      * @param int $id_usuario ID do usuário responsável pelo cadastro do time
-     * @param int $id_istituicao ID da instituição associada ao time
+     * @param int $id_instituicao ID da instituição associada ao time
      */
-    private function SetALL($nome, $sexo_time, $id_usuario, $id_istituicao)
+    private function SetALL($nome, $sexo_time, $id_usuario, $id_instituicao)
     {
         $this->nome_time = $nome; // Nome do time
         $this->sexo_time = $sexo_time; // Categoria do time (masculino/feminino)
         $this->id_usuario = $id_usuario; // ID do usuário responsável pelo cadastro
-        $this->id_istituicao = $id_istituicao; // ID da instituição associada
+        $this->id_instituicao = $id_instituicao; // ID da instituição associada
     }
 
     // Métodos getters para obter informações do time
@@ -116,10 +116,10 @@ class Time
      * Método responsável por cadastrar um novo time no banco
      * @return boolean Retorna verdadeiro indicando sucesso na operação
      */
-    public function Cadastrar($nome, $sexo_time, $id_usuario, $id_istituicao)
+    public function Cadastrar($nome, $sexo_time, $id_usuario, $id_instituicao)
     {
         // Chama o método SetALL para atribuir os valores ao time
-        $this->SetALL($nome, $sexo_time, $id_usuario, $id_istituicao);
+        $this->SetALL($nome, $sexo_time, $id_usuario, $id_instituicao);
         // Define a data e hora atuais para a criação do time
         $this->data_hora_criacao = date('Y-m-d H:i:s');
 
@@ -132,7 +132,7 @@ class Time
             'data_hora_criacao' => $this->data_hora_criacao, // Data e hora de criação
             'sexo_time' => $this->sexo_time, // Sexo do time
             'id_usuario' => $this->id_usuario, // ID do usuário que cadastrou
-            'id_instituicao' => $this->id_istituicao // ID da instituição
+            'id_instituicao' => $this->id_instituicao // ID da instituição
         ]);
 
         // Retorna verdadeiro indicando sucesso na operação
@@ -150,7 +150,7 @@ class Time
             'nome_time' => $this->nome_time, // Atualiza o nome do time
             'data_hora_criacao' => $this->data_hora_criacao, // Atualiza a data de criação
             'sexo_time' => $this->sexo_time, // Atualiza o sexo do time
-            'id_istituicao' => $this->id_istituicao // Atualiza o ID da instituição
+            'id_instituicao' => $this->id_instituicao // Atualiza o ID da instituição
         ]);
     }
 

@@ -138,7 +138,10 @@ if (isset($_SESSION['id_usuario'])) {
 
                 <div class="align-self-center">
                   <!-- Rótulo com base no sexo e na posição do jogador -->
-                  <label class="m-3" for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?> Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?> <?= $conteudo[0] ?></label>
+                  <label class="m-3"
+                    for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "o(a)" : "o") ?>
+                    Jogador<?= $time->GetSexo() == 'F' ? "a" : ($time->GetSexo() == 'MIS' ? "(a)" : "") ?>
+                    <?= $conteudo[0] ?></label>
                   <!-- Campo de seleção para escolher o jogador disponível na posição -->
                   <select class="form-select m-3" style="width: auto;" name="<?= $name ?>">
                     <option value="">Escolha uma posição</option>
@@ -178,33 +181,39 @@ if (isset($_SESSION['id_usuario'])) {
         <h2 class="text-center text-white mb-3">Masculino</h2>
         <?php
         $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
-        foreach ($timeMasculino as $time) {
+        if (!empty($timeMasculino))
+          foreach ($timeMasculino as $time) {
         ?>
-          <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <a class="btn m-1" id="btn-time"
+            href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
         <?php
-        }
+          }
         ?>
         <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
 
         <h2 class="text-center text-white mb-3">Feminino</h2>
         <?php
         $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
-        foreach ($timeFeminino as $time) {
+        if (!empty($timeFeminino))
+          foreach ($timeFeminino as $time) {
         ?>
-          <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <a class="btn m-1" id="btn-time"
+            href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
         <?php
-        }
+          }
         ?>
         <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
 
         <h2 class="text-center text-white mb-3">Misto</h2>
         <?php
         $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
-        foreach ($timeMisto as $time) {
+        if (!empty($timeMisto))
+          foreach ($timeMisto as $time) {
         ?>
-          <a class="btn m-1" id="btn-time" href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+          <a class="btn m-1" id="btn-time"
+            href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
         <?php
-        }
+          }
         ?>
         <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
       </div>

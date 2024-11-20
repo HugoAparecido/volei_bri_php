@@ -115,9 +115,9 @@ class Database
     public function select($where = null, $order = null, $limit = null, $fields = '*')
     {
         // DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
-        $order = strlen($order) ? 'ORDER BY ' . $order : ''; // Define a cláusula ORDER BY, se houver
-        $limit = strlen($limit) ? 'LIMIT ' . $limit : ''; // Define a cláusula LIMIT, se houver
+        $where = ($where != null) ? 'WHERE ' . $where : ''; // Define a cláusula WHERE, se houver
+        $order = ($order != null) ? 'ORDER BY ' . $order : ''; // Define a cláusula ORDER BY, se houver
+        $limit = ($limit != null) ? 'LIMIT ' . $limit : ''; // Define a cláusula LIMIT, se houver
 
         // MONTA A QUERY
         $query = 'SELECT ' . $fields . ' FROM ' . $this->table . ' ' . $where . ' ' . $order . ' ' . $limit;
