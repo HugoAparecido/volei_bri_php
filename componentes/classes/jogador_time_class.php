@@ -1,6 +1,6 @@
 <?php
 // Requer o arquivo que contém a classe de conexão com o banco de dados
-require_once 'database_class.php';
+require_once "database_class.php";
 
 // Classe JogadorTime que representa a relação entre um jogador e um time
 class JogadorTime
@@ -11,6 +11,42 @@ class JogadorTime
     private string $nome_jogador; // Nome do jogador
     private int $numero_camisa; // Número da camisa do jogador
     private int $id_time; // Identificador do time ao qual o jogador pertence
+
+    /**
+     * Apelido do jogador
+     * @var string
+     */
+    protected $apelido_jogador;
+
+    /**
+     * Defesas do jogador
+     * @var int
+     */
+    protected $defesa_jogador;
+
+    /**
+     * Erros Defesas do jogador
+     * @var int
+     */
+    protected $erro_defesa;
+
+    /**
+     * Altura do jogador em metros
+     * @var float
+     */
+    protected $altura_jogador;
+
+    /**
+     * Peso do jogador em quilogramas
+     * @var float
+     */
+    protected $peso_jogador;
+
+    /**
+     * Sexo do jogador (M ou F)
+     * @var string
+     */
+    protected $sexo_jogador;
 
     // Atributos relacionados a estatísticas do jogador no time
     private ?int $defesa_jogador_no_time; // Defesas realizadas pelo jogador no time
