@@ -21,7 +21,7 @@ class OutrasPosicoes extends Jogador
     private $saque_flutuante; // Contador de saques flutuantes
     private $saque_viagem; // Contador de saques em viagem
     private $saque_fora; // Contador de saques errados
-    private $posicao; // Posicao do jogador
+    protected $posicao; // Posicao do jogador
 
     /**
      * Método privado para definir todos os atributos do jogador
@@ -43,7 +43,7 @@ class OutrasPosicoes extends Jogador
         $this->sexo_jogador = $sexo; // Sexo do jogador (ex.: "M" ou "F")
         $this->altura_jogador = $altura; // Altura do jogador em metros
         $this->peso_jogador = $peso; // Peso do jogador em quilogramas
-        $this->posicao_jogador = $posicao; // Posição do jogador em campo (ex.: "Líbero", "Atacante")
+        $this->posicao = $posicao; // Posição do jogador em campo (ex.: "Líbero", "Atacante")
     }
 
     public function GetPosicao()
@@ -72,7 +72,7 @@ class OutrasPosicoes extends Jogador
             // Insere a posição do jogador no banco de dados
             $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,
-                'posicao' => $this->posicao_jogador
+                'posicao' => $this->posicao
             ]);
         } else {
             // Se o jogador não existe, o método Cadastrar() deve inserir o jogador no banco
@@ -84,7 +84,7 @@ class OutrasPosicoes extends Jogador
             // Insere a posição do novo jogador
             $this->id_posicao = $obDatabase->insert([
                 'id_jogador' => $this->id_jogador,
-                'posicao' => $this->posicao_jogador
+                'posicao' => $this->posicao
             ]);
         }
         // Aqui poderia retornar um valor booleano indicando sucesso

@@ -27,7 +27,7 @@ class Jogador
      * Posição do jogador (ex: Líbero, Levantador)
      * @var string
      */
-    protected $posicao_jogador;
+    protected $posicao;
 
     /**
      * Número da camisa do jogador
@@ -58,6 +58,12 @@ class Jogador
      * @var int
      */
     protected $defesa_jogador;
+
+    /**
+     * Erros Defesas do jogador
+     * @var int
+     */
+    protected $erro_defesa;
 
     // Métodos para obter os dados do jogador (getters)
 

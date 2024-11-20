@@ -35,4 +35,4 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
 }
 
 // Redireciona o usuário para a página onde os jogadores cadastrados são exibidos
-header("Location: ../../pages/exibir_jogadores.php");
+header("Location: ../../pages/times.php");

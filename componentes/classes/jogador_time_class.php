@@ -28,7 +28,7 @@ class JogadorTime
     private ?int $levantamento_para_ponta_no_time; // Levantamentos para jogador ponta
     private ?int $levantamento_para_centro_no_time; // Levantamentos para jogador central
     private ?int $errou_levantamento_no_time; // Erros de levantamento no time
-    private string $posicao_jogador; // Posição do jogador no time
+    private ?string $posicao_jogador; // Posição do jogador no time
 
     // Atributos relacionados ao saque do jogador no time
     private ?int $saque_fora_no_time; // Saques errados fora do time

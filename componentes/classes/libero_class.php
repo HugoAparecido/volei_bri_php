@@ -32,7 +32,7 @@ class Libero extends Jogador
         $this->peso_jogador = $peso; // Peso do jogador em quilogramas
 
         // Define a posição padrão do jogador como "Líbero"
-        $this->posicao_jogador = "Líbero";
+        $this->posicao = "Líbero";
     }
 
 

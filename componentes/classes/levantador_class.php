@@ -7,7 +7,7 @@ class Levantador extends Jogador
 {
     // Atributos específicos da classe Levantador
     private $ataque_dentro; // Contador de ataques realizados dentro do time
-    private $ataque_errado; // Contador de ataques errados
+    private $ataque_fora; // Contador de ataques errados
     private $bloqueio_convertido; // Contador de bloqueios convertidos
     private $bloqueio_errado; // Contador de bloqueios errados
     private $errou_levantamento; // Contador de levantamentos errados
@@ -19,10 +19,7 @@ class Levantador extends Jogador
     private $saque_cima; // Contador de saques do tipo cima
     private $saque_flutuante; // Contador de saques do tipo flutuante
     private $saque_viagem; // Contador de saques do tipo viagem
-    private $saque_cima_ace; // Contador de saques ace do tipo cima
-    private $saque_flutuante_ace; // Contador de saques ace do tipo flutuante
-    private $saque_viagem_ace; // Contador de saques ace do tipo viagem
-
+    private $saque_ace; // Contador de saques ace
     // Método privado para definir os atributos do jogador
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {
@@ -33,7 +30,7 @@ class Levantador extends Jogador
         $this->sexo_jogador = $sexo; // Sexo do jogador
         $this->altura_jogador = $altura; // Altura do jogador
         $this->peso_jogador = $peso; // Peso do jogador
-        $this->posicao_jogador = "Levantador"; // Define a posição como 'Levantador'
+        $this->posicao = "Levantador"; // Define a posição como 'Levantador'
     }
 
     /**
