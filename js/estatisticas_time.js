@@ -9,10 +9,9 @@ const totalSaques = saquesLevantador.map((num, index) => num + saquesOutrasPosic
 
 const ataquesTotal = ataquesLevantador.map((num, index) => num + ataquesOutrasPosicoes[index]);
 const bloqueiosTotal = bloqueiosLevantador.map((num, index) => num + bloqueiosOutrasPosicoes[index]);
-console.log(saquesOutrasPosicoes)
 
 // Configuração dos dados para construção de diferentes tipos de gráficos
-const dadosConstrução = [
+const dadosConstrucao = [
     // Dados para gráfico de passes do líbero
     [
         passesLibero,                        // Dados de passes do líbero
@@ -239,8 +238,8 @@ const dadosConstrução = [
     ]
 ];
 
-// Para cada conjunto de dados em 'dadosConstrução', chama a função de construção do gráfico
-dadosConstrução.forEach(
+// Para cada conjunto de dados em 'dadosConstrucao', chama a função de construção do gráfico
+dadosConstrucao.forEach(
     function (dados) {
         Graficos.FazerGrafico(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5]); // Chama a função para criar o gráfico
     }

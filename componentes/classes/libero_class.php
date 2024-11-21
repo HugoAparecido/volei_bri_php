@@ -11,6 +11,17 @@ class Libero extends Jogador
     private $passe_c; // Contador de passes do tipo C
     private $passe_d; // Contador de passes do tipo D
 
+    // Métodos para obter estatísticas específicas em formato de array
+    public function GetPasses()
+    {
+        return '[' . ($this->passe_a ?? 0) . ',' . ($this->passe_b ?? 0) . ',' . ($this->passe_c ?? 0) . ',' . ($this->passe_d ?? 0) . ']';
+    }
+
+    public function GetDefesas()
+    {
+        return '[' . ($this->defesa_jogador ?? 0) . ',' . ($this->erro_defesa ?? 0) . ']';
+    }
+
     /**
      * Método privado para definir os atributos do jogador
      * 

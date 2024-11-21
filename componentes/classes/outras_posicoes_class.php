@@ -51,6 +51,32 @@ class OutrasPosicoes extends Jogador
         return $this->posicao;
     }
 
+    // Métodos para obter estatísticas específicas em formato de array
+    public function GetPasses()
+    {
+        return '[' . ($this->passe_a ?? 0) . ',' . ($this->passe_b ?? 0) . ',' . ($this->passe_c ?? 0) . ',' . ($this->passe_d ?? 0) . ']';
+    }
+
+    public function GetDefesas()
+    {
+        return '[' . ($this->defesa_jogador ?? 0) . ',' . ($this->erro_defesa ?? 0) . ']';
+    }
+
+    public function GetAtaques()
+    {
+        return '[' . ($this->ataque_dentro ?? 0) . ',' . ($this->ataque_fora ?? 0) . ']';
+    }
+
+    public function GetBloqueios()
+    {
+        return '[' . ($this->bloqueio_convertido ?? 0) . ',' . ($this->bloqueio_errado ?? 0) . ']';
+    }
+
+    public function GetSaques()
+    {
+        return '[' . ($this->saque_ace ?? 0) . ',' . ($this->saque_viagem ?? 0) . ',' . ($this->saque_flutuante ?? 0) . ',' . ($this->saque_cima ?? 0) . ',' . ($this->saque_fora ?? 0) . ']';
+    }
+
     /**
      * Método responsável por cadastrar um novo jogador no banco de dados
      * @return boolean Retorna verdadeiro em caso de sucesso

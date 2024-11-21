@@ -20,6 +20,31 @@ class Levantador extends Jogador
     private $saque_flutuante; // Contador de saques do tipo flutuante
     private $saque_viagem; // Contador de saques do tipo viagem
     private $saque_ace; // Contador de saques ace
+
+    public function GetDefesas()
+    {
+        return '[' . ($this->defesa_jogador ?? 0) . ',' . ($this->erro_defesa ?? 0) . ']';
+    }
+
+    public function GetAtaques()
+    {
+        return '[' . ($this->ataque_dentro ?? 0) . ',' . ($this->ataque_fora ?? 0) . ']';
+    }
+
+    public function GetBloqueios()
+    {
+        return '[' . ($this->bloqueio_convertido ?? 0) . ',' . ($this->bloqueio_errado ?? 0) . ']';
+    }
+
+    public function GetSaques()
+    {
+        return '[' . ($this->saque_ace ?? 0) . ',' . ($this->saque_viagem ?? 0) . ',' . ($this->saque_flutuante ?? 0) . ',' . ($this->saque_cima ?? 0) . ',' . ($this->saque_fora ?? 0) . ']';
+    }
+
+    public function GetLevantamentos()
+    {
+        return '[' . ($this->levantamento_para_centro ?? 0) . ',' . ($this->levantamento_para_oposto ?? 0) . ',' . ($this->levantamento_para_pipe ?? 0) . ',' . ($this->levantamento_para_ponta ?? 0) . ',' . ($this->errou_levantamento ?? 0) . ']';
+    }
     // Método privado para definir os atributos do jogador
     private function SetAll($nome, $sexo, $apelido, $numero, $altura, $peso)
     {

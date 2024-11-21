@@ -37,13 +37,13 @@ include '../componentes/header.php';
     <?php
     if (isset($_SESSION)) {
     ?>
-        <!-- Botão flutuante no topo direito da página, utilizado para logout -->
-        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-            <button type="button" class="btn" id="logout">
-                <!-- Link para o logout, redirecionando para o script de logout -->
-                <a href="../componentes/logout.php">Sair</a>
-            </button>
-        </div>
+    <!-- Botão flutuante no topo direito da página, utilizado para logout -->
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <!-- Link para o logout, redirecionando para o script de logout -->
+            <a href="../componentes/logout.php">Sair</a>
+        </button>
+    </div>
     <?php
     }
     ?>
@@ -66,8 +66,8 @@ include '../componentes/header.php';
     <div class="text-center">
         <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
         <?php if (isset($_GET['id_time'])) { ?>
-            <!-- Exibe o título "Estatísticas" -->
-            <h1>Estatísticas</h1>
+        <!-- Exibe o título "Estatísticas" -->
+        <h1>Estatísticas</h1>
     </div>
 
     <div class="card">
@@ -79,11 +79,11 @@ include '../componentes/header.php';
                 // Cria um array para armazenar os IDs dos jogadores obtidos
                 $ids = [];
         ?>
-            <div>
-                <form action="./estatisticas_jogador.php">
-                    <label for="id_jogador">Estatíticas do jogador:</label>
-                    <select name="id_jogador" id="id_jogador">
-                        <?php
+        <div>
+            <form action="./estatisticas_jogador.php">
+                <label for="id_jogador">Estatíticas do jogador:</label>
+                <select name="id_jogador" id="id_jogador">
+                    <?php
                         // Itera sobre os objetos retornados para extrair os IDs dos jogadores
                         foreach ($objetos as $objeto) {
                             $nomeJogadorClass = JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador', " jogador_no_time.id_jogador = " . $objeto->GetIDJogador());
@@ -92,10 +92,10 @@ include '../componentes/header.php';
                             array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
                         }
                         ?>
-                    </select>
-                    <button type="submit">Visualizar</button>
-                </form>
-            </div>
+                </select>
+                <button type="submit">Visualizar</button>
+            </form>
+        </div>
         <?php
 
                 // Definição das estatísticas de defesas e passes para o time selecionado
@@ -309,13 +309,12 @@ include '../componentes/header.php';
         </div>
     </div>
 
+    <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="../js/estatisticas_time.js"></script>
     <!-- Fim da condição -->
-<?php } ?>
+    <?php } ?>
 </main>
-
-<!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="module" src="../js/estatisticas_time.js"></script>
 <script src="../js/pesquisa.js"></script>
 
 <?php
