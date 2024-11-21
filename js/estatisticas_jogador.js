@@ -2,33 +2,10 @@
 import { Graficos } from './classes/graficos_class';
 
 var dadosConstrucao = [];
-if (typeof outras !== 'undefined') {
+if (typeof posicoes !== 'undefined') {
+    console.log(posicoes)
     dadosConstrucao.push([
-        outras.passes,                        // Dados de passes do líbero
-        ['Passe A', 'Passe B', 'Passe C', 'Passe D'], // Etiquetas dos tipos de passes
-        'passe',                              // Tipo do gráfico
-        [
-            'rgb(0, 37, 228)',  // Cor para o Passe A
-            'rgb(2, 183, 86)',  // Cor para o Passe B
-            'rgb(230, 197, 1)', // Cor para o Passe C
-            'rgb(242, 92, 5)'   // Cor para o Passe D
-        ],
-        'grafico_passe_outras_local',         // ID do local do gráfico
-        'grafico_passe_outras'
-    ])
-    dadosConstrucao.push([
-        outras.ataques,
-        ['Acerto', 'Erro'],
-        'Ataque',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
-        'grafico_ataque_outras_local',
-        'grafico_ataque_outras'
-    ])
-    dadosConstrucao.push([
-        outras.defesas,                               // Dados de defesas (acertos e erros)
+        posicoes[0].defesas,                               // Dados de defesas (acertos e erros)
         ['Acerto', 'Erro'],                    // Etiquetas para defesa
         'Defesa',                              // Tipo do gráfico
         [
@@ -38,40 +15,71 @@ if (typeof outras !== 'undefined') {
         'grafico_defesa_local',
         'grafico_defesa'
     ])
-    dadosConstrucao.push([
-        [outras.saques.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), outras.saques[4]], // Soma dos saques dentro e fora
-        ['Dentro', 'Fora'],                    // Etiquetas para saques dentro e fora
-        'saques',
-        [
-            'rgb(0, 37, 228)',                 // Cor para saques dentro
-            'rgb(2, 183, 86)'                  // Cor para saques fora
-        ],
-        'grafico_erros_saques_outras_local',
-        'grafico_erros_saques_outras'
-    ])
-    dadosConstrucao.push([
-        outras.saques.slice(0, 4),
-        ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
-        'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
-        'grafico_tipos_saques_outras_local',
-        'grafico_tipos_saques_outras'
-    ])
-    dadosConstrucao.push([
-        outras.bloqueios,
-        ['Acerto', 'Erro'],
-        'Bloqueios',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
-        'grafico_bloqueio_outras_local',
-        'grafico_bloqueio_outras'])
+    posicoes.forEach((posicao) => {
+        console.log(posicao);
+        posicao.posicao = posicao.posicao.replace(" ", "_");
+        posicao.posicao = posicao.posicao.replace("ã", "a");
+        posicao.posicao = posicao.posicao.replace("í", "i");
+        dadosConstrucao.push([
+            posicao.passes,                        // Dados de passes do líbero
+            ['Passe A', 'Passe B', 'Passe C', 'Passe D'], // Etiquetas dos tipos de passes
+            'passe',                              // Tipo do gráfico
+            [
+                'rgb(0, 37, 228)',  // Cor para o Passe A
+                'rgb(2, 183, 86)',  // Cor para o Passe B
+                'rgb(230, 197, 1)', // Cor para o Passe C
+                'rgb(242, 92, 5)'   // Cor para o Passe D
+            ],
+            'grafico_passe_' + posicao.posicao + '_local',         // ID do local do gráfico
+            'grafico_passe_' + posicao.posicao
+        ])
+        dadosConstrucao.push([
+            posicao.ataques,
+            ['Acerto', 'Erro'],
+            'Ataque',
+            [
+                'rgb(0, 37, 228)',
+                'rgb(2, 183, 86)'
+            ],
+            'grafico_ataque_' + posicao.posicao + '_local',
+            'grafico_ataque_' + posicao.posicao
+        ])
+        dadosConstrucao.push([
+            [posicao.saques.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), posicao.saques[4]], // Soma dos saques dentro e fora
+            ['Dentro', 'Fora'],                    // Etiquetas para saques dentro e fora
+            'saques',
+            [
+                'rgb(0, 37, 228)',                 // Cor para saques dentro
+                'rgb(2, 183, 86)'                  // Cor para saques fora
+            ],
+            'grafico_erros_saques_' + posicao.posicao + '_local',
+            'grafico_erros_saques_' + posicao.posicao
+        ])
+        dadosConstrucao.push([
+            posicao.saques.slice(0, 4),
+            ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
+            'saques',
+            [
+                'rgb(0, 37, 228)',
+                'rgb(2, 183, 86)',
+                'rgb(230, 197, 1)',
+                'rgb(242, 92, 5)'
+            ],
+            'grafico_tipos_saques_' + posicao.posicao + '_local',
+            'grafico_tipos_saques_' + posicao.posicao
+        ])
+        dadosConstrucao.push([
+            posicao.bloqueios,
+            ['Acerto', 'Erro'],
+            'Bloqueios',
+            [
+                'rgb(0, 37, 228)',
+                'rgb(2, 183, 86)'
+            ],
+            'grafico_bloqueio_' + posicao.posicao + '_local',
+            'grafico_bloqueio_' + posicao.posicao])
+
+    })
 }
 
 if (typeof levantador !== 'undefined') {

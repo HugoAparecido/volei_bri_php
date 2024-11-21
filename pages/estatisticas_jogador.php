@@ -67,20 +67,27 @@ include '../componentes/header.php';
             $nomeJogador = $outras[0]->GetNome();
         ?>
     <script>
-    var outras = {
-        posicao: "<?= $outras[0]->GetPosicao() ?>",
-        defesas: <?= $outras[0]->GetDefesas() ?>,
-        ataques: <?= $outras[0]->GetAtaques() ?>,
-        bloqueios: <?= $outras[0]->GetBloqueios() ?>,
-        saques: <?= $outras[0]->GetSaques() ?>,
-        passes: <?= $outras[0]->GetPasses() ?>
-    }
+    var posicoes = [];
     </script>
     <?php
+            foreach ($outras as $posicao) {
+            ?>
+    <script>
+    posicoes.push({
+        posicao: "<?= $posicao->GetPosicao() ?>",
+        defesas: <?= $posicao->GetDefesas() ?>,
+        ataques: <?= $posicao->GetAtaques() ?>,
+        bloqueios: <?= $posicao->GetBloqueios() ?>,
+        saques: <?= $posicao->GetSaques() ?>,
+        passes: <?= $posicao->GetPasses() ?>
+    })
+    </script>
+    <?php
+            }
         }
         if (!empty($libero)) {
             $nomeJogador = $libero[0]->GetNome();
-        ?>
+            ?>
     <script>
     libero = {
         passes: <?= $libero[0]->GetPasses() ?>,
@@ -108,7 +115,7 @@ include '../componentes/header.php';
                 <div class="card-header text-center">
                     <h3>Passes</h3>
                 </div>
-                <div class="d-flex flex-row justify-content-around">
+                <div class="d-flex flex-row flex-wrap justify-content-around">
                     <?php
                         if (!empty($libero)) {
                         ?>
@@ -121,9 +128,8 @@ include '../componentes/header.php';
                         foreach ($outras as $posicao) {
                         ?>
                     <div class="card" style="width: 100%;">
-                        <!-- <div class="text-center"
-                            id="grafico_passe_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local"> -->
-                        <div class="text-center" id="grafico_passe_outras_local">
+                        <div class="text-center"
+                            id="grafico_passe_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
                             <h3><?= $posicao->GetPosicao() ?></h3>
                         </div>
                     </div>
@@ -157,7 +163,7 @@ include '../componentes/header.php';
                 <div class="card-header text-center">
                     <h3>Saques</h3>
                 </div>
-                <div class="d-flex flex-row justify-content-around">
+                <div class="d-flex flex-row flex-wrap justify-content-around">
                     <?php if (!empty($levantador)) { ?>
                     <div class="card" style="width: 50%;">
                         <div class="text-center" id="grafico_erros_saques_levantador_local">
@@ -170,17 +176,22 @@ include '../componentes/header.php';
                         </div>
                     </div>
                     <?php } ?>
-                    <?php if (!empty($outras)) { ?>
+                    <?php if (!empty($outras)) {
+                            foreach ($outras as $posicao) {
+                        ?>
                     <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_erros_saques_outras_local">
-                            <h3>Erros e acertos dos outros jogadores</h3>
+                        <div class="text-center"
+                            id="grafico_erros_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
                         </div>
                     </div>
                     <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_tipos_saques_outras_local">
-                            <h3>Tipos de saques usados por outros jogadores</h3>
+                        <div class="text-center"
+                            id="grafico_tipos_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                            <h3>Tipos de saques usados: <?= $posicao->GetPosicao() ?></h3>
                         </div>
                     </div>
+                    <?php } ?>
                     <?php } ?>
                 </div>
                 <?php if (!empty($outras) && !empty($levantador)) { ?>
@@ -202,7 +213,7 @@ include '../componentes/header.php';
                 <div class="card-header text-center">
                     <h3>Ataques</h3>
                 </div>
-                <div class="d-flex flex-row justify-content-around">
+                <div class="d-flex flex-row flex-wrap justify-content-around">
                     <?php if (!empty($levantador)) { ?>
                     <div class="card" style="width: 100%;">
                         <div class="text-center" id="grafico_ataque_levantador_local">
@@ -210,12 +221,16 @@ include '../componentes/header.php';
                         </div>
                     </div>
                     <?php } ?>
-                    <?php if (!empty($outras)) { ?>
+                    <?php if (!empty($outras)) {
+                            foreach ($outras as $posicao) {
+                        ?>
                     <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_ataque_outras_local">
-                            <h3>Erros e acertos dos outros jogadores</h3>
+                        <div class="text-center"
+                            id="grafico_ataque_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
                         </div>
                     </div>
+                    <?php } ?>
                     <?php } ?>
                     <?php if (!empty($outras) && !empty($levantador)) { ?>
                     <div class="card" style="width: 100%;">
@@ -230,7 +245,7 @@ include '../componentes/header.php';
                 <div class="card-header text-center">
                     <h3>Bloqueios</h3>
                 </div>
-                <div class="d-flex flex-row justify-content-around">
+                <div class="d-flex flex-row flex-wrap justify-content-around">
                     <?php if (!empty($levantador)) { ?>
                     <div class="card" style="width: 100%;">
                         <div class="text-center" id="grafico_bloqueio_levantador_local">
@@ -238,12 +253,16 @@ include '../componentes/header.php';
                         </div>
                     </div>
                     <?php } ?>
-                    <?php if (!empty($outras)) { ?>
+                    <?php if (!empty($outras)) {
+                            foreach ($outras as $posicao) {
+                        ?>
                     <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_bloqueio_outras_local">
-                            <h3>Erros e acertos dos outros jogadores</h3>
+                        <div class="text-center"
+                            id="grafico_bloqueio_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
                         </div>
                     </div>
+                    <?php } ?>
                     <?php } ?>
                     <?php if (!empty($outras) && !empty($levantador)) { ?>
                     <div class="card" style="width: 100%;">
