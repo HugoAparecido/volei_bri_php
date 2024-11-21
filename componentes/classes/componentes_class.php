@@ -12,7 +12,7 @@ class Componentes
     public static function InputJogadores()
     {
         // Obtém a lista de jogadores chamando o método getJogadores da classe Jogador
-        $jogadores = Jogador::getJogadores();
+        $jogadores = Jogador::getJogadores('', ' nome_jogador');
 
         // Percorre cada jogador obtido na lista de jogadores
         foreach ($jogadores as $jogador) {

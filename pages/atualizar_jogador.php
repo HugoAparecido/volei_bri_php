@@ -38,30 +38,32 @@ if (isset($_SESSION['id_usuario'])) {
     include '../componentes/header.php';
 ?>
 
-    <!-- Início do conteúdo principal da página -->
-    <main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
-        <!-- Botão flutuante de logout no canto superior direito da página -->
-        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-            <button type="button" class="btn" id="logout">
-                <a href="../componentes/logout.php">Sair</a>
-            </button>
-        </div>
+<!-- Início do conteúdo principal da página -->
+<main class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
+    <!-- Botão flutuante de logout no canto superior direito da página -->
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <a href="../componentes/logout.php">Sair</a>
+        </button>
+    </div>
 
-        <!-- Cartão que contém o formulário de atualização de jogador -->
-        <div class="card p-4 shadow-sm" id="card">
-            <form action="<?= isset($_POST['id_jogador']) ? '../componentes/execucoes/atualizar_jogador_exe.php' : './atualizar_jogador.php' ?>" method="post">
-                <h2 class="text-center text-white mb-4">Atualizar Jogador(a)</h2>
+    <!-- Cartão que contém o formulário de atualização de jogador -->
+    <div class="card p-4 shadow-sm" id="card">
+        <form
+            action="<?= isset($_POST['id_jogador']) ? '../componentes/execucoes/atualizar_jogador_exe.php' : './atualizar_jogador.php' ?>"
+            method="post">
+            <h2 class="text-center text-white mb-4">Atualizar Jogador(a)</h2>
 
-                <?php if (!isset($_POST['id_jogador'])) { ?>
-                    <!-- Campo de seleção para escolher um jogador -->
-                    <div class="mb-3">
-                        <label for="id_jogador">Qual jogador é?</label>
-                        <select name="id_jogador" class="form-select" id="id_jogador" required>
-                            <!-- Gera opções de jogadores usando o método da classe Componentes -->
-                            <?php Componentes::InputJogadores(); ?>
-                        </select>
-                    </div>
-                <?php } else {
+            <?php if (!isset($_POST['id_jogador'])) { ?>
+            <!-- Campo de seleção para escolher um jogador -->
+            <div class="mb-3">
+                <label for="id_jogador">Qual jogador é?</label>
+                <select name="id_jogador" class="form-select" id="id_jogador" required>
+                    <!-- Gera opções de jogadores usando o método da classe Componentes -->
+                    <?php Componentes::InputJogadores(); ?>
+                </select>
+            </div>
+            <?php } else {
                     // Obtém os dados do jogador selecionado.
                     $jogador = Jogador::getJogador(intval($_POST['id_jogador']));
 
@@ -84,10 +86,10 @@ if (isset($_SESSION['id_usuario'])) {
                     ];
 
                     // Itera sobre a lista de jogadores em outras posições
-                    foreach ($outras as $jogador) {
+                    foreach ($outras as $posicao) {
                         // Verifica a posição do jogador atual e define o valor como "verdadeiro" no array, caso a posição corresponda
-                        foreach ($posicoesExcluir as $chave => &$valor) {
-                            if ($chave === $jogador->GetPosicao()) {
+                        foreach ($posicoesExcluir as $chave => $valor) {
+                            if ($chave === $posicao->GetPosicao()) {
                                 $valor = true;
                             }
                         }
@@ -95,94 +97,100 @@ if (isset($_SESSION['id_usuario'])) {
 
                 ?>
 
-                    <!-- Campo oculto para armazenar o ID do jogador enviado via POST -->
-                    <input type="hidden" name="id_jogador" value="<?= $_POST['id_jogador'] ?>">
+            <!-- Campo oculto para armazenar o ID do jogador enviado via POST -->
+            <input type="hidden" name="id_jogador" value="<?= $_POST['id_jogador'] ?>">
 
-                    <!-- Campo para selecionar a posição do jogador -->
-                    <div class="mb-3">
-                        <label for="posicao_jogador">Posição do jogador: </label>
+            <!-- Campo para selecionar a posição do jogador -->
+            <div class="mb-3">
+                <label for="posicao_jogador">Posição do jogador: </label>
 
-                        <!-- Menu suspenso para seleção da posição -->
-                        <select name="posicao_jogador" class="form-select" id="posicao_jogador">
+                <!-- Menu suspenso para seleção da posição -->
+                <select name="posicao_jogador" class="form-select" id="posicao_jogador">
 
-                            <!-- Opção padrão para não atribuir outra posição -->
-                            <option value="">Não colocar em outra</option>
+                    <!-- Opção padrão para não atribuir outra posição -->
+                    <option value="">Não colocar em outra</option>
 
-                            <!-- Adiciona a opção "Não Definida" se ainda não estiver marcada para exclusão -->
-                            <?= !$posicoesExcluir['nao definida'] ? "<option value='não definida'>Não Definida</option>" : "" ?>
+                    <!-- Adiciona a opção "Não Definida" se ainda não estiver marcada para exclusão -->
+                    <?= !$posicoesExcluir['nao definida'] ? "<option value='não definida'>Não Definida</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Levantador" se o jogador ainda não está configurado como levantador -->
-                            <?= !$levantador ? "<option value='levantador'>Levantador</option>" : "" ?>
+                    <!-- Adiciona a opção "Levantador" se o jogador ainda não está configurado como levantador -->
+                    <?= !$levantador ? "<option value='levantador'>Levantador</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Central" se a posição ainda não estiver marcada para exclusão -->
-                            <?= !$posicoesExcluir['central'] ? "<option value='central'>Central</option>" : "" ?>
+                    <!-- Adiciona a opção "Central" se a posição ainda não estiver marcada para exclusão -->
+                    <?= !$posicoesExcluir['central'] ? "<option value='central'>Central</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Ponta 1" se a posição ainda não estiver marcada para exclusão -->
-                            <?= !$posicoesExcluir['ponta 1'] ? "<option value='ponta 1'>Ponta 1</option>" : "" ?>
+                    <!-- Adiciona a opção "Ponta 1" se a posição ainda não estiver marcada para exclusão -->
+                    <?= !$posicoesExcluir['ponta 1'] ? "<option value='ponta 1'>Ponta 1</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Ponta 2" se a posição ainda não estiver marcada para exclusão -->
-                            <?= !$posicoesExcluir['ponta 2'] ? "<option value='ponta 2'>Ponta 2</option>" : "" ?>
+                    <!-- Adiciona a opção "Ponta 2" se a posição ainda não estiver marcada para exclusão -->
+                    <?= !$posicoesExcluir['ponta 2'] ? "<option value='ponta 2'>Ponta 2</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Oposto" se a posição ainda não estiver marcada para exclusão -->
-                            <?= !$posicoesExcluir['oposto'] ? "<option value='oposto'>Oposto</option>" : "" ?>
+                    <!-- Adiciona a opção "Oposto" se a posição ainda não estiver marcada para exclusão -->
+                    <?= !$posicoesExcluir['oposto'] ? "<option value='oposto'>Oposto</option>" : "" ?>
 
-                            <!-- Adiciona a opção "Líbero" se o jogador ainda não está configurado como líbero -->
-                            <?= !$libero ? "<option value='líbero'>líbero</option>" : "" ?>
-                        </select>
-                    </div>
-
-                    <!-- Campo para nome do jogador -->
-                    <div class="mb-3">
-                        <label for="nome_jogador">Nome: </label>
-                        <input type="text" class="form-control" id="nome_jogador" name="nome_jogador" value="<?= $jogador->GetNome() ?>" required>
-                    </div>
-
-                    <!-- Campo para apelido do jogador -->
-                    <div class="mb-3">
-                        <label for="apelido_jogador">Apelido: </label>
-                        <input type="text" class="form-control" id="apelido_jogador" name="apelido_jogador" value="<?= $jogador->GetApelido() ?>">
-                    </div>
-
-                    <!-- Campo para número da camisa do jogador -->
-                    <div class="mb-3">
-                        <label for="num_camisa_jogador">Número da camisa do(a) jogador(a): </label>
-                        <input type="number" class="form-control" id="num_camisa_jogador" name="num_camisa_jogador" value="<?= $jogador->GetNumeroCamisa() ?>">
-                    </div>
-
-                    <!-- Campo para sexo do jogador -->
-                    <div class="mb-3">
-                        <label for="sexo_jogador">Sexo do(a) jogador(a): </label>
-                        <select name="sexo_jogador" class="form-select" id="sexo_jogador" disabled>
-                            <option value="M" <?= $jogador->GetSexo() == "M" ? 'selected' : "" ?>>Masculino</option>
-                            <option value="F" <?= $jogador->GetSexo() == "F" ? 'selected' : "" ?>>Feminino</option>
-                        </select>
-                    </div>
-
-                    <!-- Campo para altura do jogador -->
-                    <div class="mb-3">
-                        <label for="altura_jogador">Altura do(a) jogador(a): </label>
-                        <input type="text" class="form-control" id="altura_jogador" name="altura_jogador" value="<?= $jogador->GetAltura() ?>">
-                    </div>
-
-                    <!-- Campo para peso do jogador -->
-                    <div class="mb-3">
-                        <label for="peso_jogador">Peso do(a) jogador(a): </label>
-                        <input type="text" class="form-control" id="peso_jogador" name="peso_jogador" value="<?= $jogador->GetPeso() ?>">
-                    </div>
-                <?php } ?>
-
-                <!-- Botão de atualização do jogador -->
-                <div class="d-grid gap-2 mb-3">
-                    <button id="cadastrar_jogador" class="btn">Atualizar Jogador(a)</button>
-                </div>
-            </form>
-
-            <!-- Link para exibir jogadores cadastrados -->
-            <div class="d-grid gap-2 mb-3">
-                <a href="./exibir_jogadores.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores Cadastrados</a>
+                    <!-- Adiciona a opção "Líbero" se o jogador ainda não está configurado como líbero -->
+                    <?= !$libero ? "<option value='líbero'>líbero</option>" : "" ?>
+                </select>
             </div>
+
+            <!-- Campo para nome do jogador -->
+            <div class="mb-3">
+                <label for="nome_jogador">Nome: </label>
+                <input type="text" class="form-control" id="nome_jogador" name="nome_jogador"
+                    value="<?= $jogador->GetNome() ?>" required>
+            </div>
+
+            <!-- Campo para apelido do jogador -->
+            <div class="mb-3">
+                <label for="apelido_jogador">Apelido: </label>
+                <input type="text" class="form-control" id="apelido_jogador" name="apelido_jogador"
+                    value="<?= $jogador->GetApelido() ?>">
+            </div>
+
+            <!-- Campo para número da camisa do jogador -->
+            <div class="mb-3">
+                <label for="num_camisa_jogador">Número da camisa do(a) jogador(a): </label>
+                <input type="number" class="form-control" id="num_camisa_jogador" name="num_camisa_jogador"
+                    value="<?= $jogador->GetNumeroCamisa() ?>">
+            </div>
+
+            <!-- Campo para sexo do jogador -->
+            <div class="mb-3">
+                <label for="sexo_jogador">Sexo do(a) jogador(a): </label>
+                <select name="sexo_jogador" class="form-select" id="sexo_jogador" disabled>
+                    <option value="M" <?= $jogador->GetSexo() == "M" ? 'selected' : "" ?>>Masculino</option>
+                    <option value="F" <?= $jogador->GetSexo() == "F" ? 'selected' : "" ?>>Feminino</option>
+                </select>
+            </div>
+
+            <!-- Campo para altura do jogador -->
+            <div class="mb-3">
+                <label for="altura_jogador">Altura do(a) jogador(a): </label>
+                <input type="text" class="form-control" id="altura_jogador" name="altura_jogador"
+                    value="<?= $jogador->GetAltura() ?>">
+            </div>
+
+            <!-- Campo para peso do jogador -->
+            <div class="mb-3">
+                <label for="peso_jogador">Peso do(a) jogador(a): </label>
+                <input type="text" class="form-control" id="peso_jogador" name="peso_jogador"
+                    value="<?= $jogador->GetPeso() ?>">
+            </div>
+            <?php } ?>
+
+            <!-- Botão de atualização do jogador -->
+            <div class="d-grid gap-2 mb-3">
+                <button id="cadastrar_jogador" class="btn">Atualizar Jogador(a)</button>
+            </div>
+        </form>
+
+        <!-- Link para exibir jogadores cadastrados -->
+        <div class="d-grid gap-2 mb-3">
+            <a href="./exibir_jogadores.php" class="btn" id="update_jogadores_cadastrados">Mostrar Jogadores
+                Cadastrados</a>
         </div>
-    </main>
+    </div>
+</main>
 
 <?php
     // Inclui o rodapé da página, geralmente com scripts ou informações finais.

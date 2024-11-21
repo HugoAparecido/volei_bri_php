@@ -143,7 +143,7 @@ include '../componentes/header.php';
             <!-- Gráfico para exibir as defesas -->
             <div class="card align-items-center" style="width: 25%;">
                 <div class="card-header text-center" style="width: 100%;">
-                    <h2>Defesas</h2>
+                    <h3>Defesas</h3>
                 </div>
                 <div class="text-center" style="width: 100%;">
                     <div id="grafico_defesa_local"></div>
@@ -155,7 +155,7 @@ include '../componentes/header.php';
             <!-- Gráfico para exibir as defesas -->
             <div class="card" style="width: 50%;">
                 <div class="card-header text-center">
-                    <h2>Saques</h2>
+                    <h3>Saques</h3>
                 </div>
                 <div class="d-flex flex-row justify-content-around">
                     <?php if (!empty($levantador)) { ?>
@@ -200,7 +200,7 @@ include '../componentes/header.php';
             </div>
             <div class="card" style="width: 25%;">
                 <div class="card-header text-center">
-                    <h2>Ataques</h2>
+                    <h3>Ataques</h3>
                 </div>
                 <div class="d-flex flex-row justify-content-around">
                     <?php if (!empty($levantador)) { ?>
@@ -228,7 +228,7 @@ include '../componentes/header.php';
             </div>
             <div class="card" style="width: 25%;">
                 <div class="card-header text-center">
-                    <h2>Bloqueios</h2>
+                    <h3>Bloqueios</h3>
                 </div>
                 <div class="d-flex flex-row justify-content-around">
                     <?php if (!empty($levantador)) { ?>
@@ -258,7 +258,7 @@ include '../componentes/header.php';
             <?php if (!empty($levantador)) { ?>
             <div class="card" style="width: 50%;">
                 <div class="card-header text-center">
-                    <h2>Levantamentos</h2>
+                    <h3>Levantamentos</h3>
                 </div>
                 <div class="d-flex flex-row justify-content-around">
                     <div class="card" style="width: 50%;">
