@@ -12,7 +12,7 @@ if (isset($_SESSION['id_usuario'])) {
     // Define constantes para o caminho de ícone, CSS, links de cadastro e login, e logotipo
     define('FAVICON', "../img/bolas.ico");
     define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css", "../css/inserir_informacoes.css"));
-define('SCRIPT_LOADING', "../js/loading.js");
+    define('SCRIPT_LOADING', "../js/loading.js");
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     define('LINK_LOGIN', './login.php');
@@ -20,7 +20,7 @@ define('SCRIPT_LOADING', "../js/loading.js");
     define('LOGO_USUARIO', "../img/login.png");
 
     // Define o nome e caminho das páginas disponíveis
-    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', './extrair_dados_aplicativo.php']));
     include '../componentes/header.php';
 ?>
 <main>

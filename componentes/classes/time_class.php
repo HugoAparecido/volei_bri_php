@@ -111,6 +111,11 @@ class Time
         return $this->sexo_time; // Retorna a categoria do time (masculino/feminino)
     }
 
+    public function GetData()
+    {
+        return $this->data_hora_criacao;
+    }
+
 
     /**
      * Método responsável por cadastrar um novo time no banco

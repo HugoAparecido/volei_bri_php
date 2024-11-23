@@ -37,6 +37,21 @@ class Competicao
         return $this->nome_competicao;
     }
 
+    public function GetDesafiante()
+    {
+        return $this->id_time_desafiante;
+    }
+
+    public function GetDesafiado()
+    {
+        return $this->id_time_desafiado;
+    }
+
+    public function GetData()
+    {
+        return $this->data_hora_competicao;
+    }
+
     // Método para cadastrar uma nova competição
     public function Cadastrar(array $dados)
     {
