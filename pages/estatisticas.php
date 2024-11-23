@@ -39,13 +39,13 @@ include '../componentes/header.php';
     <?php
     if (isset($_SESSION)) {
     ?>
-        <!-- Botão flutuante no topo direito da página, utilizado para logout -->
-        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-            <button type="button" class="btn" id="logout">
-                <!-- Link para o logout, redirecionando para o script de logout -->
-                <a href="../componentes/logout.php">Sair</a>
-            </button>
-        </div>
+    <!-- Botão flutuante no topo direito da página, utilizado para logout -->
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <!-- Link para o logout, redirecionando para o script de logout -->
+            <a href="../componentes/logout.php">Sair</a>
+        </button>
+    </div>
     <?php
     }
     ?>
@@ -68,8 +68,8 @@ include '../componentes/header.php';
     <div class="text-center">
         <!-- Verificação se o parâmetro 'id_time' não está presente na URL -->
         <?php if (isset($_GET['id_time'])) { ?>
-            <!-- Exibe o título "Estatísticas" -->
-            <h1>Estatísticas</h1>
+        <!-- Exibe o título "Estatísticas" -->
+        <h1>Estatísticas</h1>
     </div>
 
     <div class="card">
@@ -81,11 +81,11 @@ include '../componentes/header.php';
                 // Cria um array para armazenar os IDs dos jogadores obtidos
                 $ids = [];
         ?>
-            <div>
-                <form action="./estatisticas_jogador.php">
-                    <label for="id_jogador">Estatíticas do jogador:</label>
-                    <select name="id_jogador" id="id_jogador">
-                        <?php
+        <div>
+            <form action="./estatisticas_jogador.php">
+                <label for="id_jogador">Estatíticas do jogador:</label>
+                <select name="id_jogador" id="id_jogador">
+                    <?php
                         // Itera sobre os objetos retornados para extrair os IDs dos jogadores
                         foreach ($objetos as $objeto) {
                             $nomeJogadorClass = JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador', " jogador_no_time.id_jogador = " . $objeto->GetIDJogador());
@@ -94,10 +94,10 @@ include '../componentes/header.php';
                             array_push($ids, $objeto->GetID()); // Adiciona o ID do jogador ao array
                         }
                         ?>
-                    </select>
-                    <button type="submit">Visualizar</button>
-                </form>
-            </div>
+                </select>
+                <button type="submit">Visualizar</button>
+            </form>
+        </div>
         <?php
 
                 // Definição das estatísticas de defesas e passes para o time selecionado
@@ -174,137 +174,137 @@ include '../componentes/header.php';
             }
         ?>
 
-        <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Passes</h2>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_passe_libero_local">
-                        <h3>Líbero</h3>
-                    </div>
+        <div class="d-flex flex-wrap">
+            <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
+            <div class="card" style="width: 75%;">
+                <div class="card-header text-center">
+                    <h2>Passes</h2>
                 </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_passe_outras_local">
-                        <h3>Outras Posições</h3>
+                <div class="d-flex flex-row">
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_passe_libero_local">
+                            <h3>Líbero</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_passe_total_local">
-                        <h3>Total Passes Time</h3>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_passe_outras_local">
+                            <h3>Outras Posições</h3>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gráfico para exibir as defesas -->
-        <div class="card align-items-center" style="width: 100%;">
-            <div class="card-header text-center" style="width: 100%;">
-                <h2>Defesas</h2>
-            </div>
-            <div class="text-center" style="width: 33.3%;">
-                <div id="grafico_defesa_local"></div>
-            </div>
-        </div>
-
-        <!-- Gráfico para exibir as defesas -->
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Saques</h2>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 25%;">
-                    <div class="text-center" id="grafico_erros_saques_levantadores_local">
-                        <h3>Erros e acertos dos levantadores</h3>
-                    </div>
-                </div>
-                <div class="card" style="width: 25%;">
-                    <div class="text-center" id="grafico_tipos_saques_levantadores_local">
-                        <h3>Tipos de saques usados por levantadores</h3>
-                    </div>
-                </div>
-                <div class="card" style="width: 25%;">
-                    <div class="text-center" id="grafico_erros_saques_outras_posicoes_local">
-                        <h3>Erros e acertos dos outros jogadores</h3>
-                    </div>
-                </div>
-                <div class="card" style="width: 25%;">
-                    <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local">
-                        <h3>Tipos de saques usados por outros jogadores</h3>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_passe_total_local">
+                            <h3>Total Passes Time</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 50%;">
-                    <div class="text-center" id="grafico_erros_saques_total_local">
-                        <h3>Total erros e acertos</h3>
+            <!-- Gráfico para exibir as defesas -->
+            <div class="card align-items-center" style="width: 25%;">
+                <div class="card-header text-center" style="width: 100%;">
+                    <h2>Defesas</h2>
+                </div>
+                <div class="text-center" style="width: 100%;">
+                    <div id="grafico_defesa_local"></div>
+                </div>
+            </div>
+            <!-- Gráfico para exibir as defesas -->
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Saques</h2>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="card" style="width: 25%;">
+                        <div class="text-center" id="grafico_erros_saques_levantadores_local">
+                            <h3>Erros e acertos dos levantadores</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25%;">
+                        <div class="text-center" id="grafico_tipos_saques_levantadores_local">
+                            <h3>Tipos de saques usados por levantadores</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25%;">
+                        <div class="text-center" id="grafico_erros_saques_outras_posicoes_local">
+                            <h3>Erros e acertos dos outros jogadores</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25%;">
+                        <div class="text-center" id="grafico_tipos_saques_outras_posicoes_local">
+                            <h3>Tipos de saques usados por outros jogadores</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="card" style="width: 50%;">
-                    <div class="text-center" id="grafico_tipos_saques_total_local">
-                        <h3>Total tipos de saques usados</h3>
+                <div class="d-flex flex-row" style="width: 50%;">
+                    <div class="card" style="width: 50%;">
+                        <div class="text-center" id="grafico_erros_saques_total_local">
+                            <h3>Total erros e acertos</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 50%;">
+                        <div class="text-center" id="grafico_tipos_saques_total_local">
+                            <h3>Total tipos de saques usados</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Ataques</h2>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_ataque_levantador_local">
-                        <h3>Erros e acertos dos levantadores</h3>
-                    </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header text-center">
+                    <h2>Ataques</h2>
                 </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_ataque_outras_posicoes_local">
-                        <h3>Erros e acertos dos outros jogadores</h3>
+                <div class="d-flex flex-row">
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_ataque_levantador_local">
+                            <h3>Erros e acertos dos levantadores</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_ataque_total_local">
-                        <h3>Erros e acertos totais</h3>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_ataque_outras_posicoes_local">
+                            <h3>Erros e acertos dos outros jogadores</h3>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Bloqueios</h2>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_bloqueio_levantador_local">
-                        <h3>Erros e acertos dos levantadores</h3>
-                    </div>
-                </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_bloqueio_outras_posicoes_local">
-                        <h3>Erros e acertos dos outros jogadores</h3>
-                    </div>
-                </div>
-                <div class="card" style="width: 33.3%;">
-                    <div class="text-center" id="grafico_bloqueio_total_local">
-                        <h3>Erros e acertos totais</h3>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_ataque_total_local">
+                            <h3>Erros e acertos totais</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>Levantamentos</h2>
-            </div>
-            <div class="d-flex flex-row">
-                <div class="card" style="width: 50%;">
-                    <div class="text-center" id="grafico_erros_levantamento_local">
-                        <h3>Erros e acertos</h3>
+            <div class="card" style="width: 50%;">
+                <div class="card-header text-center">
+                    <h2>Bloqueios</h2>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_bloqueio_levantador_local">
+                            <h3>Erros e acertos dos levantadores</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_bloqueio_outras_posicoes_local">
+                            <h3>Erros e acertos dos outros jogadores</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 33.3%;">
+                        <div class="text-center" id="grafico_bloqueio_total_local">
+                            <h3>Erros e acertos totais</h3>
+                        </div>
                     </div>
                 </div>
-                <div class="card" style="width: 50%;">
-                    <div class="text-center" id="grafico_tipos_levantamento_local">
-                        <h3>Tipos acertados</h3>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header text-center">
+                    <h2>Levantamentos</h2>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="card" style="width: 50%;">
+                        <div class="text-center" id="grafico_erros_levantamento_local">
+                            <h3>Erros e acertos</h3>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 50%;">
+                        <div class="text-center" id="grafico_tipos_levantamento_local">
+                            <h3>Tipos acertados</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@ include '../componentes/header.php';
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="../js/estatisticas_time.js"></script>
     <!-- Fim da condição -->
-<?php } ?>
+    <?php } ?>
 </main>
 <script src="../js/pesquisa.js"></script>
 

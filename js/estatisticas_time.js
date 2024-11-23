@@ -10,6 +10,14 @@ const totalSaques = saquesLevantador.map((num, index) => num + saquesOutrasPosic
 const ataquesTotal = ataquesLevantador.map((num, index) => num + ataquesOutrasPosicoes[index]);
 const bloqueiosTotal = bloqueiosLevantador.map((num, index) => num + bloqueiosOutrasPosicoes[index]);
 
+const errosAcertosCor = ['rgb(2, 183, 86)', 'rgba(255, 99, 132)'];
+const coresTipos = [
+    'rgb(0, 37, 228)',
+    'rgb(2, 183, 86)',
+    'rgb(230, 197, 1)',
+    'rgb(242, 92, 5)'
+];
+
 // Configuração dos dados para construção de diferentes tipos de gráficos
 const dadosConstrucao = [
     // Dados para gráfico de passes do líbero
@@ -17,12 +25,7 @@ const dadosConstrucao = [
         passesLibero,                        // Dados de passes do líbero
         ['Passe A', 'Passe B', 'Passe C', 'Passe D'], // Etiquetas dos tipos de passes
         'passe',                              // Tipo do gráfico
-        [
-            'rgb(0, 37, 228)',  // Cor para o Passe A
-            'rgb(2, 183, 86)',  // Cor para o Passe B
-            'rgb(230, 197, 1)', // Cor para o Passe C
-            'rgb(242, 92, 5)'   // Cor para o Passe D
-        ],
+        coresTipos,
         'grafico_passe_libero_local',         // ID do local do gráfico
         'grafico_passe_libero'                // Nome do gráfico
     ],
@@ -31,12 +34,7 @@ const dadosConstrucao = [
         passesOutrasPosicoes,                 // Dados de passes de outras posições
         ['Passe A', 'Passe B', 'Passe C', 'Passe D'],
         'passe',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
+        coresTipos,
         'grafico_passe_outras_local',
         'grafico_passe_outras_posicoes'
     ],
@@ -45,12 +43,7 @@ const dadosConstrucao = [
         totalPasses,
         ['Passe A', 'Passe B', 'Passe C', 'Passe D'],
         'passe',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
+        coresTipos,
         'grafico_passe_total_local',
         'grafico_passe_total_posicoes'
     ],
@@ -59,10 +52,7 @@ const dadosConstrucao = [
         defesas,                               // Dados de defesas (acertos e erros)
         ['Acerto', 'Erro'],                    // Etiquetas para defesa
         'Defesa',                              // Tipo do gráfico
-        [
-            'rgb(0, 37, 228)',                 // Cor para acertos
-            'rgb(2, 183, 86)'                  // Cor para erros
-        ],
+        errosAcertosCor,
         'grafico_defesa_local',
         'grafico_defesa'
     ],
@@ -71,10 +61,7 @@ const dadosConstrucao = [
         [saquesOutrasPosicoes.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesOutrasPosicoes[4]], // Soma dos saques dentro e fora
         ['Dentro', 'Fora'],                    // Etiquetas para saques dentro e fora
         'saques',
-        [
-            'rgb(0, 37, 228)',                 // Cor para saques dentro
-            'rgb(2, 183, 86)'                  // Cor para saques fora
-        ],
+        errosAcertosCor,
         'grafico_erros_saques_outras_posicoes_local',
         'grafico_erros_saques_outras_posicoes'
     ],
@@ -83,10 +70,7 @@ const dadosConstrucao = [
         [saquesLevantador.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), saquesLevantador[4]],
         ['Dentro', 'Fora'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_erros_saques_levantadores_local',
         'grafico_erros_saques_levantadores'
     ],
@@ -95,12 +79,7 @@ const dadosConstrucao = [
         saquesOutrasPosicoes.slice(0, 4),      // Dados para tipos de saques específicos
         ['Ace', 'Viagem', 'Flutuante', 'Por cima'], // Etiquetas dos tipos de saques
         'saques',
-        [
-            'rgb(0, 37, 228)',                 // Cor para saques Ace
-            'rgb(2, 183, 86)',                 // Cor para saques por cima
-            'rgb(230, 197, 1)',                // Cor para saques flutuante
-            'rgb(242, 92, 5)'                  // Cor para saques viagem
-        ],
+        coresTipos,
         'grafico_tipos_saques_outras_posicoes_local',
         'grafico_tipos_saques_outras_posicoes'
     ],
@@ -109,12 +88,7 @@ const dadosConstrucao = [
         saquesLevantador.slice(0, 4),
         ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
+        coresTipos,
         'grafico_tipos_saques_levantadores_local',
         'grafico_tipos_saques_levantadores'
     ],
@@ -123,10 +97,7 @@ const dadosConstrucao = [
         [totalSaques.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), totalSaques[4]],
         ['Dentro', 'Fora'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_erros_saques_total_local',
         'grafico_erros_saques_total'
     ],
@@ -135,12 +106,7 @@ const dadosConstrucao = [
         totalSaques.slice(0, 4),
         ['Ace', 'Viagem', 'Flutuante', 'Por cima'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
+        coresTipos,
         'grafico_tipos_saques_total_local',
         'grafico_tipos_saques_total'
     ],
@@ -148,10 +114,7 @@ const dadosConstrucao = [
         ataquesLevantador,
         ['Acerto', 'Erro'],
         'Ataque',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_ataque_levantador_local',
         'grafico_ataque_levantador'
     ],
@@ -159,10 +122,7 @@ const dadosConstrucao = [
         ataquesOutrasPosicoes,
         ['Acerto', 'Erro'],
         'Ataque',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_ataque_outras_posicoes_local',
         'grafico_ataque_outras_posicoes'
     ],
@@ -170,10 +130,7 @@ const dadosConstrucao = [
         ataquesTotal,
         ['Acerto', 'Erro'],
         'Ataque',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_ataque_total_local',
         'grafico_ataque_total'
     ],
@@ -181,10 +138,7 @@ const dadosConstrucao = [
         bloqueiosLevantador,
         ['Acerto', 'Erro'],
         'Bloqueios',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_bloqueio_levantador_local',
         'grafico_bloqueio_levantador'
     ],
@@ -192,10 +146,7 @@ const dadosConstrucao = [
         bloqueiosOutrasPosicoes,
         ['Acerto', 'Erro'],
         'Bloqueios',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_bloqueio_outras_posicoes_local',
         'grafico_bloqueio_outras_posicoes'
     ],
@@ -203,10 +154,7 @@ const dadosConstrucao = [
         bloqueiosTotal,
         ['Acerto', 'Erro'],
         'Bloqueios',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_bloqueio_total_local',
         'grafico_bloqueio_total'
     ],
@@ -215,12 +163,7 @@ const dadosConstrucao = [
         levantamentos.slice(0, 4),
         ['Centro', 'Oposto', 'Pipe', 'Ponta'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)',
-            'rgb(230, 197, 1)',
-            'rgb(242, 92, 5)'
-        ],
+        coresTipos,
         'grafico_tipos_levantamento_local',
         'grafico_tipos_levantamento'
     ],
@@ -229,10 +172,7 @@ const dadosConstrucao = [
         [levantamentos.slice(0, 4).reduce((acc, valorAtual) => acc + valorAtual, 0), levantamentos[4]],
         ['Acertou', 'Errou'],
         'saques',
-        [
-            'rgb(0, 37, 228)',
-            'rgb(2, 183, 86)'
-        ],
+        errosAcertosCor,
         'grafico_erros_levantamento_local',
         'grafico_erros_levantamento'
     ]
