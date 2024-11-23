@@ -1,3 +1,5 @@
+<div class="loader"></div>
+<script src="../../js/loading.js" defer></script>
 <?php
 // Inclui as classes necessárias para lidar com as operações de atualização de estatísticas
 include_once '../classes/jogador_time_class.php';
