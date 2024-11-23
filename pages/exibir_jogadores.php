@@ -8,6 +8,8 @@ define('FAVICON', "../img/bolas.ico");
 // Define o caminho dos arquivos CSS a serem utilizados na página.
 define('FOLHAS_DE_ESTILO', array("../css/cadastro.css", "../css/style.css"));
 
+define('SCRIPT_LOADING', "../js/loading.js");
+
 // Define os links para outras páginas importantes: cadastro de usuário, cadastro de instituição, e login.
 define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');

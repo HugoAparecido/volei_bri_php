@@ -12,6 +12,7 @@ if (isset($_SESSION['id_usuario'])) {
     // Define constantes para o caminho de ícone, CSS, links de cadastro e login, e logotipo
     define('FAVICON', "../img/bolas.ico");
     define('FOLHAS_DE_ESTILO', array("../css/style.css", "../css/times.css", "../css/inserir_informacoes.css"));
+define('SCRIPT_LOADING', "../js/loading.js");
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
     define('LINK_LOGIN', './login.php');

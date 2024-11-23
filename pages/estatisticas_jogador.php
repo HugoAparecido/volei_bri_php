@@ -11,6 +11,8 @@ define('FAVICON', "../img/bolas.ico");
 // Define os caminhos dos arquivos CSS a serem carregados na página.
 define('FOLHAS_DE_ESTILO', array("../css/index.css", "../css/login.css", "../css/style.css"));
 
+define('SCRIPT_LOADING', "../js/loading.js");
+
 // Define os links para as páginas de cadastro de usuário, cadastro de instituição e login.
 define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');
@@ -38,62 +40,62 @@ include '../componentes/header.php';
     <?php
     if (isset($_SESSION)) {
     ?>
-    <!-- Botão flutuante no topo direito da página, utilizado para logout -->
-    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-        <button type="button" class="btn" id="logout">
-            <!-- Link para o logout, redirecionando para o script de logout -->
-            <a href="../componentes/logout.php">Sair</a>
-        </button>
-    </div>
-    <?php
+        <!-- Botão flutuante no topo direito da página, utilizado para logout -->
+        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+            <button type="button" class="btn" id="logout">
+                <!-- Link para o logout, redirecionando para o script de logout -->
+                <a href="../componentes/logout.php">Sair</a>
+            </button>
+        </div>
+        <?php
         $levantador = Levantador::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ' levantador.id_jogador = ' . intval($_GET['id_jogador']));
         $outras = OutrasPosicoes::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ' outras_posicoes.id_jogador = ' . intval($_GET['id_jogador']));
         $libero = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ' libero.id_jogador = ' . intval($_GET['id_jogador']));
         if (!empty($levantador)) {
             $nomeJogador = $levantador[0]->GetNome();
         ?>
-    <script>
-    var levantador = {
-        defesas: <?= $levantador[0]->GetDefesas() ?>,
-        ataques: <?= $levantador[0]->GetAtaques() ?>,
-        bloqueios: <?= $levantador[0]->GetBloqueios() ?>,
-        saques: <?= $levantador[0]->GetSaques() ?>,
-        levantamentos: <?= $levantador[0]->GetLevantamentos() ?>
-    }
-    </script>
-    <?php
+            <script>
+                var levantador = {
+                    defesas: <?= $levantador[0]->GetDefesas() ?>,
+                    ataques: <?= $levantador[0]->GetAtaques() ?>,
+                    bloqueios: <?= $levantador[0]->GetBloqueios() ?>,
+                    saques: <?= $levantador[0]->GetSaques() ?>,
+                    levantamentos: <?= $levantador[0]->GetLevantamentos() ?>
+                }
+            </script>
+        <?php
         }
         if (!empty($outras)) {
             $nomeJogador = $outras[0]->GetNome();
         ?>
-    <script>
-    var posicoes = [];
-    </script>
-    <?php
+            <script>
+                var posicoes = [];
+            </script>
+            <?php
             foreach ($outras as $posicao) {
             ?>
-    <script>
-    posicoes.push({
-        posicao: "<?= $posicao->GetPosicao() ?>",
-        defesas: <?= $posicao->GetDefesas() ?>,
-        ataques: <?= $posicao->GetAtaques() ?>,
-        bloqueios: <?= $posicao->GetBloqueios() ?>,
-        saques: <?= $posicao->GetSaques() ?>,
-        passes: <?= $posicao->GetPasses() ?>
-    })
-    </script>
-    <?php
+                <script>
+                    posicoes.push({
+                        posicao: "<?= $posicao->GetPosicao() ?>",
+                        defesas: <?= $posicao->GetDefesas() ?>,
+                        ataques: <?= $posicao->GetAtaques() ?>,
+                        bloqueios: <?= $posicao->GetBloqueios() ?>,
+                        saques: <?= $posicao->GetSaques() ?>,
+                        passes: <?= $posicao->GetPasses() ?>
+                    })
+                </script>
+            <?php
             }
         }
         if (!empty($libero)) {
             $nomeJogador = $libero[0]->GetNome();
             ?>
-    <script>
-    libero = {
-        passes: <?= $libero[0]->GetPasses() ?>,
-        defesas: <?= $libero[0]->GetDefesas() ?>
-    }
-    </script>
+            <script>
+                libero = {
+                    passes: <?= $libero[0]->GetPasses() ?>,
+                    defesas: <?= $libero[0]->GetDefesas() ?>
+                }
+            </script>
     <?php
         }
     }
@@ -110,41 +112,41 @@ include '../componentes/header.php';
             <?php
             if (!empty($libero) || !empty($outras)) {
             ?>
-            <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
-            <div class="card" style="width: 25%;">
-                <div class="card-header text-center">
-                    <h3>Passes</h3>
-                </div>
-                <div class="d-flex flex-row flex-wrap justify-content-around">
-                    <?php
+                <!-- Seção de gráficos para exibir as estatísticas de passes e defesas -->
+                <div class="card" style="width: 25%;">
+                    <div class="card-header text-center">
+                        <h3>Passes</h3>
+                    </div>
+                    <div class="d-flex flex-row flex-wrap justify-content-around">
+                        <?php
                         if (!empty($libero)) {
                         ?>
-                    <div class="card" style="width:100%;">
-                        <div class="text-center" id="grafico_passe_libero_local">
-                            <h3>Líbero</h3>
-                        </div>
-                    </div>
-                    <?php }
+                            <div class="card" style="width:100%;">
+                                <div class="text-center" id="grafico_passe_libero_local">
+                                    <h3>Líbero</h3>
+                                </div>
+                            </div>
+                        <?php }
                         foreach ($outras as $posicao) {
                         ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center"
-                            id="grafico_passe_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
-                            <h3><?= $posicao->GetPosicao() ?></h3>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center"
+                                    id="grafico_passe_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                                    <h3><?= $posicao->GetPosicao() ?></h3>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php
                         if (!empty($levantador) && !empty($outras)) {
                         ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_passe_total_local">
-                            <h3>Total Passes</h3>
-                        </div>
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center" id="grafico_passe_total_local">
+                                    <h3>Total Passes</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <?php } ?>
                 </div>
-            </div>
             <?php } ?>
             <!-- Gráfico para exibir as defesas -->
             <div class="card align-items-center" style="width: 25%;">
@@ -158,140 +160,140 @@ include '../componentes/header.php';
             <?php
             if (!empty($levantador) || !empty($outras)) {
             ?>
-            <!-- Gráfico para exibir as defesas -->
-            <div class="card" style="width: 50%;">
-                <div class="card-header text-center">
-                    <h3>Saques</h3>
-                </div>
-                <div class="d-flex flex-row flex-wrap justify-content-around">
-                    <?php if (!empty($levantador)) { ?>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_erros_saques_levantador_local">
-                            <h3>Erros e acertos dos levantadores</h3>
-                        </div>
+                <!-- Gráfico para exibir as defesas -->
+                <div class="card" style="width: 50%;">
+                    <div class="card-header text-center">
+                        <h3>Saques</h3>
                     </div>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_tipos_saques_levantadores_local">
-                            <h3>Tipos de saques usados por levantadores</h3>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php if (!empty($outras)) {
+                    <div class="d-flex flex-row flex-wrap justify-content-around">
+                        <?php if (!empty($levantador)) { ?>
+                            <div class="card" style="width: 50%;">
+                                <div class="text-center" id="grafico_erros_saques_levantador_local">
+                                    <h3>Erros e acertos dos levantadores</h3>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 50%;">
+                                <div class="text-center" id="grafico_tipos_saques_levantadores_local">
+                                    <h3>Tipos de saques usados por levantadores</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php if (!empty($outras)) {
                             foreach ($outras as $posicao) {
                         ?>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center"
-                            id="grafico_erros_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
-                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
-                        </div>
+                                <div class="card" style="width: 50%;">
+                                    <div class="text-center"
+                                        id="grafico_erros_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                                        <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
+                                    </div>
+                                </div>
+                                <div class="card" style="width: 50%;">
+                                    <div class="text-center"
+                                        id="grafico_tipos_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                                        <h3>Tipos de saques usados: <?= $posicao->GetPosicao() ?></h3>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center"
-                            id="grafico_tipos_saques_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
-                            <h3>Tipos de saques usados: <?= $posicao->GetPosicao() ?></h3>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php } ?>
-                </div>
-                <?php if (!empty($outras) && !empty($levantador)) { ?>
-                <div class="d-flex flex-row justify-content-around">
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_erros_saques_total_local">
-                            <h3>Total erros e acertos</h3>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_tipos_saques_total_local">
-                            <h3>Total tipos de saques usados</h3>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-            </div>
-            <div class="card" style="width: 25%;">
-                <div class="card-header text-center">
-                    <h3>Ataques</h3>
-                </div>
-                <div class="d-flex flex-row flex-wrap justify-content-around">
-                    <?php if (!empty($levantador)) { ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_ataque_levantador_local">
-                            <h3>Erros e acertos dos levantadores</h3>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php if (!empty($outras)) {
-                            foreach ($outras as $posicao) {
-                        ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center"
-                            id="grafico_ataque_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
-                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php } ?>
                     <?php if (!empty($outras) && !empty($levantador)) { ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_ataque_total_local">
-                            <h3>Erros e acertos totais</h3>
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="card" style="width: 50%;">
+                                <div class="text-center" id="grafico_erros_saques_total_local">
+                                    <h3>Total erros e acertos</h3>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 50%;">
+                                <div class="text-center" id="grafico_tipos_saques_total_local">
+                                    <h3>Total tipos de saques usados</h3>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     <?php } ?>
                 </div>
-            </div>
-            <div class="card" style="width: 25%;">
-                <div class="card-header text-center">
-                    <h3>Bloqueios</h3>
-                </div>
-                <div class="d-flex flex-row flex-wrap justify-content-around">
-                    <?php if (!empty($levantador)) { ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_bloqueio_levantador_local">
-                            <h3>Erros e acertos dos levantadores</h3>
-                        </div>
+                <div class="card" style="width: 25%;">
+                    <div class="card-header text-center">
+                        <h3>Ataques</h3>
                     </div>
-                    <?php } ?>
-                    <?php if (!empty($outras)) {
+                    <div class="d-flex flex-row flex-wrap justify-content-around">
+                        <?php if (!empty($levantador)) { ?>
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center" id="grafico_ataque_levantador_local">
+                                    <h3>Erros e acertos dos levantadores</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php if (!empty($outras)) {
                             foreach ($outras as $posicao) {
                         ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center"
-                            id="grafico_bloqueio_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
-                            <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
-                        </div>
+                                <div class="card" style="width: 100%;">
+                                    <div class="text-center"
+                                        id="grafico_ataque_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                                        <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                        <?php if (!empty($outras) && !empty($levantador)) { ?>
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center" id="grafico_ataque_total_local">
+                                    <h3>Erros e acertos totais</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
-                    <?php } ?>
-                    <?php } ?>
-                    <?php if (!empty($outras) && !empty($levantador)) { ?>
-                    <div class="card" style="width: 100%;">
-                        <div class="text-center" id="grafico_bloqueio_total_local">
-                            <h3>Erros e acertos totais</h3>
-                        </div>
-                    </div>
-                    <?php } ?>
                 </div>
-            </div>
+                <div class="card" style="width: 25%;">
+                    <div class="card-header text-center">
+                        <h3>Bloqueios</h3>
+                    </div>
+                    <div class="d-flex flex-row flex-wrap justify-content-around">
+                        <?php if (!empty($levantador)) { ?>
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center" id="grafico_bloqueio_levantador_local">
+                                    <h3>Erros e acertos dos levantadores</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <?php if (!empty($outras)) {
+                            foreach ($outras as $posicao) {
+                        ?>
+                                <div class="card" style="width: 100%;">
+                                    <div class="text-center"
+                                        id="grafico_bloqueio_<?= str_replace(' ', '_', str_replace('ã', 'a', str_replace('í', 'i', $posicao->GetPosicao()))) ?>_local">
+                                        <h3>Erros e acertos: <?= $posicao->GetPosicao() ?></h3>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                        <?php if (!empty($outras) && !empty($levantador)) { ?>
+                            <div class="card" style="width: 100%;">
+                                <div class="text-center" id="grafico_bloqueio_total_local">
+                                    <h3>Erros e acertos totais</h3>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
             <?php } ?>
             <?php if (!empty($levantador)) { ?>
-            <div class="card" style="width: 50%;">
-                <div class="card-header text-center">
-                    <h3>Levantamentos</h3>
-                </div>
-                <div class="d-flex flex-row justify-content-around">
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_erros_levantamento_local">
-                            <h3>Erros e acertos</h3>
+                <div class="card" style="width: 50%;">
+                    <div class="card-header text-center">
+                        <h3>Levantamentos</h3>
+                    </div>
+                    <div class="d-flex flex-row justify-content-around">
+                        <div class="card" style="width: 50%;">
+                            <div class="text-center" id="grafico_erros_levantamento_local">
+                                <h3>Erros e acertos</h3>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 50%;">
+                            <div class="text-center" id="grafico_tipos_levantamento_local">
+                                <h3>Tipos acertados</h3>
+                            </div>
                         </div>
                     </div>
-                    <div class="card" style="width: 50%;">
-                        <div class="text-center" id="grafico_tipos_levantamento_local">
-                            <h3>Tipos acertados</h3>
-                        </div>
-                    </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>

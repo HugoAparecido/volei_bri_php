@@ -10,6 +10,8 @@ define('FAVICON', "./img/bolas.ico");
 // Define um array de constantes com os caminhos dos arquivos CSS da página
 define('FOLHAS_DE_ESTILO', array("./css/index.css", "./css/style.css"));
 
+define('SCRIPT_LOADING', "./js/loading.js");
+
 // Define as constantes com os caminhos para as páginas de cadastro e login
 define('LINK_CADASTRO_USUARIO', './pages/cadastrar_usuario.php');
 define('LINK_CADASTRO_INSTITUICAO', './pages/cadastrar_instituicao.php');

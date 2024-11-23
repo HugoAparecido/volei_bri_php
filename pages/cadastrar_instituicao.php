@@ -11,6 +11,8 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
     // Define uma constante com o caminho dos arquivos CSS da página.
     define('FOLHAS_DE_ESTILO', array("../css/cadastro.css", "../css/style.css"));
 
+    define('SCRIPT_LOADING', "../js/loading.js");
+
     // Define links constantes para páginas específicas do sistema.
     define('LINK_CADASTRO_USUARIO', './cadastrar_usuario.php');
     define('LINK_CADASTRO_INSTITUICAO', './cadastrar_instituicao.php');

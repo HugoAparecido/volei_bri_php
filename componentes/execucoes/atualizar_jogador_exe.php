@@ -1,3 +1,5 @@
+<div class="loader"></div>
+<script src="../../js/loading.js" defer></script>
 <?php
 // Inclui arquivos de classe necessários para o código, cada um representando um tipo de jogador com métodos específicos.
 require_once '../classes/libero_class.php'; // Inclui a classe Libero

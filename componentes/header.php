@@ -17,7 +17,9 @@
     <?php } ?>
 
     <!-- Inclui o CSS do Bootstrap para estilização da página -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="<?= SCRIPT_LOADING ?>" defer></script>
 </head>
 
 <body class="bg-light">
@@ -32,7 +34,9 @@
                 </a>
 
                 <!-- Botão para expandir ou colapsar o menu em telas pequenas -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -44,17 +48,20 @@
                         foreach (OUTRAS_PAGINAS as $pagina) {
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
+                                <a class="nav-link active" aria-current="page"
+                                    href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
                             </li>
                         <?php }
 
                         // Se o usuário for um treinador, exibe links para cadastrar usuário e instituição
                         if (isset($_SESSION['treinador']) && $_SESSION['treinador']) { ?>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_USUARIO ?>">Cadastrar Usuário</a>
+                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_USUARIO ?>">Cadastrar
+                                    Usuário</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
+                                <a class="nav-link active" aria-current="page"
+                                    href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
                             </li>
                         <?php }
 
