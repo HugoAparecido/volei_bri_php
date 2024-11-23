@@ -28,6 +28,7 @@ if (isset($nomeUsuario) && isset($emailUsuario) && isset($senhaUsuario) && isset
     // Redireciona para a página de times após o cadastro ser realizado com sucesso
     header("Location: ../../pages/times.php");
 } else {
+    $_SESSION['error'] = "O nome, o email e a senha do usuário, se é jogador e se é treinador devem estar definidos";
     // Se algum dos campos obrigatórios não está presente, redireciona de volta para a página de cadastro de usuário
     header("Location: ../../pages/cadastrar_usuario.php");
 }

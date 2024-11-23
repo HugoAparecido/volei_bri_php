@@ -40,6 +40,7 @@ if (isset($nomeJogador) && isset($posicaoJogador)) {
 } else {
     // Se os dados obrigatórios não estiverem definidos, exibe uma mensagem de erro
     echo "Não foi possível cadastrar o jogador";
+    $_SESSION['error'] = "O nome e a posição do jogador devem estar definidos";
 }
 
 // Redireciona o usuário para a página onde os jogadores cadastrados são exibidos

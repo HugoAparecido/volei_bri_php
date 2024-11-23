@@ -24,6 +24,7 @@ if (isset($nomeTime) && isset($sexoTime) && isset($instituicaoTime)) {
     // Redireciona o usuário para a página de visualização dos times após o cadastro
     header("Location: ../../pages/times.php");
 } else {
+    $_SESSION['error'] = "O nome, o sexo e a instituição do time devem estar definidos";
     // Se algum dado estiver ausente, redireciona o usuário para a página de cadastro do time
     header("Location: ../../pages/cadastrar_time.php");
 }

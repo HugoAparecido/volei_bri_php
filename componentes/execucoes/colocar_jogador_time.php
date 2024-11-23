@@ -48,6 +48,7 @@ if (isset($idTime)) {
     // Redireciona o usuário para a página de times após adicionar os jogadores
     header("Location: ../../pages/times.php");
 } else {
+    $_SESSION['error'] = "O não foi possível obter o identificador do time";
     // Se o ID do time não foi fornecido, redireciona para a mesma página de times
     header("Location: ../../pages/times.php");
 }

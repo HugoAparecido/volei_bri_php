@@ -13,7 +13,7 @@
     // Inclui cada arquivo CSS da lista definida na constante FOLHAS_DE_ESTILO
     foreach (FOLHAS_DE_ESTILO as $link_css) {
     ?>
-        <link rel="stylesheet" href="<?= $link_css ?>">
+    <link rel="stylesheet" href="<?= $link_css ?>">
     <?php } ?>
 
     <!-- Inclui o CSS do Bootstrap para estilização da página -->
@@ -47,30 +47,30 @@
                         // Gera os links para as outras páginas, usando as constantes em OUTRAS_PAGINAS
                         foreach (OUTRAS_PAGINAS as $pagina) {
                         ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                    href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
+                        </li>
                         <?php }
 
                         // Se o usuário for um treinador, exibe links para cadastrar usuário e instituição
                         if (isset($_SESSION['treinador']) && $_SESSION['treinador']) { ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_USUARIO ?>">Cadastrar
-                                    Usuário</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                    href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= LINK_CADASTRO_USUARIO ?>">Cadastrar
+                                Usuário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="<?= LINK_CADASTRO_INSTITUICAO ?>">Cadastrar Instituição</a>
+                        </li>
                         <?php }
 
                         // Exibe o link de login se o usuário não estiver logado
                         if (!isset($_SESSION['id_usuario'])) {
                         ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="<?= LINK_LOGIN ?>">Login</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= LINK_LOGIN ?>">Login</a>
+                        </li>
                         <?php }
                         ?>
                     </ul>
@@ -80,9 +80,16 @@
             <!-- Exibe o nome do usuário logado na barra de navegação -->
             <?php
             if (isset($_SESSION['id_usuario'])) { ?>
-                <a class="navbar-brand">
-                    <?= $_SESSION['nome_usuario'] ?>
-                </a>
+            <a class="navbar-brand">
+                <?= $_SESSION['nome_usuario'] ?>
+            </a>
             <?php } ?>
         </nav>
     </header>
+    <?php
+    if (isset($_SESSION['error'])) { ?>
+    <div>
+        <p><?= $_SESSION['error'] ?></p>
+    </div>
+    <?php unset($_SESSION['error']);
+    } ?>

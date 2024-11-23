@@ -17,6 +17,7 @@ if (isset($nomeInstituicao) && isset($tipoInstituicao)) {
     // Redireciona para a página de times após o cadastro ser realizado com sucesso
     header("Location: ../../pages/times.php");
 } else {
+    $_SESSION['error'] = "O nome e o tipo da instituição devem estar definidos";
     // Se algum dos campos obrigatórios não está presente, redireciona de volta para a página de cadastro de usuário
     header("Location: ../../pages/cadastrar_instituicao.php");
 }

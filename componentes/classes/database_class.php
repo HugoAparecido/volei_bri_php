@@ -58,6 +58,7 @@ class Database
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             // Em caso de erro, encerra a execução e exibe a mensagem de erro
+            $_SESSION['error'] = 'ERROR: ' . $e->getMessage();
             die('ERROR: ' . $e->getMessage());
         }
     }
@@ -78,6 +79,7 @@ class Database
             return $statement; // Retorna a instância PDOStatement resultante
         } catch (PDOException $e) {
             // Em caso de erro, encerra a execução e exibe a mensagem de erro
+            $_SESSION['error'] = 'ERROR: ' . $e->getMessage();
             die('ERROR: ' . $e->getMessage());
         }
     }

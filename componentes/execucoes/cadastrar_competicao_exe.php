@@ -24,6 +24,7 @@ if (isset($nomeCompeticao) && isset($desafiante)) {
     // Redireciona para a página de times após o cadastro ser realizado com sucesso
     header("Location: ../../pages/times.php");
 } else {
+    $_SESSION['error'] = "O nome e o desafiante devem estar definidos";
     // Se algum dos campos obrigatórios não está presente, redireciona de volta para a página
     header("Location: ../../pages/cadastrar_Competicao.php");
 }

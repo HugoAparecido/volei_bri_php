@@ -72,6 +72,7 @@ if (isset($_POST)) {
     // Redireciona para a página de estatísticas após a atualização
     header("Location: ../../pages/estatisticas.php");
 } else {
+    $_SESSION['error'] = "Não foi possível obter os dados do envio";
     // Se não há dados enviados, redireciona para a página de times
     header("Location: ../../pages/times.php");
 }

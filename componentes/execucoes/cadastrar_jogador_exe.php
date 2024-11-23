@@ -32,6 +32,7 @@ if (isset($nomeJogador) && isset($posicaoJogador) && isset($sexoJogador)) {
         $obOutrasPosicoes->CadastrarPosicao($nomeJogador, $sexoJogador, $posicaoJogador, $apelidoJogador, $numCamisaJogador, $alturaJogador, $pesoJogador);
     }
 } else {
+    $_SESSION['error'] = "O nome, a posição e o sexo do jogador devem estar definidos";
     // Se os dados obrigatórios não estiverem definidos, exibe uma mensagem de erro
     echo "Não foi possível cadastrar o jogador";
 }
