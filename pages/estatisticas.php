@@ -3,6 +3,7 @@
 include '../componentes/protect.php';
 include '../componentes/classes/time_class.php';
 include '../componentes/classes/componentes_class.php';
+include '../componentes/classes/competicao_time_class.php';
 
 // Define o caminho do ícone (favicon) da página.
 define('FAVICON', "../img/bolas.ico");
@@ -309,8 +310,40 @@ include '../componentes/header.php';
                 </div>
             </div>
         </div>
+        <div class="d-flex flex-wrap">
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de acertos e erros de defesa entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_defesas_competicoes_local">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    <?php
+            $competicoes = Competicao::GetCompeticoes(' id_time_desafiante = ' . intval($_GET['id_time']) . ' OR id_time_desafiado = ' . intval($_GET['id_time']));
+            $competicoesTime = [];
+            $defesas = ['acertos' => [], 'erros' => []];
+            $ataques = [];
+            $bloqueios = [];
+            $levantamentos = [];
+            $saques = [];
+            $passes = [];
+            $nomeCompeticoes = [];
+            foreach ($competicoes as $competicao) {
+                array_push($competicoesTime, CompeticaoTime::GetCompeticaoTime($competicao->GetID()));
+                array_push($nomeCompeticoes, $competicao->GetNome());
+            }
+            foreach ($competicoesTime as $competicaoTime) {
+                list($a, $b) = $competicaoTime->GetDefesas();
+                array_push($defesas['acertos'], $a);
+                array_push($defesas['erros'], $b);
+            }
+            echo "<script> const competicoes = ['" . implode("','", $nomeCompeticoes) . "'] </script>";
+            echo "<script> const defesasCompeticoes = [['" . implode("','", $defesas['acertos']) . "'], ['" . implode("','", $defesas['erros']) . "']] </script>";
+    ?>
     <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="../js/estatisticas_time.js"></script>

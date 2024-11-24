@@ -184,3 +184,5 @@ dadosConstrucao.forEach(
         Graficos.FazerGrafico(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5]); // Chama a função para criar o gráfico
     }
 );
+
+Graficos.FazerGraficoLinha(defesasCompeticoes, competicoes, 'defesas', ['acerto', 'erro'], errosAcertosCor, 'relacao_defesas_competicoes_local', 'relacao_defesas_competicoes')

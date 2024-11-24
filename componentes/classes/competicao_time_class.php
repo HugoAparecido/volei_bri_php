@@ -15,6 +15,8 @@ class CompeticaoTime
      */
     private int $defesa_no_time;
 
+    private int $erro_defesa_no_time;
+
     /**
      * Ataques realizados pelo jogador dentro do time
      * @var int
@@ -93,13 +95,6 @@ class CompeticaoTime
      */
     private int $errou_levantamento_no_time;
 
-    /**
-     * Posição do jogador no time (ex.: levantador, atacante, defensor)
-     * @var string
-     */
-    private string $posicao_jogador;
-
-
     // Atributos relacionados ao saque do jogador no time
 
     /**
@@ -131,6 +126,37 @@ class CompeticaoTime
      * @var int
      */
     private int $saque_flutuante_no_time;
+
+    // Métodos para obter estatísticas específicas em formato de array
+    public function GetPasses()
+    {
+        return '[' . ($this->passe_a_no_time ?? 0) . ',' . ($this->passe_b_no_time ?? 0) . ',' . ($this->passe_c_no_time ?? 0) . ',' . ($this->passe_d_no_time ?? 0) . ']';
+    }
+
+    public function GetDefesas()
+    {
+        return [($this->defesa_no_time ?? 0), ($this->erro_defesa_no_time ?? 0)];
+    }
+
+    public function GetAtaques()
+    {
+        return '[' . ($this->ataque_dentro_no_time ?? 0) . ',' . ($this->ataque_fora_no_time ?? 0) . ']';
+    }
+
+    public function GetBloqueios()
+    {
+        return '[' . ($this->bloqueio_convertido_no_time ?? 0) . ',' . ($this->bloqueio_errado_no_time ?? 0) . ']';
+    }
+
+    public function GetSaques()
+    {
+        return '[' . ($this->saque_ace_no_time ?? 0) . ',' . ($this->saque_viagem_no_time ?? 0) . ',' . ($this->saque_flutuante_no_time ?? 0) . ',' . ($this->saque_cima_no_time ?? 0) . ',' . ($this->saque_fora_no_time ?? 0) . ']';
+    }
+
+    public function GetLevantamentos()
+    {
+        return '[' . ($this->levantamento_para_centro_no_time ?? 0) . ',' . ($this->levantamento_para_oposto_no_time ?? 0) . ',' . ($this->levantamento_para_pipe_no_time ?? 0) . ',' . ($this->levantamento_para_ponta_no_time ?? 0) . ',' . ($this->errou_levantamento_no_time ?? 0) . ']';
+    }
 
     // Método privado chamado "SetIDs" para definir os IDs de competição e time
     private function SetIDs(array $ids)
@@ -175,6 +201,19 @@ class CompeticaoTime
         // Atualiza as estatísticas na tabela 'competicao_time' com os valores modificados, 
         // aplicando a condição para um registro específico (baseado no ID da competição e do time)
         $obDatabase->AtualizarEstatisticas('id_competicao = ' . $idCompeticao . ' AND id_time = ' . $idTime, $valores);
+    }
+
+    public static function GetCompeticoesTime($where = null, $order = null, $limit = null, $fields = '*')
+    {
+        // Cria uma nova instância da classe Database para manipulação da tabela 'competicao'
+        // Realiza uma consulta usando os parâmetros fornecidos e retorna os resultados como objetos da classe Competicao
+        return (new Database('competicao_time'))
+            ->select($where, $order, $limit, $fields)
+            ->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+    public static function GetCompeticaoTime($id)
+    {
+        return (new Database('competicao_time'))->select('id_competicao = ' . $id)->fetchObject(self::class);
     }
 
     /**
