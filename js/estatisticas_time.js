@@ -184,5 +184,16 @@ dadosConstrucao.forEach(
         Graficos.FazerGrafico(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5]); // Chama a função para criar o gráfico
     }
 );
-
-Graficos.FazerGraficoLinha(defesasCompeticoes, competicoes, 'defesas', ['acerto', 'erro'], errosAcertosCor, 'relacao_defesas_competicoes_local', 'relacao_defesas_competicoes')
+var errosCompeticao = [[defesasCompeticoes, 'relacao_defesas_competicoes_local'], [bloqueiosCompeticoes, 'relacao_bloqueios_competicoes_local'], [ataquesCompeticoes, 'relacao_ataques_competicoes_local'], [levantamentosCompeticoes, 'relacao_levantamentos_competicoes_local'], [saquesCompeticoes, 'relacao_saques_competicoes_local']]
+errosCompeticao.forEach(movimento => {
+    console.log(movimento);
+    Graficos.FazerGraficoLinha(movimento[0], competicoes, ['acerto', 'erro'], errosAcertosCor, movimento[1], movimento[1].replace('_local', ''));
+})
+var tiposCompeticao = [[saquesTiposCompeticoes, 'relacao_saques_tipos_competicoes_local'], [levantamentosTiposCompeticoes, 'relacao_levantamentos_tipos_competicoes_local']]
+tiposCompeticao.forEach(movimento => {
+    console.log(movimento);
+    Graficos.FazerGraficoLinha(movimento[0], competicoes, ['acerto', 'erro', 'nao sei', 'nao sei', 'nao sei'], ['rgb(0, 37, 228)',
+        'rgb(2, 183, 86)',
+        'rgb(230, 197, 1)',
+        'rgb(242, 92, 5)', 'rgba(255, 99, 132)'], movimento[1], movimento[1].replace('_local', ''));
+})

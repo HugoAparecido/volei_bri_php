@@ -130,7 +130,7 @@ class CompeticaoTime
     // Métodos para obter estatísticas específicas em formato de array
     public function GetPasses()
     {
-        return '[' . ($this->passe_a_no_time ?? 0) . ',' . ($this->passe_b_no_time ?? 0) . ',' . ($this->passe_c_no_time ?? 0) . ',' . ($this->passe_d_no_time ?? 0) . ']';
+        return [$this->passe_a_no_time ?? 0,$this->passe_b_no_time ?? 0,$this->passe_c_no_time ?? 0,$this->passe_d_no_time ?? 0];
     }
 
     public function GetDefesas()
@@ -140,22 +140,22 @@ class CompeticaoTime
 
     public function GetAtaques()
     {
-        return '[' . ($this->ataque_dentro_no_time ?? 0) . ',' . ($this->ataque_fora_no_time ?? 0) . ']';
+        return [$this->ataque_dentro_no_time ?? 0,$this->ataque_fora_no_time ?? 0];
     }
 
     public function GetBloqueios()
     {
-        return '[' . ($this->bloqueio_convertido_no_time ?? 0) . ',' . ($this->bloqueio_errado_no_time ?? 0) . ']';
+        return [$this->bloqueio_convertido_no_time ?? 0,$this->bloqueio_errado_no_time ?? 0];
     }
 
     public function GetSaques()
     {
-        return '[' . ($this->saque_ace_no_time ?? 0) . ',' . ($this->saque_viagem_no_time ?? 0) . ',' . ($this->saque_flutuante_no_time ?? 0) . ',' . ($this->saque_cima_no_time ?? 0) . ',' . ($this->saque_fora_no_time ?? 0) . ']';
+        return [$this->saque_ace_no_time ?? 0,$this->saque_viagem_no_time ?? 0,$this->saque_flutuante_no_time ?? 0,$this->saque_cima_no_time ?? 0,$this->saque_fora_no_time ?? 0];
     }
 
     public function GetLevantamentos()
     {
-        return '[' . ($this->levantamento_para_centro_no_time ?? 0) . ',' . ($this->levantamento_para_oposto_no_time ?? 0) . ',' . ($this->levantamento_para_pipe_no_time ?? 0) . ',' . ($this->levantamento_para_ponta_no_time ?? 0) . ',' . ($this->errou_levantamento_no_time ?? 0) . ']';
+        return [$this->levantamento_para_centro_no_time ?? 0,$this->levantamento_para_oposto_no_time ?? 0,$this->levantamento_para_pipe_no_time ?? 0,$this->levantamento_para_ponta_no_time ?? 0,$this->errou_levantamento_no_time ?? 0];
     }
 
     // Método privado chamado "SetIDs" para definir os IDs de competição e time

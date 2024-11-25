@@ -320,29 +320,109 @@ include '../componentes/header.php';
                     </div>
                 </div>
             </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de acertos e erros de saques</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_saques_competicoes_local">
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de acertos e erros de ataques entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_ataques_competicoes_local">
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de acertos e erros de bloqueios entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_bloqueios_competicoes_local">
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de acertos e erros de levantamentos entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_levantamentos_competicoes_local">
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de levantamentos entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_levantamentos_tipos_competicoes_local">
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="width: 50%;">
+                <div class="card-header">
+                    <h2>Relação de saques entre as competições</h2>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <div class="text-center" id="relacao_saques_tipos_competicoes_local">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <?php
             $competicoes = Competicao::GetCompeticoes(' id_time_desafiante = ' . intval($_GET['id_time']) . ' OR id_time_desafiado = ' . intval($_GET['id_time']));
             $competicoesTime = [];
             $defesas = ['acertos' => [], 'erros' => []];
-            $ataques = [];
-            $bloqueios = [];
-            $levantamentos = [];
-            $saques = [];
-            $passes = [];
+            $ataques = ['acertos' => [], 'erros' => []];
+            $bloqueios = ['acertos' => [], 'erros' => []];
+            $levantamentos = ['acertos' => [], 'erros' => [], 'oposto' => [], 'central' => [], 'pipe' => [], 'ponta' => []];
+            $saques = ['acertos' => [], 'erros' => [], 'flutuante' => [], 'viagem' => [], 'ace' => [], 'cima' => []];
+            $passes = ['A' => [], 'B' => [], 'C' => [], 'D' => []];
             $nomeCompeticoes = [];
             foreach ($competicoes as $competicao) {
                 array_push($competicoesTime, CompeticaoTime::GetCompeticaoTime($competicao->GetID()));
                 array_push($nomeCompeticoes, $competicao->GetNome());
             }
             foreach ($competicoesTime as $competicaoTime) {
-                list($a, $b) = $competicaoTime->GetDefesas();
-                array_push($defesas['acertos'], $a);
-                array_push($defesas['erros'], $b);
+                list($acertos, $erros) = $competicaoTime->GetDefesas();
+                array_push($defesas['acertos'], $acertos);
+                array_push($defesas['erros'], $erros);
+                list($acertos, $erros) = $competicaoTime->GetBloqueios();
+                array_push($bloqueios['acertos'], $acertos);
+                array_push($bloqueios['erros'], $erros);
+                list($acertos, $erros) = $competicaoTime->GetAtaques();
+                array_push($ataques['acertos'], $acertos);
+                array_push($ataques['erros'], $erros);
+                list($centro, $oposto, $pipe, $ponta, $erro) = $competicaoTime->GetLevantamentos();
+                array_push($levantamentos['acertos'], ($centro + $oposto + $ponta + $pipe));
+                array_push($levantamentos['oposto'], $oposto);
+                array_push($levantamentos['pipe'], $pipe);
+                array_push($levantamentos['ponta'], $ponta);
+                array_push($levantamentos['central'], $centro);
+                array_push($levantamentos['erros'], $erro);
+                list($ace, $viagem, $flutuante, $cima, $erro) = $competicaoTime->GetSaques();
+                array_push($saques['acertos'], ($ace + $viagem + $cima + $flutuante));
+                array_push($levantamentos['flutuante'], $flutuante);
+                array_push($levantamentos['viagem'], $viagem);
+                array_push($levantamentos['ace'], $ace);
+                array_push($levantamentos['cima'], $cima);
+                array_push($saques['erros'], $erro);
             }
             echo "<script> const competicoes = ['" . implode("','", $nomeCompeticoes) . "'] </script>";
             echo "<script> const defesasCompeticoes = [['" . implode("','", $defesas['acertos']) . "'], ['" . implode("','", $defesas['erros']) . "']] </script>";
+            echo "<script> const bloqueiosCompeticoes = [['" . implode("','", $bloqueios['acertos']) . "'], ['" . implode("','", $bloqueios['erros']) . "']] </script>";
+            echo "<script> const ataquesCompeticoes = [['" . implode("','", $ataques['acertos']) . "'], ['" . implode("','", $ataques['erros']) . "']] </script>";
+            echo "<script> const levantamentosCompeticoes = [['" . implode("','", $levantamentos['acertos']) . "'], ['" . implode("','", $levantamentos['erros']) . "']] </script>";
+            echo "<script> const saquesCompeticoes = [['" . implode("','", $saques['acertos']) . "'], ['" . implode("','", $saques['erros']) . "']] </script>";
+            echo "<script> const saquesTiposCompeticoes = [['" . implode("','", $saques['ace']) . "'], ['" . implode("','", $saques['erros']) . "']] </script>";
+            echo "<script> const levantamentosTiposCompeticoes = [['" . implode("','", $levantamentos['acertos']) . "'], ['" . implode("','", $levantamentos['erros']) . "']] </script>";
     ?>
     <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

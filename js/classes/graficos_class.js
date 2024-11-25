@@ -57,11 +57,12 @@ export class Graficos {
         // se não hover levantamento para apresentar, haverá uma mensagem no formato parágrafo
         else localGrafico.innerHTML += "<p>Não há dados disponíveis no momento</p>"
     }
-    static FazerGraficoLinha(dados, labels, legenda, nomeValores, cores, idLocalGrafico, idGrafico) {
+    static FazerGraficoLinha(dados, labels, nomeValores, cores, idLocalGrafico, idGrafico) {
         var sum = 0;
         for (var i = 0; i < dados.length; i++) {
             sum += dados[i];
         }
+        console.log(idLocalGrafico)
         //Criando o elemneto canva
         const canva = document.createElement('canvas');
         //Definindo o id do elemnto canva
@@ -71,22 +72,22 @@ export class Graficos {
         localGrafico.appendChild(canva);
         // pegando o id do gráfico
         const ctx = document.getElementById(`${idGrafico}`);
+        console.log(dados)
         if (sum != 0) {
+            var dataset = [];
+            dados.forEach((element, indice) => {
+                console.log(element)
+                dataset.push({
+                    label: nomeValores[indice],
+                    data: element,
+                    fill: false,
+                    borderColor: cores[indice],
+                    tension: 0.1
+                })
+            });
             const data = {
                 labels: labels,
-                datasets: [{
-                    label: 'Acertos',
-                    data: dados[0],
-                    fill: false,
-                    borderColor: cores[0],
-                    tension: 0.1
-                }, {
-                    label: 'Erros',
-                    data: dados[1],
-                    fill: false,
-                    borderColor: cores[1],
-                    tension: 0.1
-                }]
+                datasets: dataset
             };
             // configurando o gráfico
             const config = {
