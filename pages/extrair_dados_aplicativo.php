@@ -24,26 +24,27 @@ if (isset($_SESSION['id_usuario'])) {
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
     include '../componentes/header.php';
 ?>
-<main>
-    <form action="../componentes/construir_json.php" method="post">
+    <main>
+        <form action="../componentes/construir_json.php" method="post">
 
-        <!-- Campo para a instituição do time -->
-        <div class="mb-3">
-            <label class="form-label" for="instituicao">Instituição do Time:</label>
-            <select class="form-select" name="instituicao" id="instituicao" required>
-                <?php
+            <!-- Campo para a instituição do time -->
+            <div class="mb-3">
+                <label class="form-label" for="instituicao">Instituição do Time:</label>
+                <select class="form-select" name="instituicao" id="instituicao" required>
+                    <?php
                     // Obtém a lista de instituições usando um método estático da classe Instituicao.
                     $instituicao = Instituicao::GetInstituicoes();
 
                     // Percorre a lista de instituições e cria uma opção para cada uma no campo select.
                     foreach ($instituicao as $instituicao) {
                     ?>
-                <option value="<?= $instituicao->GetID() ?>"><?= $instituicao->GetNome() ?></option>
-                <?php } ?>
-            </select>
-    </form>
-    <a href="../componentes/construir_json.php" class="btn" id="btn">Baixar arquivo</a>
-</main>
+                        <option value="<?= $instituicao->GetID() ?>"><?= $instituicao->GetNome() ?></option>
+                    <?php } ?>
+                </select>
+        </form>
+        <a href="../componentes/construir_json.php" class="btn" id="btn">Baixar arquivo</a>
+        <a href="../componentes/enviar_email.php" class="btn" id="btn">Enviar por e-mail</a>
+    </main>
 <?php
     // Inclui o footer da página
     include '../componentes/footer.php';
