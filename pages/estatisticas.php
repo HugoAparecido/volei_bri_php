@@ -409,10 +409,10 @@ include '../componentes/header.php';
                 array_push($levantamentos['erros'], $erro);
                 list($ace, $viagem, $flutuante, $cima, $erro) = $competicaoTime->GetSaques();
                 array_push($saques['acertos'], ($ace + $viagem + $cima + $flutuante));
-                array_push($levantamentos['flutuante'], $flutuante);
-                array_push($levantamentos['viagem'], $viagem);
-                array_push($levantamentos['ace'], $ace);
-                array_push($levantamentos['cima'], $cima);
+                array_push($saques['flutuante'], $flutuante);
+                array_push($saques['viagem'], $viagem);
+                array_push($saques['ace'], $ace);
+                array_push($saques['cima'], $cima);
                 array_push($saques['erros'], $erro);
             }
             echo "<script> const competicoes = ['" . implode("','", $nomeCompeticoes) . "'] </script>";
@@ -421,8 +421,8 @@ include '../componentes/header.php';
             echo "<script> const ataquesCompeticoes = [['" . implode("','", $ataques['acertos']) . "'], ['" . implode("','", $ataques['erros']) . "']] </script>";
             echo "<script> const levantamentosCompeticoes = [['" . implode("','", $levantamentos['acertos']) . "'], ['" . implode("','", $levantamentos['erros']) . "']] </script>";
             echo "<script> const saquesCompeticoes = [['" . implode("','", $saques['acertos']) . "'], ['" . implode("','", $saques['erros']) . "']] </script>";
-            echo "<script> const saquesTiposCompeticoes = [['" . implode("','", $saques['ace']) . "'], ['" . implode("','", $saques['erros']) . "']] </script>";
-            echo "<script> const levantamentosTiposCompeticoes = [['" . implode("','", $levantamentos['acertos']) . "'], ['" . implode("','", $levantamentos['erros']) . "']] </script>";
+            echo "<script> const saquesTiposCompeticoes = [['" . implode("','", $saques['ace']) . "'], ['" . implode("','", $saques['viagem']) . "'], ['" . implode("','", $saques['flutuante']) . "'], ['" . implode("','", $saques['cima']) . "'], ['" . implode("','", $saques['erros']) . "']] </script>";
+            echo "<script> const levantamentosTiposCompeticoes = [['" . implode("','", $levantamentos['pipe']) . "'], ['" . implode("','", $levantamentos['oposto']) . "'], ['" . implode("','", $levantamentos['ponta']) . "'], ['" . implode("','", $levantamentos['central']) . "'], ['" . implode("','", $levantamentos['erros']) . "']] </script>";
     ?>
     <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
