@@ -13,7 +13,7 @@ define('LINK_LOGIN', './login.php');
 
 // Define o caminho da logo exibida no cabeçalho.
 define('LOGO_HEADER', "../img/logo.png");
-define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
+define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 
 // Define os nomes e caminhos de outras páginas para navegação.
 define('OUTRAS_PAGINAS', array(

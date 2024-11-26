@@ -25,7 +25,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
 
     // Define o caminho do ícone do usuário para login.
     define('LOGO_USUARIO', "../img/login.png");
-    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 
     // Define um array com links de navegação para outras páginas do site.
     define('OUTRAS_PAGINAS', array(

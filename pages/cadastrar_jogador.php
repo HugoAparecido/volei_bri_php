@@ -22,7 +22,7 @@ if (isset($_SESSION['id_usuario'])) {
 
     // Define uma constante para o caminho da imagem do ícone do usuário.
     define('LOGO_USUARIO', "../img/login.png");
-    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 
     // Define uma constante para um array contendo outras páginas do site e seus respectivos links.
     define('OUTRAS_PAGINAS', array(

@@ -23,7 +23,7 @@ define('LOGO_HEADER', "./img/logo.png");
 // Define a constante com o caminho da imagem de login do usuário
 define('LOGO_USUARIO', "./img/login.png");
 
-define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', './componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './componentes/gerenciamento_cadastro.php']));
+define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', './componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 // Define um array com o nome das páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(
     ['Página Principal', './index.php'],
@@ -35,19 +35,19 @@ define('OUTRAS_PAGINAS', array(
 include __DIR__ . '/componentes/header.php';
 ?>
 <style>
-    /* Estilos de formatação para o layout da página */
-    .container-esquerdo {
-        height: 500px;
-        background-color: #e9ecef;
-        margin-bottom: 20px;
-        border-radius: 10px;
-    }
+/* Estilos de formatação para o layout da página */
+.container-esquerdo {
+    height: 500px;
+    background-color: #e9ecef;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
 
-    .container-direito {
-        height: 1020px;
-        background-color: #ced4da;
-        border-radius: 10px;
-    }
+.container-direito {
+    height: 1020px;
+    background-color: #ced4da;
+    border-radius: 10px;
+}
 </style>
 <main>
     <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">

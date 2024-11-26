@@ -18,7 +18,7 @@ if (isset($_SESSION['id_usuario'])) {
     define('LINK_LOGIN', './login.php');
     define('LOGO_HEADER', "../img/logo.png");
     define('LOGO_USUARIO', "../img/login.png");
-    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 
     // Define o nome e caminho das páginas disponíveis
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', '../componentes/construir_json.php']));

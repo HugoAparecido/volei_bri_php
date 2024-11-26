@@ -59,7 +59,7 @@ if (!isset($_SESSION['id_usuario'])) {
     // Define o caminho do logo para o cabeçalho.
     define('LOGO_HEADER', "../img/logo.png");
     define('LOGO_USUARIO', "../img/login.png");
-    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
     // Define as páginas para navegação, como a página inicial e de estatísticas.
     define('OUTRAS_PAGINAS', array(
         ['Página Principal', '../index.php'],

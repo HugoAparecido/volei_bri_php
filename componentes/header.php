@@ -57,7 +57,7 @@
                             ?>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                                href="<?= $pagina[0] ?>"><?= $pagina[1] ?></a>
+                                href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
                         </li>
                         <?php }
                         }
