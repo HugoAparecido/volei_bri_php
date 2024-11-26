@@ -8,6 +8,7 @@ include('../componentes/classes/levantador_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
 include('../componentes/classes/componentes_class.php');
 include('../componentes/classes/instituicao_class.php');
+include('./protect.php');
 
 $times = Time::GetTimes();
 $arrayTimes = ['times' => ['M' => [], 'F' => [], 'MIS' => []]];
@@ -110,7 +111,7 @@ foreach ($outrasPosicoes as $index => $posicao) {
 foreach ($competicoes as $index => $competicao) {
     array_push($arrayCompeticoes, ['id' => $competicao->GetID(), 'desafiante' => $competicao->GetDesafiante(), 'nome' => $competicao->GetNome(), 'desafiado' => $competicao->GetDesafiado(), 'criacao' => $competicao->GetData()]);
 }
-$arrayJSON = $arrayTimes + $arrayJogadores + $competicoes;
+$arrayJSON = $arrayTimes + $arrayJogadores + $competicoes + ['email' => $_SESSION['email_usuario'], 'nome_usuario' => $_SESSION['nome_usuario']];
 $arrayJSON = json_encode($arrayJSON);
 // Define os cabeçalhos para o download do arquivo 
 header('Content-Type: application/json');

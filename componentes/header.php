@@ -52,6 +52,15 @@
                                 href="<?= $pagina[1] ?>"><?= $pagina[0] ?></a>
                         </li>
                         <?php }
+                        if (isset($_SESSION['id_usuario'])) {
+                            foreach (LINK_USUARIO_CADASTRADO as $pagina) {
+                            ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="<?= $pagina[0] ?>"><?= $pagina[1] ?></a>
+                        </li>
+                        <?php }
+                        }
 
                         // Se o usuário for um treinador, exibe links para cadastrar usuário e instituição
                         if (isset($_SESSION['treinador']) && $_SESSION['treinador']) { ?>

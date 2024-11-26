@@ -23,6 +23,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
 
     // Define a constante do caminho para a imagem do usuário.
     define('LOGO_USUARIO', "../img/login.png");
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
 
     // Define uma constante contendo outras páginas do sistema.
     define('OUTRAS_PAGINAS', array(

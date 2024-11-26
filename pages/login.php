@@ -59,6 +59,7 @@ if (!isset($_SESSION['id_usuario'])) {
     // Define o caminho do logo para o cabeçalho.
     define('LOGO_HEADER', "../img/logo.png");
     define('LOGO_USUARIO', "../img/login.png");
+    define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
     // Define as páginas para navegação, como a página inicial e de estatísticas.
     define('OUTRAS_PAGINAS', array(
         ['Página Principal', '../index.php'],
@@ -69,38 +70,38 @@ if (!isset($_SESSION['id_usuario'])) {
     // Inclui o cabeçalho da página.
     include '../componentes/header.php';
 ?>
-<!-- HTML para o formulário de login do usuário -->
-<main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-    <div class="card p-4 shadow-sm" id="card">
-        <h2 class="text-center text-white mb-4">Login</h2>
-        <form action="./login.php" method="post">
-            <div class="mb-3">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
-                <!-- Mensagens de erro para validação do campo de e-mail -->
-                <div class="erro text-danger" id="email-requerido-erro">Email é obrigatório</div>
-                <div class="erro text-danger" id="email-invalido-erro">Email é inválido</div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="senha">Senha</label>
-                <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
-                <!-- Mensagem de erro para validação do campo de senha -->
-                <div class="erro text-danger" id="senha-requerido-erro">Senha é obrigatória</div>
-            </div>
-            <div class="d-grid gap-2 mb-3">
-                <!-- Botão de recuperação de senha (desativado) -->
-                <button type="button" class="btn" id="recuperar-senha-botao" disabled>Recuperar senha</button>
-            </div>
-            <div class="d-grid gap-2">
-                <!-- Botão de login (desativado) -->
-                <button type="submit" class="btn" id="login-botao" disabled>Entrar</button>
-            </div>
-        </form>
-    </div>
-</main>
-<!-- Inclui o arquivo JavaScript para validação do formulário de login -->
-<script type="module" src="../js/login.js"></script>
-<?php
+    <!-- HTML para o formulário de login do usuário -->
+    <main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <div class="card p-4 shadow-sm" id="card">
+            <h2 class="text-center text-white mb-4">Login</h2>
+            <form action="./login.php" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" name="email" id="email" placeholder="seu@email.com">
+                    <!-- Mensagens de erro para validação do campo de e-mail -->
+                    <div class="erro text-danger" id="email-requerido-erro">Email é obrigatório</div>
+                    <div class="erro text-danger" id="email-invalido-erro">Email é inválido</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="senha">Senha</label>
+                    <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                    <!-- Mensagem de erro para validação do campo de senha -->
+                    <div class="erro text-danger" id="senha-requerido-erro">Senha é obrigatória</div>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                    <!-- Botão de recuperação de senha (desativado) -->
+                    <button type="button" class="btn" id="recuperar-senha-botao" disabled>Recuperar senha</button>
+                </div>
+                <div class="d-grid gap-2">
+                    <!-- Botão de login (desativado) -->
+                    <button type="submit" class="btn" id="login-botao" disabled>Entrar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!-- Inclui o arquivo JavaScript para validação do formulário de login -->
+    <script type="module" src="../js/login.js"></script>
+    <?php
     // Inclui o rodapé da página.
     include '../componentes/footer.php';
     ?>

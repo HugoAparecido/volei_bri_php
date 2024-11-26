@@ -24,6 +24,7 @@ define('LOGO_HEADER', "../img/logo.png");
 
 // Define o caminho do ícone de login do usuário.
 define('LOGO_USUARIO', "../img/login.png");
+define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
 
 // Define um array com os nomes das páginas e seus respectivos caminhos para navegação.
 define('OUTRAS_PAGINAS', [
@@ -40,12 +41,12 @@ include '../componentes/header.php';
 // Verifica se o usuário está autenticado através da variável de sessão 'id_usuario'.
 if (isset($_SESSION['id_usuario'])) {
 ?>
-<!-- Botão para logout, redirecionando para o script de logout ao clicar -->
-<button type="button" class="botao_deslogar" id="logout">
-    <a href="../componentes/logout.php">Sair</a>
-</button>
+    <!-- Botão para logout, redirecionando para o script de logout ao clicar -->
+    <button type="button" class="botao_deslogar" id="logout">
+        <a href="../componentes/logout.php">Sair</a>
+    </button>
 
-<!-- Início da seção de tabela ou conteúdo restrito para usuários autenticados -->
-<div class="tabela">
-</div>
+    <!-- Início da seção de tabela ou conteúdo restrito para usuários autenticados -->
+    <div class="tabela">
+    </div>
 <?php } ?>

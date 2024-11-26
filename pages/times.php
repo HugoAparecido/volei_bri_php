@@ -20,7 +20,7 @@ if (isset($_SESSION['id_usuario'])) {
     define('LOGO_USUARIO', "../img/login.png");
 
     // Define o nome e caminho das páginas disponíveis
-    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', '../componentes/construir_json.php']));
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
     include '../componentes/header.php';
 ?>
 <main>

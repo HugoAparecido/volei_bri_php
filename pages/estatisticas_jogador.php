@@ -23,6 +23,7 @@ define('LOGO_HEADER', "../img/logo.png");
 
 // Define o caminho do ícone de usuário para o login.
 define('LOGO_USUARIO', "../img/login.png");
+define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', '../componentes/gerenciamento_cadastro.php']));
 
 // Define um array com nomes e caminhos de outras páginas para a navegação.
 define('OUTRAS_PAGINAS', array(
