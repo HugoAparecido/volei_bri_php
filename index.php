@@ -23,7 +23,7 @@ define('LOGO_HEADER', "./img/logo.png");
 // Define a constante com o caminho da imagem de login do usuário
 define('LOGO_USUARIO', "./img/login.png");
 
-define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', './componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
+define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', './componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './pages/gerenciamento_cadastros.php']));
 // Define um array com o nome das páginas e seus respectivos caminhos
 define('OUTRAS_PAGINAS', array(
     ['Página Principal', './index.php'],

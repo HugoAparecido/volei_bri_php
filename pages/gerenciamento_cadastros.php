@@ -6,6 +6,7 @@ include('../componentes/classes/libero_class.php');
 include('../componentes/classes/levantador_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
 include('../componentes/classes/componentes_class.php');
+include('../componentes/classes/instituicao_class.php');
 
 // Verifica se o usuário está logado
 if (isset($_SESSION['id_usuario'])) {
@@ -24,10 +25,19 @@ if (isset($_SESSION['id_usuario'])) {
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', '../componentes/construir_json.php']));
     include '../componentes/header.php';
 ?>
-    <main>
-
-    </main>
-    <script src="../js/times.js"></script>
+<main>
+    <?php
+        $jogadores = Jogador::getJogadores();
+        var_dump($jogadores);
+        $time = Time::GetTimes(' id_usuario = ' . intval($_SESSION['id_usuario']));
+        var_dump($time);
+        if (isset($_SESSION['treinador']) && $_SESSION['treinador']) {
+            $instituicao = Instituicao::GetInstituicoes();
+            var_dump($instituicao);
+        }
+        ?>
+</main>
+<script src="../js/times.js"></script>
 <?php
     // Inclui o footer da página
     include '../componentes/footer.php';
