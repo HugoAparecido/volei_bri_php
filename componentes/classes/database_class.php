@@ -53,7 +53,7 @@ class Database
     {
         try {
             // Cria uma nova instância PDO para conexão com o banco
-            $this->connection = new PDO('mysql:host=' . self::HOST . ';dbname=' . self::NAME, self::USER, self::PASS);
+            $this->connection = new PDO('mysql:host=' . self::HOST . ';port=3307;dbname=' . self::NAME, self::USER, self::PASS);
             // Define o modo de erro do PDO para lançar exceções
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {

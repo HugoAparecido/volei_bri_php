@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dados_volei`
 --
-CREATE DATABASE IF NOT EXISTS `dados_volei` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `dados_volei`;
 USE `dados_volei`;
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `competicao` (
   PRIMARY KEY (`id_competicao`),
   KEY `competicao_id_desafiado` (`id_time_desafiado`),
   KEY `competicao_time_desafiante` (`id_time_desafiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `competicao_time` (
   `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id_competicao`,`id_time`),
   KEY `competicao_time` (`id_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `levantador_no_time` (
   `saque_viagem_no_time` int UNSIGNED DEFAULT '0',
   `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id_jogador_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS `libero_no_time` (
   `passe_c_no_time` int UNSIGNED DEFAULT '0',
   `passe_d_no_time` int UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id_jogador_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `outras_posicoes_no_time` (
   `saque_viagem_no_time` int UNSIGNED DEFAULT '0',
   `saque_flutuante_no_time` int UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id_jogador_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
