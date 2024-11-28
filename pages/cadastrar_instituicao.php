@@ -110,7 +110,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                         <td><?= $instituicao->GetTipo() ?></td>
                         <td><a href="./atualizar_instituicao.php?id=<?= $instituicao->GetID() ?>" class="btn"
                                 id="btn">Atualizar</a></td>
-                        <td><a href="../componentes/execucoes/deletar.php?id=<?= $instituicao->GetID() ?>&classe=instituicao"
+                        <td><a onclick="confirmarExclusão('../componentes/execucoes/deletar.php?id=<?= $instituicao->GetID() ?>&classe=instituicao')"
                                 class="btn btn-danger">Deletar</a></td>
                     </tr>
                     <?php
@@ -123,7 +123,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                 ?>
     </div>
 </main>
-
+<script src="../js/confirmar_exclusao.js"></script>
 <?php
     // Inclui o rodapé da página com informações finais.
     include '../componentes/footer.php';

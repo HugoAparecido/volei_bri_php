@@ -55,6 +55,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
             <div class="text-center text-white mb-4">
                 <h2>Atualizar Instituição</h2>
             </div>
+            <input type="hidden" name="id_instituicao" value="<?= $_GET['id'] ?>">
 
             <div class="mb-3">
                 <!-- Campo de entrada para o nome da instituição -->
@@ -85,7 +86,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
 
             <div class="mb-3">
                 <!-- Botão para submeter o formulário de cadastro -->
-                <button type="submit" id="botao_cadastro" class="btn">Cadastrar</button>
+                <button type="submit" id="botao_cadastro" class="btn">Atualizar</button>
             </div>
         </form>
     </div>
