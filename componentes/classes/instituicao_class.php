@@ -38,7 +38,6 @@ class Instituicao
     {
         return $this->tipo_instituicao; // Retorna o tipo da instituição
     }
-
     /**
      * Método responsável por cadastrar uma nova instituição no banco
      * @return boolean
@@ -66,10 +65,13 @@ class Instituicao
      * Método responsável por atualizar os dados da instituição no banco
      * @return boolean
      */
-    public function Atualizar()
+    public function Atualizar($nome, $tipo)
     {
+        // Atribui os parâmetros às propriedades da classe
+        $this->nome_instituicao = $nome;
+        $this->tipo_instituicao = $tipo;
         // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
-        return (new Database('instituicao'))->update('id = ' . $this->id_instituicao, [
+        return (new Database('instituicao'))->update('id_instituicao = ' . $this->id_instituicao, [
             'nome_instituicao' => $this->nome_instituicao,
             'tipo_instituicao' => $this->tipo_instituicao
         ]);
@@ -82,7 +84,7 @@ class Instituicao
     public function Excluir()
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
-        return (new Database('instituicao'))->delete('id = ' . $this->id_instituicao);
+        return (new Database('instituicao'))->delete('id_instituicao = ' . $this->id_instituicao);
     }
 
     /**
@@ -106,6 +108,6 @@ class Instituicao
     public static function GetInstituicao($id_instituicao)
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'instituicao'
-        return (new Database('instituicao'))->select('id = ' . $id_instituicao)->fetchObject(self::class);
+        return (new Database('instituicao'))->select('id_instituicao = ' . $id_instituicao)->fetchObject(self::class);
     }
 }
