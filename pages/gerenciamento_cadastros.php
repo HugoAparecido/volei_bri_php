@@ -25,17 +25,37 @@ if (isset($_SESSION['id_usuario'])) {
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', '../componentes/construir_json.php']));
     include '../componentes/header.php';
 ?>
-<main>
+<main class="text-center d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
     <?php
         $jogadores = Jogador::getJogadores();
-        var_dump($jogadores);
         $time = Time::GetTimes(' id_usuario = ' . intval($_SESSION['id_usuario']));
-        var_dump($time);
         if (isset($_SESSION['treinador']) && $_SESSION['treinador']) {
             $instituicao = Instituicao::GetInstituicoes();
             var_dump($instituicao);
         }
         ?>
+    <h1>Gerenciamento</h1>
+    <div class="card p-4 shadow-sm" id="card">
+        <div class="card-header">
+            <h2>Jogadores</h2>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($jogadores as $jogador) { ?>
+                <tr>
+                    <td><?= $jogador->GetNome() ?></td>
+                    <td></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </main>
 <script src="../js/times.js"></script>
 <?php
