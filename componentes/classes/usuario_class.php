@@ -172,7 +172,7 @@ class Usuario
     public function Cadastrar($nome, $email, $senha, $jogador, $treinador, $id_jogador = null)
     {
         // Configura todos os atributos do usuário
-        $this->SetAll($nome, $email, password_hash($senha, PASSWORD_DEFAULT), $jogador, $treinador, $id_jogador);
+        $this->SetAll($nome, $email, password_hash($senha, PASSWORD_BCRYPT), $jogador, $treinador, $id_jogador);
         // Cria uma nova instância da classe Database para realizar a operação de inserção
         $obDatabase = new Database('usuario');
         // Insere os dados do usuário no banco de dados
