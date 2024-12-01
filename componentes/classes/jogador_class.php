@@ -195,10 +195,10 @@ class Jogador
      * Método responsável por excluir o jogador do banco de dados
      * @return boolean
      */
-    protected function Excluir()
+    public function Excluir()
     {
         // Exclui o jogador da tabela com base no ID
-        return (new Database('jogador'))->delete('id = ' . $this->id_jogador);
+        return (new Database('jogador'))->delete('id_jogador = ' . $this->id_jogador);
     }
 
     /**

@@ -116,6 +116,10 @@ class Time
         return $this->data_hora_criacao;
     }
 
+    public function GetInstituicao()
+    {
+        return $this->id_instituicao;
+    }
 
     /**
      * Método responsável por cadastrar um novo time no banco
@@ -148,14 +152,12 @@ class Time
      * Método responsável por atualizar os dados do time no banco
      * @return boolean Retorna verdadeiro indicando sucesso na operação
      */
-    public function Atualizar()
+    public function Atualizar($nome)
     {
+        $this->nome_time = $nome;
         // Cria uma nova instância da classe Database para manipulação da tabela 'time'
-        return (new Database('time'))->update('id = ' . $this->id_time, [
+        return (new Database('time'))->update('id_time = ' . $this->id_time, [
             'nome_time' => $this->nome_time, // Atualiza o nome do time
-            'data_hora_criacao' => $this->data_hora_criacao, // Atualiza a data de criação
-            'sexo_time' => $this->sexo_time, // Atualiza o sexo do time
-            'id_instituicao' => $this->id_instituicao // Atualiza o ID da instituição
         ]);
     }
 
@@ -166,7 +168,7 @@ class Time
     public function Excluir()
     {
         // Cria uma nova instância da classe Database para manipulação da tabela 'time'
-        return (new Database('time'))->delete('id = ' . $this->id_time); // Remove o time com base no ID
+        return (new Database('time'))->delete('id_time = ' . $this->id_time); // Remove o time com base no ID
     }
 
     /**

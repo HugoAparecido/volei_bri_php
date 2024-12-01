@@ -6,7 +6,6 @@ include('../componentes/classes/libero_class.php');
 include('../componentes/classes/levantador_class.php');
 include('../componentes/classes/outras_posicoes_class.php');
 include('../componentes/classes/componentes_class.php');
-include('../componentes/classes/instituicao_class.php');
 
 // Verifica se o usuário está logado
 if (isset($_SESSION['id_usuario'])) {
@@ -28,36 +27,57 @@ if (isset($_SESSION['id_usuario'])) {
 <main class="text-center d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
     <?php
         $jogadores = Jogador::getJogadores();
-        $time = Time::GetTimes(' id_usuario = ' . intval($_SESSION['id_usuario']));
-        if (isset($_SESSION['treinador']) && $_SESSION['treinador']) {
-            $instituicao = Instituicao::GetInstituicoes();
-            var_dump($instituicao);
-        }
+        $times = Time::GetTimes(' id_usuario = ' . intval($_SESSION['id_usuario']));
         ?>
     <h1>Gerenciamento</h1>
     <div class="card p-4 shadow-sm" id="card">
         <div class="card-header">
             <h2>Jogadores</h2>
         </div>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Deletar</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Deletar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($jogadores as $jogador) { ?>
                 <tr>
                     <td><?= $jogador->GetNome() ?></td>
-                    <td></td>
+                    <td><a onclick="confirmarExclusão('../componentes/execucoes/deletar.php?id=<?= $jogador->GetID() ?>&classe=jogador', 'Tem certeza que quer deletar o jogador <?= $jogador->GetNome() ?>? Os dados dele serão perdidos para sempre!')"
+                            class="btn btn-danger">Deletar</a></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="card p-4 shadow-sm" id="card">
+        <div class="card-header">
+            <h2>Times</h2>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Atualizar</th>
+                    <th scope="col">Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($times as $time) { ?>
+                <tr>
+                    <td><?= $time->GetNome() ?></td>
+                    <td><a href="./atualizar_time.php?id=<?= $time->GetID() ?>" class="btn" id="btn">Atualizar</a></td>
+                    <td><a onclick="confirmarExclusão('../componentes/execucoes/deletar.php?id=<?= $time->GetID() ?>&classe=time', 'Tem certeza que quer deletar o time <?= $time->GetNome() ?>? Os dados dele serão perdidos para sempre!')"
+                            class="btn btn-danger">Deletar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
     </div>
 </main>
-<script src="../js/times.js"></script>
+<script src="../js/confirmar_exclusao.js"></script>
 <?php
     // Inclui o footer da página
     include '../componentes/footer.php';

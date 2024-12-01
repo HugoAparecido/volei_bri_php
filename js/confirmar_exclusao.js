@@ -1,5 +1,5 @@
-function confirmarExclusão(link) {
-    const resposta = confirm("Você tem certeza que deseja deletar?");
+function confirmarExclusão(link, mensagem) {
+    const resposta = confirm(mensagem);
     if (resposta) {
         window.location.href = link;
     }

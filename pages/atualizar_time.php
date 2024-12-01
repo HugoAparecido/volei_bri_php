@@ -2,8 +2,13 @@
 // Inclui um arquivo para proteger o acesso à página, verificando a autenticação do usuário.
 include('../componentes/protect.php');
 
-// Inclui o arquivo da classe 'Instituicao' que possui métodos e atributos relacionados à instituição.
-include('../componentes/classes/instituicao_class.php');
+include('../componentes/classes/time_class.php');
+
+if (isset($_POST['id_time'])) {
+    $time = Time::GetTime(intval($_POST['id_time']));
+    $time->Atualizar($_POST['nome_time']);
+    header("Location: ./gerenciamento_cadastros.php");
+}
 
 // Verifica se a variável de sessão 'id_usuario' está definida para garantir que o usuário está autenticado.
 if (isset($_SESSION['id_usuario'])) {
@@ -50,46 +55,21 @@ if (isset($_SESSION['id_usuario'])) {
 
     <!-- Cartão contendo o formulário de cadastro de um time -->
     <div class="card p-5 shadow-sm mb-5" id="card">
-        <form action="../componentes/execucoes/cadastrar_time_exe.php" method="post">
-
+        <form action="./atualizar_time.php" method="post">
+            <?php
+                $id = intval($_GET['id']);
+                $time = Time::GetTime($id);
+                ?>
+            <input type="hidden" name="id_time" value="<?= $id ?>">
             <!-- Campo para o nome do time -->
             <div class="mb-3">
                 <label class="form-label" for="nome_time">Nome do Time:</label>
-                <input class="form-control" type="text" id="nome_time" name="nome_time" value="">
-            </div>
-
-            <!-- Campo para o sexo do time -->
-            <div class="mb-3">
-                <label class="form-label" for="sexo_time">Sexo do Time:</label>
-                <select class="form-select" name="sexo_time" id="sexo_time" required>
-                    <!-- Define opções para o sexo do time, usando a variável $_GET para manter a seleção atual -->
-                    <option value="M" <?= $_GET['sexo'] == 'M' ? "selected" : "" ?>>Masculino</option>
-                    <option value="F" <?= $_GET['sexo'] == 'F' ? "selected" : "" ?>>Feminino</option>
-                    <option value="Mis" <?= $_GET['sexo'] == 'Mis' ? "selected" : "" ?>>Misto</option>
-                </select>
-            </div>
-
-            <!-- Campo para a instituição do time -->
-            <div class="mb-3">
-                <label class="form-label" for="instituicao">Instituição do Time:</label>
-                <select class="form-select" name="instituicao" id="instituicao" required>
-                    <?php
-                        // Obtém a lista de instituições usando um método estático da classe Instituicao.
-                        $instituicao = Instituicao::GetInstituicoes();
-
-                        // Percorre a lista de instituições e cria uma opção para cada uma no campo select.
-                        foreach ($instituicao as $instituicao) {
-                        ?>
-                    <option value="<?= $instituicao->GetID() ?>"><?= $instituicao->GetNome() ?></option>
-                    <?php } ?>
-                </select>
+                <input class="form-control" type="text" id="nome_time" name="nome_time" value="<?= $time->GetNome() ?>">
             </div>
 
             <!-- Botões para cadastrar o time e redirecionar para o cadastro de jogadores -->
             <div class="mb-3">
-                <button id="cadastrar_time" class="btn" type="submit">Cadastrar Time</button>
-                <a href="./cadastrar_jogador.php" class="btn" id="cadastrar_jogador">Cadastrar Jogador</a>
-                <a href="./cadastrar_instituicao.php" class="btn" id="cadastrar_instituicao">Cadastrar Instituição</a>
+                <button id="cadastrar_time" class="btn" type="submit">Atualizar Time</button>
             </div>
         </form>
     </div>

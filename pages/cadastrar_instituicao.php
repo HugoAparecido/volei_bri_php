@@ -110,7 +110,7 @@ if (isset($_SESSION['id_usuario']) && $_SESSION['treinador']) {
                         <td><?= $instituicao->GetTipo() ?></td>
                         <td><a href="./atualizar_instituicao.php?id=<?= $instituicao->GetID() ?>" class="btn"
                                 id="btn">Atualizar</a></td>
-                        <td><a onclick="confirmarExclusão('../componentes/execucoes/deletar.php?id=<?= $instituicao->GetID() ?>&classe=instituicao')"
+                        <td><a onclick="confirmarExclusão('../componentes/execucoes/deletar.php?id=<?= $instituicao->GetID() ?>&classe=instituicao', 'Tem certeza que quer deletar? Os times cadastrados com esta instituição serão deletados também!')"
                                 class="btn btn-danger">Deletar</a></td>
                     </tr>
                     <?php
