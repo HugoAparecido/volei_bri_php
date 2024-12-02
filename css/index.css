@@ -1,25 +1,26 @@
-@media (max-width: 2010px){
-  .container-esquerdo{
-    height: 50%%;
+@media (max-width: 2010px) {
+  .container-esquerdo {
+    height: 50%;
   }
-  .conteiner-direito{
 
-  }
-} 
-@media (max-width: 450px){
-  .container-esquerdo{
+  .conteiner-direito {}
+}
+
+@media (max-width: 450px) {
+  .container-esquerdo {
     height: 15%;
   }
-  .conteiner-direito{
 
-  }
-} 
-@media (max-width: 780px){
-  .container-esquerdo{
+  .conteiner-direito {}
+}
+
+@media (max-width: 780px) {
+  .container-esquerdo {
     height: 20%;
   }
 
-} 
+}
+
 #descricao_botoes {
   display: none;
 }

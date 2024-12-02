@@ -25,6 +25,10 @@
   box-shadow: 0px 0px 15px 0px var(--preto);
 }
 
+#btn_impressao {
+  background-color: var(--amarelo);
+}
+
 #logo {
   width: 90px;
   height: 90px;
@@ -95,5 +99,41 @@ option {
 @media (max-width: 990px) {
   #botao_flutuante {
     top: 150px;
+  }
+}
+
+@media print {
+
+  body *,
+  main * {
+    visibility: hidden;
+  }
+
+  #relatorio,
+  #relatorio * {
+    visibility: visible;
+  }
+
+  #relatorio {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  canvas {
+    width: 100% !important;
+    /* Redimensiona o canvas para ocupar toda a largura da página de impressão */
+    height: auto !important;
+    /* Mantém a proporção correta do canvas */
+  }
+
+  .quebra-pagina {
+    page-break-before: always;
+    /* Adiciona uma quebra de página antes do elemento */
+  }
+
+  .nao-quebrar {
+    page-break-inside: avoid;
+    /* Evita a quebra de página dentro do elemento */
   }
 }

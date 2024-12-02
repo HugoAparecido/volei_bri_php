@@ -94,7 +94,8 @@ export class Graficos {
                 // tipo área polar
                 type: 'line',
                 // os valores citados acima
-                data: data
+                data: data,
+                options: { responsive: true }
             }
             // função de criação do gráfico (local, confuguração)
             new Chart(ctx, config);
