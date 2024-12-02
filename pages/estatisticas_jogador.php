@@ -54,6 +54,10 @@ include '../componentes/header.php';
         $libero = Libero::JuntarTabelas('jogador', 'id_jogador', 'id_jogador', ' libero.id_jogador = ' . intval($_GET['id_jogador']));
         if (!empty($levantador)) {
             $nomeJogador = $levantador[0]->GetNome();
+            $numeroCamisa = $levantador[0]->GetNumeroCamisa();
+            $apelido = $levantador[0]->GetApelido();
+            $peso = $levantador[0]->GetPeso();
+            $altura = $levantador[0]->GetAltura();
         ?>
             <script>
                 var levantador = {
@@ -68,6 +72,10 @@ include '../componentes/header.php';
         }
         if (!empty($outras)) {
             $nomeJogador = $outras[0]->GetNome();
+            $numeroCamisa = $outras[0]->GetNumeroCamisa();
+            $apelido = $outras[0]->GetApelido();
+            $peso = $outras[0]->GetPeso();
+            $altura = $outras[0]->GetAltura();
         ?>
             <script>
                 var posicoes = [];
@@ -90,6 +98,10 @@ include '../componentes/header.php';
         }
         if (!empty($libero)) {
             $nomeJogador = $libero[0]->GetNome();
+            $numeroCamisa = $libero[0]->GetNumeroCamisa();
+            $apelido = $libero[0]->GetApelido();
+            $peso = $libero[0]->GetPeso();
+            $altura = $libero[0]->GetAltura();
             ?>
             <script>
                 libero = {
@@ -104,10 +116,14 @@ include '../componentes/header.php';
     ?>
     <div class="text-center">
         <h1>Jogador</h1>
+        <button type="button" class="btn" id="btn_impressao">Imprimir relatório</button>
     </div>
-    <div class="card text-center">
+    <div class="card text-center" id="relatorio">
         <div class="card-header">
-            <h2><?= $nomeJogador ?></h2>
+            <h2><?= $nomeJogador ?><?= $apelido == '' ? "" : "($apelido)" ?><?= $numeroCamisa == '' ? "" : ", camisa: $numeroCamisa" ?>
+            </h2>
+            <h3><?= $altura == 0 ? "" : "Altura: $altura" ?>
+                <?= $peso == 0 ? "" : " Peso: $peso" ?></h3>
         </div>
         <div class="d-flex flex-row flex-wrap justify-content-around">
             <?php
@@ -302,6 +318,7 @@ include '../componentes/header.php';
 
 <!-- Inclusão de bibliotecas de JavaScript para criação de gráficos -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="../js/impressao.js"></script>
 <script type="module" src="../js/estatisticas_jogador.js"></script>
 
 <?php

@@ -10,7 +10,6 @@ const coresTipos = [
 ];
 var dadosConstrucao = [];
 if (typeof posicoes !== 'undefined') {
-    console.log(posicoes)
     dadosConstrucao.push([
         posicoes[0].defesas,                               // Dados de defesas (acertos e erros)
         ['Acerto', 'Erro'],                    // Etiquetas para defesa
@@ -20,7 +19,6 @@ if (typeof posicoes !== 'undefined') {
         'grafico_defesa'
     ])
     posicoes.forEach((posicao) => {
-        console.log(posicao);
         posicao.posicao = posicao.posicao.replace(" ", "_");
         posicao.posicao = posicao.posicao.replace("ã", "a");
         posicao.posicao = posicao.posicao.replace("í", "i");
@@ -149,7 +147,6 @@ if (typeof libero !== 'undefined') {
         'grafico_passe_libero'
     ])
 }
-console.log(dadosConstrucao);
 // Para cada conjunto de dados em 'dadosConstrucao', chama a função de construção do gráfico
 dadosConstrucao.forEach(
     function (dados) {
