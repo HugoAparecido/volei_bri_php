@@ -103,6 +103,14 @@ class JogadorTime
         return $this->numero_camisa;
     }
 
+    // Definindo o método público GetApelido
+    public function GetApelido()
+    {
+        // Retorna o valor da propriedade apelido_jogador do objeto
+        return $this->apelido_jogador;
+    }
+
+
     // Métodos para obter estatísticas específicas em formato de array
     public function GetPasses()
     {

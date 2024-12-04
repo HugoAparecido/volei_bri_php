@@ -24,47 +24,47 @@ if (isset($_SESSION['id_usuario'])) {
     define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
     include '../componentes/header.php';
 ?>
-<main>
-    <!-- Botão para logout no canto superior direito -->
-    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-        <button type="button" class="btn" id="logout">
-            <a href="../componentes/logout.php">Sair</a>
-        </button>
-    </div>
-    <?php
+    <main>
+        <!-- Botão para logout no canto superior direito -->
+        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+            <button type="button" class="btn" id="logout">
+                <a href="../componentes/logout.php">Sair</a>
+            </button>
+        </div>
+        <?php
         // Se existe um ID de time na URL, obtem informações do time
         if (isset($_GET['id_time'])) {
             $time = Time::GetTime((int)$_GET['id_time']);
         ?>
-    <div class="d-flex justify-content-center mt-5">
-        <!-- Formulário para envio de dados do time -->
-        <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100 text-center">
-            <div class="card w-100 text-center d-flex justify-content-center align-items-center">
-                <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
-                <label for="id_competicao" class="form-label m-3">Em qual competição ou treinamento o time
-                    está?</label>
-                <select name="id_competicao" id="id_competicao" class="form-select m-3" style="width: 500px;">
-                    <option value="">Nenhuma</option>
-                    <?php
+            <div class="d-flex justify-content-center mt-5">
+                <!-- Formulário para envio de dados do time -->
+                <form action="../componentes/execucoes/enviar_dados.php" method="post" class="w-100 text-center">
+                    <div class="card w-100 text-center d-flex justify-content-center align-items-center">
+                        <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+                        <label for="id_competicao" class="form-label m-3">Em qual competição ou treinamento o time
+                            está?</label>
+                        <select name="id_competicao" id="id_competicao" class="form-select m-3" style="width: 500px;">
+                            <option value="">Nenhuma</option>
+                            <?php
                             Componentes::InputCompeticoes($time->GetID())
                             ?>
-                </select>
-                <a href="./cadastrar_competicao.php" class="btn m-3" id="btn" style="width: 300px;">Cadastrar
-                    Competição</a>
-            </div>
-            <!-- Card com informações do time e jogadores principais -->
-            <div class="card mb-3 mt-5 " style="width: 100%;">
-                <div class="card-header">
-                    <h2>Time: <?= $time->GetNome() ?></h2>
-                </div>
-                <div class="col-auto m-3">
-                    <h2>Sexo: <?= strtoupper($time->GetSexo()) ?></h2>
-                </div>
-                <div class="col-auto m-3">
-                    <!-- Título para os jogadores principais com ajuste de gênero ('Jogadoras' ou 'Jogadores') -->
-                    <h3>Jogador<?= ($time->GetSexo() == 'F' ? 'as' : 'es') ?> Principais no Momento</h3>
+                        </select>
+                        <a href="./cadastrar_competicao.php" class="btn m-3" id="btn" style="width: 300px;">Cadastrar
+                            Competição</a>
+                    </div>
+                    <!-- Card com informações do time e jogadores principais -->
+                    <div class="card mb-3 mt-5 " style="width: 100%;">
+                        <div class="card-header">
+                            <h2>Time: <?= $time->GetNome() ?></h2>
+                        </div>
+                        <div class="col-auto m-3">
+                            <h2>Sexo: <?= strtoupper($time->GetSexo()) ?></h2>
+                        </div>
+                        <div class="col-auto m-3">
+                            <!-- Título para os jogadores principais com ajuste de gênero ('Jogadoras' ou 'Jogadores') -->
+                            <h3>Jogador<?= ($time->GetSexo() == 'F' ? 'as' : 'es') ?> Principais no Momento</h3>
 
-                    <?php
+                            <?php
                             // Array contendo as posições dos jogadores para exibir nos cards
                             $cardPosicoes = ['Levantador', 'Líbero', 'Ponta 1', 'Ponta 2', 'Oposto', 'Central 1', 'Central 2'];
 
@@ -72,27 +72,27 @@ if (isset($_SESSION['id_usuario'])) {
                             foreach ($cardPosicoes as $indice => $cardPosicao) {
                             ?>
 
-                    <!-- Estrutura de um card para cada posição, com estilo mínimo de altura para manter tamanho uniforme -->
-                    <div class="card" style="min-height: 100px; height: auto; min-width:50%; width: auto; float:left;">
+                                <!-- Estrutura de um card para cada posição, com estilo mínimo de altura para manter tamanho uniforme -->
+                                <div class="card" style="min-height: 100px; height: auto; min-width:50%; width: auto; float:left;">
 
-                        <!-- Cabeçalho do card que mostra o nome da posição -->
-                        <div class="card-header">
-                            <p><?= $cardPosicao ?></p>
-                        </div>
+                                    <!-- Cabeçalho do card que mostra o nome da posição -->
+                                    <div class="card-header">
+                                        <p><?= $cardPosicao ?></p>
+                                    </div>
 
-                        <!-- Div para conter o conteúdo principal do card, com altura mínima para evitar colapso -->
-                        <div class="containerItemPrincipal" style="min-height: 100px;"></div>
-                    </div>
+                                    <!-- Div para conter o conteúdo principal do card, com altura mínima para evitar colapso -->
+                                    <div class="containerItemPrincipal" style="min-height: 100px;"></div>
+                                </div>
 
-                    <?php
+                            <?php
                             }
                             ?>
-                </div>
+                        </div>
 
-            </div>
-            <!-- Card para listar jogadores de diferentes posições e adicionar no time -->
-            <div class="card containerItem">
-                <?php
+                    </div>
+                    <!-- Card para listar jogadores de diferentes posições e adicionar no time -->
+                    <div class="card containerItem">
+                        <?php
                         // Recupera jogadores e os divide em listas por posição para exibição
                         $time->DefinirJogadores(JogadorTime::getJogadores('jogador', 'id_jogador', 'id_jogador',  'id_time = ' . $time->GetID()));
                         $jogadoresNoTime = [];
@@ -100,25 +100,25 @@ if (isset($_SESSION['id_usuario'])) {
 
                         // Lista jogadores por posição e insere no componente adequado
                         foreach ($time->GetJogadores() as $jogador) {
-                            $componentes->LocalInsercao($jogador->GetIDJogador(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa());
+                            $componentes->LocalInsercao($jogador->GetIDJogador(), $jogador->GetNome(), $jogador->GetPosicao(), $jogador->GetNumeroCamisa(), $jogador->GetApelido());
                             array_push($jogadoresNoTime, $jogador->GetIDJogador());
                         }
                         ?>
-                <!-- Botão para enviar dados do time -->
-                <button type="submit" class="btn m-5" id="btn">Enviar Dados</button>
+                        <!-- Botão para enviar dados do time -->
+                        <button type="submit" class="btn m-5" id="btn">Enviar Dados</button>
+                    </div>
+                </form>
+
             </div>
-        </form>
+            <div class="d-flex align-items-center justify-content-center">
 
-    </div>
-    <div class="d-flex align-items-center justify-content-center">
-
-        <!-- Formulário para adicionar jogador em cada posição -->
-        <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
-            <div class="card m-lg-5 w-80">
-                <!-- Campo oculto para armazenar o ID do time -->
-                <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
-                <div class="d-flex flex-row flex-wrap align-items-center justify-content-center">
-                    <?php
+                <!-- Formulário para adicionar jogador em cada posição -->
+                <form action="../componentes/execucoes/colocar_jogador_time.php" method="post">
+                    <div class="card m-lg-5 w-80">
+                        <!-- Campo oculto para armazenar o ID do time -->
+                        <input type="hidden" name="id_time" value="<?= $time->GetID() ?>">
+                        <div class="d-flex flex-row flex-wrap align-items-center justify-content-center">
+                            <?php
                             // Array associativo que define cada posição de jogador com:
                             // 1) Um rótulo que adapta o gênero e a posição conforme o sexo do time.
                             // 2) Uma lista de jogadores para a posição correspondente, utilizando o método `JuntarTabelas` para fazer as consultas necessárias.
@@ -135,91 +135,91 @@ if (isset($_SESSION['id_usuario'])) {
                             foreach ($selectsPosicao as $name => $conteudo) {
                             ?>
 
-                    <div class="align-self-center">
-                        <!-- Rótulo com base no sexo e na posição do jogador -->
-                        <label class="m-3"
-                            for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "o(a)" : "o") ?>
-                            Jogador<?= $time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "(a)" : "") ?>
-                            <?= $conteudo[0] ?></label>
-                        <!-- Campo de seleção para escolher o jogador disponível na posição -->
-                        <select class="form-select m-3" style="width: auto;" name="<?= $name ?>">
-                            <option value="">Escolha uma posição</option>
-                            <?php
+                                <div class="align-self-center">
+                                    <!-- Rótulo com base no sexo e na posição do jogador -->
+                                    <label class="m-3"
+                                        for="<?= $name ?>">Nov<?= $time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "o(a)" : "o") ?>
+                                        Jogador<?= $time->GetSexo() == 'F' ? "a" : (($time->GetSexo()) == 'MIS' ? "(a)" : "") ?>
+                                        <?= $conteudo[0] ?></label>
+                                    <!-- Campo de seleção para escolher o jogador disponível na posição -->
+                                    <select class="form-select m-3" style="width: auto;" name="<?= $name ?>">
+                                        <option value="">Escolha uma posição</option>
+                                        <?php
                                         // Loop para preencher cada opção com os jogadores disponíveis na posição atual
                                         foreach ($conteudo[1] as $jogador) {
                                         ?>
-                            <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
-                            <?php
+                                            <option value="<?= $jogador->GetID() ?>"><?= $jogador->GetNome() ?></option>
+                                        <?php
                                         }
                                         ?>
-                        </select>
-                    </div>
+                                    </select>
+                                </div>
 
-                    <?php
+                            <?php
                             }
                             ?>
-                </div>
-                <div class="d-flex align-items-center justify-content-center flex-column">
-                    <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
-                    <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center flex-column">
+                            <!-- Botão para enviar o formulário e adicionar o jogador selecionado -->
+                            <button type="submit" class="btn m-3" id="btn">Adicionar Jogador</button>
 
-                    <!-- Link para cadastrar novo jogador -->
-                    <a href="./cadastrar_jogador.php" type="button" class="btn m-3" id="btn">Cadastrar Jogador</a>
-                </div>
-        </form>
-    </div>
+                            <!-- Link para cadastrar novo jogador -->
+                            <a href="./cadastrar_jogador.php" type="button" class="btn m-3" id="btn">Cadastrar Jogador</a>
+                        </div>
+                </form>
+            </div>
 
-    <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
-    </div>
-    <?php
+            <!-- Exibe a lista de times por categoria (Masculino, Feminino e Misto) -->
+            </div>
+        <?php
         }
         ?>
-    <div class="d-flex justify-content-center mt-5 mb-5">
-        <div class="card p-4 shadow-sm" id="card">
+        <div class="d-flex justify-content-center mt-5 mb-5">
+            <div class="card p-4 shadow-sm" id="card">
 
-            <h2 class="text-center text-white mb-3">Masculino</h2>
-            <?php
+                <h2 class="text-center text-white mb-3">Masculino</h2>
+                <?php
                 $timeMasculino = Time::GetTimes("sexo_time = 'M'", 'data_hora_criacao');
                 if (!empty($timeMasculino))
                     foreach ($timeMasculino as $time) {
                 ?>
-            <a class="btn m-1" id="btn-time"
-                href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-            <?php
+                    <a class="btn m-1" id="btn-time"
+                        href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+                <?php
                     }
                 ?>
-            <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
+                <a href="cadastrar_time.php?sexo=M" class="btn" id="btn">Cadastrar Time</a>
 
-            <h2 class="text-center text-white mb-3">Feminino</h2>
-            <?php
+                <h2 class="text-center text-white mb-3">Feminino</h2>
+                <?php
                 $timeFeminino = Time::GetTimes("sexo_time = 'F'", 'data_hora_criacao');
                 if (!empty($timeFeminino))
                     foreach ($timeFeminino as $time) {
                 ?>
-            <a class="btn m-1" id="btn-time"
-                href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-            <?php
+                    <a class="btn m-1" id="btn-time"
+                        href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+                <?php
                     }
                 ?>
-            <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
+                <a href="cadastrar_time.php?sexo=F" class="btn" id="btn">Cadastrar Time</a>
 
-            <h2 class="text-center text-white mb-3">Misto</h2>
-            <?php
+                <h2 class="text-center text-white mb-3">Misto</h2>
+                <?php
                 $timeMisto = Time::GetTimes("sexo_time = 'Mis'", 'data_hora_criacao');
                 if (!empty($timeMisto))
                     foreach ($timeMisto as $time) {
                 ?>
-            <a class="btn m-1" id="btn-time"
-                href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
-            <?php
+                    <a class="btn m-1" id="btn-time"
+                        href="./times.php?id_time=<?= $time->GetID() ?>"><?= $time->GetNome() ?></a>
+                <?php
                     }
                 ?>
-            <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
+                <a href="cadastrar_time.php?sexo=Mis" class="btn" id="btn">Cadastrar Time</a>
+            </div>
         </div>
-    </div>
-    </div>
-</main>
-<script src="../js/times.js"></script>
+        </div>
+    </main>
+    <script src="../js/times.js"></script>
 <?php
     // Inclui o footer da página
     include '../componentes/footer.php';

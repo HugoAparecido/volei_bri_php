@@ -77,15 +77,16 @@ class Componentes
      * @param string $nomeJogador Nome do jogador
      * @param string $posicaoJogador Posição do jogador
      * @param int $numeroJogador Número da camisa do jogador
+     * @param string $apelido Apelido do jogador
      */
-    public function LocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador)
+    public function LocalInsercao($idJogador, $nomeJogador, $posicaoJogador, $numeroJogador, $apelido)
     {
     ?>
 <!-- Bloco arrastável que representa o jogador -->
 <div class="itemArrastavel card m-3" style="width: auto;" draggable="true">
     <?php
             // Exibe o cabeçalho com o nome, número e posição do jogador
-            $this->HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador);
+            $this->HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador, $apelido);
             ?>
 
     <!-- Área de controle de atributos individuais do jogador -->
@@ -112,16 +113,17 @@ class Componentes
     }
 
     /**
-     * Método privado que gera o cabeçalho do card com a posição, número e nome do jogador
+     * Método privado que gera o cabeçalho do card com a posição, número, nome e apelido do jogador
      * @param string $nomeJogador Nome do jogador
      * @param string $posicaoJogador Posição do jogador
      * @param int $numeroJogador Número do jogador
+     * @param string $apelido Apelido do jogador
      */
-    private function HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador)
+    private function HeaderInsercao($nomeJogador, $posicaoJogador, $numeroJogador, $apelido)
     { ?>
 <div class="card-header">
     <p style="font-weight: 700; font-size: 25px;">
-        <?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador ?>
+        <?= $posicaoJogador . ' : ' . ($numeroJogador == 0 ? '' : $numeroJogador . " : ")  . $nomeJogador . ($apelido == '' ? '' : " ($apelido)") ?>
     </p>
 </div>
 <?php
