@@ -38,55 +38,55 @@ if (isset($_SESSION['id_usuario'])) {
     include '../componentes/header.php';
 ?>
 
-    <!-- Principal conteúdo da página -->
-    <main class="d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
+<!-- Principal conteúdo da página -->
+<main class="d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
 
-        <!-- Botão flutuante no canto superior direito para logout -->
-        <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
-            <button type="button" class="btn" id="logout">
-                <a href="../componentes/logout.php">Sair</a>
-            </button>
-        </div>
+    <!-- Botão flutuante no canto superior direito para logout -->
+    <div class="d-grip gap-2 mb-3 fixed-top" id="botao_flutuante">
+        <button type="button" class="btn" id="logout">
+            <a href="../componentes/logout.php">Sair</a>
+        </button>
+    </div>
 
-        <!-- Cartão contendo o formulário de cadastro de uma competicao -->
-        <div class="card p-5 shadow-sm mb-5" id="card">
-            <form action="../componentes/execucoes/cadastrar_competicao_exe.php" method="post">
+    <!-- Cartão contendo o formulário de cadastro de uma competicao -->
+    <div class="card p-5 shadow-sm mb-5" id="card">
+        <form action="../componentes/execucoes/cadastrar_competicao_exe.php" method="post">
 
-                <!-- Campo para o nome da competicao -->
-                <div class="mb-3">
-                    <label class="form-label" for="nome_competicao">Nome da competição:</label>
-                    <input class="form-control" type="text" id="nome_competicao" name="nome_competicao" value="" required>
-                </div>
+            <!-- Campo para o nome da competicao -->
+            <div class="mb-3">
+                <label class="form-label" for="nome_competicao">Nome da competição:</label>
+                <input class="form-control" type="text" id="nome_competicao" name="nome_competicao" value="" required>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="desafiante_competicao">Time Desafiante:</label>
-                    <select name="desafiante_competicao" id="desafiante_competicao" required>
-                        <option value="">Escolha um time</option>
-                        <?php
+            <div class="mb-3">
+                <label class="form-label" for="desafiante_competicao">Time Desafiante:</label>
+                <select name="desafiante_competicao" id="desafiante_competicao" required class="form-select">
+                    <option value="">Escolha um time</option>
+                    <?php
                         Componentes::InputTimes();
                         ?>
-                    </select>
-                </div>
+                </select>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="desafiado_competicao">Time Desafiado:</label>
-                    <select name="desafiado_competicao" id="desafiado_competicao">
-                        <option value="">Escolha um time</option>
-                        <?php
+            <div class="mb-3">
+                <label class="form-label" for="desafiado_competicao">Time Desafiado:</label>
+                <select name="desafiado_competicao" id="desafiado_competicao" class="form-select">
+                    <option value="">Escolha um time</option>
+                    <?php
                         Componentes::InputTimes();
                         ?>
-                    </select>
-                </div>
+                </select>
+            </div>
 
-                <!-- Botões para cadastrar o competicao e redirecionar para o cadastro de jogadores -->
-                <div class="mb-3">
-                    <button class="btn" type="submit">Cadastrar competicao</button>
-                    <a href="./times.php" class="btn">Inserir Estatísticas</a>
-                </div>
-            </form>
-        </div>
+            <!-- Botões para cadastrar o competicao e redirecionar para o cadastro de jogadores -->
+            <div class="mb-3">
+                <button class="btn" type="submit">Cadastrar competicao</button>
+                <a href="./times.php" class="btn">Inserir Estatísticas</a>
+            </div>
+        </form>
+    </div>
 
-    </main>
+</main>
 
 <?php
     // Inclui o rodapé da página, contendo scripts adicionais ou informações finais.
