@@ -62,8 +62,7 @@ include __DIR__ . '/componentes/header.php';
             <div class="col-md-8">
                 <div class="container-esquerdo p-3">
                     <h5 style="margin-left: 10px;">Tipos de Saque no vôlei</h5>
-                    <iframe id="SAQUE" class="videos"
-                        src="https://www.youtube.com/embed/a3C8gZtbZ0U"
+                    <iframe id="SAQUE" class="videos" src="https://www.youtube.com/embed/a3C8gZtbZ0U"
                         title="Saque no Voleibol: Os Tipos de Saque do Vôlei" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -78,8 +77,7 @@ include __DIR__ . '/componentes/header.php';
                 </div>
                 <div class="container-esquerdo p-3">
                     <h5 style="margin-left: 10px;">Tipos de Ataque</h5>
-                    <iframe id="ATAQUE" class="videos"
-                        src="https://www.youtube.com/embed/P_dlI-EKtmA"
+                    <iframe id="ATAQUE" class="videos" src="https://www.youtube.com/embed/P_dlI-EKtmA"
                         title="Ataque no Voleibol: Tipos de Ataque no Vôlei" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -119,7 +117,7 @@ include __DIR__ . '/componentes/header.php';
             </div>
 
             <!-- Coluna da direita com um container fino -->
-            <div class="col-md-4 ">
+            <div class="col-md-4">
                 <div class="container-direito p-3">
                     <h5>Sumário:</h5>
                     <div class="list-group list-group-flush">
@@ -136,22 +134,6 @@ include __DIR__ . '/componentes/header.php';
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="duvidas">
-        <!-- Botão de dúvidas com descrições para auxiliar o usuário -->
-        <button class="btn" type="button" id="botao_duvidas">?</button>
-        <div id="descricao_botoes">
-            <p><strong>Def:</strong> defesa bem sucedida</p>
-            <p><strong>Def Err:</strong> defesa em que a bola não pode ser pega pelo companheiro</p>
-            <p><strong>Pas:</strong> ato de passar a bola entre os jogadores, considerando a altura máxima entre
-                a
-                jogada de um e o recebimento do outro. <strong>A:</strong> acima das antenas da rede;
-                <strong>B:</strong> o flutuante
-                acima da rede e na altura das antenas; <strong>C:</strong> abaixo das antenas e na altura da
-                rede;
-                <strong>D:</strong> abaixo da rede;
-            </p>
         </div>
     </div>
 </main>
