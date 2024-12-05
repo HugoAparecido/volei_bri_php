@@ -1,0 +1,80 @@
+#passes_time {
+    width: 75%;
+}
+
+#passes_time .card {
+    width: 33.3%;
+}
+
+#defesas_time {
+    width: 25%;
+}
+
+#saques_time .card {
+    width: 25%;
+}
+
+.ataques_bloqueios_time {
+    width: 50%;
+}
+
+.ataques_bloqueios_time .card {
+    width: 33.3%;
+}
+
+#levantamentos {
+    width: 50%;
+}
+
+#levantamentos .card {
+    width: 50%;
+}
+
+#relacao_competicao .card {
+    width: 50%;
+}
+
+#passes_jogador {
+    width: 25%;
+}
+
+@media (max-width: 990px) {
+    #passes_time {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    #defesas_time {
+        width: 100%;
+    }
+
+    #passes_time .card {
+        width: 50%;
+    }
+
+    #saques_time .card {
+        width: 50%;
+    }
+
+
+    #ataques_bloqueios_time {
+        width: 100%;
+    }
+
+    .ataques_bloqueios_time .card {
+        width: 100%;
+    }
+
+    #levantamentos {
+        width: 100%;
+    }
+
+    .relacao_competicao .card {
+        width: 100%;
+    }
+
+    #passes_jogador {
+        width: 100%;
+    }
+}
