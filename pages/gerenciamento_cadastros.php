@@ -21,7 +21,7 @@ if (isset($_SESSION['id_usuario'])) {
     define('LINK_USUARIO_CADASTRADO', array(['Dados para aplicativo', '../componentes/construir_json.php'], ['Gerenciar cadastros efetuados', './gerenciamento_cadastros.php']));
 
     // Define o nome e caminho das páginas disponíveis
-    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php'], ['Dados para aplicativo', '../componentes/construir_json.php']));
+    define('OUTRAS_PAGINAS', array(['Página Principal', '../index.php'], ['Times', './times.php'], ['Estatísticas', './estatisticas.php']));
     include '../componentes/header.php';
 ?>
 <main class="text-center d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5">
